@@ -1,0 +1,6 @@
+@PRAMS.Authentication_HostAddress = http://localhost:5209
+
+GET {{PRAMS.Authentication_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

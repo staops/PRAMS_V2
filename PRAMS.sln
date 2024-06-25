@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35004.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PRAMS.Authentication", "PRAMS.Authentication\PRAMS.Authentication.csproj", "{AA9EAAE8-EDA5-4860-B5A6-1BBCB6B9E5D0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PRAMS.Configuration", "PRAMS.Configuration\PRAMS.Configuration.csproj", "{D269FACE-5C0D-4A93-8D18-5A95BA8407F8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infraestructure", "Infraestructure", "{8B39EA77-B4BD-48F2-A374-43CC26D957EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRAMS.Infraestructure", "PRAMS.Infraestructure\PRAMS.Infraestructure.csproj", "{E240BAC7-6E1A-4A4A-9659-E699F3040904}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{63E0E7A7-42D1-412D-8ED4-6239A9F15215}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRAMS.Domain", "PRAMS.Domain\PRAMS.Domain.csproj", "{9893AD03-C633-4AC6-83F1-C5A7EE493FE8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{A97E91A8-0320-47E4-AA37-210A6E6A0284}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRAMS.Application", "PRAMS.Application\PRAMS.Application.csproj", "{A6FB6817-B7CE-45FB-BE21-49331F7F1C49}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AA9EAAE8-EDA5-4860-B5A6-1BBCB6B9E5D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA9EAAE8-EDA5-4860-B5A6-1BBCB6B9E5D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA9EAAE8-EDA5-4860-B5A6-1BBCB6B9E5D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA9EAAE8-EDA5-4860-B5A6-1BBCB6B9E5D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D269FACE-5C0D-4A93-8D18-5A95BA8407F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D269FACE-5C0D-4A93-8D18-5A95BA8407F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D269FACE-5C0D-4A93-8D18-5A95BA8407F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D269FACE-5C0D-4A93-8D18-5A95BA8407F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E240BAC7-6E1A-4A4A-9659-E699F3040904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E240BAC7-6E1A-4A4A-9659-E699F3040904}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E240BAC7-6E1A-4A4A-9659-E699F3040904}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E240BAC7-6E1A-4A4A-9659-E699F3040904}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9893AD03-C633-4AC6-83F1-C5A7EE493FE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9893AD03-C633-4AC6-83F1-C5A7EE493FE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9893AD03-C633-4AC6-83F1-C5A7EE493FE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9893AD03-C633-4AC6-83F1-C5A7EE493FE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6FB6817-B7CE-45FB-BE21-49331F7F1C49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6FB6817-B7CE-45FB-BE21-49331F7F1C49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6FB6817-B7CE-45FB-BE21-49331F7F1C49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6FB6817-B7CE-45FB-BE21-49331F7F1C49}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E240BAC7-6E1A-4A4A-9659-E699F3040904} = {8B39EA77-B4BD-48F2-A374-43CC26D957EC}
+		{9893AD03-C633-4AC6-83F1-C5A7EE493FE8} = {63E0E7A7-42D1-412D-8ED4-6239A9F15215}
+		{A6FB6817-B7CE-45FB-BE21-49331F7F1C49} = {A97E91A8-0320-47E4-AA37-210A6E6A0284}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D6131B79-4451-4727-AC7D-0F828F3C64BA}
+	EndGlobalSection
+EndGlobal
