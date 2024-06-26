@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PRAMS.Infraestructure.Data.SystemConfiguration;
 
@@ -11,9 +12,11 @@ using PRAMS.Infraestructure.Data.SystemConfiguration;
 namespace PRAMS.Configuration.Migrations
 {
     [DbContext(typeof(AppConfigDbContext))]
-    partial class AppConfigDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240626064313_AddRolMenu")]
+    partial class AddRolMenu
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

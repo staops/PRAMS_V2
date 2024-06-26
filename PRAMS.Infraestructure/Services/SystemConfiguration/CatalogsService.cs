@@ -7,7 +7,7 @@ using PRAMS.Domain.Entities.SystemConfiguration.Dto;
 using PRAMS.Domain.Models.SystemConfiguration;
 using PRAMS.Infraestructure.Data.SystemConfiguration;
 
-namespace PRAMS.Infraestructure.Services
+namespace PRAMS.Infraestructure.Services.SystemConfiguration
 {
     public class CatalogsService : ICatalogsService
     {

@@ -9,12 +9,18 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
 
         public DbSet<AdmParametrosSeleccion> AdmParamSelections { get; set; }
 
+        public DbSet<AdmMenuElements> AdmMenuElements { get; set; }
+
+        public DbSet<AdmMenuRole> AdmMenuRoles { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             PouplateParametroCategoria(modelBuilder);
             PopulateAdmParametrosSeleccion(modelBuilder);
+            PopulateAdmMenuElements(modelBuilder);
+            PopulateAdmMenuRole(modelBuilder);
         }
 
         private static void PouplateParametroCategoria(ModelBuilder modelBuilder)
@@ -407,7 +413,7 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
                     CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                     CreateDate = DateTime.Now,
                     Activo = true
-                },                
+                },
                 new ()
                 {
                     ParamterosID = 15,
@@ -418,7 +424,7 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
                     CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                     CreateDate = DateTime.Now,
                     Activo = true
-                },                
+                },
                 new ()
                 {
                     ParamterosID = 16,
@@ -429,7 +435,7 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
                     CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                     CreateDate = DateTime.Now,
                     Activo = true
-                },                
+                },
                 new ()
                 {
                     ParamterosID = 17,
@@ -440,7 +446,7 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
                     CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                     CreateDate = DateTime.Now,
                     Activo = true
-                },                
+                },
                 new ()
                 {
                     ParamterosID = 18,
@@ -451,7 +457,7 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
                     CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                     CreateDate = DateTime.Now,
                     Activo = true
-                },                
+                },
                 new ()
                 {
                     ParamterosID = 19,
@@ -462,7 +468,7 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
                     CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                     CreateDate = DateTime.Now,
                     Activo = true
-                },                
+                },
                 new ()
                 {
                     ParamterosID = 20,
@@ -473,7 +479,7 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
                     CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                     CreateDate = DateTime.Now,
                     Activo = true
-                },                
+                },
                 new ()
                 {
                     ParamterosID = 21,
@@ -489,6 +495,305 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
             ];
 
             modelBuilder.Entity<AdmParametrosSeleccion>().HasData(firmasParametrosSeleccions);
+        }
+
+        private static void PopulateAdmMenuElements(ModelBuilder modelBuilder)
+        {
+            IList<AdmMenuElements> admMenuElements = [
+                new(){
+                    MenuElementId = 1,
+                    Nombre = "Home",
+                    Controlador = "Home",
+                    Accion = "Index",
+                    Icono = "fas fa-home",
+                    Orden = 1,
+                    MenuElementParentId = null,
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                    MenuElementId = 2,
+                    Nombre = "System Configuration",
+                    Controlador = "SystemConfiguration",
+                    Accion = "Index",
+                    Icono = "fas fa-cogs",
+                    Orden = 2,
+                    MenuElementParentId = null,
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                    MenuElementId = 3,
+                    Nombre = "Parametros",
+                    Controlador = "Parametros",
+                    Accion = "Index",
+                    Icono = "fas fa-cogs",
+                    Orden = 1,
+                    MenuElementParentId = 2,
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                    MenuElementId = 4,
+                    Nombre = "Categorias",
+                    Controlador = "Categorias",
+                    Accion = "Index",
+                    Icono = "fas fa-cogs",
+                    Orden = 2,
+                    MenuElementParentId = 2,
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                    MenuElementId = 5,
+                    Nombre = "Ajustes",
+                    Controlador = "Ajustes",
+                    Accion = "Index",
+                    Icono = "fas fa-cogs",
+                    Orden = 3,
+                    MenuElementParentId = null,
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                    MenuElementId = 6,
+                    Nombre = "Roles",
+                    Controlador = "Roles",
+                    Accion = "Index",
+                    Icono = "fas fa-cogs",
+                    Orden = 4,
+                    MenuElementParentId = 5,
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                    MenuElementId = 7,
+                    Nombre = "Usuarios",
+                    Controlador = "Usuarios",
+                    Accion = "Index",
+                    Icono = "fas fa-cogs",
+                    Orden = 5,
+                    MenuElementParentId = 5,
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                    MenuElementId = 8,
+                    Nombre = "Otro",
+                    Controlador = "Otro",
+                    Accion = "Index",
+                    Icono = "fas fa-cogs",
+                    Orden = 6,
+                    MenuElementParentId = 5,
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                    MenuElementId = 9,
+                    Nombre = "Agregar",
+                    Controlador = "AgregarRol",
+                    Accion = "Index",
+                    Icono = "fas fa-cogs",
+                    Orden = 7,
+                    MenuElementParentId = 6,
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                    MenuElementId = 10,
+                    Nombre = "Editar",
+                    Controlador = "EditarRol",
+                    Accion = "Index",
+                    Icono = "fas fa-cogs",
+                    Orden = 8,
+                    MenuElementParentId = 6,
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                    MenuElementId = 11,
+                    Nombre = "Eliminar",
+                    Controlador = "EliminarRol",
+                    Accion = "Index",
+                    Icono = "fas fa-cogs",
+                    Orden = 9,
+                    MenuElementParentId = 6,
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                    MenuElementId = 12,
+                    Nombre = "Agregar",
+                    Controlador = "AgregarUsuario",
+                    Accion = "Index",
+                    Icono = "fas fa-cogs",
+                    Orden = 10,
+                    MenuElementParentId = 7,
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                    MenuElementId = 13,
+                    Nombre = "Editar",
+                    Controlador = "EditarUsuario",
+                    Accion = "Index",
+                    Icono = "fas fa-cogs",
+                    Orden = 11,
+                    MenuElementParentId = 7,
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                    MenuElementId = 14,
+                    Nombre = "Eliminar",
+                    Controlador = "EliminarUsuario",
+                    Accion = "Index",
+                    Icono = "fas fa-cogs",
+                    Orden = 12,
+                    MenuElementParentId = 7,
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                }
+
+            ];
+
+            modelBuilder.Entity<AdmMenuElements>().HasData(admMenuElements);
+
+        }
+
+        private static void PopulateAdmMenuRole(ModelBuilder modelBuilder)
+        {
+            IList<AdmMenuRole> admMenuElements = [
+                new(){
+                    MenuRoleId = 1,
+                    MenuElementId = 1,
+                    RoleId = "SU",
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                    MenuRoleId = 2,
+                    MenuElementId = 2,
+                    RoleId = "SU",
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                    MenuRoleId = 3,
+                    MenuElementId = 3,
+                    RoleId = "SU",
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                    MenuRoleId = 4,
+                    MenuElementId = 4,
+                    RoleId = "SU",
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                    MenuRoleId = 5,
+                    MenuElementId = 5,
+                    RoleId = "SU",
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                    MenuRoleId = 6,
+                    MenuElementId = 6,
+                    RoleId = "SU",
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                    MenuRoleId = 7,
+                    MenuElementId = 7,
+                    RoleId = "SU",
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                    MenuRoleId = 8,
+                    MenuElementId = 8,
+                    RoleId = "SU",
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                    MenuRoleId = 9,
+                    MenuElementId = 9,
+                    RoleId = "SU",
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                    MenuRoleId = 10,
+                    MenuElementId = 10,
+                    RoleId = "SU",
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                    MenuRoleId = 11,
+                    MenuElementId = 11,
+                    RoleId = "SU",
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                    MenuRoleId = 12,
+                    MenuElementId = 12,
+                    RoleId = "SU",
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                    MenuRoleId = 13,
+                    MenuElementId = 13,
+                    RoleId = "SU",
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                    MenuRoleId = 14,
+                    MenuElementId = 14,
+                    RoleId = "SU",
+                    Activo = true,
+                    CreateDate = DateTime.Now,
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                }
+
+            ];
+
+            modelBuilder.Entity<AdmMenuRole>().HasData(admMenuElements);
         }
     }
 }
