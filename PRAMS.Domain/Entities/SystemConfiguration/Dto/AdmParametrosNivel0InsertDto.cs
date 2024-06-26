@@ -11,5 +11,6 @@ namespace PRAMS.Domain.Entities.SystemConfiguration.Dto
         public string? TX_FilterTwo { get; set; }
         public string? TX_FilterThree { get; set; }
         public string? TX_FilterFour { get; set; }
+        public string? TX_FilterFive { get; set; }
     }
 }

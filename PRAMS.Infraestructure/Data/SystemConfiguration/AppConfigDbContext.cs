@@ -383,6 +383,112 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
             ];
 
             modelBuilder.Entity<AdmParametrosSeleccion>().HasData(entdParametrosSeleccions);
+
+            IList<AdmParametrosSeleccion> firmasParametrosSeleccions =
+            [
+                new ()
+                {
+                    ParamterosID = 13,
+                    CategoriaID = 8,
+                    Parametro = "BAG",
+                    Descripcion = "Bernardo Acevedo González",
+                    TX_Filtro1 = "Analista de Recursos Humanos",
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                    CreateDate = DateTime.Now,
+                    Activo = true
+                },
+                new ()
+                {
+                    ParamterosID = 14,
+                    CategoriaID = 8,
+                    Parametro = "CRN",
+                    Descripcion = "Carmín Rodríguez Negrón",
+                    TX_Filtro1 = "Directora",
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                    CreateDate = DateTime.Now,
+                    Activo = true
+                },                
+                new ()
+                {
+                    ParamterosID = 15,
+                    CategoriaID = 8,
+                    Parametro = "JLF",
+                    Descripcion = "Jannette López Falcón",
+                    TX_Filtro1 = "Analista de Recursos Humanos",
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                    CreateDate = DateTime.Now,
+                    Activo = true
+                },                
+                new ()
+                {
+                    ParamterosID = 16,
+                    CategoriaID = 8,
+                    Parametro = "VMM",
+                    Descripcion = "Victor Maldonado Martínez",
+                    TX_Filtro1 = "Director",
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                    CreateDate = DateTime.Now,
+                    Activo = true
+                },                
+                new ()
+                {
+                    ParamterosID = 17,
+                    CategoriaID = 8,
+                    Parametro = "JPR",
+                    Descripcion = "Juan Perez Rodriguez",
+                    TX_Filtro1 = "Analista ASUME",
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                    CreateDate = DateTime.Now,
+                    Activo = true
+                },                
+                new ()
+                {
+                    ParamterosID = 18,
+                    CategoriaID = 8,
+                    Parametro = "NCA",
+                    Descripcion = "Nancy Calderon Alicea",
+                    TX_Filtro1 = "Especialista Recursos Humanos",
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                    CreateDate = DateTime.Now,
+                    Activo = true
+                },                
+                new ()
+                {
+                    ParamterosID = 19,
+                    CategoriaID = 8,
+                    Parametro = "GOV",
+                    Descripcion = "Gabriel Otero Valentin",
+                    TX_Filtro1 = "Analista ADSEF",
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                    CreateDate = DateTime.Now,
+                    Activo = true
+                },                
+                new ()
+                {
+                    ParamterosID = 20,
+                    CategoriaID = 8,
+                    Parametro = "LSM",
+                    Descripcion = "Leslie Soto Matos",
+                    TX_Filtro1 = "Analista AMSCA",
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                    CreateDate = DateTime.Now,
+                    Activo = true
+                },                
+                new ()
+                {
+                    ParamterosID = 21,
+                    CategoriaID = 8,
+                    Parametro = "SEC-GME",
+                    Descripcion = "Secretaria Gerencia",
+                    TX_Filtro1 = "Administrador",
+                    CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                    CreateDate = DateTime.Now,
+                    Activo = true
+                },
+
+            ];
+
+            modelBuilder.Entity<AdmParametrosSeleccion>().HasData(firmasParametrosSeleccions);
         }
     }
 }

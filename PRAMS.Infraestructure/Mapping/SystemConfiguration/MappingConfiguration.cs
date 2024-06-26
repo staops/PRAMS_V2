@@ -12,13 +12,15 @@ namespace PRAMS.Infraestructure.Mapping.SystemConfiguration
             {
                 config.CreateMap<AdmParametrosSeleccion, AdmParametrosNivel0Dto>()
                     .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.AdmParametroCategoria.Categoria))
+                    .ForMember(dest => dest.ParamterosID, opt => opt.MapFrom(src => src.ParamterosID))
                     .ForMember(dest => dest.Paremeter, opt => opt.MapFrom(src => src.Parametro))
-                    .ForMember(dest => dest.CatDescription, opt => opt.MapFrom(src => src.Descripcion))
-                    .ForMember(dest => dest.ParamDescription, opt => opt.MapFrom(src => src.AdmParametroCategoria.Descripcion))
-                    .ForMember(dest => dest.TX_Filter, opt => opt.MapFrom(src => src.AdmParametroCategoria.TX_Filtro1_Nombre))
-                    .ForMember(dest => dest.TX_FilterTwo, opt => opt.MapFrom(src => src.AdmParametroCategoria.TX_Filtro2_Nombre))
-                    .ForMember(dest => dest.TX_FilterThree, opt => opt.MapFrom(src => src.AdmParametroCategoria.TX_Filtro3_Nombre))
-                    .ForMember(dest => dest.TX_FilterFour, opt => opt.MapFrom(src => src.AdmParametroCategoria.TX_Filtro4_Nombre))
+                    .ForMember(dest => dest.TX_Filter, opt => opt.MapFrom(src => src.TX_Filtro1))
+                    .ForMember(dest => dest.TX_FilterTwo, opt => opt.MapFrom(src => src.TX_Filtro2))
+                    .ForMember(dest => dest.TX_FilterThree, opt => opt.MapFrom(src => src.TX_Filtro3))
+                    .ForMember(dest => dest.TX_FilterFour, opt => opt.MapFrom(src => src.TX_Filtro4))
+                    .ForMember(dest => dest.TX_FilterFive, opt => opt.MapFrom(src => src.TX_Filtro5))
+                    .ForMember(dest => dest.CatDescription, opt => opt.MapFrom(src => src.AdmParametroCategoria.Descripcion))
+                    .ForMember(dest => dest.ParamDescription, opt => opt.MapFrom(src => src.Descripcion))
                     .ReverseMap();
 
 
