@@ -26,8 +26,25 @@ namespace PRAMS.Infraestructure.Services.SystemConfiguration
             try
             {
                 var query = _appConfigDbContext.AdmMenuElements
-                    .Include(i => i.AdmMenuRoles)
-                    .Where(w => w.Activo == true)
+                    .Include(i => i.AdmMenuChildElements
+                                    .Where(w=> _appConfigDbContext.AdmMenuRoles
+                                                .Where(ww => ww.RoleId == roleId && ww.Activo == true)
+                                                .Select(s => s.MenuElementId)
+                                                .Contains(w.MenuElementId))
+                            )
+                    .Include("AdmMenuChildElements.AdmMenuChildElements")
+                                    .Where(w => _appConfigDbContext.AdmMenuRoles
+                                                .Where(ww => ww.RoleId == roleId && ww.Activo == true)
+                                                .Select(s => s.MenuElementId)
+                                                .Contains(w.MenuElementId))
+                    .Where(w =>
+                           w.Activo == true &&
+                           w.MenuElementParentId == null &&
+                           _appConfigDbContext.AdmMenuRoles
+                                .Where(ww => ww.RoleId == roleId && ww.Activo == true)
+                                .Select(s => s.MenuElementId)
+                                .Contains(w.MenuElementId)
+                           )
                     .OrderBy(o => o.Orden)
                     .AsQueryable();
 

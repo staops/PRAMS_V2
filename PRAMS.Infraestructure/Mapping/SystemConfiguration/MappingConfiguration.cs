@@ -50,14 +50,20 @@ namespace PRAMS.Infraestructure.Mapping.SystemConfiguration
                     .ForMember(dest => dest.Controlador, opt => opt.MapFrom(src => src.Controlador))
                     .ForMember(dest => dest.Accion, opt => opt.MapFrom(src => src.Accion))
                     .ForMember(dest => dest.Icono, opt => opt.MapFrom(src => src.Icono))
-                    .ForMember(dest => dest.SubMenu, opt => opt.MapFrom(src => src.AdmMenuRoles));
+                    .ForMember(dest => dest.SubMenu, opt => opt.MapFrom(src => src.AdmMenuChildElements));
 
-                config.CreateMap<AdmMenuRole, AdmMenuRoleDosDto>()
-                    .ForMember(dest => dest.Nombre, opt => opt.MapFrom(src => src.AdmMenuElement.Nombre))
-                    .ForMember(dest => dest.Controlador, opt => opt.MapFrom(src => src.AdmMenuElement.Controlador))
-                    .ForMember(dest => dest.Accion, opt => opt.MapFrom(src => src.AdmMenuElement.Accion))
-                    .ForMember(dest => dest.Icono, opt => opt.MapFrom(src => src.AdmMenuElement.Icono));
+                config.CreateMap<AdmMenuElements, AdmSubMenuRoleDto>()
+                    .ForMember(dest => dest.Nombre, opt => opt.MapFrom(src => src.Nombre))
+                    .ForMember(dest => dest.Controlador, opt => opt.MapFrom(src => src.Controlador))
+                    .ForMember(dest => dest.Accion, opt => opt.MapFrom(src => src.Accion))
+                    .ForMember(dest => dest.Icono, opt => opt.MapFrom(src => src.Icono))
+                    .ForMember(dest => dest.SubSubMenu, opt => opt.MapFrom(src => src.AdmMenuChildElements));
 
+                config.CreateMap<AdmMenuElements, AdmSubSubMenuRoleDto>()
+                    .ForMember(dest => dest.Nombre, opt => opt.MapFrom(src => src.Nombre))
+                    .ForMember(dest => dest.Controlador, opt => opt.MapFrom(src => src.Controlador))
+                    .ForMember(dest => dest.Accion, opt => opt.MapFrom(src => src.Accion))
+                    .ForMember(dest => dest.Icono, opt => opt.MapFrom(src => src.Icono));
 
 
             });

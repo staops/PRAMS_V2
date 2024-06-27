@@ -9,6 +9,7 @@ namespace PRAMS.Domain.Models.SystemConfiguration
         public AdmMenuElements()
         {
             AdmMenuRoles = new HashSet<AdmMenuRole>();
+            AdmMenuChildElements = new HashSet<AdmMenuElements>();
         }
 
         [Key]
@@ -27,6 +28,9 @@ namespace PRAMS.Domain.Models.SystemConfiguration
         public bool Activo { get; set; } = true;
 
         public virtual ICollection<AdmMenuRole>? AdmMenuRoles { get; set; }
+
+        [ForeignKey("MenuElementParentId")]
+        public virtual ICollection<AdmMenuElements>? AdmMenuChildElements { get; set; }
 
     }
 }
