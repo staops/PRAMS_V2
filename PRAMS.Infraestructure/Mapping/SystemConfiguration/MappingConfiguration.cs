@@ -45,25 +45,39 @@ namespace PRAMS.Infraestructure.Mapping.SystemConfiguration
                     .ForMember(dest => dest.TX_FilterTwo, opt => opt.MapFrom(src => src.TX_Filtro6))
                     .ReverseMap();
 
-                config.CreateMap<AdmMenuElements, AdmMenuRoleDto>()
+
+
+
+                config.CreateMap<AdmMenuElements, AdmMenuElementDto>()
                     .ForMember(dest => dest.Nombre, opt => opt.MapFrom(src => src.Nombre))
                     .ForMember(dest => dest.Controlador, opt => opt.MapFrom(src => src.Controlador))
                     .ForMember(dest => dest.Accion, opt => opt.MapFrom(src => src.Accion))
                     .ForMember(dest => dest.Icono, opt => opt.MapFrom(src => src.Icono))
                     .ForMember(dest => dest.SubMenu, opt => opt.MapFrom(src => src.AdmMenuChildElements));
 
-                config.CreateMap<AdmMenuElements, AdmSubMenuRoleDto>()
+                config.CreateMap<AdmMenuElements, AdmSubMenuElementDto>()
                     .ForMember(dest => dest.Nombre, opt => opt.MapFrom(src => src.Nombre))
                     .ForMember(dest => dest.Controlador, opt => opt.MapFrom(src => src.Controlador))
                     .ForMember(dest => dest.Accion, opt => opt.MapFrom(src => src.Accion))
                     .ForMember(dest => dest.Icono, opt => opt.MapFrom(src => src.Icono))
                     .ForMember(dest => dest.SubSubMenu, opt => opt.MapFrom(src => src.AdmMenuChildElements));
 
-                config.CreateMap<AdmMenuElements, AdmSubSubMenuRoleDto>()
+                config.CreateMap<AdmMenuElements, AdmSubSubMenuElementDto>()
                     .ForMember(dest => dest.Nombre, opt => opt.MapFrom(src => src.Nombre))
                     .ForMember(dest => dest.Controlador, opt => opt.MapFrom(src => src.Controlador))
                     .ForMember(dest => dest.Accion, opt => opt.MapFrom(src => src.Accion))
                     .ForMember(dest => dest.Icono, opt => opt.MapFrom(src => src.Icono));
+
+
+                config.CreateMap<AdmMenuElements, AdmMenuInsertDto>().ReverseMap();
+                config.CreateMap<AdmMenuElements, AdmMenuUpdateDto>().ReverseMap();
+
+                config.CreateMap<AdmMenuRole, AdmMenuRoleDto>()
+                    .ForMember(dest => dest.MenuElementName, opt => opt.MapFrom(src => src.AdmMenuElement.Nombre));
+                config.CreateMap<AdmMenuRoleDto, AdmMenuRole>();
+
+                config.CreateMap<AdmMenuRole, AdmMenuRoleInsertDto>().ReverseMap();
+                config.CreateMap<AdmMenuRole, AdmMenuRoleUpdateDto>().ReverseMap();
 
 
             });
