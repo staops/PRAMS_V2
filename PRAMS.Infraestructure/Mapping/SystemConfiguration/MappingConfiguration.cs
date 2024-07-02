@@ -12,13 +12,15 @@ namespace PRAMS.Infraestructure.Mapping.SystemConfiguration
             {
                 config.CreateMap<AdmParametrosSeleccion, AdmParametrosNivel0Dto>()
                     .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.AdmParametroCategoria.Categoria))
+                    .ForMember(dest => dest.ParamterosID, opt => opt.MapFrom(src => src.ParamterosID))
                     .ForMember(dest => dest.Paremeter, opt => opt.MapFrom(src => src.Parametro))
-                    .ForMember(dest => dest.CatDescription, opt => opt.MapFrom(src => src.Descripcion))
-                    .ForMember(dest => dest.ParamDescription, opt => opt.MapFrom(src => src.AdmParametroCategoria.Descripcion))
-                    .ForMember(dest => dest.TX_Filter, opt => opt.MapFrom(src => src.AdmParametroCategoria.TX_Filtro1_Nombre))
-                    .ForMember(dest => dest.TX_FilterTwo, opt => opt.MapFrom(src => src.AdmParametroCategoria.TX_Filtro2_Nombre))
-                    .ForMember(dest => dest.TX_FilterThree, opt => opt.MapFrom(src => src.AdmParametroCategoria.TX_Filtro3_Nombre))
-                    .ForMember(dest => dest.TX_FilterFour, opt => opt.MapFrom(src => src.AdmParametroCategoria.TX_Filtro4_Nombre))
+                    .ForMember(dest => dest.TX_Filter, opt => opt.MapFrom(src => src.TX_Filtro1))
+                    .ForMember(dest => dest.TX_FilterTwo, opt => opt.MapFrom(src => src.TX_Filtro2))
+                    .ForMember(dest => dest.TX_FilterThree, opt => opt.MapFrom(src => src.TX_Filtro3))
+                    .ForMember(dest => dest.TX_FilterFour, opt => opt.MapFrom(src => src.TX_Filtro4))
+                    .ForMember(dest => dest.TX_FilterFive, opt => opt.MapFrom(src => src.TX_Filtro5))
+                    .ForMember(dest => dest.CatDescription, opt => opt.MapFrom(src => src.AdmParametroCategoria.Descripcion))
+                    .ForMember(dest => dest.ParamDescription, opt => opt.MapFrom(src => src.Descripcion))
                     .ReverseMap();
 
 
@@ -42,6 +44,40 @@ namespace PRAMS.Infraestructure.Mapping.SystemConfiguration
                     .ForMember(dest => dest.TX_Filter, opt => opt.MapFrom(src => src.TX_Filtro5))
                     .ForMember(dest => dest.TX_FilterTwo, opt => opt.MapFrom(src => src.TX_Filtro6))
                     .ReverseMap();
+
+
+
+
+                config.CreateMap<AdmMenuElements, AdmMenuElementDto>()
+                    .ForMember(dest => dest.Nombre, opt => opt.MapFrom(src => src.Nombre))
+                    .ForMember(dest => dest.Controlador, opt => opt.MapFrom(src => src.Controlador))
+                    .ForMember(dest => dest.Accion, opt => opt.MapFrom(src => src.Accion))
+                    .ForMember(dest => dest.Icono, opt => opt.MapFrom(src => src.Icono))
+                    .ForMember(dest => dest.SubMenu, opt => opt.MapFrom(src => src.AdmMenuChildElements));
+
+                config.CreateMap<AdmMenuElements, AdmSubMenuElementDto>()
+                    .ForMember(dest => dest.Nombre, opt => opt.MapFrom(src => src.Nombre))
+                    .ForMember(dest => dest.Controlador, opt => opt.MapFrom(src => src.Controlador))
+                    .ForMember(dest => dest.Accion, opt => opt.MapFrom(src => src.Accion))
+                    .ForMember(dest => dest.Icono, opt => opt.MapFrom(src => src.Icono))
+                    .ForMember(dest => dest.SubSubMenu, opt => opt.MapFrom(src => src.AdmMenuChildElements));
+
+                config.CreateMap<AdmMenuElements, AdmSubSubMenuElementDto>()
+                    .ForMember(dest => dest.Nombre, opt => opt.MapFrom(src => src.Nombre))
+                    .ForMember(dest => dest.Controlador, opt => opt.MapFrom(src => src.Controlador))
+                    .ForMember(dest => dest.Accion, opt => opt.MapFrom(src => src.Accion))
+                    .ForMember(dest => dest.Icono, opt => opt.MapFrom(src => src.Icono));
+
+
+                config.CreateMap<AdmMenuElements, AdmMenuInsertDto>().ReverseMap();
+                config.CreateMap<AdmMenuElements, AdmMenuUpdateDto>().ReverseMap();
+
+                config.CreateMap<AdmMenuRole, AdmMenuRoleDto>()
+                    .ForMember(dest => dest.MenuElementName, opt => opt.MapFrom(src => src.AdmMenuElement.Nombre));
+                config.CreateMap<AdmMenuRoleDto, AdmMenuRole>();
+
+                config.CreateMap<AdmMenuRole, AdmMenuRoleInsertDto>().ReverseMap();
+                config.CreateMap<AdmMenuRole, AdmMenuRoleUpdateDto>().ReverseMap();
 
 
             });

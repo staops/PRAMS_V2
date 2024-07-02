@@ -135,7 +135,7 @@ namespace PRAMS.Configuration.Controllers
             }
         }
 
-        [HttpPost("InsertCatalog")]
+        [HttpPost("CreateCatalog")]
         [Authorize]
         [Consumes(MediaTypeNames.Application.Json)]
         [Produces(MediaTypeNames.Application.Json)]
