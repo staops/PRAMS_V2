@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper.Execution;
+using Microsoft.EntityFrameworkCore;
 using PRAMS.Domain.Models.SystemConfiguration;
 
 namespace PRAMS.Infraestructure.Data.SystemConfiguration
@@ -21,6 +22,8 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
             PopulateAdmParametrosSeleccion(modelBuilder);
             PopulateAdmMenuElements(modelBuilder);
             PopulateAdmMenuRole(modelBuilder);
+            PouplateReportsCategoria(modelBuilder);
+            PouplateReportsRoleCategoria(modelBuilder);
         }
 
         private static void PouplateParametroCategoria(ModelBuilder modelBuilder)
@@ -875,6 +878,272 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
             ];
 
             modelBuilder.Entity<AdmMenuRole>().HasData(admMenuElements);
+        }
+
+        private static void PouplateReportsCategoria(ModelBuilder modelBuilder)
+        {
+
+            IList<AdmReports> admReportsParametros =
+            [
+                new(){
+                  ReportId =  1,
+                  ReportType = "Región",
+                  ReportName =  "Listado de RMS Generados Diarios (por Región)",
+                  ReportLink =  "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_GeneradosDiarios",
+                  ReportParameters =  "Fecha",
+                  Activo = true,
+                  ReportDescription =  "Lista los RMS Pendientes Diariamente, selección por Fecha y agrupado por Región",
+                  Orden =  1,
+                  CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                  CreateDate = DateTime.Now
+                },
+                new(){
+                  ReportId =  2,
+                  ReportType = "Región",
+                  ReportName =  "RMS Completados por Empleados rango de Fechas y por Región",
+                  ReportLink =  "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_Complete_DateRange",
+                  ReportParameters =  "Fechas",
+                  Activo = true,
+                  ReportDescription =  "Lista los RMS Completados por los Empleados por rango de fecha y por Región (Todos los Contestados)",
+                  Orden =  3,
+                  CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                  CreateDate = DateTime.Now
+                },
+                new(){
+                  ReportId =  3,
+                  ReportType = "Región",
+                  ReportName =  "RMS Completados por Fechas, Región y que son Validos",
+                  ReportLink =  "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_Complete_DateRangeValid",
+                  ReportParameters =  "Fechas, Region",
+                  Activo = true,
+                  ReportDescription =  "Lista los RMS Completados Validos por los Empleados por rango de fecha y por Región (Solo Validos)",
+                  Orden =  2,
+                  CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                  CreateDate = DateTime.Now
+                },
+                new(){
+                  ReportId =  4,
+                  ReportType = "Finanzas",
+                  ReportName =  "Reporte de RMS Validos Completados Listado para Asistencias de Empleados",
+                  ReportLink =  "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_Complete_ValidAssistance",
+                  ReportParameters =  "Fecha, Region",
+                  Activo = true,
+                  ReportDescription =  "Reporte de RMS Completados Validos para reclamos, incluye Numero de RMS para uso en las Asistencias de los Empleados para los RMS Contestados.",
+                  Orden =  3,
+                  CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                  CreateDate = DateTime.Now
+                },
+                new(){
+                  ReportId =  5,
+                  ReportType = "Administración",
+                  ReportName =  "RMS Resumen Estadisticas Envíos por Rango Fecha y Región",
+                  ReportLink =  "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRms_Statdistics_DateRangeRegion",
+                  ReportParameters =  "Fecha y Region",
+                  Activo = true,
+                  ReportDescription =  "Resumen de los RMS enviados, completados, invalidos, seguimientos y validos con porcientos de completados",
+                  Orden =  2,
+                  CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                  CreateDate = DateTime.Now
+                },
+                new(){
+                  ReportId =  6,
+                  ReportType = "Administración",
+                  ReportName =  "Formulario RMS llenados por Fecha ",
+                  ReportLink =  "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_CAP_WorkDetailRange",
+                  ReportParameters =  "Fecha",
+                  Activo = true,
+                  ReportDescription =  "Muestra el Formulario RMS según llenado por los Trabajadores Sociales",
+                  Orden =  1,
+                  CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                  CreateDate = DateTime.Now
+                },
+                new(){
+                  ReportId =  7,
+                  ReportType = "Finanzas",
+                  ReportName =  "Cost Allocation Plan Reporte Diario",
+                  ReportLink =  "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_CostAllocationDaily",
+                  ReportParameters =  "Fecha",
+                  Activo = true,
+                  ReportDescription =  "El reporte de Cost Allocation Plan resumen de los RMS entrados por Grant Diarios",
+                  Orden =  4,
+                  CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                  CreateDate = DateTime.Now
+                },
+                new(){
+                  ReportId =  8,
+                  ReportType = "Finanzas",
+                  ReportName =  "Cost Allocation Plan Reporte Mensual",
+                  ReportLink =  "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_CostAllocationMonthly",
+                  ReportParameters =  "Fecha",
+                  Activo = true,
+                  ReportDescription =  "El reporte de Cost Allocation Plan resumen de los RMS entrados por Grant para el Mes seleccionado.",
+                  Orden =  5,
+                  CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                  CreateDate = DateTime.Now
+                },
+                new(){
+                  ReportId =  9,
+                  ReportType = "Finanzas",
+                  ReportName =  "Cost Allocation Plan Reporte Trimestral",
+                  ReportLink =  "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_CostAllocationQuarter",
+                  ReportParameters =  "Fecha",
+                  Activo = true,
+                  ReportDescription =  "El reporte de Cost Allocation Plan resumen de los RMS entrados por Grant Trimestrales",
+                  Orden =  7,
+                  CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                  CreateDate = DateTime.Now
+                },
+                new(){
+                  ReportId =  10,
+                  ReportType = "Administración",
+                  ReportName =  "Observaciones Completadas por Rango de Fecha (Selección Validas)",
+                  ReportLink =  "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_Submitted_DateRange",
+                  ReportParameters =  "Fechas",
+                  Activo = true,
+                  ReportDescription =  "Este Reporte muestra todas las Observaciones entradas por los usuarios en un rango de fechas con sus respectivos Títulos y Grants por rango de Fecha y selección de Validos o Invalidos para el CAP",
+                  Orden =  3,
+                  CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                  CreateDate = DateTime.Now
+                },
+                new(){
+                  ReportId =  11,
+                  ReportType = "Finanzas",
+                  ReportName =  "RMS Matrix",
+                  ReportLink =  "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_CAP_Matrix",
+                  ReportParameters =  "Fechas",
+                  Activo = true,
+                  ReportDescription =  "RMS Matrix Distribution Report for the CAP Titile Distribution",
+                  Orden =  1,
+                  CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                  CreateDate = DateTime.Now
+                },
+                new(){
+                  ReportId =  12,
+                  ReportType = "Finanzas",
+                  ReportName =  "Schedule D Listado RMS",
+                  ReportLink =  "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_CAP_ScheduleD",
+                  ReportParameters =  "Fechas",
+                  Activo = true,
+                  ReportDescription =  "Listado de RMS Validos para completar el Schedule D del CAP",
+                  Orden =  2,
+                  CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                  CreateDate = DateTime.Now
+                }
+            ];
+
+            modelBuilder.Entity<AdmReports>().HasMany(m => m.AdmReportsRoles).WithMany();
+
+            modelBuilder.Entity<AdmReports>().HasData(admReportsParametros);
+
+
+        }
+
+        private static void PouplateReportsRoleCategoria(ModelBuilder modelBuilder)
+        {
+
+            IList<AdmReportsRole> admReportsParametros = [
+                new(){
+                  ReportRoleId = 1,
+                  ReportId = 1,
+                  RoleId = "SU",
+                  Activo = true,
+                  CreateDate = DateTime.Now,
+                  CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                  ReportRoleId = 2,
+                  ReportId = 2,
+                  RoleId = "SU",
+                  Activo = true,
+                  CreateDate = DateTime.Now,
+                  CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                  ReportRoleId = 3,
+                  ReportId = 3,
+                  RoleId = "SU",
+                  Activo = true,
+                  CreateDate = DateTime.Now,
+                  CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                  ReportRoleId = 4,
+                  ReportId = 4,
+                  RoleId = "SU",
+                  Activo = true,
+                  CreateDate = DateTime.Now,
+                  CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                  ReportRoleId = 5,
+                  ReportId = 5,
+                  RoleId = "SU",
+                  Activo = true,
+                  CreateDate = DateTime.Now,
+                  CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                  ReportRoleId = 6,
+                  ReportId = 6,
+                  RoleId = "SU",
+                  Activo = true,
+                  CreateDate = DateTime.Now,
+                  CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                  ReportRoleId = 7,
+                  ReportId = 7,
+                  RoleId = "SU",
+                  Activo = true,
+                  CreateDate = DateTime.Now,
+                  CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                  ReportRoleId = 8,
+                  ReportId = 8,
+                  RoleId = "SU",
+                  Activo = true,
+                  CreateDate = DateTime.Now,
+                  CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                  ReportRoleId = 9,
+                  ReportId = 9,
+                  RoleId = "SU",
+                  Activo = true,
+                  CreateDate = DateTime.Now,
+                  CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                  ReportRoleId = 10,
+                  ReportId = 10,
+                  RoleId = "SU",
+                  Activo = true,
+                  CreateDate = DateTime.Now,
+                  CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                  ReportRoleId = 11,
+                  ReportId = 11,
+                  RoleId = "SU",
+                  Activo = true,
+                  CreateDate = DateTime.Now,
+                  CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                },
+                new(){
+                  ReportRoleId = 12,
+                  ReportId = 12,
+                  RoleId = "SU",
+                  Activo = true,
+                  CreateDate = DateTime.Now,
+                  CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                }
+            ];
+
+            modelBuilder.Entity<AdmReportsRole>().HasData(admReportsParametros);
+
+
+
         }
     }
 }

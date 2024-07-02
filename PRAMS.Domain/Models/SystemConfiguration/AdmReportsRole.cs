@@ -3,13 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PRAMS.Domain.Models.SystemConfiguration
 {
-    [Table("Adm_MenuRole")]
-    public class AdmMenuRole
+    [Table("Adm_ReportAdminRole")]
+    public class AdmReportsRole
     {
         [Key]
-        public int MenuRoleId { get; set; }
+        public int ReportRoleId { get; set; }
         [Required]
-        public int MenuElementId { get; set; }
+        public int ReportId { get; set; }
         [Required]
         public required string RoleId { get; set; }
         [Required]
@@ -19,8 +19,7 @@ namespace PRAMS.Domain.Models.SystemConfiguration
         [Required]
         public bool Activo { get; set; } = true;
 
-        [ForeignKey("MenuElementId")]
-        public virtual AdmMenuElements? AdmMenuElement { get; set; }
-
+        [ForeignKey("ReportId")]
+        public virtual AdmMenuRole? AdmMenuRole { get; set; }
     }
 }

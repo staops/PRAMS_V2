@@ -22,6 +22,21 @@ namespace PRAMS.Configuration.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("AdmReportsAdmReportsRole", b =>
+                {
+                    b.Property<int>("AdmReportsReportId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AdmReportsRolesReportRoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AdmReportsReportId", "AdmReportsRolesReportRoleId");
+
+                    b.HasIndex("AdmReportsRolesReportRoleId");
+
+                    b.ToTable("AdmReportsAdmReportsRole");
+                });
+
             modelBuilder.Entity("PRAMS.Domain.Models.SystemConfiguration.AdmMenuElements", b =>
                 {
                     b.Property<int>("MenuElementId")
@@ -72,7 +87,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "Home",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2274),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4277),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-home",
                             Nombre = "Home",
@@ -84,7 +99,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "SystemConfiguration",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2277),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4280),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             Nombre = "System Configuration",
@@ -96,7 +111,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "Parametros",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2279),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4282),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             MenuElementParentId = 2,
@@ -109,7 +124,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "Categorias",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2281),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4284),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             MenuElementParentId = 2,
@@ -122,7 +137,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "Ajustes",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2283),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4286),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             Nombre = "Ajustes",
@@ -134,7 +149,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "Roles",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2284),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4287),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             MenuElementParentId = 5,
@@ -147,7 +162,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "Usuarios",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2286),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4289),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             MenuElementParentId = 5,
@@ -160,7 +175,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "Otro",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2288),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4291),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             MenuElementParentId = 5,
@@ -173,7 +188,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "AgregarRol",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2290),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4293),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             MenuElementParentId = 6,
@@ -186,7 +201,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "EditarRol",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2291),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4295),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             MenuElementParentId = 6,
@@ -199,7 +214,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "EliminarRol",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2293),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4297),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             MenuElementParentId = 6,
@@ -212,7 +227,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "AgregarUsuario",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2295),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4299),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             MenuElementParentId = 7,
@@ -225,7 +240,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "EditarUsuario",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2297),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4301),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             MenuElementParentId = 7,
@@ -238,7 +253,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "EliminarUsuario",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2299),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4302),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             MenuElementParentId = 7,
@@ -251,7 +266,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "EliminarUsuario",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2300),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4304),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             MenuElementParentId = 14,
@@ -264,7 +279,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "EliminarUsuario",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2302),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4306),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             MenuElementParentId = 14,
@@ -277,7 +292,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "EliminarUsuario",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2304),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4308),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             Nombre = "Borrado lógico",
@@ -289,7 +304,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = false,
                             Controlador = "EliminarUsuario",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2318),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4310),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             Nombre = "Elmento eliminado",
@@ -333,7 +348,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 1,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2347),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4340),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 1,
                             RoleId = "SU"
@@ -342,7 +357,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 2,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2349),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4342),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 2,
                             RoleId = "SU"
@@ -351,7 +366,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 3,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2350),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4343),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 3,
                             RoleId = "SU"
@@ -360,7 +375,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 4,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2351),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4344),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 4,
                             RoleId = "SU"
@@ -369,7 +384,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 5,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2352),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4346),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 5,
                             RoleId = "SU"
@@ -378,7 +393,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 6,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2354),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4347),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 6,
                             RoleId = "SU"
@@ -387,7 +402,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 7,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2355),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4348),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 7,
                             RoleId = "SU"
@@ -396,7 +411,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 8,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2356),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4349),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 8,
                             RoleId = "SU"
@@ -405,7 +420,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 9,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2357),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4350),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 9,
                             RoleId = "SU"
@@ -414,7 +429,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 10,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2358),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4351),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 10,
                             RoleId = "SU"
@@ -423,7 +438,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 11,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2359),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4353),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 11,
                             RoleId = "SU"
@@ -432,7 +447,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 12,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2361),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4354),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 12,
                             RoleId = "SU"
@@ -441,7 +456,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 13,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2362),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4355),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 13,
                             RoleId = "SU"
@@ -450,7 +465,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 14,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2363),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4356),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 14,
                             RoleId = "SU"
@@ -459,7 +474,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 15,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2364),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4357),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 15,
                             RoleId = "SU"
@@ -468,7 +483,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 16,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2365),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4358),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 16,
                             RoleId = "SU"
@@ -477,7 +492,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 17,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2366),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4360),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 17,
                             RoleId = "SU"
@@ -486,7 +501,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 18,
                             Activo = false,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2367),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4361),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 18,
                             RoleId = "SU"
@@ -562,7 +577,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 1,
                             Activo = true,
                             Categoria = "Clasificacion Empleados",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2014),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(3987),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Clasificaciones"
                         },
@@ -571,7 +586,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 2,
                             Activo = true,
                             Categoria = "Curso Aprobado",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2016),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(3989),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         },
@@ -580,7 +595,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 3,
                             Activo = false,
                             Categoria = "Curso Aprobado Demo",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2017),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(3990),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         },
@@ -589,7 +604,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 4,
                             Activo = true,
                             Categoria = "Tipo Impedimento",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2019),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(3992),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         },
@@ -598,7 +613,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 5,
                             Activo = true,
                             Categoria = "Tipo Nombramiento",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2020),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(3993),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         },
@@ -607,7 +622,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 6,
                             Activo = true,
                             Categoria = "Pueblos",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2021),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(3995),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Def Pueblos con Dos Niveles de Filtros",
                             TX_Filtro1_Nombre = "Estado",
@@ -618,7 +633,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 7,
                             Activo = true,
                             Categoria = "Categoria Licencias",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2023),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(3996),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         },
@@ -627,7 +642,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 8,
                             Activo = true,
                             Categoria = "Firmas",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2024),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(3998),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "",
                             TX_Filtro1_Nombre = "Posición / Puesto"
@@ -637,7 +652,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 9,
                             Activo = true,
                             Categoria = "Acciones",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2026),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(3999),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         },
@@ -646,7 +661,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 10,
                             Activo = true,
                             Categoria = "Genero",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2027),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4001),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         },
@@ -655,7 +670,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 11,
                             Activo = true,
                             Categoria = "Region",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2028),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4002),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         },
@@ -664,7 +679,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 12,
                             Activo = true,
                             Categoria = "Tipo Convocatoria",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2029),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4003),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         },
@@ -673,7 +688,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 13,
                             Activo = true,
                             Categoria = "Dependencias",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2030),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4005),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         },
@@ -682,7 +697,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 14,
                             Activo = false,
                             Categoria = "Dependencias2",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2032),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4006),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         },
@@ -691,7 +706,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 15,
                             Activo = false,
                             Categoria = "Dependencias3",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2033),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4007),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         },
@@ -700,7 +715,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 16,
                             Activo = true,
                             Categoria = "Entidades Municipio",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2035),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4024),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Def Municipios Tres Niveles Ejemplo",
                             TX_Filtro1_Nombre = "Region",
@@ -712,7 +727,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 17,
                             Activo = true,
                             Categoria = "Cantidad Solicitudes",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2036),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4026),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         },
@@ -721,7 +736,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 18,
                             Activo = false,
                             Categoria = "Cantidad Solicitudes2",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2037),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4027),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         },
@@ -730,7 +745,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 19,
                             Activo = true,
                             Categoria = "Grados Academicos",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2039),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4028),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         },
@@ -739,7 +754,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 20,
                             Activo = true,
                             Categoria = "Tipo de Documentos",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2040),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4030),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         },
@@ -748,7 +763,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 21,
                             Activo = true,
                             Categoria = "Tipo Reportes",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2041),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4031),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         },
@@ -757,7 +772,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 22,
                             Activo = true,
                             Categoria = "RolesReportes",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2042),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4032),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         },
@@ -766,7 +781,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 23,
                             Activo = true,
                             Categoria = "RolesMenu",
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2044),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4034),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         });
@@ -851,7 +866,7 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 1,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2124),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4130),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Parametro = "Empleado"
                         },
@@ -860,7 +875,7 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 2,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2125),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4132),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Parametro = "Empleado Temporal"
                         },
@@ -869,7 +884,7 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 3,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2127),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4134),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Parametro = "Empleado Contratado"
                         },
@@ -878,7 +893,7 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 4,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2128),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4135),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Parametro = "Empleado de Carrera"
                         },
@@ -887,7 +902,7 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 5,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2129),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4136),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Parametro = "Empleado de Confianza"
                         },
@@ -896,7 +911,7 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 6,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2130),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4137),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Parametro = "Empleado de Base"
                         },
@@ -905,7 +920,7 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 7,
                             Activo = true,
                             CategoriaID = 16,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2191),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4162),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Parametro = "San Juan",
                             TX_Filtro1 = "Area Metro",
@@ -917,7 +932,7 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 8,
                             Activo = true,
                             CategoriaID = 16,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2192),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4164),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Parametro = "Carolina",
                             TX_Filtro1 = "Area Metro",
@@ -929,7 +944,7 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 9,
                             Activo = true,
                             CategoriaID = 16,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2194),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4165),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Parametro = "Arecibo",
                             TX_Filtro1 = "Area Norte",
@@ -941,7 +956,7 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 10,
                             Activo = true,
                             CategoriaID = 16,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2195),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4167),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Parametro = "Ponce",
                             TX_Filtro1 = "Area Sur",
@@ -953,7 +968,7 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 11,
                             Activo = true,
                             CategoriaID = 16,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2197),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4168),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Parametro = "Orange",
                             TX_Filtro1 = "Central",
@@ -965,7 +980,7 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 12,
                             Activo = true,
                             CategoriaID = 16,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2198),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4170),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Parametro = "New York City",
                             TX_Filtro1 = "Greater City",
@@ -977,7 +992,7 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 13,
                             Activo = true,
                             CategoriaID = 8,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2212),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4185),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Bernardo Acevedo González",
                             Parametro = "BAG",
@@ -988,7 +1003,7 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 14,
                             Activo = true,
                             CategoriaID = 8,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2214),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4187),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Carmín Rodríguez Negrón",
                             Parametro = "CRN",
@@ -999,7 +1014,7 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 15,
                             Activo = true,
                             CategoriaID = 8,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2215),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4188),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Jannette López Falcón",
                             Parametro = "JLF",
@@ -1010,7 +1025,7 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 16,
                             Activo = true,
                             CategoriaID = 8,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2217),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4190),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Victor Maldonado Martínez",
                             Parametro = "VMM",
@@ -1021,7 +1036,7 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 17,
                             Activo = true,
                             CategoriaID = 8,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2218),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4191),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Juan Perez Rodriguez",
                             Parametro = "JPR",
@@ -1032,7 +1047,7 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 18,
                             Activo = true,
                             CategoriaID = 8,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2219),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4193),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Nancy Calderon Alicea",
                             Parametro = "NCA",
@@ -1043,7 +1058,7 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 19,
                             Activo = true,
                             CategoriaID = 8,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2221),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4194),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Gabriel Otero Valentin",
                             Parametro = "GOV",
@@ -1054,7 +1069,7 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 20,
                             Activo = true,
                             CategoriaID = 8,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2222),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4195),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Leslie Soto Matos",
                             Parametro = "LSM",
@@ -1065,12 +1080,371 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 21,
                             Activo = true,
                             CategoriaID = 8,
-                            CreateDate = new DateTime(2024, 6, 27, 0, 5, 23, 631, DateTimeKind.Local).AddTicks(2224),
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4197),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Secretaria Gerencia",
                             Parametro = "SEC-GME",
                             TX_Filtro1 = "Administrador"
                         });
+                });
+
+            modelBuilder.Entity("PRAMS.Domain.Models.SystemConfiguration.AdmReports", b =>
+                {
+                    b.Property<int>("ReportId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReportId"));
+
+                    b.Property<bool>("Activo")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreateUser")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Orden")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReportDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReportLink")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReportName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReportParameters")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReportType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ReportId");
+
+                    b.ToTable("Adm_ReportAdmin");
+
+                    b.HasData(
+                        new
+                        {
+                            ReportId = 1,
+                            Activo = true,
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4390),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Orden = 1,
+                            ReportDescription = "Lista los RMS Pendientes Diariamente, selección por Fecha y agrupado por Región",
+                            ReportLink = "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_GeneradosDiarios",
+                            ReportName = "Listado de RMS Generados Diarios (por Región)",
+                            ReportParameters = "Fecha",
+                            ReportType = "Región"
+                        },
+                        new
+                        {
+                            ReportId = 2,
+                            Activo = true,
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4392),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Orden = 3,
+                            ReportDescription = "Lista los RMS Completados por los Empleados por rango de fecha y por Región (Todos los Contestados)",
+                            ReportLink = "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_Complete_DateRange",
+                            ReportName = "RMS Completados por Empleados rango de Fechas y por Región",
+                            ReportParameters = "Fechas",
+                            ReportType = "Región"
+                        },
+                        new
+                        {
+                            ReportId = 3,
+                            Activo = true,
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4429),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Orden = 2,
+                            ReportDescription = "Lista los RMS Completados Validos por los Empleados por rango de fecha y por Región (Solo Validos)",
+                            ReportLink = "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_Complete_DateRangeValid",
+                            ReportName = "RMS Completados por Fechas, Región y que son Validos",
+                            ReportParameters = "Fechas, Region",
+                            ReportType = "Región"
+                        },
+                        new
+                        {
+                            ReportId = 4,
+                            Activo = true,
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4430),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Orden = 3,
+                            ReportDescription = "Reporte de RMS Completados Validos para reclamos, incluye Numero de RMS para uso en las Asistencias de los Empleados para los RMS Contestados.",
+                            ReportLink = "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_Complete_ValidAssistance",
+                            ReportName = "Reporte de RMS Validos Completados Listado para Asistencias de Empleados",
+                            ReportParameters = "Fecha, Region",
+                            ReportType = "Finanzas"
+                        },
+                        new
+                        {
+                            ReportId = 5,
+                            Activo = true,
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4432),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Orden = 2,
+                            ReportDescription = "Resumen de los RMS enviados, completados, invalidos, seguimientos y validos con porcientos de completados",
+                            ReportLink = "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRms_Statdistics_DateRangeRegion",
+                            ReportName = "RMS Resumen Estadisticas Envíos por Rango Fecha y Región",
+                            ReportParameters = "Fecha y Region",
+                            ReportType = "Administración"
+                        },
+                        new
+                        {
+                            ReportId = 6,
+                            Activo = true,
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4434),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Orden = 1,
+                            ReportDescription = "Muestra el Formulario RMS según llenado por los Trabajadores Sociales",
+                            ReportLink = "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_CAP_WorkDetailRange",
+                            ReportName = "Formulario RMS llenados por Fecha ",
+                            ReportParameters = "Fecha",
+                            ReportType = "Administración"
+                        },
+                        new
+                        {
+                            ReportId = 7,
+                            Activo = true,
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4436),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Orden = 4,
+                            ReportDescription = "El reporte de Cost Allocation Plan resumen de los RMS entrados por Grant Diarios",
+                            ReportLink = "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_CostAllocationDaily",
+                            ReportName = "Cost Allocation Plan Reporte Diario",
+                            ReportParameters = "Fecha",
+                            ReportType = "Finanzas"
+                        },
+                        new
+                        {
+                            ReportId = 8,
+                            Activo = true,
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4437),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Orden = 5,
+                            ReportDescription = "El reporte de Cost Allocation Plan resumen de los RMS entrados por Grant para el Mes seleccionado.",
+                            ReportLink = "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_CostAllocationMonthly",
+                            ReportName = "Cost Allocation Plan Reporte Mensual",
+                            ReportParameters = "Fecha",
+                            ReportType = "Finanzas"
+                        },
+                        new
+                        {
+                            ReportId = 9,
+                            Activo = true,
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4439),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Orden = 7,
+                            ReportDescription = "El reporte de Cost Allocation Plan resumen de los RMS entrados por Grant Trimestrales",
+                            ReportLink = "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_CostAllocationQuarter",
+                            ReportName = "Cost Allocation Plan Reporte Trimestral",
+                            ReportParameters = "Fecha",
+                            ReportType = "Finanzas"
+                        },
+                        new
+                        {
+                            ReportId = 10,
+                            Activo = true,
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4441),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Orden = 3,
+                            ReportDescription = "Este Reporte muestra todas las Observaciones entradas por los usuarios en un rango de fechas con sus respectivos Títulos y Grants por rango de Fecha y selección de Validos o Invalidos para el CAP",
+                            ReportLink = "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_Submitted_DateRange",
+                            ReportName = "Observaciones Completadas por Rango de Fecha (Selección Validas)",
+                            ReportParameters = "Fechas",
+                            ReportType = "Administración"
+                        },
+                        new
+                        {
+                            ReportId = 11,
+                            Activo = true,
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4443),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Orden = 1,
+                            ReportDescription = "RMS Matrix Distribution Report for the CAP Titile Distribution",
+                            ReportLink = "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_CAP_Matrix",
+                            ReportName = "RMS Matrix",
+                            ReportParameters = "Fechas",
+                            ReportType = "Finanzas"
+                        },
+                        new
+                        {
+                            ReportId = 12,
+                            Activo = true,
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 908, DateTimeKind.Local).AddTicks(4444),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Orden = 2,
+                            ReportDescription = "Listado de RMS Validos para completar el Schedule D del CAP",
+                            ReportLink = "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_CAP_ScheduleD",
+                            ReportName = "Schedule D Listado RMS",
+                            ReportParameters = "Fechas",
+                            ReportType = "Finanzas"
+                        });
+                });
+
+            modelBuilder.Entity("PRAMS.Domain.Models.SystemConfiguration.AdmReportsRole", b =>
+                {
+                    b.Property<int>("ReportRoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReportRoleId"));
+
+                    b.Property<bool>("Activo")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreateUser")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ReportId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ReportRoleId");
+
+                    b.HasIndex("ReportId");
+
+                    b.ToTable("Adm_ReportAdminRole");
+
+                    b.HasData(
+                        new
+                        {
+                            ReportRoleId = 1,
+                            Activo = true,
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 911, DateTimeKind.Local).AddTicks(5435),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            ReportId = 1,
+                            RoleId = "SU"
+                        },
+                        new
+                        {
+                            ReportRoleId = 2,
+                            Activo = true,
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 911, DateTimeKind.Local).AddTicks(5437),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            ReportId = 2,
+                            RoleId = "SU"
+                        },
+                        new
+                        {
+                            ReportRoleId = 3,
+                            Activo = true,
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 911, DateTimeKind.Local).AddTicks(5438),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            ReportId = 3,
+                            RoleId = "SU"
+                        },
+                        new
+                        {
+                            ReportRoleId = 4,
+                            Activo = true,
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 911, DateTimeKind.Local).AddTicks(5440),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            ReportId = 4,
+                            RoleId = "SU"
+                        },
+                        new
+                        {
+                            ReportRoleId = 5,
+                            Activo = true,
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 911, DateTimeKind.Local).AddTicks(5441),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            ReportId = 5,
+                            RoleId = "SU"
+                        },
+                        new
+                        {
+                            ReportRoleId = 6,
+                            Activo = true,
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 911, DateTimeKind.Local).AddTicks(5442),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            ReportId = 6,
+                            RoleId = "SU"
+                        },
+                        new
+                        {
+                            ReportRoleId = 7,
+                            Activo = true,
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 911, DateTimeKind.Local).AddTicks(5443),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            ReportId = 7,
+                            RoleId = "SU"
+                        },
+                        new
+                        {
+                            ReportRoleId = 8,
+                            Activo = true,
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 911, DateTimeKind.Local).AddTicks(5445),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            ReportId = 8,
+                            RoleId = "SU"
+                        },
+                        new
+                        {
+                            ReportRoleId = 9,
+                            Activo = true,
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 911, DateTimeKind.Local).AddTicks(5446),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            ReportId = 9,
+                            RoleId = "SU"
+                        },
+                        new
+                        {
+                            ReportRoleId = 10,
+                            Activo = true,
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 911, DateTimeKind.Local).AddTicks(5447),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            ReportId = 10,
+                            RoleId = "SU"
+                        },
+                        new
+                        {
+                            ReportRoleId = 11,
+                            Activo = true,
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 911, DateTimeKind.Local).AddTicks(5448),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            ReportId = 11,
+                            RoleId = "SU"
+                        },
+                        new
+                        {
+                            ReportRoleId = 12,
+                            Activo = true,
+                            CreateDate = new DateTime(2024, 7, 1, 23, 32, 5, 911, DateTimeKind.Local).AddTicks(5450),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            ReportId = 12,
+                            RoleId = "SU"
+                        });
+                });
+
+            modelBuilder.Entity("AdmReportsAdmReportsRole", b =>
+                {
+                    b.HasOne("PRAMS.Domain.Models.SystemConfiguration.AdmReports", null)
+                        .WithMany()
+                        .HasForeignKey("AdmReportsReportId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PRAMS.Domain.Models.SystemConfiguration.AdmReportsRole", null)
+                        .WithMany()
+                        .HasForeignKey("AdmReportsRolesReportRoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("PRAMS.Domain.Models.SystemConfiguration.AdmMenuElements", b =>
@@ -1100,6 +1474,17 @@ namespace PRAMS.Configuration.Migrations
                         .IsRequired();
 
                     b.Navigation("AdmParametroCategoria");
+                });
+
+            modelBuilder.Entity("PRAMS.Domain.Models.SystemConfiguration.AdmReportsRole", b =>
+                {
+                    b.HasOne("PRAMS.Domain.Models.SystemConfiguration.AdmMenuRole", "AdmMenuRole")
+                        .WithMany()
+                        .HasForeignKey("ReportId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AdmMenuRole");
                 });
 
             modelBuilder.Entity("PRAMS.Domain.Models.SystemConfiguration.AdmMenuElements", b =>
