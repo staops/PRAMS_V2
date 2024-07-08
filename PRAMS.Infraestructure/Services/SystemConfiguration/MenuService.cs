@@ -67,7 +67,7 @@ namespace PRAMS.Infraestructure.Services.SystemConfiguration
             {
                 // Validate if the item already exists
                 var item = await _appConfigDbContext.AdmMenuElements
-                    .FirstOrDefaultAsync(f => f.MenuElementId == admMenuRoleInsertDto.MenuElementId);
+                    .FirstOrDefaultAsync(f => f.MenuElementId == admMenuRoleInsertDto.MenuElementId && f.Activo == true);
 
                 if (item is not null)
                 {

@@ -22,7 +22,7 @@ IMapper mapper = MappingConfiguration.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson();
 
 builder.Services.AddScoped<ICatalogsService>(x =>
 {
@@ -37,6 +37,14 @@ builder.Services.AddScoped<IMenuService>(x =>
     var logger = x.GetRequiredService<ILogger<IMenuService>>();
     return new MenuService(dbContext, mapper, logger);
 });
+
+builder.Services.AddScoped<IRoleService>(x =>
+{
+    var dbContext = x.GetRequiredService<AppConfigDbContext>();
+    var logger = x.GetRequiredService<ILogger<IMenuService>>();
+    return new RoleService(dbContext, mapper, logger);
+});
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
