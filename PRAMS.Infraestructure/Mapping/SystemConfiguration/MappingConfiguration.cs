@@ -23,7 +23,6 @@ namespace PRAMS.Infraestructure.Mapping.SystemConfiguration
                     .ForMember(dest => dest.ParamDescription, opt => opt.MapFrom(src => src.Descripcion))
                     .ReverseMap();
 
-
                 config.CreateMap<AdmParametrosSeleccion, AdmParametrosNivel1Dto>()
                     .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.AdmParametroCategoria.Categoria))
                     .ForMember(dest => dest.CatDescription, opt => opt.MapFrom(src => src.AdmParametroCategoria.Descripcion))
@@ -78,6 +77,36 @@ namespace PRAMS.Infraestructure.Mapping.SystemConfiguration
 
                 config.CreateMap<AdmMenuRole, AdmMenuRoleInsertDto>().ReverseMap();
                 config.CreateMap<AdmMenuRole, AdmMenuRoleUpdateDto>().ReverseMap();
+
+
+
+
+
+                config.CreateMap<AdmReports, AdmReportDto>().ReverseMap();
+                config.CreateMap<AdmReports, AdmReportInsertDto>().ReverseMap();
+                config.CreateMap<AdmReports, AdmReportUpdateDto>().ReverseMap();
+
+
+                config.CreateMap<AdmReportsRole, AdmReportsRoleDto>()
+                .ForMember(dest => dest.ReportName, opt => opt.MapFrom(src => src.AdmReports.ReportName))
+                .ForMember(dest => dest.ReportType, opt => opt.MapFrom(src => src.AdmReports.ReportType))
+                .ForMember(dest => dest.ReportLink, opt => opt.MapFrom(src => src.AdmReports.ReportLink))
+                .ForMember(dest => dest.ReportDescription, opt => opt.MapFrom(src => src.AdmReports.ReportDescription))
+                .ForMember(dest => dest.ReportParameters, opt => opt.MapFrom(src => src.AdmReports.ReportParameters))
+                .ForMember(dest => dest.ReportRoleId, opt => opt.MapFrom(src => src.ReportRoleId))
+                .ForMember(dest => dest.RoleId, opt => opt.MapFrom(src => src.RoleId))
+                .ForMember(dest => dest.ReportId, opt => opt.MapFrom(src => src.ReportId));
+
+                config.CreateMap<AdmReportsRole, AdmReportsRoleInsertDto>().ReverseMap();
+                config.CreateMap<AdmReportsRole, AdmReportsRoleUpdateDto>().ReverseMap();
+
+
+                //.ForMember(dest => dest.ReportName, opt => opt.MapFrom(src => src.ReportName))
+                //.ForMember(dest => dest.ReportType, opt => opt.MapFrom(src => src.ReportType))
+                //.ForMember(dest => dest.ReportLink, opt => opt.MapFrom(src => src.ReportLink))
+                //.ForMember(dest => dest.ReportDescription, opt => opt.MapFrom(src => src.ReportDescription))
+                //.ForMember(dest => dest.ReportParameters, opt => opt.MapFrom(src => src.ReportParameters));
+
 
 
             });
