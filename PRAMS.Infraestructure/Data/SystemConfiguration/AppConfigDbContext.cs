@@ -14,6 +14,10 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
 
         public DbSet<AdmMenuRole> AdmMenuRoles { get; set; }
 
+        public DbSet<AdmReports> AdmReports { get; set; }
+
+        public DbSet<AdmReportsRole> AdmReportsRoles { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -1031,7 +1035,7 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
                 }
             ];
 
-            modelBuilder.Entity<AdmReports>().HasMany(m => m.AdmReportsRoles).WithMany();
+            //modelBuilder.Entity<AdmReports>().HasMany(m => m.AdmReportsRoles).WithMany();
 
             modelBuilder.Entity<AdmReports>().HasData(admReportsParametros);
 

@@ -20,6 +20,6 @@ namespace PRAMS.Domain.Models.SystemConfiguration
         public bool Activo { get; set; } = true;
 
         [ForeignKey("ReportId")]
-        public virtual AdmMenuRole? AdmMenuRole { get; set; }
+        public virtual AdmReports? AdmReports { get; set; }
     }
 }
