@@ -9,15 +9,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PRAMS.Configuration", "PRAM
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infraestructure", "Infraestructure", "{8B39EA77-B4BD-48F2-A374-43CC26D957EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRAMS.Infraestructure", "PRAMS.Infraestructure\PRAMS.Infraestructure.csproj", "{E240BAC7-6E1A-4A4A-9659-E699F3040904}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PRAMS.Infraestructure", "PRAMS.Infraestructure\PRAMS.Infraestructure.csproj", "{E240BAC7-6E1A-4A4A-9659-E699F3040904}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{63E0E7A7-42D1-412D-8ED4-6239A9F15215}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRAMS.Domain", "PRAMS.Domain\PRAMS.Domain.csproj", "{9893AD03-C633-4AC6-83F1-C5A7EE493FE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PRAMS.Domain", "PRAMS.Domain\PRAMS.Domain.csproj", "{9893AD03-C633-4AC6-83F1-C5A7EE493FE8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{A97E91A8-0320-47E4-AA37-210A6E6A0284}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRAMS.Application", "PRAMS.Application\PRAMS.Application.csproj", "{A6FB6817-B7CE-45FB-BE21-49331F7F1C49}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PRAMS.Application", "PRAMS.Application\PRAMS.Application.csproj", "{A6FB6817-B7CE-45FB-BE21-49331F7F1C49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRAMS.People", "PRAMS.People\PRAMS.People.csproj", "{2030C0C2-E5FB-4E49-8564-1D741EE25FD4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{A6FB6817-B7CE-45FB-BE21-49331F7F1C49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6FB6817-B7CE-45FB-BE21-49331F7F1C49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6FB6817-B7CE-45FB-BE21-49331F7F1C49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2030C0C2-E5FB-4E49-8564-1D741EE25FD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2030C0C2-E5FB-4E49-8564-1D741EE25FD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2030C0C2-E5FB-4E49-8564-1D741EE25FD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2030C0C2-E5FB-4E49-8564-1D741EE25FD4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

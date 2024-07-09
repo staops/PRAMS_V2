@@ -15,8 +15,4 @@
     <ProjectReference Include="..\PRAMS.Application\PRAMS.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\SystemConfiguration\" />
-  </ItemGroup>
-
 </Project>
