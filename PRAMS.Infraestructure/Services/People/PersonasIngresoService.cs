@@ -2,6 +2,7 @@
 using FluentResults;
 using Microsoft.Extensions.Logging;
 using PRAMS.Application.Contract.People;
+using PRAMS.Domain.Entities.People.Dto;
 using PRAMS.Infraestructure.Data.SystemConfiguration;
 
 namespace PRAMS.Infraestructure.Services.People
@@ -19,7 +20,7 @@ namespace PRAMS.Infraestructure.Services.People
             _logger = logger;
         }
 
-        public Task<Result<ICollection<object>>> GetPersonasIngreso(int personaIngresoId)
+        public async Task<Result<PersonDto>> GetPersonasIngreso(int personaId)
         {
             throw new NotImplementedException();
         }

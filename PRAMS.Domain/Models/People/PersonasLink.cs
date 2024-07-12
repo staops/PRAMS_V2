@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace PRAMS.Domain.Models.People
 {
     [Table("Conf_Personas_Links")]
-    public class PersonasLinks
+    public class PersonasLink
     {
         [Key]
         public int LinkId { get; set; }
@@ -24,6 +24,6 @@ namespace PRAMS.Domain.Models.People
         public bool Pensionado { get; set; } = false;
 
         [ForeignKey("PersonaId")]
-        public virtual Personas? Persona { get; set; }
+        public virtual Persona? Persona { get; set; }
     }
 }

@@ -1,10 +1,11 @@
 ﻿using FluentResults;
+using PRAMS.Domain.Entities.People.Dto;
 
 namespace PRAMS.Application.Contract.People
 {
     public interface IPersonasIngresoService
     {
-        Task<Result<ICollection<object>>> GetPersonasIngreso(int personaIngresoId);
+        Task<Result<PersonDto>> GetPersonasIngreso(int personaId);
 
     }
 }

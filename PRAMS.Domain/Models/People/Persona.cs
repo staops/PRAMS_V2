@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace PRAMS.Domain.Models.People
 {
     [Table("Conf_Personas")]
-    public class Personas
+    public class Persona
     {
-        public Personas()
+        public Persona()
         {
-            PersonasDirecciones = new HashSet<PersonasDirecciones>();
-            PersonasLinks = new HashSet<PersonasLinks>();
+            PersonasDirecciones = new HashSet<PersonasDireccion>();
+            PersonasLinks = new HashSet<PersonasLink>();
         }
 
         [Key]
@@ -87,9 +87,9 @@ namespace PRAMS.Domain.Models.People
         public string? MergedUser { get; set; }
         public int? MergedPersonId { get; set; }
 
-        public virtual ICollection<PersonasDirecciones>? PersonasDirecciones { get; set; }
-        public virtual ICollection<PersonasLinks>? PersonasLinks { get; set; }
-        public virtual PersonasIngresos? PersonasIngresos { get; set; }
+        public virtual ICollection<PersonasDireccion>? PersonasDirecciones { get; set; }
+        public virtual ICollection<PersonasLink>? PersonasLinks { get; set; }
+        public virtual PersonasIngreso? PersonasIngresos { get; set; }
 
     }
 }

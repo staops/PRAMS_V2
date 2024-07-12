@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace PRAMS.Domain.Models.People
 {
     [Table("Conf_Personas_Ingresos")]
-    public class PersonasIngresos
+    public class PersonasIngreso
     {
-        public PersonasIngresos()
+        public PersonasIngreso()
         {
             PersonasIngresosDetalle = new HashSet<PersonasIngresosDetalle>();
         }
@@ -29,7 +29,7 @@ namespace PRAMS.Domain.Models.People
         public bool Activo { get; set; } = true;
 
         [ForeignKey("PersonaId")]
-        public virtual Personas? Persona { get; set; }
+        public virtual Persona? Persona { get; set; }
         public virtual ICollection<PersonasIngresosDetalle>? PersonasIngresosDetalle { get; set; }
     }
 }

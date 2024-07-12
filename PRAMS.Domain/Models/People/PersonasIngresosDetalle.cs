@@ -22,6 +22,6 @@ namespace PRAMS.Domain.Models.People
         public string? Comentario { get; set; }
 
         [ForeignKey("PersonaIngresoId")]
-        public virtual PersonasIngresos? PersonasIngreso { get; set; }
+        public virtual PersonasIngreso? PersonasIngreso { get; set; }
     }
 }
