@@ -70,8 +70,23 @@ namespace PRAMS.Infraestructure.Services.People
         {
             try
             {
+                // If all the search criteria are empty, return an empty list
+                if (string.IsNullOrEmpty(personSearchDto.Nombre) &&
+                    string.IsNullOrEmpty(personSearchDto.ApellidoPaterno) &&
+                    string.IsNullOrEmpty(personSearchDto.ApellidoMaterno) &&
+                    string.IsNullOrEmpty(personSearchDto.SeguroSocial) &&
+                    string.IsNullOrEmpty(personSearchDto.TelefonoResidencia) &&
+                    string.IsNullOrEmpty(personSearchDto.TelefonoCelular) &&
+                    string.IsNullOrEmpty(personSearchDto.TelefonoFamiliar) &&
+                    string.IsNullOrEmpty(personSearchDto.Email))
+                {
+                    ICollection<PersonDto> emptyList = [];
+                    return Result.Ok(emptyList);
+                }
+
                 // Build the predicate based on the search criteria
                 var predicate = PredicateBuilder.New<Persona>(true);
+
                 if (!string.IsNullOrEmpty(personSearchDto.Nombre))
                 {
                     predicate = predicate.Or(x => x.Nombre.Contains(personSearchDto.Nombre));
@@ -115,7 +130,7 @@ namespace PRAMS.Infraestructure.Services.People
             {
                 _logger.LogError(error, "Error in SearchPersonItem");
                 return Result.Fail(new Error($"Error in SearchPersonItem {error.Message}")).WithError(error.StackTrace);
-            
+
             }
         }
 
