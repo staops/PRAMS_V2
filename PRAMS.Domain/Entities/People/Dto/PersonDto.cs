@@ -1,4 +1,6 @@
-﻿namespace PRAMS.Domain.Entities.People.Dto
+﻿using PRAMS.Domain.Models.People;
+
+namespace PRAMS.Domain.Entities.People.Dto
 {
     public class PersonDto
     {
@@ -36,5 +38,7 @@
         public DateTime? MergedDate { get; set; }
         public string? MergedUser { get; set; }
         public int? MergedPersonId { get; set; }
+        public virtual Persona? MergedPerson { get; set; }
+
     }
 }
