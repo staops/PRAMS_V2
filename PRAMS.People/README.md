@@ -7,7 +7,7 @@
 
 1. Prepare the database by running the following command in the Package Manager Console:
 
-```bash add-migration InitConfigurationDB```
+```bash add-migration InitPeopleDB```
 
 2. Update the database by running the following command in the Package Manager Console:
 
@@ -17,5 +17,6 @@
 
 ```bash update-database 0```
 ```bash Update-Database <previous-migration-name> ```
+```bash Remove-Migration```
 
 ### Configuration
