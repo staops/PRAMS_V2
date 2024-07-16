@@ -2,7 +2,7 @@
 using PRAMS.Domain.Entities.People.Dto;
 using PRAMS.Domain.Models.People;
 
-namespace PRAMS.Infraestructure.Mapping.SystemConfiguration
+namespace PRAMS.Infraestructure.Mapping.People
 {
     public class MappingPeople
     {

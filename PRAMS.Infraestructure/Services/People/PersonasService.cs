@@ -8,7 +8,7 @@ using PRAMS.Application.Contract.People;
 using PRAMS.Domain.Entities.People.Dto;
 using PRAMS.Domain.Entities.Shared;
 using PRAMS.Domain.Models.People;
-using PRAMS.Infraestructure.Data.SystemConfiguration;
+using PRAMS.Infraestructure.Data.People;
 using System.Linq.Expressions;
 
 namespace PRAMS.Infraestructure.Services.People

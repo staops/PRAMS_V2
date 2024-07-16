@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PRAMS.Domain.Models.People;
 
-namespace PRAMS.Infraestructure.Data.SystemConfiguration
+namespace PRAMS.Infraestructure.Data.People
 {
     public class AppPeopleDbContext(DbContextOptions<AppPeopleDbContext> options) : DbContext(options)
     {
@@ -69,7 +69,7 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
                         PersonaId = i + 1,
                         SeguroSocial = new Random().Next(100000000, 999999999).ToString(),
                         Titulo = titles[new Random().Next(0, titles.Count)],
-                        ApellidoPaterno =  lastNames[new Random().Next(0, lastNames.Count)],
+                        ApellidoPaterno = lastNames[new Random().Next(0, lastNames.Count)],
                         ApellidoMaterno = lastNames[new Random().Next(0, lastNames.Count)],
                         Nombre = names[new Random().Next(0, names.Count)],
                         Inicial = names[new Random().Next(0, names.Count)].Substring(0, 1),

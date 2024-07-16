@@ -35,4 +35,8 @@
     <ProjectReference Include="..\PRAMS.Infraestructure\PRAMS.Infraestructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>
