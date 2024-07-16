@@ -12,7 +12,7 @@ using PRAMS.Authentication.Data;
 namespace PRAMS.Authentication.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240621030949_InitAuthTables")]
+    [Migration("20240716014934_InitAuthTables")]
     partial class InitAuthTables
     {
         /// <inheritdoc />

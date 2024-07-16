@@ -87,6 +87,9 @@ namespace PRAMS.Domain.Models.People
         public string? MergedUser { get; set; }
         public int? MergedPersonId { get; set; }
 
+        [ForeignKey("MergedPersonId")]
+        public virtual Persona? MergedPerson { get; set; }
+
         public virtual ICollection<PersonasDireccion>? PersonasDirecciones { get; set; }
         public virtual ICollection<PersonasLink>? PersonasLinks { get; set; }
         public virtual PersonasIngreso? PersonasIngresos { get; set; }

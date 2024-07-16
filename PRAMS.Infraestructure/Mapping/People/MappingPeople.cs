@@ -2,7 +2,7 @@
 using PRAMS.Domain.Entities.People.Dto;
 using PRAMS.Domain.Models.People;
 
-namespace PRAMS.Infraestructure.Mapping.SystemConfiguration
+namespace PRAMS.Infraestructure.Mapping.People
 {
     public class MappingPeople
     {
@@ -22,6 +22,9 @@ namespace PRAMS.Infraestructure.Mapping.SystemConfiguration
         public PeopleProfile()
         {
             CreateMap<Persona, PersonDto>().ReverseMap();
+
+            CreateMap<Persona, PersonUpdateDto>().ReverseMap();
+
         }
     }
 }

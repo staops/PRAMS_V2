@@ -3,7 +3,7 @@ using FluentResults;
 using Microsoft.Extensions.Logging;
 using PRAMS.Application.Contract.People;
 using PRAMS.Domain.Entities.People.Dto;
-using PRAMS.Infraestructure.Data.SystemConfiguration;
+using PRAMS.Infraestructure.Data.People;
 
 namespace PRAMS.Infraestructure.Services.People
 {
