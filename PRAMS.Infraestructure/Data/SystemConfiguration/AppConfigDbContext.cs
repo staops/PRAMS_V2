@@ -1,5 +1,4 @@
-﻿using AutoMapper.Execution;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using PRAMS.Domain.Models.SystemConfiguration;
 
 namespace PRAMS.Infraestructure.Data.SystemConfiguration
@@ -23,16 +22,12 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
             base.OnModelCreating(modelBuilder);
 
             PouplateParametroCategoria(modelBuilder);
-            PopulateAdmParametrosSeleccion(modelBuilder);
             PopulateAdmMenuElements(modelBuilder);
-            PopulateAdmMenuRole(modelBuilder);
             PouplateReportsCategoria(modelBuilder);
-            PouplateReportsRoleCategoria(modelBuilder);
         }
 
         private static void PouplateParametroCategoria(ModelBuilder modelBuilder)
         {
-
             IList<AdmParametroCategoria> admParametros =
             [
                 new()
@@ -251,14 +246,8 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
 
             ];
 
-
             modelBuilder.Entity<AdmParametroCategoria>().HasData(admParametros);
 
-
-        }
-
-        private static void PopulateAdmParametrosSeleccion(ModelBuilder modelBuilder)
-        {
             IList<AdmParametrosSeleccion> admParametrosSeleccions =
             [
                 new()
@@ -728,11 +717,7 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
 
             modelBuilder.Entity<AdmMenuElements>().HasData(admMenuElements);
 
-        }
-
-        private static void PopulateAdmMenuRole(ModelBuilder modelBuilder)
-        {
-            IList<AdmMenuRole> admMenuElements = [
+            IList<AdmMenuRole> admMenuRoles = [
                 new(){
                     MenuRoleId = 1,
                     MenuElementId = 1,
@@ -881,12 +866,11 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
 
             ];
 
-            modelBuilder.Entity<AdmMenuRole>().HasData(admMenuElements);
+            modelBuilder.Entity<AdmMenuRole>().HasData(admMenuRoles);
         }
 
         private static void PouplateReportsCategoria(ModelBuilder modelBuilder)
         {
-
             IList<AdmReports> admReportsParametros =
             [
                 new(){
@@ -1034,18 +1018,10 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
                   CreateDate = DateTime.Now
                 }
             ];
-
-            //modelBuilder.Entity<AdmReports>().HasMany(m => m.AdmReportsRoles).WithMany();
-
+            modelBuilder.Entity<AdmReports>().HasMany(x => x.AdmReportsRoles).WithOne(x => x.AdmReports).HasForeignKey(x => x.ReportId);
             modelBuilder.Entity<AdmReports>().HasData(admReportsParametros);
 
-
-        }
-
-        private static void PouplateReportsRoleCategoria(ModelBuilder modelBuilder)
-        {
-
-            IList<AdmReportsRole> admReportsParametros = [
+            IList<AdmReportsRole> admReportsRole = [
                 new(){
                   ReportRoleId = 1,
                   ReportId = 1,
@@ -1144,10 +1120,7 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
                 }
             ];
 
-            modelBuilder.Entity<AdmReportsRole>().HasData(admReportsParametros);
-
-
-
+            modelBuilder.Entity<AdmReportsRole>().HasData(admReportsRole);
         }
     }
 }

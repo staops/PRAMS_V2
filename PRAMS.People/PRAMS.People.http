@@ -1,0 +1,6 @@
+@PRAMS.People_HostAddress = http://localhost:5140
+
+GET {{PRAMS.People_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
