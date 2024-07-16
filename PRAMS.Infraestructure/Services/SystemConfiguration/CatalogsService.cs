@@ -7,7 +7,7 @@ using PRAMS.Domain.Entities.SystemConfiguration.Dto;
 using PRAMS.Domain.Models.SystemConfiguration;
 using PRAMS.Infraestructure.Data.SystemConfiguration;
 
-namespace PRAMS.Infraestructure.Services
+namespace PRAMS.Infraestructure.Services.SystemConfiguration
 {
     public class CatalogsService : ICatalogsService
     {
@@ -218,6 +218,7 @@ namespace PRAMS.Infraestructure.Services
                             TX_Filtro2 = itemToInsert.TX_FilterTwo,
                             TX_Filtro3 = itemToInsert.TX_FilterThree,
                             TX_Filtro4 = itemToInsert.TX_FilterFour,
+                            TX_Filtro5 = itemToInsert.TX_FilterFive,
                             CreateUser = user,
                             CreateDate = DateTime.Now,
                             Activo = true
@@ -301,6 +302,7 @@ namespace PRAMS.Infraestructure.Services
                     itemExists.TX_Filtro2 = itemToUpdate.TX_FilterTwo;
                     itemExists.TX_Filtro3 = itemToUpdate.TX_FilterThree;
                     itemExists.TX_Filtro4 = itemToUpdate.TX_FilterFour;
+                    itemExists.TX_Filtro5 = itemToUpdate.TX_FilterFive;
                     itemExists.ModifiedUser = user;
                     itemExists.ModifiedDate = DateTime.Now;
 

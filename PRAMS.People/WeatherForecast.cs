@@ -1,4 +1,4 @@
-namespace PRAMS.Configuration
+namespace PRAMS.People
 {
     public class WeatherForecast
     {

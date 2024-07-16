@@ -27,6 +27,7 @@ namespace PRAMS.Configuration.Controllers
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<ICollection<AdmParametrosNivel0Dto>>))]
         [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
+        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
         public async Task<IActionResult> GetCatalogZero(int categoriaID)
         {
             try
@@ -47,7 +48,7 @@ namespace PRAMS.Configuration.Controllers
             catch (Exception error)
             {
                 _logger.LogError(error, "Error in GetCatalogZero");
-                throw;
+                return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
             }
         }
 
@@ -56,6 +57,7 @@ namespace PRAMS.Configuration.Controllers
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<ICollection<AdmParametrosNivel1Dto>>))]
         [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
+        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
         public async Task<IActionResult> GetCatalogOne(int categoriaID)
         {
             try
@@ -75,7 +77,7 @@ namespace PRAMS.Configuration.Controllers
             catch (Exception error)
             {
                 _logger.LogError(error, "Error in GetCatalogOne");
-                throw;
+                return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
             }
         }
 
@@ -84,6 +86,7 @@ namespace PRAMS.Configuration.Controllers
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<ICollection<AdmParametrosNivel2Dto>>))]
         [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
+        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
         public async Task<IActionResult> GetCatalogTwo(int categoriaID)
         {
             try
@@ -103,7 +106,7 @@ namespace PRAMS.Configuration.Controllers
             catch (Exception error)
             {
                 _logger.LogError(error, "Error in GetCatalogTwo");
-                throw;
+                return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
             }
         }
 
@@ -112,6 +115,7 @@ namespace PRAMS.Configuration.Controllers
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<ICollection<AdmParametrosNivel3Dto>>))]
         [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
+        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
         public async Task<IActionResult> GetCatalogTree(int categoriaID)
         {
             try
@@ -131,16 +135,17 @@ namespace PRAMS.Configuration.Controllers
             catch (Exception error)
             {
                 _logger.LogError(error, "Error in GetCatalogTwo");
-                throw;
+                return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
             }
         }
 
-        [HttpPost("InsertCatalog")]
+        [HttpPost("CreateCatalog")]
         [Authorize]
         [Consumes(MediaTypeNames.Application.Json)]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<AdmParametrosNivel0InsertDto>))]
         [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
+        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
         public async Task<IActionResult> InsertCatalog([FromBody] AdmParametrosNivel0InsertDto catalog)
         {
             try
@@ -163,7 +168,7 @@ namespace PRAMS.Configuration.Controllers
             catch (Exception error)
             {
                 _logger.LogError(error, "Error in InsertCatalog");
-                throw;
+                return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
             }
         }
 
@@ -173,6 +178,7 @@ namespace PRAMS.Configuration.Controllers
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<AdmParametrosNivel0UpdateDto>))]
         [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
+        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
         public async Task<IActionResult> UpdateCatalog([FromBody] AdmParametrosNivel0UpdateDto catalog)
         {
             try
@@ -195,7 +201,7 @@ namespace PRAMS.Configuration.Controllers
             catch (Exception error)
             {
                 _logger.LogError(error, "Error in UpdateCatalog");
-                throw;
+                return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
             }
         }
 
@@ -204,6 +210,7 @@ namespace PRAMS.Configuration.Controllers
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<bool>))]
         [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
+        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
         public async Task<IActionResult> RemoveCatalog(int paramterosID)
         {
             try
@@ -226,7 +233,7 @@ namespace PRAMS.Configuration.Controllers
             catch (Exception error)
             {
                 _logger.LogError(error, "Error in RemoveCatalog");
-                throw;
+                return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
             }
         }
 
