@@ -6,7 +6,7 @@ using PRAMS.Application.Contract.SystemConfiguration;
 using PRAMS.Configuration.Extensions;
 using PRAMS.Infraestructure.Data.SystemConfiguration;
 using PRAMS.Infraestructure.Mapping.SystemConfiguration;
-using PRAMS.Infraestructure.Services;
+using PRAMS.Infraestructure.Services.SystemConfiguration;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,7 +22,7 @@ IMapper mapper = MappingConfiguration.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson();
 
 builder.Services.AddScoped<ICatalogsService>(x =>
 {
@@ -30,6 +30,21 @@ builder.Services.AddScoped<ICatalogsService>(x =>
     var logger = x.GetRequiredService<ILogger<ICatalogsService>>();
     return new CatalogsService(dbContext, mapper, logger);
 });
+
+builder.Services.AddScoped<IMenuService>(x =>
+{
+    var dbContext = x.GetRequiredService<AppConfigDbContext>();
+    var logger = x.GetRequiredService<ILogger<IMenuService>>();
+    return new MenuService(dbContext, mapper, logger);
+});
+
+builder.Services.AddScoped<IRoleService>(x =>
+{
+    var dbContext = x.GetRequiredService<AppConfigDbContext>();
+    var logger = x.GetRequiredService<ILogger<IMenuService>>();
+    return new RoleService(dbContext, mapper, logger);
+});
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
