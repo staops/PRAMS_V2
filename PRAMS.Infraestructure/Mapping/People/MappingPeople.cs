@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using PRAMS.Domain.Entities.People.Dto;
 using PRAMS.Domain.Models.People;
+using System.Reflection;
 
 namespace PRAMS.Infraestructure.Mapping.People
 {
@@ -22,8 +23,14 @@ namespace PRAMS.Infraestructure.Mapping.People
         public PeopleProfile()
         {
             CreateMap<Persona, PersonDto>().ReverseMap();
-
             CreateMap<Persona, PersonUpdateDto>().ReverseMap();
+
+
+
+            CreateMap<PersonasDireccion, PersonasDireccionDto>().ReverseMap();
+            CreateMap<PersonasDireccionInsertDto, PersonasDireccion>();
+            CreateMap<PersonasDireccionUpdateDto, PersonasDireccion>();
+
 
         }
     }
