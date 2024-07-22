@@ -52,7 +52,7 @@ namespace PRAMS.Infraestructure.Services.People
             {
                 var personaIngreso = await _appConfigDbContext.personas
                     .Where(x => x.PersonaId == personaId)
-                    .Include(x => x.MergedPerson)
+                    .Include(x => x.MergedPersons)
                     .FirstOrDefaultAsync();
                 if (personaIngreso == null)
                 {
@@ -74,7 +74,7 @@ namespace PRAMS.Infraestructure.Services.People
             try
             {
                 var personas = await _appConfigDbContext.personas
-                    .Include(x => x.MergedPerson)
+                    .Include(x => x.MergedPersons)
                     .ToListAsync();
                 var personasDto = _mapper.Map<ICollection<PersonDto>>(personas);
                 return Result.Ok(personasDto);
@@ -122,7 +122,7 @@ namespace PRAMS.Infraestructure.Services.People
 
                 // Get the data for the current page
                 IQueryable<Persona> result = _appConfigDbContext.personas.Where(predicate)
-                    .Include(x => x.MergedPerson)
+                    .Include(x => x.MergedPersons)
                     .AsQueryable();
 
                 // now just get the count of items (without the skip and take) - eg how many could be returned with filtering
@@ -193,7 +193,6 @@ namespace PRAMS.Infraestructure.Services.People
                 mainPersona.MergedDate = DateTime.Now;
                 mainPersona.MergedUser = user;
                 mainPersona.MergedPersonId = mergePersonaId;
-                mainPersona.MergedPerson = mergePersona;
 
                 await _appConfigDbContext.SaveChangesAsync();
 
@@ -290,7 +289,6 @@ namespace PRAMS.Infraestructure.Services.People
 
                 mainPersona.Merged = false;
                 mainPersona.MergedPersonId = null;
-                mainPersona.MergedPerson = null;
 
                 await _appConfigDbContext.SaveChangesAsync();
 

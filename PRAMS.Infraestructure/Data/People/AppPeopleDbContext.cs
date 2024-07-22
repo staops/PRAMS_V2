@@ -2,6 +2,7 @@
 using PRAMS.Domain.Models.Agencies;
 using PRAMS.Domain.Models.People;
 
+
 namespace PRAMS.Infraestructure.Data.People
 {
     public class AppPeopleDbContext(DbContextOptions<AppPeopleDbContext> options) : DbContext(options)
@@ -52,6 +53,7 @@ namespace PRAMS.Infraestructure.Data.People
 
             modelBuilder.Entity<Persona>().HasMany(p => p.PersonasDirecciones).WithOne(d => d.Persona).HasForeignKey(d => d.PersonaId);
             modelBuilder.Entity<Persona>().HasMany(p => p.PersonasLinks).WithOne(l => l.Persona).HasForeignKey(l => l.PersonaId);
+            modelBuilder.Entity<Persona>().HasMany(p => p.MergedPersons).WithOne(p => p.MergedPerson).HasConstraintName("FK_Persona_MergedPerson").HasForeignKey(p => p.MergedPersonId);
             modelBuilder.Entity<Persona>().HasOne(p => p.PersonasIngresos).WithOne(i => i.Persona).HasForeignKey<PersonasIngreso>(i => i.PersonaId);
             modelBuilder.Entity<PersonasIngreso>().HasMany(i => i.PersonasIngresosDetalle).WithOne(d => d.PersonasIngreso).HasForeignKey(d => d.PersonaIngresoId);
 
