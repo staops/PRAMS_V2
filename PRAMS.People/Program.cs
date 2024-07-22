@@ -45,6 +45,13 @@ builder.Services.AddScoped<IPersonasService>(x =>
     return new PersonasService(dbContext, mapper, logger);
 });
 
+builder.Services.AddScoped<IPersonasLinkService>(x =>
+{
+    var dbContext = x.GetRequiredService<AppPeopleDbContext>();
+    var logger = x.GetRequiredService<ILogger<IPersonasLinkService>>();
+    return new PersonasLinkService(dbContext, mapper, logger);
+});
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

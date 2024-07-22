@@ -26,12 +26,14 @@ namespace PRAMS.Infraestructure.Mapping.People
             CreateMap<Persona, PersonUpdateDto>().ReverseMap();
 
 
-
             CreateMap<PersonasDireccion, PersonasDireccionDto>().ReverseMap();
-            CreateMap<PersonasDireccionInsertDto, PersonasDireccion>();
-            CreateMap<PersonasDireccionUpdateDto, PersonasDireccion>();
+            CreateMap<PersonasDireccionInsertDto, PersonasDireccion>().ReverseMap();
+            CreateMap<PersonasDireccionUpdateDto, PersonasDireccion>().ReverseMap();
 
 
+            CreateMap<PersonasLink, PersonasLinkDto>().ReverseMap();
+            CreateMap<PersonasLinkInsertDto, PersonasLink>().ReverseMap();
+            CreateMap<PersonasLinkUpdateDto, PersonasLink>().ReverseMap();
         }
     }
 }
