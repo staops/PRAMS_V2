@@ -52,6 +52,34 @@ namespace PRAMS.Configuration.Controllers
             }
         }
 
+        [HttpGet("ListMenuItems")]
+        [Authorize]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<ICollection<AdmMenuElementDto>>))]
+        [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
+        public async Task<IActionResult> ListMenuItems()
+        {
+            try
+            {
+                Result<ICollection<AdmMenuElementDto>> result = await _menuService.ListMenuItems();
+                if (result.IsSuccess)
+                {
+                    _logger.LogInformation("Success in ListMenuItems Result:{@resut}", result.Value);
+                    return Ok(new ResponseDto<ICollection<AdmMenuElementDto>> { Result = result.Value });
+                }
+                else
+                {
+                    _logger.LogError("Error in ListMenuItems Error:{@error}", result.Errors);
+                    return BadRequest(new ErrorResponseDto<List<IError>> { Message = result.Errors.First().Message, Result = result.Errors });
+                }
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, "Error in ListMenuItems");
+                return BadRequest(Result.Fail(new Error($"Error in ListMenuItems {error.Message}")).WithError(error.StackTrace));
+            }
+        }
+
         [HttpPost("CreateMenuItem")]
         [Authorize(Roles = "SU")]
         [Produces(MediaTypeNames.Application.Json)]

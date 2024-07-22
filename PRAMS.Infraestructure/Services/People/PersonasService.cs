@@ -3,7 +3,6 @@ using FluentResults;
 using LinqKit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json.Linq;
 using PRAMS.Application.Contract.People;
 using PRAMS.Domain.Entities.People.Dto;
 using PRAMS.Domain.Entities.Shared;

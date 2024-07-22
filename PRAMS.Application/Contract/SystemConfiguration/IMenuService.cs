@@ -6,6 +6,7 @@ namespace PRAMS.Application.Contract.SystemConfiguration
     public interface IMenuService
     {
         Task<Result<ICollection<AdmMenuElementDto>>> GetRoleMenu(string roleId);
+        Task<Result<ICollection<AdmMenuElementDto>>> ListMenuItems();
         Task<Result<AdmMenuElementDto>> CreateMenuItem(AdmMenuInsertDto admMenuRoleInsertDto, string user);
         Task<Result<AdmMenuElementDto>> UpdateMenuItem(AdmMenuUpdateDto admMenuRoleInsertDto, string user);
         Task<Result<AdmMenuElementDto>> DeleteMenuItem(int menuElementId, string user);
