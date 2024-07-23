@@ -2,7 +2,7 @@
 
 namespace PRAMS.Domain.Entities.People.Dto
 {
-    public class PersonDto
+    public class PersonMergedDto
     {
         public int PersonaId { get; set; }
         public string? SeguroSocial { get; set; }
@@ -38,8 +38,5 @@ namespace PRAMS.Domain.Entities.People.Dto
         public DateTime? MergedDate { get; set; }
         public string? MergedUser { get; set; }
         public int? MergedPersonId { get; set; }
-        public virtual ICollection<PersonMergedDto>? MergedPersons { get; set; }
-        public virtual PersonMergedDto? MergedPerson { get; set; }
-
     }
 }

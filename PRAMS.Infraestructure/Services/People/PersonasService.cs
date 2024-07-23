@@ -169,13 +169,17 @@ namespace PRAMS.Infraestructure.Services.People
         {
             try
             {
-                var mainPersona = await _appConfigDbContext.personas.Where(x => x.PersonaId == mainPersonaId).FirstOrDefaultAsync();
+                var mainPersona = await _appConfigDbContext.personas.Where(x => x.PersonaId == mainPersonaId)
+                    .Include(i => i.MergedPersons)
+                    .FirstOrDefaultAsync();
                 if (mainPersona == null)
                 {
                     return Result.Fail(new Error($"PersonasIngreso with id {mainPersonaId} not found"));
                 }
 
-                var mergePersona = await _appConfigDbContext.personas.Where(x => x.PersonaId == mergePersonaId).FirstOrDefaultAsync();
+                var mergePersona = await _appConfigDbContext.personas.Where(x => x.PersonaId == mergePersonaId)
+                    .Include(i => i.MergedPersons)
+                    .FirstOrDefaultAsync();
                 if (mergePersona == null)
                 {
                     return Result.Fail(new Error($"PersonasIngreso with id {mergePersonaId} not found"));
@@ -184,17 +188,25 @@ namespace PRAMS.Infraestructure.Services.People
                 {
                     return Result.Fail(new Error($"PersonasIngreso with id {mergePersonaId} is already merged"));
                 }
+                if(mergePersona.MergedPersons is not null && mergePersona.MergedPersons.Any())
+                {
+                    return Result.Fail(new Error($"PersonasIngreso with id {mergePersonaId} is already merged with another person"));
+                }
                 if (mainPersona.Merged == true)
                 {
                     return Result.Fail(new Error($"PersonasIngreso with id {mainPersonaId} is already merged"));
                 }
 
-                mainPersona.Merged = true;
-                mainPersona.MergedDate = DateTime.Now;
-                mainPersona.MergedUser = user;
-                mainPersona.MergedPersonId = mergePersonaId;
+                mergePersona.Merged = true;
+                mergePersona.MergedDate = DateTime.Now;
+                mergePersona.MergedUser = user;
+                mergePersona.MergedPersonId = mainPersonaId;
 
                 await _appConfigDbContext.SaveChangesAsync();
+
+                mainPersona = await _appConfigDbContext.personas.Where(x => x.PersonaId == mainPersonaId)
+                    .Include(i => i.MergedPersons)
+                    .FirstOrDefaultAsync();
 
                 var personaDto = _mapper.Map<PersonDto>(mainPersona);
                 return Result.Ok(personaDto);
