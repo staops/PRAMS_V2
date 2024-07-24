@@ -23,6 +23,7 @@ namespace PRAMS.Infraestructure.Mapping.People
         public PeopleProfile()
         {
             CreateMap<Persona, PersonDto>().ReverseMap();
+            CreateMap<Persona, PersonMergedDto>().ReverseMap();
             CreateMap<Persona, PersonUpdateDto>().ReverseMap();
 
 
