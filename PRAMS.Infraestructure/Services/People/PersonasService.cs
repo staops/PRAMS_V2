@@ -3,7 +3,6 @@ using FluentResults;
 using LinqKit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json.Linq;
 using PRAMS.Application.Contract.People;
 using PRAMS.Domain.Entities.People.Dto;
 using PRAMS.Domain.Entities.Shared;
@@ -53,7 +52,7 @@ namespace PRAMS.Infraestructure.Services.People
             {
                 var personaIngreso = await _appConfigDbContext.personas
                     .Where(x => x.PersonaId == personaId)
-                    .Include(x => x.MergedPerson)
+                    .Include(x => x.MergedPersons)
                     .FirstOrDefaultAsync();
                 if (personaIngreso == null)
                 {
@@ -75,7 +74,7 @@ namespace PRAMS.Infraestructure.Services.People
             try
             {
                 var personas = await _appConfigDbContext.personas
-                    .Include(x => x.MergedPerson)
+                    .Include(x => x.MergedPersons)
                     .ToListAsync();
                 var personasDto = _mapper.Map<ICollection<PersonDto>>(personas);
                 return Result.Ok(personasDto);
@@ -123,7 +122,7 @@ namespace PRAMS.Infraestructure.Services.People
 
                 // Get the data for the current page
                 IQueryable<Persona> result = _appConfigDbContext.personas.Where(predicate)
-                    .Include(x => x.MergedPerson)
+                    .Include(x => x.MergedPersons)
                     .AsQueryable();
 
                 // now just get the count of items (without the skip and take) - eg how many could be returned with filtering
@@ -170,13 +169,17 @@ namespace PRAMS.Infraestructure.Services.People
         {
             try
             {
-                var mainPersona = await _appConfigDbContext.personas.Where(x => x.PersonaId == mainPersonaId).FirstOrDefaultAsync();
+                var mainPersona = await _appConfigDbContext.personas.Where(x => x.PersonaId == mainPersonaId)
+                    .Include(i => i.MergedPersons)
+                    .FirstOrDefaultAsync();
                 if (mainPersona == null)
                 {
                     return Result.Fail(new Error($"PersonasIngreso with id {mainPersonaId} not found"));
                 }
 
-                var mergePersona = await _appConfigDbContext.personas.Where(x => x.PersonaId == mergePersonaId).FirstOrDefaultAsync();
+                var mergePersona = await _appConfigDbContext.personas.Where(x => x.PersonaId == mergePersonaId)
+                    .Include(i => i.MergedPersons)
+                    .FirstOrDefaultAsync();
                 if (mergePersona == null)
                 {
                     return Result.Fail(new Error($"PersonasIngreso with id {mergePersonaId} not found"));
@@ -185,18 +188,25 @@ namespace PRAMS.Infraestructure.Services.People
                 {
                     return Result.Fail(new Error($"PersonasIngreso with id {mergePersonaId} is already merged"));
                 }
+                if(mergePersona.MergedPersons is not null && mergePersona.MergedPersons.Any())
+                {
+                    return Result.Fail(new Error($"PersonasIngreso with id {mergePersonaId} is already merged with another person"));
+                }
                 if (mainPersona.Merged == true)
                 {
                     return Result.Fail(new Error($"PersonasIngreso with id {mainPersonaId} is already merged"));
                 }
 
-                mainPersona.Merged = true;
-                mainPersona.MergedDate = DateTime.Now;
-                mainPersona.MergedUser = user;
-                mainPersona.MergedPersonId = mergePersonaId;
-                mainPersona.MergedPerson = mergePersona;
+                mergePersona.Merged = true;
+                mergePersona.MergedDate = DateTime.Now;
+                mergePersona.MergedUser = user;
+                mergePersona.MergedPersonId = mainPersonaId;
 
                 await _appConfigDbContext.SaveChangesAsync();
+
+                mainPersona = await _appConfigDbContext.personas.Where(x => x.PersonaId == mainPersonaId)
+                    .Include(i => i.MergedPersons)
+                    .FirstOrDefaultAsync();
 
                 var personaDto = _mapper.Map<PersonDto>(mainPersona);
                 return Result.Ok(personaDto);
@@ -291,7 +301,6 @@ namespace PRAMS.Infraestructure.Services.People
 
                 mainPersona.Merged = false;
                 mainPersona.MergedPersonId = null;
-                mainPersona.MergedPerson = null;
 
                 await _appConfigDbContext.SaveChangesAsync();
 

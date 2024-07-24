@@ -22,6 +22,27 @@ namespace PRAMS.Infraestructure.Services.SystemConfiguration
             _logger = logger;
         }
 
+        public async Task<Result<ICollection<AdmMenuElementDto>>> ListMenuItems()
+        {
+            try 
+            {
+                var query = _appConfigDbContext.AdmMenuElements
+                    .Where(w => w.Activo == true)
+                    .OrderBy(o => o.MenuElementId)
+                    .AsQueryable();
+
+                var result = await query.ToListAsync();
+                var mapped = _mapper.Map<ICollection<AdmMenuElementDto>>(result);
+
+                return Result.Ok(mapped);
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, "Error in ListMenuItems");
+                return Result.Fail(new Error($"Error in ListMenuItems {error.Message}")).WithError(error.StackTrace);
+            }
+        }
+
         public async Task<Result<ICollection<AdmMenuElementDto>>> GetRoleMenu(string roleId)
         {
             try
@@ -284,5 +305,6 @@ namespace PRAMS.Infraestructure.Services.SystemConfiguration
                 return Result.Fail(new Error($"Error in DeleteRolMenuItem {error.Message}")).WithError(error.StackTrace);
             }
         }
+        
     }
 }

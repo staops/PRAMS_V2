@@ -10,6 +10,7 @@ namespace PRAMS.Domain.Models.People
         {
             PersonasDirecciones = new HashSet<PersonasDireccion>();
             PersonasLinks = new HashSet<PersonasLink>();
+            MergedPersons = new HashSet<Persona>();
         }
 
         [Key]
@@ -86,13 +87,11 @@ namespace PRAMS.Domain.Models.People
         [StringLength(36)]
         public string? MergedUser { get; set; }
         public int? MergedPersonId { get; set; }
-
-        [ForeignKey("MergedPersonId")]
-        public virtual Persona? MergedPerson { get; set; }
-
         public virtual ICollection<PersonasDireccion>? PersonasDirecciones { get; set; }
         public virtual ICollection<PersonasLink>? PersonasLinks { get; set; }
         public virtual PersonasIngreso? PersonasIngresos { get; set; }
-
+        public virtual ICollection<Persona>? MergedPersons { get; set; }
+        [ForeignKey("MergedPersonId")]
+        public virtual Persona? MergedPerson { get; set; }
     }
 }
