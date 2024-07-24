@@ -65,7 +65,7 @@ builder.Services.AddAuthorization();
 //services cors
 builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
 {
-    builder.WithOrigins("http://localhost:8100").AllowAnyMethod().AllowAnyHeader();
+    builder.WithOrigins("http://localhost:8100", "http://localhost:8080").AllowAnyMethod().AllowAnyHeader();
 }));
 
 var app = builder.Build();
