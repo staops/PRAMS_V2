@@ -2,10 +2,12 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using PRAMS.Application.Contract.Flujos;
 using PRAMS.Application.Contract.SystemConfiguration;
 using PRAMS.Configuration.Extensions;
 using PRAMS.Infraestructure.Data.SystemConfiguration;
 using PRAMS.Infraestructure.Mapping.SystemConfiguration;
+using PRAMS.Infraestructure.Services.Flujos;
 using PRAMS.Infraestructure.Services.SystemConfiguration;
 using Serilog;
 
@@ -43,6 +45,13 @@ builder.Services.AddScoped<IRoleService>(x =>
     var dbContext = x.GetRequiredService<AppConfigDbContext>();
     var logger = x.GetRequiredService<ILogger<IMenuService>>();
     return new RoleService(dbContext, mapper, logger);
+});
+
+builder.Services.AddScoped<IFlujosFormulariosService>(x =>
+{
+    var dbContext = x.GetRequiredService<AppConfigDbContext>();
+    var logger = x.GetRequiredService<ILogger<IFlujosFormulariosService>>();
+    return new FlujosFormulariosService(dbContext, mapper, logger);
 });
 
 
@@ -118,7 +127,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 // Apply pending migrations automatically.
-//ApplyMigrations();
+ApplyMigrations();
 
 app.Run();
 

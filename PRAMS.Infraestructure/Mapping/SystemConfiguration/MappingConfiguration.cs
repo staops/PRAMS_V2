@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using PRAMS.Domain.Entities.Flujos.Dto;
 using PRAMS.Domain.Entities.SystemConfiguration.Dto;
+using PRAMS.Domain.Models.Flujos;
 using PRAMS.Domain.Models.SystemConfiguration;
 
 namespace PRAMS.Infraestructure.Mapping.SystemConfiguration
@@ -13,6 +15,7 @@ namespace PRAMS.Infraestructure.Mapping.SystemConfiguration
                 config.AddProfile<ParametrosProfile>();
                 config.AddProfile<MenuProfile>();
                 config.AddProfile<ReportProfile>();
+                config.AddProfile<AdmFlujosProfile>();
             });
             return mappingConfig;
         }
@@ -116,6 +119,16 @@ namespace PRAMS.Infraestructure.Mapping.SystemConfiguration
 
             CreateMap<AdmReportsRole, AdmReportsRoleInsertDto>().ReverseMap();
             CreateMap<AdmReportsRole, AdmReportsRoleUpdateDto>().ReverseMap();
+        }
+    }
+
+    public class AdmFlujosProfile : Profile
+    {
+        public AdmFlujosProfile()
+        {
+            CreateMap<AdmFlujoFormulario, AdmFlujoFormularioDto>().ReverseMap();
+            CreateMap<AdmFlujoFormulario, AdmFlujoFormularioInsertDto>().ReverseMap();
+            CreateMap<AdmFlujoFormulario, AdmFlujoFormularioUpdateDto>().ReverseMap();
         }
     }
 }
