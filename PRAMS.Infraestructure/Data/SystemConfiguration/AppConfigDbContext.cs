@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PRAMS.Domain.Models.Flujos;
+using PRAMS.Domain.Models.Forms;
 using PRAMS.Domain.Models.SystemConfiguration;
 
 namespace PRAMS.Infraestructure.Data.SystemConfiguration
@@ -17,9 +19,35 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
 
         public DbSet<AdmReportsRole> AdmReportsRoles { get; set; }
 
+        public DbSet<AdmFlujoFormulario> AdmFlujoFormularios { get; set; }
+
+        public DbSet<AdmFlujoFormularioEtapa> AdmFlujoFormularioEtapas { get; set; }
+
+        public DbSet<AdmFlujoFormularioEtapaAccion> AdmFlujoFormularioEtapaAcciones { get; set; }
+
+        public DbSet<AdmFlujoFormularioNota> AdmFlujoFormularioNotas { get; set; }
+
+        public DbSet<AdmFlujoPantallaUser> AdmFlujoPantallaUsers { get; set; }
+
+        public DbSet<AdmFormularioEtapaAccioneCampo> AdmFormularioEtapaAccioneCampos { get; set; }
+
+        public DbSet<FormFlujoPantalla> FormFlujoPantallas { get; set; }
+
+        public DbSet<FormFormularioFirma> FormFormularioFirmas { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            //modelBuilder.Entity<AdmFlujoFormulario>().HasMany(f => f.AdmFlujoFormularioEtapas).WithOne(e => e.AdmFlujoFormulario).HasForeignKey(e => e.AdmFlujoFormulario);
+            //modelBuilder.Entity<AdmFlujoFormulario>().HasMany(f => f.FormFormularioFirmas).WithOne(f => f.AdmFlujoFormulario).HasForeignKey(f => f.AdmFlujoFormulario);
+            //modelBuilder.Entity<AdmFlujoFormulario>().HasMany(f => f.FormFlujoPantallas).WithOne(p => p.AdmFlujoFormulario).HasForeignKey(p => p.AdmFlujoFormulario);
+
+            //modelBuilder.Entity<AdmFlujoFormularioEtapa>().HasMany(e => e.AdmFlujoPantallaUsers).WithOne(u => u.AdmFlujoFormularioEtapa).HasForeignKey(u => u.AdmFlujoFormularioEtapa);
+            //modelBuilder.Entity<AdmFlujoFormularioEtapa>().HasMany(e => e.FormFormularioFirmas).WithOne(f => f.AdmFlujoFormularioEtapa).HasForeignKey(f => f.AdmFlujoFormularioEtapa);    
+
+            //modelBuilder.Entity<FormFormularioFirma>().HasOne(f => f.AdmFlujoFormularioEtapa).WithMany(e => e.AdmFlujoFormularios).HasForeignKey(f => f.FormularioFirmasId);
+            //modelBuilder.Entity<FormFormularioFirma>().HasOne(f => f.AdmFlujoFormulario).WithMany(f => f.FormFormularioFirmas).HasForeignKey(f => f.FormularioFirmasId);
 
             PouplateParametroCategoria(modelBuilder);
             PopulateAdmMenuElements(modelBuilder);
