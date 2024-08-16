@@ -35,11 +35,11 @@ namespace PRAMS.Domain.Models.Flujos
         public int? NotaSatarId { get; set; }
         public int? NotaEndId { get; set; }
         [Required]
-        [StringLength(30)]
+        [StringLength(40)]
         public required string CreateUser { get; set; }
         [Required]
         public DateTime CreateDate { get; set; } = DateTime.Now;
-        [StringLength(30)]
+        [StringLength(40)]
         public string? ModifiedUser { get; set; }
         public DateTime? ModifiedDate { get; set; }
         public required bool Activo { get; set; } = true;
