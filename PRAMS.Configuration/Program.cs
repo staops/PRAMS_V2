@@ -7,7 +7,6 @@ using PRAMS.Application.Contract.Flujos;
 using PRAMS.Application.Contract.People;
 using PRAMS.Application.Contract.SystemConfiguration;
 using PRAMS.Configuration.Extensions;
-using PRAMS.Infraestructure.Data.People;
 using PRAMS.Infraestructure.Data.SystemConfiguration;
 using PRAMS.Infraestructure.Mapping.SystemConfiguration;
 using PRAMS.Infraestructure.Services.Flujos;
@@ -69,13 +68,6 @@ builder.Services.AddScoped<IFlujoFormularioNotasService>(x =>
     var dbContext = x.GetRequiredService<AppConfigDbContext>();
     var logger = x.GetRequiredService<ILogger<IFlujoFormularioNotasService>>();
     return new FlujoFormularioNotasService(dbContext, mapper, logger);
-});
-
-builder.Services.AddScoped<IFlujosFormulariosEtapasAccionesService>(x =>
-{
-    var dbContext = x.GetRequiredService<AppConfigDbContext>();
-    var logger = x.GetRequiredService<ILogger<IFlujosFormulariosEtapasAccionesService>>();
-    return new FlujosFormulariosEtapasAccionesService(dbContext, mapper, logger);
 });
 
 

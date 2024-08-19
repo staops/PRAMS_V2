@@ -79,7 +79,7 @@ namespace PRAMS.Infraestructure.Services.Flujos
             }
         }
 
-        public async Task<Result<AdmFlujoFormularioDto>> RemoveFlujoFormulario(int formularioId, string user)
+        public async Task<Result<bool>> RemoveFlujoFormulario(int formularioId, string user)
         {
             try
             {
@@ -89,20 +89,19 @@ namespace PRAMS.Infraestructure.Services.Flujos
 
                 if (admFlujoFormulario == null)
                 {
-                    return Result.Fail<AdmFlujoFormularioDto>("El flujo del formulario no existe");
+                    return Result.Fail<bool>("El flujo del formulario no existe");
                 }
 
                 _appConfigDbContext.Remove(admFlujoFormulario);
                 await _appConfigDbContext.SaveChangesAsync();
 
-                var result = _mapper.Map<AdmFlujoFormularioDto>(admFlujoFormulario);
-                return Result.Ok(result);
+                return Result.Ok(true);
 
             }
             catch (Exception error)
             {
                 _logger.LogError(error, "Error al eliminar el flujo del formulario");
-                return Result.Fail<AdmFlujoFormularioDto>("Error al eliminar el flujo del formulario");
+                return Result.Fail<bool>("Error al eliminar el flujo del formulario");
             }
         }
 
