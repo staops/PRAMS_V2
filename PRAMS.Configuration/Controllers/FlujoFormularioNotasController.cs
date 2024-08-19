@@ -1,8 +1,8 @@
 ﻿using FluentResults;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PRAMS.Application.Contract.Flujos;
-using PRAMS.Domain.Entities.Flujos.Dto;
+using PRAMS.Application.Contract.People;
+using PRAMS.Domain.Entities.People.Dto;
 using PRAMS.Domain.Entities.Shared;
 using System.Net.Mime;
 using System.Security.Claims;
@@ -11,104 +11,103 @@ namespace PRAMS.Configuration.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FlujosFormulariosEtapasController : ControllerBase
+    public class FlujoFormularioNotasController : ControllerBase
     {
-        private readonly IFlujosFormulariosEtapasService _flujosFormulariosEtapas;
-        private readonly ILogger<FlujosFormulariosController> _logger;
+        private readonly IFlujoFormularioNotasService _flujoFormularioNotasService;
+        private readonly ILogger<FlujoFormularioNotasController> _logger;
 
-        public FlujosFormulariosEtapasController(IFlujosFormulariosEtapasService flujosFormulariosEtapas, ILogger<FlujosFormulariosController> logger)
+        public FlujoFormularioNotasController(IFlujoFormularioNotasService flujoFormularioNotasService, ILogger<FlujoFormularioNotasController> logger)
         {
-            _flujosFormulariosEtapas = flujosFormulariosEtapas;
+            _flujoFormularioNotasService = flujoFormularioNotasService;
             _logger = logger;
-        }
-
-        [HttpGet("{formularioId}")]
-        [Authorize]
-        [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<AdmFlujoFormularioEtapaDto>))]
-        [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
-        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
-        public async Task<IActionResult> GetFlujosFormularioEtapa(int formularioId)
-        {
-            try
-            {
-                var result = await _flujosFormulariosEtapas.GetFlujoFormularioEtapa(formularioId);
-                if (result.IsSuccess)
-                {
-                    _logger.LogInformation("Success in GetFlujosFormularioEtapa Result:{@result}", result.Value);
-                    return Ok(new ResponseDto<AdmFlujoFormularioEtapaDto> { Result = result.Value });
-                }
-                else
-                {
-                    _logger.LogError("Error in GetFlujosFormularioEtapa Errors:{@errors}", result.Errors);
-                    return BadRequest(new ErrorResponseDto<List<IError>> { Message = result.Errors.First().Message, Result = result.Errors });
-                }
-            }
-            catch (Exception error)
-            {
-                _logger.LogError(error, "Error al obtener el flujo del formulario");
-                return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
-            }
-        }
-
-        [HttpGet]
-        [Authorize]
-        [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<ICollection<AdmFlujoFormularioEtapaDto>>))]
-        [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
-        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
-        public async Task<IActionResult> GetFlujosFormulariosEtapas()
-        {
-            try
-            {
-                var result = await _flujosFormulariosEtapas.GetFlujosFormulariosEtapas();
-                if (result.IsSuccess)
-                {
-                    _logger.LogInformation("Success in GetFlujosFormulariosEtapas Result:{@result}", result.Value);
-                    return Ok(new ResponseDto<ICollection<AdmFlujoFormularioEtapaDto>> { Result = result.Value });
-                }
-                else
-                {
-                    _logger.LogError("Error in GetFlujosFormulariosEtapas Errors:{@errors}", result.Errors);
-                    return BadRequest(new ErrorResponseDto<List<IError>> { Message = result.Errors.First().Message, Result = result.Errors });
-                }
-            }
-            catch (Exception error)
-            {
-                _logger.LogError(error, "Error al obtener los flujos de los formularios");
-                return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
-            }
         }
 
         [HttpPost("Create")]
         [Authorize]
         [Produces(MediaTypeNames.Application.Json)]
         [Consumes(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<AdmFlujoFormularioEtapaDto>))]
+        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<AdmFlujoFormularioNotaDto>))]
         [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
-        public async Task<IActionResult> CreateFlujoFormularioEtapa(AdmFlujoFormularioEtapaInsertDto itemToInsert)
+        public async Task<IActionResult> CreateFlujoFormularioNotaItem(AdmFlujoFormularioNotaInsertDto admFlujoFormularioNotaInsertDto)
         {
             try
             {
                 // Get the user id from the Authorize
                 var user = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty;
-
-                var result = await _flujosFormulariosEtapas.CreateFlujoFormularioEtapa(itemToInsert, user);
+                var result = await _flujoFormularioNotasService.CreateFlujoFormularioNotaItem(admFlujoFormularioNotaInsertDto, user);
                 if (result.IsSuccess)
                 {
-                    _logger.LogInformation("Success in CreateFlujoFormularioEtapa Result:{@result}", result.Value);
-                    return Ok(new ResponseDto<AdmFlujoFormularioEtapaDto> { Result = result.Value });
+                    _logger.LogInformation("Success in CreateFlujoFormularioNotaItem Result:{@result}", result.Value);
+                    return Ok(new ResponseDto<AdmFlujoFormularioNotaDto> { Result = result.Value });
                 }
                 else
                 {
-                    _logger.LogError("Error in CreateFlujoFormularioEtapa Errors:{@errors}", result.Errors);
+                    _logger.LogError("Error in CreateFlujoFormularioNotaItem Errors:{@errors}", result.Errors);
                     return BadRequest(new ErrorResponseDto<List<IError>> { Message = result.Errors.First().Message, Result = result.Errors });
                 }
             }
             catch (Exception error)
             {
-                _logger.LogError(error, "Error al crear el flujo del formulario");
+                _logger.LogError(error, "Error al crear la nota del flujo del formulario");
+                return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
+            }
+        }
+
+        [HttpGet("{formularioId}")]
+        [Authorize]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<ICollection<AdmFlujoFormularioNotaDto>>))]
+        [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
+        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
+        public async Task<IActionResult> GetFlujoFormularioNotas(int formularioId)
+        {
+            try
+            {
+                var result = await _flujoFormularioNotasService.GetFlujoFormularioNotas(formularioId);
+                if (result.IsSuccess)
+                {
+                    _logger.LogInformation("Success in GetFlujoFormularioNotas Result:{@result}", result.Value);
+                    return Ok(new ResponseDto<ICollection<AdmFlujoFormularioNotaDto>> { Result = result.Value });
+                }
+                else
+                {
+                    _logger.LogError("Error in GetFlujoFormularioNotas Errors:{@errors}", result.Errors);
+                    return BadRequest(new ErrorResponseDto<List<IError>> { Message = result.Errors.First().Message, Result = result.Errors });
+                }
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, "Error al obtener las notas del flujo del formulario");
+                return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
+            }
+        }
+
+        [HttpGet("getByFormularioNotaId/{formularioNotaId}")]
+        [Authorize]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<AdmFlujoFormularioNotaDto>))]
+        [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
+        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
+        public async Task<IActionResult> GetFlujoFormularioNota(int formularioNotaId)
+        {
+            try
+            {
+                var result = await _flujoFormularioNotasService.GetFlujoFormularioNota(formularioNotaId);
+                if (result.IsSuccess)
+                {
+                    _logger.LogInformation("Success in GetFlujoFormularioNota Result:{@result}", result.Value);
+                    return Ok(new ResponseDto<AdmFlujoFormularioNotaDto> { Result = result.Value });
+                }
+                else
+                {
+                    _logger.LogError("Error in GetFlujoFormularioNota Errors:{@errors}", result.Errors);
+                    return BadRequest(new ErrorResponseDto<List<IError>> { Message = result.Errors.First().Message, Result = result.Errors });
+                }
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, "Error al obtener la nota del flujo del formulario");
                 return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
             }
         }
@@ -117,66 +116,63 @@ namespace PRAMS.Configuration.Controllers
         [Authorize]
         [Produces(MediaTypeNames.Application.Json)]
         [Consumes(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<AdmFlujoFormularioEtapaDto>))]
+        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<AdmFlujoFormularioNotaDto>))]
         [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
-        public async Task<IActionResult> UpdateFlujoFormularioEtapa(AdmFlujoFormularioEtapaUpdateDto itemToUpdate)
+        public async Task<IActionResult> UpdateFlujoFormularioNotaItem(AdmFlujoFormularioNotaUpdateDto admFlujoFormularioNotaUpdateDto)
         {
             try
             {
                 // Get the user id from the Authorize
                 var user = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty;
-
-                var result = await _flujosFormulariosEtapas.UpdateFlujoFormularioEtapa(itemToUpdate, user);
+                var result = await _flujoFormularioNotasService.UpdateFlujoFormularioNotaItem(admFlujoFormularioNotaUpdateDto, user);
                 if (result.IsSuccess)
                 {
-                    _logger.LogInformation("Success in UpdateFlujoFormularioEtapa Result:{@result}", result.Value);
-                    return Ok(new ResponseDto<AdmFlujoFormularioEtapaDto> { Result = result.Value });
+                    _logger.LogInformation("Success in UpdateFlujoFormularioNotaItem Result:{@result}", result.Value);
+                    return Ok(new ResponseDto<AdmFlujoFormularioNotaDto> { Result = result.Value });
                 }
                 else
                 {
-                    _logger.LogError("Error in UpdateFlujoFormularioEtapa Errors:{@errors}", result.Errors);
+                    _logger.LogError("Error in UpdateFlujoFormularioNotaItem Errors:{@errors}", result.Errors);
                     return BadRequest(new ErrorResponseDto<List<IError>> { Message = result.Errors.First().Message, Result = result.Errors });
                 }
             }
             catch (Exception error)
             {
-                _logger.LogError(error, "Error al actualizar el flujo del formulario");
+                _logger.LogError(error, "Error al actualizar la nota del flujo del formulario");
                 return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
             }
         }
 
-        [HttpDelete("Remove/{formularioId}")]
+        [HttpDelete("Remove/{formularioNotaId}")]
         [Authorize]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<bool>))]
+        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<AdmFlujoFormularioNotaDto>))]
         [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
-        public async Task<IActionResult> RemoveFlujoFormularioEtapa(int formularioId)
+        public async Task<IActionResult> DeleteFlujoFormularioNotaItem(int formularioNotaId)
         {
             try
             {
                 // Get the user id from the Authorize
                 var user = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty;
-
-                var result = await _flujosFormulariosEtapas.RemoveFlujoFormularioEtapa(formularioId, user);
+                var result = await _flujoFormularioNotasService.DeleteFlujoFormularioNotaItem(formularioNotaId, user);
                 if (result.IsSuccess)
                 {
-                    _logger.LogInformation("Success in RemoveFlujoFormularioEtapa Result:{@result}", result.Value);
-                    return Ok(new ResponseDto<bool> { Result = result.Value });
+                    _logger.LogInformation("Success in DeleteFlujoFormularioNotaItem Result:{@result}", result.Value);
+                    return Ok(new ResponseDto<AdmFlujoFormularioNotaDto> { Result = result.Value });
                 }
                 else
                 {
-                    _logger.LogError("Error in RemoveFlujoFormularioEtapa Errors:{@errors}", result.Errors);
+                    _logger.LogError("Error in DeleteFlujoFormularioNotaItem Errors:{@errors}", result.Errors);
                     return BadRequest(new ErrorResponseDto<List<IError>> { Message = result.Errors.First().Message, Result = result.Errors });
                 }
             }
             catch (Exception error)
             {
-                _logger.LogError(error, "Error al eliminar el flujo del formulario");
+                _logger.LogError(error, "Error al eliminar la nota del flujo del formulario");
                 return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
             }
         }
-
     }
 }

@@ -80,7 +80,7 @@ namespace PRAMS.Configuration.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("Create")]
         [Authorize]
         [Produces(MediaTypeNames.Application.Json)]
         [Consumes(MediaTypeNames.Application.Json)]
@@ -113,7 +113,7 @@ namespace PRAMS.Configuration.Controllers
             }
         }
 
-        [HttpDelete("{formularioId}")]
+        [HttpDelete("Remove/{formularioId}")]
         [Authorize]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<bool>))]
@@ -145,7 +145,7 @@ namespace PRAMS.Configuration.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("Update")]
         [Authorize]
         [Produces(MediaTypeNames.Application.Json)]
         [Consumes(MediaTypeNames.Application.Json)]

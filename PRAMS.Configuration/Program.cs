@@ -1,8 +1,10 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using PRAMS.Application.Contract.Flujos;
+using PRAMS.Application.Contract.People;
 using PRAMS.Application.Contract.SystemConfiguration;
 using PRAMS.Configuration.Extensions;
 using PRAMS.Infraestructure.Data.SystemConfiguration;
@@ -60,6 +62,14 @@ builder.Services.AddScoped<IFlujosFormulariosEtapasService>(x =>
     var logger = x.GetRequiredService<ILogger<IFlujosFormulariosEtapasService>>();
     return new FlujosFormulariosEtapasService(dbContext, mapper, logger);
 });
+
+builder.Services.AddScoped<IFlujoFormularioNotasService>(x =>
+{
+    var dbContext = x.GetRequiredService<AppConfigDbContext>();
+    var logger = x.GetRequiredService<ILogger<IFlujoFormularioNotasService>>();
+    return new FlujoFormularioNotasService(dbContext, mapper, logger);
+});
+
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

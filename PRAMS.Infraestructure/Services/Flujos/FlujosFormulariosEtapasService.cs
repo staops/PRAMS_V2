@@ -124,12 +124,12 @@ namespace PRAMS.Infraestructure.Services.Flujos
             try
             {
                 var entity = await _appConfigDbContext.AdmFlujoFormularioEtapas
-                    .Where(x => x.FormularioId == itemToUpdate.FormularioId && x.Activo)
+                    .Where(x => x.FormularioEtapaId == itemToUpdate.FormularioEtapaId && x.Activo)
                     .FirstOrDefaultAsync();
 
                 if (entity == null)
                 {
-                    return Result.Fail<AdmFlujoFormularioEtapaDto>($"El flujo del formulario {itemToUpdate.FormularioId} no existe");
+                    return Result.Fail<AdmFlujoFormularioEtapaDto>($"La etapa del formulario {itemToUpdate.FormularioEtapaId} no existe");
                 }
 
                 // Validate if the FormularioId exist
