@@ -1,8 +1,7 @@
-﻿namespace PRAMS.Domain.Entities.People.Dto
+﻿namespace PRAMS.Domain.Entities.Flujos.Dto
 {
-    public class AdmFlujoFormularioNotaUpdateDto
+    public class AdmFlujoFormularioNotaInsertDto
     {
-        public int FormularioNotaId { get; set; }
         public required int FormularioId { get; set; }
         public string? TXNombreNota { get; set; }
         public string? TXDescripcion { get; set; }

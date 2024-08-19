@@ -1,7 +1,7 @@
 ﻿using FluentResults;
-using PRAMS.Domain.Entities.People.Dto;
+using PRAMS.Domain.Entities.Flujos.Dto;
 
-namespace PRAMS.Application.Contract.People
+namespace PRAMS.Application.Contract.Flujos
 {
     public interface IFlujosFormulariosEtapasAccionesCamposService
     {

@@ -1,4 +1,4 @@
-﻿namespace PRAMS.Domain.Entities.People.Dto
+﻿namespace PRAMS.Domain.Entities.Flujos.Dto
 {
     public class AdmFlujoFormularioNotaDto
     {

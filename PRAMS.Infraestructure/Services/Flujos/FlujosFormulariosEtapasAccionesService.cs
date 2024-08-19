@@ -2,8 +2,8 @@
 using FluentResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using PRAMS.Application.Contract.People;
-using PRAMS.Domain.Entities.People.Dto;
+using PRAMS.Application.Contract.Flujos;
+using PRAMS.Domain.Entities.Flujos.Dto;
 using PRAMS.Domain.Models.Flujos;
 using PRAMS.Infraestructure.Data.SystemConfiguration;
 

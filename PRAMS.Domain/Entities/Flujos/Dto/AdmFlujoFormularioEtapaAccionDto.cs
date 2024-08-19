@@ -1,7 +1,8 @@
-﻿namespace PRAMS.Domain.Entities.People.Dto
+﻿namespace PRAMS.Domain.Entities.Flujos.Dto
 {
-    public class AdmFlujoFormularioEtapaAccionInsertDto
+    public class AdmFlujoFormularioEtapaAccionDto
     {
+        public int FormularioEtapaAccionId { get; set; }
         public required int FormularioEtapaId { get; set; }
         public required string NombreAccion { get; set; }
         public required int OrdenAccion { get; set; }

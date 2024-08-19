@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using PRAMS.Domain.Entities.Flujos.Dto;
-using PRAMS.Domain.Entities.People.Dto;
+using PRAMS.Domain.Entities.Forms.Dto;
 using PRAMS.Domain.Entities.SystemConfiguration.Dto;
 using PRAMS.Domain.Models.Flujos;
+using PRAMS.Domain.Models.Forms;
 using PRAMS.Domain.Models.SystemConfiguration;
 
 namespace PRAMS.Infraestructure.Mapping.SystemConfiguration
@@ -21,6 +22,7 @@ namespace PRAMS.Infraestructure.Mapping.SystemConfiguration
                 config.AddProfile<AdmFlujosFormulariosNotasProfile>();
                 config.AddProfile<AdmFlujoFormularioEtapaAccionProfile>();
                 config.AddProfile<AdmFormularioEtapaAccioneCampoProfile>();
+                config.AddProfile<FlujosPantallasProfile>();
             });
             return mappingConfig;
         }
@@ -174,6 +176,16 @@ namespace PRAMS.Infraestructure.Mapping.SystemConfiguration
             CreateMap<AdmFormularioEtapaAccioneCampo, AdmFlujoFormularioEtapaAccionCampoDto>().ReverseMap();
             CreateMap<AdmFormularioEtapaAccioneCampo, AdmFlujoFormularioEtapaAccionCampoInsertDto>().ReverseMap();
             CreateMap<AdmFormularioEtapaAccioneCampo, AdmFlujoFormularioEtapaAccionCampoUpdateDto>().ReverseMap();
+        }
+    }
+
+    public class FlujosPantallasProfile : Profile
+    {
+        public FlujosPantallasProfile()
+        {
+            CreateMap<FormFlujoPantalla, FormFlujoPantallaDto>().ReverseMap();
+            CreateMap<FormFlujoPantalla, FormFlujoPantallaInsertDto>().ReverseMap();
+            CreateMap<FormFlujoPantalla, FormFlujoPantallaUpdateDto>().ReverseMap();
         }
     }
 }

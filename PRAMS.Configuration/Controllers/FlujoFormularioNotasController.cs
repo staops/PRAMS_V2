@@ -1,8 +1,8 @@
 ﻿using FluentResults;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PRAMS.Application.Contract.People;
-using PRAMS.Domain.Entities.People.Dto;
+using PRAMS.Application.Contract.Flujos;
+using PRAMS.Domain.Entities.Flujos.Dto;
 using PRAMS.Domain.Entities.Shared;
 using System.Net.Mime;
 using System.Security.Claims;
