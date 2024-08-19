@@ -20,6 +20,7 @@ namespace PRAMS.Infraestructure.Mapping.SystemConfiguration
                 config.AddProfile<AdmFlujosFormulariosProfile>();
                 config.AddProfile<AdmFlujosFormulariosNotasProfile>();
                 config.AddProfile<AdmFlujoFormularioEtapaAccionProfile>();
+                config.AddProfile<AdmFormularioEtapaAccioneCampoProfile>();
             });
             return mappingConfig;
         }
@@ -163,6 +164,16 @@ namespace PRAMS.Infraestructure.Mapping.SystemConfiguration
             CreateMap<AdmFlujoFormularioEtapaAccion, AdmFlujoFormularioEtapaAccionDto>().ReverseMap();
             CreateMap<AdmFlujoFormularioEtapaAccion, AdmFlujoFormularioEtapaAccionInsertDto>().ReverseMap();
             CreateMap<AdmFlujoFormularioEtapaAccion, AdmFlujoFormularioEtapaAccionUpdateDto>().ReverseMap();
+        }
+    }
+
+    public class AdmFormularioEtapaAccioneCampoProfile : Profile
+    {
+        public AdmFormularioEtapaAccioneCampoProfile()
+        {
+            CreateMap<AdmFormularioEtapaAccioneCampo, AdmFlujoFormularioEtapaAccionCampoDto>().ReverseMap();
+            CreateMap<AdmFormularioEtapaAccioneCampo, AdmFlujoFormularioEtapaAccionCampoInsertDto>().ReverseMap();
+            CreateMap<AdmFormularioEtapaAccioneCampo, AdmFlujoFormularioEtapaAccionCampoUpdateDto>().ReverseMap();
         }
     }
 }

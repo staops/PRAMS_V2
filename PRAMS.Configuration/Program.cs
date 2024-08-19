@@ -78,6 +78,13 @@ builder.Services.AddScoped<IFlujosFormulariosEtapasAccionesService>(x =>
     return new FlujosFormulariosEtapasAccionesService(dbContext, mapper, logger);
 });
 
+builder.Services.AddScoped<IFlujosFormulariosEtapasAccionesCamposService>(x =>
+{
+    var dbContext = x.GetRequiredService<AppConfigDbContext>();
+    var logger = x.GetRequiredService<ILogger<IFlujosFormulariosEtapasAccionesCamposService>>();
+    return new FlujosFormulariosEtapasAccionesCamposService(dbContext, mapper, logger);
+});
+
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
