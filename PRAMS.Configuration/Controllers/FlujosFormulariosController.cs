@@ -116,7 +116,7 @@ namespace PRAMS.Configuration.Controllers
         [HttpDelete("Remove/{formularioId}")]
         [Authorize]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<bool>))]
+        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<AdmFlujoFormularioDto>))]
         [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
         public async Task<IActionResult> RemoveFlujoFormulario(int formularioId)
@@ -130,7 +130,7 @@ namespace PRAMS.Configuration.Controllers
                 if (result.IsSuccess)
                 {
                     _logger.LogInformation("Success in RemoveFlujoFormulario Result:{@result}", result.Value);
-                    return Ok(new ResponseDto<bool> { Result = result.Value });
+                    return Ok(new ResponseDto<AdmFlujoFormularioDto> { Result = result.Value });
                 }
                 else
                 {
