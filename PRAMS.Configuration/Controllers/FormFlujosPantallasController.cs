@@ -11,12 +11,12 @@ namespace PRAMS.Configuration.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FlujosPantallasController : ControllerBase
+    public class FormFlujosPantallasController : ControllerBase
     {
         private readonly IFlujosPantallasService _flujosPantallasService;
-        private readonly ILogger<FlujosPantallasController> _logger;
+        private readonly ILogger<FormFlujosPantallasController> _logger;
 
-        public FlujosPantallasController(IFlujosPantallasService flujosPantallasService, ILogger<FlujosPantallasController> logger)
+        public FormFlujosPantallasController(IFlujosPantallasService flujosPantallasService, ILogger<FormFlujosPantallasController> logger)
         {
             _flujosPantallasService = flujosPantallasService;
             _logger = logger;
@@ -204,7 +204,7 @@ namespace PRAMS.Configuration.Controllers
             }
         }
 
-        [HttpDelete("{flujoPantallaId}")]
+        [HttpDelete("Remove/{flujoPantallaId}")]
         [Authorize]
         [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<bool>))]
         [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]

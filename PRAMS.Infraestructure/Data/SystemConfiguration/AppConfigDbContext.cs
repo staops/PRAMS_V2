@@ -39,15 +39,21 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
         {
             base.OnModelCreating(modelBuilder);
 
-            //modelBuilder.Entity<AdmFlujoFormulario>().HasMany(f => f.AdmFlujoFormularioEtapas).WithOne(e => e.AdmFlujoFormulario).HasForeignKey(e => e.AdmFlujoFormulario);
-            //modelBuilder.Entity<AdmFlujoFormulario>().HasMany(f => f.FormFormularioFirmas).WithOne(f => f.AdmFlujoFormulario).HasForeignKey(f => f.AdmFlujoFormulario);
-            //modelBuilder.Entity<AdmFlujoFormulario>().HasMany(f => f.FormFlujoPantallas).WithOne(p => p.AdmFlujoFormulario).HasForeignKey(p => p.AdmFlujoFormulario);
-
-            //modelBuilder.Entity<AdmFlujoFormularioEtapa>().HasMany(e => e.AdmFlujoPantallaUsers).WithOne(u => u.AdmFlujoFormularioEtapa).HasForeignKey(u => u.AdmFlujoFormularioEtapa);
-            //modelBuilder.Entity<AdmFlujoFormularioEtapa>().HasMany(e => e.FormFormularioFirmas).WithOne(f => f.AdmFlujoFormularioEtapa).HasForeignKey(f => f.AdmFlujoFormularioEtapa);    
-
-            //modelBuilder.Entity<FormFormularioFirma>().HasOne(f => f.AdmFlujoFormularioEtapa).WithMany(e => e.AdmFlujoFormularios).HasForeignKey(f => f.FormularioFirmasId);
             //modelBuilder.Entity<FormFormularioFirma>().HasOne(f => f.AdmFlujoFormulario).WithMany(f => f.FormFormularioFirmas).HasForeignKey(f => f.FormularioFirmasId);
+
+            modelBuilder.Entity<AdmFlujoFormularioEtapa>()
+                .HasOne(f => f.AdmFlujoFormularioNotaStart)
+                .WithMany(p => p.AdmFlujoFormularioEtapasStart)
+                .HasForeignKey(f => f.NotaStartId)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasConstraintName("FK_AdmFlujoFormularioNotaStart");
+
+            modelBuilder.Entity<AdmFlujoFormularioEtapa>()
+                .HasOne(f => f.AdmFlujoFormularioNotaEnd)
+                .WithMany(p => p.AdmFlujoFormularioEtapasEnd)
+                .HasForeignKey(f => f.NotaEndId)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasConstraintName("FK_AdmFlujoFormularioNotaEnd");
 
             PouplateParametroCategoria(modelBuilder);
             PopulateAdmMenuElements(modelBuilder);

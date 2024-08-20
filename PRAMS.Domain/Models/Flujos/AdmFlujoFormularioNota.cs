@@ -6,6 +6,13 @@ namespace PRAMS.Domain.Models.Flujos
     [Table("Adm_FlujoFormularioNotas")]
     public class AdmFlujoFormularioNota
     {
+        public AdmFlujoFormularioNota()
+        {
+            AdmFlujoFormularioEtapasStart = new HashSet<AdmFlujoFormularioEtapa>();
+            AdmFlujoFormularioEtapasEnd = new HashSet<AdmFlujoFormularioEtapa>();
+        }
+
+
         [Key]
         public int FormularioNotaId { get; set; }
         [Required]
@@ -25,7 +32,9 @@ namespace PRAMS.Domain.Models.Flujos
         [Column("ID_TipoUsuario")]
         public int? TipoUsuarioId { get; set; }
 
-        [ForeignKey("FormularioId")]
-        public virtual AdmFlujoFormulario? AdmFlujoFormulario { get; set; }
+
+        public virtual ICollection<AdmFlujoFormularioEtapa>? AdmFlujoFormularioEtapasStart { get; set; }
+        public virtual ICollection<AdmFlujoFormularioEtapa>? AdmFlujoFormularioEtapasEnd { get; set; }
+
     }
 }

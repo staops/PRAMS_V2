@@ -11,7 +11,7 @@
         public bool Completado { get; set; }
         public bool Concurrencia { get; set; }
         public int ConcurrenciaEtapa { get; set; }
-        public int? NotaSatarId { get; set; }
+        public int? notaStartId { get; set; }
         public int? NotaEndId { get; set; }
     }
 }

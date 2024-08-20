@@ -53,10 +53,32 @@ namespace PRAMS.Infraestructure.Services.Flujos
         {
             try
             {
-                var admFlujoFormularioNota = await _context.AdmFlujoFormularioNotas.FindAsync(formularioNotaId);
+                var admFlujoFormularioNota = await _context.AdmFlujoFormularioNotas
+                    .Where(w => w.FormularioNotaId == formularioNotaId)
+                    .FirstOrDefaultAsync();
+
                 if (admFlujoFormularioNota == null)
                 {
                     return Result.Fail<AdmFlujoFormularioNotaDto>(new Error($"The form flow with id {formularioNotaId} does not exist"));
+                }
+
+                // Validate if the note is being used in any start or end stage
+                var admFlujoFormularioEtapaStart = await _context.AdmFlujoFormularioEtapas
+                    .Where(w => w.NotaStartId == formularioNotaId)
+                    .FirstOrDefaultAsync();
+
+                if (admFlujoFormularioEtapaStart != null)
+                {
+                    return Result.Fail<AdmFlujoFormularioNotaDto>(new Error($"The note is being used in the start stage of the form flow: {admFlujoFormularioEtapaStart.FormularioEtapaId}"));
+                }
+
+                var admFlujoFormularioEtapaEnd = await _context.AdmFlujoFormularioEtapas
+                    .Where(w => w.NotaEndId == formularioNotaId)
+                    .FirstOrDefaultAsync();
+
+                if (admFlujoFormularioEtapaEnd != null)
+                {
+                    return Result.Fail<AdmFlujoFormularioNotaDto>(new Error($"The note is being used in the end stage of the form flow: {admFlujoFormularioEtapaEnd.FormularioEtapaId}"));
                 }
 
                 _context.AdmFlujoFormularioNotas.Remove(admFlujoFormularioNota);

@@ -14,6 +14,24 @@ namespace PRAMS.Configuration.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Adm_FlujoFormularioNotas",
+                columns: table => new
+                {
+                    FormularioNotaId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FormularioId = table.Column<int>(type: "int", nullable: false),
+                    TX_NombreNota = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    TX_Descripcion = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    TX_Subject = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    TX_Mensaje = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    ID_TipoUsuario = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Adm_FlujoFormularioNotas", x => x.FormularioNotaId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Adm_FlujosFormularios",
                 columns: table => new
                 {
@@ -123,7 +141,7 @@ namespace PRAMS.Configuration.Migrations
                     Completado = table.Column<bool>(type: "bit", nullable: false),
                     Concurrencia = table.Column<bool>(type: "bit", nullable: false),
                     ConcurrenciaEtapa = table.Column<int>(type: "int", nullable: false),
-                    NotaSatarId = table.Column<int>(type: "int", nullable: true),
+                    NotaStartId = table.Column<int>(type: "int", nullable: true),
                     NotaEndId = table.Column<int>(type: "int", nullable: true),
                     CreateUser = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -135,31 +153,17 @@ namespace PRAMS.Configuration.Migrations
                 {
                     table.PrimaryKey("PK_Adm_FlujoFormularioEtapas", x => x.FormularioEtapaId);
                     table.ForeignKey(
-                        name: "FK_Adm_FlujoFormularioEtapas_Adm_FlujosFormularios_FormularioId",
-                        column: x => x.FormularioId,
-                        principalTable: "Adm_FlujosFormularios",
-                        principalColumn: "FormularioId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Adm_FlujoFormularioNotas",
-                columns: table => new
-                {
-                    FormularioNotaId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FormularioId = table.Column<int>(type: "int", nullable: false),
-                    TX_NombreNota = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    TX_Descripcion = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    TX_Subject = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    TX_Mensaje = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    ID_TipoUsuario = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Adm_FlujoFormularioNotas", x => x.FormularioNotaId);
+                        name: "FK_AdmFlujoFormularioNotaEnd",
+                        column: x => x.NotaEndId,
+                        principalTable: "Adm_FlujoFormularioNotas",
+                        principalColumn: "FormularioNotaId");
                     table.ForeignKey(
-                        name: "FK_Adm_FlujoFormularioNotas_Adm_FlujosFormularios_FormularioId",
+                        name: "FK_AdmFlujoFormularioNotaStart",
+                        column: x => x.NotaStartId,
+                        principalTable: "Adm_FlujoFormularioNotas",
+                        principalColumn: "FormularioNotaId");
+                    table.ForeignKey(
+                        name: "FK_Adm_FlujoFormularioEtapas_Adm_FlujosFormularios_FormularioId",
                         column: x => x.FormularioId,
                         principalTable: "Adm_FlujosFormularios",
                         principalColumn: "FormularioId",
@@ -406,11 +410,11 @@ namespace PRAMS.Configuration.Migrations
                 columns: new[] { "MenuElementId", "Accion", "Activo", "Controlador", "CreateDate", "CreateUser", "Icono", "MenuElementParentId", "Nombre", "Orden" },
                 values: new object[,]
                 {
-                    { 1, "Index", true, "Home", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9048), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-home", null, "Home", 1 },
-                    { 2, "Index", true, "SystemConfiguration", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9050), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", null, "System Configuration", 2 },
-                    { 5, "Index", true, "Ajustes", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9056), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", null, "Ajustes", 3 },
-                    { 17, "Index", true, "EliminarUsuario", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9078), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", null, "Borrado lógico", 12 },
-                    { 18, "Index", false, "EliminarUsuario", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9080), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", null, "Elmento eliminado", 12 }
+                    { 1, "Index", true, "Home", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1297), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-home", null, "Home", 1 },
+                    { 2, "Index", true, "SystemConfiguration", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1300), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", null, "System Configuration", 2 },
+                    { 5, "Index", true, "Ajustes", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1306), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", null, "Ajustes", 3 },
+                    { 17, "Index", true, "EliminarUsuario", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1352), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", null, "Borrado lógico", 12 },
+                    { 18, "Index", false, "EliminarUsuario", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1353), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", null, "Elmento eliminado", 12 }
                 });
 
             migrationBuilder.InsertData(
@@ -418,29 +422,29 @@ namespace PRAMS.Configuration.Migrations
                 columns: new[] { "CategoriaID", "Activo", "Categoria", "CreateDate", "CreateUser", "Descripcion", "ModifiedDate", "ModifiedUser", "TX_Filtro1_Nombre", "TX_Filtro2_Nombre", "TX_Filtro3_Nombre", "TX_Filtro4_Nombre", "TX_Filtro5_Nombre", "TX_Filtro6_Nombre", "TX_Filtro7_Nombre", "TX_Filtro8_Nombre", "TX_Filtro9_Nombre" },
                 values: new object[,]
                 {
-                    { 1, true, "Clasificacion Empleados", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8776), "03334448-73b4-438f-8fdf-784dbab58150", "Clasificaciones", null, null, null, null, null, null, null, null, null, null, null },
-                    { 2, true, "Curso Aprobado", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8778), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
-                    { 3, false, "Curso Aprobado Demo", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8780), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
-                    { 4, true, "Tipo Impedimento", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8782), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
-                    { 5, true, "Tipo Nombramiento", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8783), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
-                    { 6, true, "Pueblos", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8785), "03334448-73b4-438f-8fdf-784dbab58150", "Def Pueblos con Dos Niveles de Filtros", null, null, "Estado", "Pais", null, null, null, null, null, null, null },
-                    { 7, true, "Categoria Licencias", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8786), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
-                    { 8, true, "Firmas", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8787), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, "Posición / Puesto", null, null, null, null, null, null, null, null },
-                    { 9, true, "Acciones", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8789), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
-                    { 10, true, "Genero", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8790), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
-                    { 11, true, "Region", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8791), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
-                    { 12, true, "Tipo Convocatoria", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8792), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
-                    { 13, true, "Dependencias", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8794), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
-                    { 14, false, "Dependencias2", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8795), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
-                    { 15, false, "Dependencias3", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8797), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
-                    { 16, true, "Entidades Municipio", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8798), "03334448-73b4-438f-8fdf-784dbab58150", "Def Municipios Tres Niveles Ejemplo", null, null, "Region", "Estado", "Pais", null, null, null, null, null, null },
-                    { 17, true, "Cantidad Solicitudes", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8800), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
-                    { 18, false, "Cantidad Solicitudes2", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8801), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
-                    { 19, true, "Grados Academicos", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8802), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
-                    { 20, true, "Tipo de Documentos", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8803), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
-                    { 21, true, "Tipo Reportes", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8805), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
-                    { 22, true, "RolesReportes", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8807), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
-                    { 23, true, "RolesMenu", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8808), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null }
+                    { 1, true, "Clasificacion Empleados", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1043), "03334448-73b4-438f-8fdf-784dbab58150", "Clasificaciones", null, null, null, null, null, null, null, null, null, null, null },
+                    { 2, true, "Curso Aprobado", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1046), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
+                    { 3, false, "Curso Aprobado Demo", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1048), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
+                    { 4, true, "Tipo Impedimento", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1050), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
+                    { 5, true, "Tipo Nombramiento", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1052), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
+                    { 6, true, "Pueblos", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1055), "03334448-73b4-438f-8fdf-784dbab58150", "Def Pueblos con Dos Niveles de Filtros", null, null, "Estado", "Pais", null, null, null, null, null, null, null },
+                    { 7, true, "Categoria Licencias", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1056), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
+                    { 8, true, "Firmas", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1058), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, "Posición / Puesto", null, null, null, null, null, null, null, null },
+                    { 9, true, "Acciones", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1059), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
+                    { 10, true, "Genero", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1061), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
+                    { 11, true, "Region", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1062), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
+                    { 12, true, "Tipo Convocatoria", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1064), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
+                    { 13, true, "Dependencias", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1065), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
+                    { 14, false, "Dependencias2", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1066), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
+                    { 15, false, "Dependencias3", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1068), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
+                    { 16, true, "Entidades Municipio", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1070), "03334448-73b4-438f-8fdf-784dbab58150", "Def Municipios Tres Niveles Ejemplo", null, null, "Region", "Estado", "Pais", null, null, null, null, null, null },
+                    { 17, true, "Cantidad Solicitudes", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1071), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
+                    { 18, false, "Cantidad Solicitudes2", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1073), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
+                    { 19, true, "Grados Academicos", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1074), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
+                    { 20, true, "Tipo de Documentos", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1075), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
+                    { 21, true, "Tipo Reportes", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1077), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
+                    { 22, true, "RolesReportes", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1079), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null },
+                    { 23, true, "RolesMenu", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1081), "03334448-73b4-438f-8fdf-784dbab58150", "", null, null, null, null, null, null, null, null, null, null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -448,18 +452,18 @@ namespace PRAMS.Configuration.Migrations
                 columns: new[] { "ReportId", "Activo", "CreateDate", "CreateUser", "Orden", "ReportDescription", "ReportLink", "ReportName", "ReportParameters", "ReportType" },
                 values: new object[,]
                 {
-                    { 1, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9200), "03334448-73b4-438f-8fdf-784dbab58150", 1, "Lista los RMS Pendientes Diariamente, selección por Fecha y agrupado por Región", "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_GeneradosDiarios", "Listado de RMS Generados Diarios (por Región)", "Fecha", "Región" },
-                    { 2, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9203), "03334448-73b4-438f-8fdf-784dbab58150", 3, "Lista los RMS Completados por los Empleados por rango de fecha y por Región (Todos los Contestados)", "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_Complete_DateRange", "RMS Completados por Empleados rango de Fechas y por Región", "Fechas", "Región" },
-                    { 3, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9205), "03334448-73b4-438f-8fdf-784dbab58150", 2, "Lista los RMS Completados Validos por los Empleados por rango de fecha y por Región (Solo Validos)", "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_Complete_DateRangeValid", "RMS Completados por Fechas, Región y que son Validos", "Fechas, Region", "Región" },
-                    { 4, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9206), "03334448-73b4-438f-8fdf-784dbab58150", 3, "Reporte de RMS Completados Validos para reclamos, incluye Numero de RMS para uso en las Asistencias de los Empleados para los RMS Contestados.", "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_Complete_ValidAssistance", "Reporte de RMS Validos Completados Listado para Asistencias de Empleados", "Fecha, Region", "Finanzas" },
-                    { 5, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9208), "03334448-73b4-438f-8fdf-784dbab58150", 2, "Resumen de los RMS enviados, completados, invalidos, seguimientos y validos con porcientos de completados", "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRms_Statdistics_DateRangeRegion", "RMS Resumen Estadisticas Envíos por Rango Fecha y Región", "Fecha y Region", "Administración" },
-                    { 6, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9210), "03334448-73b4-438f-8fdf-784dbab58150", 1, "Muestra el Formulario RMS según llenado por los Trabajadores Sociales", "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_CAP_WorkDetailRange", "Formulario RMS llenados por Fecha ", "Fecha", "Administración" },
-                    { 7, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9211), "03334448-73b4-438f-8fdf-784dbab58150", 4, "El reporte de Cost Allocation Plan resumen de los RMS entrados por Grant Diarios", "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_CostAllocationDaily", "Cost Allocation Plan Reporte Diario", "Fecha", "Finanzas" },
-                    { 8, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9213), "03334448-73b4-438f-8fdf-784dbab58150", 5, "El reporte de Cost Allocation Plan resumen de los RMS entrados por Grant para el Mes seleccionado.", "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_CostAllocationMonthly", "Cost Allocation Plan Reporte Mensual", "Fecha", "Finanzas" },
-                    { 9, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9215), "03334448-73b4-438f-8fdf-784dbab58150", 7, "El reporte de Cost Allocation Plan resumen de los RMS entrados por Grant Trimestrales", "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_CostAllocationQuarter", "Cost Allocation Plan Reporte Trimestral", "Fecha", "Finanzas" },
-                    { 10, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9216), "03334448-73b4-438f-8fdf-784dbab58150", 3, "Este Reporte muestra todas las Observaciones entradas por los usuarios en un rango de fechas con sus respectivos Títulos y Grants por rango de Fecha y selección de Validos o Invalidos para el CAP", "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_Submitted_DateRange", "Observaciones Completadas por Rango de Fecha (Selección Validas)", "Fechas", "Administración" },
-                    { 11, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9218), "03334448-73b4-438f-8fdf-784dbab58150", 1, "RMS Matrix Distribution Report for the CAP Titile Distribution", "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_CAP_Matrix", "RMS Matrix", "Fechas", "Finanzas" },
-                    { 12, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9220), "03334448-73b4-438f-8fdf-784dbab58150", 2, "Listado de RMS Validos para completar el Schedule D del CAP", "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_CAP_ScheduleD", "Schedule D Listado RMS", "Fechas", "Finanzas" }
+                    { 1, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1468), "03334448-73b4-438f-8fdf-784dbab58150", 1, "Lista los RMS Pendientes Diariamente, selección por Fecha y agrupado por Región", "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_GeneradosDiarios", "Listado de RMS Generados Diarios (por Región)", "Fecha", "Región" },
+                    { 2, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1471), "03334448-73b4-438f-8fdf-784dbab58150", 3, "Lista los RMS Completados por los Empleados por rango de fecha y por Región (Todos los Contestados)", "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_Complete_DateRange", "RMS Completados por Empleados rango de Fechas y por Región", "Fechas", "Región" },
+                    { 3, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1473), "03334448-73b4-438f-8fdf-784dbab58150", 2, "Lista los RMS Completados Validos por los Empleados por rango de fecha y por Región (Solo Validos)", "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_Complete_DateRangeValid", "RMS Completados por Fechas, Región y que son Validos", "Fechas, Region", "Región" },
+                    { 4, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1475), "03334448-73b4-438f-8fdf-784dbab58150", 3, "Reporte de RMS Completados Validos para reclamos, incluye Numero de RMS para uso en las Asistencias de los Empleados para los RMS Contestados.", "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_Complete_ValidAssistance", "Reporte de RMS Validos Completados Listado para Asistencias de Empleados", "Fecha, Region", "Finanzas" },
+                    { 5, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1476), "03334448-73b4-438f-8fdf-784dbab58150", 2, "Resumen de los RMS enviados, completados, invalidos, seguimientos y validos con porcientos de completados", "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRms_Statdistics_DateRangeRegion", "RMS Resumen Estadisticas Envíos por Rango Fecha y Región", "Fecha y Region", "Administración" },
+                    { 6, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1478), "03334448-73b4-438f-8fdf-784dbab58150", 1, "Muestra el Formulario RMS según llenado por los Trabajadores Sociales", "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_CAP_WorkDetailRange", "Formulario RMS llenados por Fecha ", "Fecha", "Administración" },
+                    { 7, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1480), "03334448-73b4-438f-8fdf-784dbab58150", 4, "El reporte de Cost Allocation Plan resumen de los RMS entrados por Grant Diarios", "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_CostAllocationDaily", "Cost Allocation Plan Reporte Diario", "Fecha", "Finanzas" },
+                    { 8, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1481), "03334448-73b4-438f-8fdf-784dbab58150", 5, "El reporte de Cost Allocation Plan resumen de los RMS entrados por Grant para el Mes seleccionado.", "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_CostAllocationMonthly", "Cost Allocation Plan Reporte Mensual", "Fecha", "Finanzas" },
+                    { 9, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1483), "03334448-73b4-438f-8fdf-784dbab58150", 7, "El reporte de Cost Allocation Plan resumen de los RMS entrados por Grant Trimestrales", "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_CostAllocationQuarter", "Cost Allocation Plan Reporte Trimestral", "Fecha", "Finanzas" },
+                    { 10, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1485), "03334448-73b4-438f-8fdf-784dbab58150", 3, "Este Reporte muestra todas las Observaciones entradas por los usuarios en un rango de fechas con sus respectivos Títulos y Grants por rango de Fecha y selección de Validos o Invalidos para el CAP", "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_Submitted_DateRange", "Observaciones Completadas por Rango de Fecha (Selección Validas)", "Fechas", "Administración" },
+                    { 11, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1486), "03334448-73b4-438f-8fdf-784dbab58150", 1, "RMS Matrix Distribution Report for the CAP Titile Distribution", "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_CAP_Matrix", "RMS Matrix", "Fechas", "Finanzas" },
+                    { 12, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1489), "03334448-73b4-438f-8fdf-784dbab58150", 2, "Listado de RMS Validos para completar el Schedule D del CAP", "Reports/Pages/Report.aspx?ItemPath=%2fRMS+Reports%2fRMS_CAP_ScheduleD", "Schedule D Listado RMS", "Fechas", "Finanzas" }
                 });
 
             migrationBuilder.InsertData(
@@ -467,11 +471,11 @@ namespace PRAMS.Configuration.Migrations
                 columns: new[] { "MenuElementId", "Accion", "Activo", "Controlador", "CreateDate", "CreateUser", "Icono", "MenuElementParentId", "Nombre", "Orden" },
                 values: new object[,]
                 {
-                    { 3, "Index", true, "Parametros", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9052), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", 2, "Parametros", 1 },
-                    { 4, "Index", true, "Categorias", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9054), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", 2, "Categorias", 2 },
-                    { 6, "Index", true, "Roles", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9058), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", 5, "Roles", 4 },
-                    { 7, "Index", true, "Usuarios", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9059), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", 5, "Usuarios", 5 },
-                    { 8, "Index", true, "Otro", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9061), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", 5, "Otro", 6 }
+                    { 3, "Index", true, "Parametros", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1302), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", 2, "Parametros", 1 },
+                    { 4, "Index", true, "Categorias", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1304), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", 2, "Categorias", 2 },
+                    { 6, "Index", true, "Roles", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1308), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", 5, "Roles", 4 },
+                    { 7, "Index", true, "Usuarios", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1330), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", 5, "Usuarios", 5 },
+                    { 8, "Index", true, "Otro", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1332), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", 5, "Otro", 6 }
                 });
 
             migrationBuilder.InsertData(
@@ -479,11 +483,11 @@ namespace PRAMS.Configuration.Migrations
                 columns: new[] { "MenuRoleId", "Activo", "CreateDate", "CreateUser", "MenuElementId", "RoleId" },
                 values: new object[,]
                 {
-                    { 1, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9148), "03334448-73b4-438f-8fdf-784dbab58150", 1, "SU" },
-                    { 2, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9150), "03334448-73b4-438f-8fdf-784dbab58150", 2, "SU" },
-                    { 5, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9154), "03334448-73b4-438f-8fdf-784dbab58150", 5, "SU" },
-                    { 17, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9168), "03334448-73b4-438f-8fdf-784dbab58150", 17, "SU" },
-                    { 18, false, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9169), "03334448-73b4-438f-8fdf-784dbab58150", 18, "SU" }
+                    { 1, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1415), "03334448-73b4-438f-8fdf-784dbab58150", 1, "SU" },
+                    { 2, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1417), "03334448-73b4-438f-8fdf-784dbab58150", 2, "SU" },
+                    { 5, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1421), "03334448-73b4-438f-8fdf-784dbab58150", 5, "SU" },
+                    { 17, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1435), "03334448-73b4-438f-8fdf-784dbab58150", 17, "SU" },
+                    { 18, false, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1437), "03334448-73b4-438f-8fdf-784dbab58150", 18, "SU" }
                 });
 
             migrationBuilder.InsertData(
@@ -491,27 +495,27 @@ namespace PRAMS.Configuration.Migrations
                 columns: new[] { "ParamterosID", "Activo", "CategoriaID", "CreateDate", "CreateUser", "Descripcion", "FechaEnd", "FechaStart", "ModifiedDate", "ModifiedUser", "Parametro", "TX_Filtro1", "TX_Filtro2", "TX_Filtro3", "TX_Filtro4", "TX_Filtro5", "TX_Filtro6", "TX_Filtro7", "TX_Filtro8", "TX_Filtro9" },
                 values: new object[,]
                 {
-                    { 1, true, 1, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8905), "03334448-73b4-438f-8fdf-784dbab58150", null, null, null, null, null, "Empleado", null, null, null, null, null, null, null, null, null },
-                    { 2, true, 1, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8906), "03334448-73b4-438f-8fdf-784dbab58150", null, null, null, null, null, "Empleado Temporal", null, null, null, null, null, null, null, null, null },
-                    { 3, true, 1, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8908), "03334448-73b4-438f-8fdf-784dbab58150", null, null, null, null, null, "Empleado Contratado", null, null, null, null, null, null, null, null, null },
-                    { 4, true, 1, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8909), "03334448-73b4-438f-8fdf-784dbab58150", null, null, null, null, null, "Empleado de Carrera", null, null, null, null, null, null, null, null, null },
-                    { 5, true, 1, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8910), "03334448-73b4-438f-8fdf-784dbab58150", null, null, null, null, null, "Empleado de Confianza", null, null, null, null, null, null, null, null, null },
-                    { 6, true, 1, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8911), "03334448-73b4-438f-8fdf-784dbab58150", null, null, null, null, null, "Empleado de Base", null, null, null, null, null, null, null, null, null },
-                    { 7, true, 16, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8935), "03334448-73b4-438f-8fdf-784dbab58150", null, null, null, null, null, "San Juan", "Area Metro", "PR", "Puerto Rico", null, null, null, null, null, null },
-                    { 8, true, 16, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8957), "03334448-73b4-438f-8fdf-784dbab58150", null, null, null, null, null, "Carolina", "Area Metro", "PR", "Puerto Rico", null, null, null, null, null, null },
-                    { 9, true, 16, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8958), "03334448-73b4-438f-8fdf-784dbab58150", null, null, null, null, null, "Arecibo", "Area Norte", "PR", "Puerto Rico", null, null, null, null, null, null },
-                    { 10, true, 16, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8960), "03334448-73b4-438f-8fdf-784dbab58150", null, null, null, null, null, "Ponce", "Area Sur", "PR", "Puerto Rico", null, null, null, null, null, null },
-                    { 11, true, 16, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8961), "03334448-73b4-438f-8fdf-784dbab58150", null, null, null, null, null, "Orange", "Central", "Florida", "Estados Unidos", null, null, null, null, null, null },
-                    { 12, true, 16, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8963), "03334448-73b4-438f-8fdf-784dbab58150", null, null, null, null, null, "New York City", "Greater City", "New York", "Estados Unidos", null, null, null, null, null, null },
-                    { 13, true, 8, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8979), "03334448-73b4-438f-8fdf-784dbab58150", "Bernardo Acevedo González", null, null, null, null, "BAG", "Analista de Recursos Humanos", null, null, null, null, null, null, null, null },
-                    { 14, true, 8, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8981), "03334448-73b4-438f-8fdf-784dbab58150", "Carmín Rodríguez Negrón", null, null, null, null, "CRN", "Directora", null, null, null, null, null, null, null, null },
-                    { 15, true, 8, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8982), "03334448-73b4-438f-8fdf-784dbab58150", "Jannette López Falcón", null, null, null, null, "JLF", "Analista de Recursos Humanos", null, null, null, null, null, null, null, null },
-                    { 16, true, 8, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8984), "03334448-73b4-438f-8fdf-784dbab58150", "Victor Maldonado Martínez", null, null, null, null, "VMM", "Director", null, null, null, null, null, null, null, null },
-                    { 17, true, 8, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8985), "03334448-73b4-438f-8fdf-784dbab58150", "Juan Perez Rodriguez", null, null, null, null, "JPR", "Analista ASUME", null, null, null, null, null, null, null, null },
-                    { 18, true, 8, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8987), "03334448-73b4-438f-8fdf-784dbab58150", "Nancy Calderon Alicea", null, null, null, null, "NCA", "Especialista Recursos Humanos", null, null, null, null, null, null, null, null },
-                    { 19, true, 8, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8989), "03334448-73b4-438f-8fdf-784dbab58150", "Gabriel Otero Valentin", null, null, null, null, "GOV", "Analista ADSEF", null, null, null, null, null, null, null, null },
-                    { 20, true, 8, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8991), "03334448-73b4-438f-8fdf-784dbab58150", "Leslie Soto Matos", null, null, null, null, "LSM", "Analista AMSCA", null, null, null, null, null, null, null, null },
-                    { 21, true, 8, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(8992), "03334448-73b4-438f-8fdf-784dbab58150", "Secretaria Gerencia", null, null, null, null, "SEC-GME", "Administrador", null, null, null, null, null, null, null, null }
+                    { 1, true, 1, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1162), "03334448-73b4-438f-8fdf-784dbab58150", null, null, null, null, null, "Empleado", null, null, null, null, null, null, null, null, null },
+                    { 2, true, 1, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1164), "03334448-73b4-438f-8fdf-784dbab58150", null, null, null, null, null, "Empleado Temporal", null, null, null, null, null, null, null, null, null },
+                    { 3, true, 1, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1165), "03334448-73b4-438f-8fdf-784dbab58150", null, null, null, null, null, "Empleado Contratado", null, null, null, null, null, null, null, null, null },
+                    { 4, true, 1, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1167), "03334448-73b4-438f-8fdf-784dbab58150", null, null, null, null, null, "Empleado de Carrera", null, null, null, null, null, null, null, null, null },
+                    { 5, true, 1, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1168), "03334448-73b4-438f-8fdf-784dbab58150", null, null, null, null, null, "Empleado de Confianza", null, null, null, null, null, null, null, null, null },
+                    { 6, true, 1, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1169), "03334448-73b4-438f-8fdf-784dbab58150", null, null, null, null, null, "Empleado de Base", null, null, null, null, null, null, null, null, null },
+                    { 7, true, 16, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1194), "03334448-73b4-438f-8fdf-784dbab58150", null, null, null, null, null, "San Juan", "Area Metro", "PR", "Puerto Rico", null, null, null, null, null, null },
+                    { 8, true, 16, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1196), "03334448-73b4-438f-8fdf-784dbab58150", null, null, null, null, null, "Carolina", "Area Metro", "PR", "Puerto Rico", null, null, null, null, null, null },
+                    { 9, true, 16, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1197), "03334448-73b4-438f-8fdf-784dbab58150", null, null, null, null, null, "Arecibo", "Area Norte", "PR", "Puerto Rico", null, null, null, null, null, null },
+                    { 10, true, 16, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1199), "03334448-73b4-438f-8fdf-784dbab58150", null, null, null, null, null, "Ponce", "Area Sur", "PR", "Puerto Rico", null, null, null, null, null, null },
+                    { 11, true, 16, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1201), "03334448-73b4-438f-8fdf-784dbab58150", null, null, null, null, null, "Orange", "Central", "Florida", "Estados Unidos", null, null, null, null, null, null },
+                    { 12, true, 16, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1202), "03334448-73b4-438f-8fdf-784dbab58150", null, null, null, null, null, "New York City", "Greater City", "New York", "Estados Unidos", null, null, null, null, null, null },
+                    { 13, true, 8, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1219), "03334448-73b4-438f-8fdf-784dbab58150", "Bernardo Acevedo González", null, null, null, null, "BAG", "Analista de Recursos Humanos", null, null, null, null, null, null, null, null },
+                    { 14, true, 8, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1220), "03334448-73b4-438f-8fdf-784dbab58150", "Carmín Rodríguez Negrón", null, null, null, null, "CRN", "Directora", null, null, null, null, null, null, null, null },
+                    { 15, true, 8, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1225), "03334448-73b4-438f-8fdf-784dbab58150", "Jannette López Falcón", null, null, null, null, "JLF", "Analista de Recursos Humanos", null, null, null, null, null, null, null, null },
+                    { 16, true, 8, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1226), "03334448-73b4-438f-8fdf-784dbab58150", "Victor Maldonado Martínez", null, null, null, null, "VMM", "Director", null, null, null, null, null, null, null, null },
+                    { 17, true, 8, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1228), "03334448-73b4-438f-8fdf-784dbab58150", "Juan Perez Rodriguez", null, null, null, null, "JPR", "Analista ASUME", null, null, null, null, null, null, null, null },
+                    { 18, true, 8, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1229), "03334448-73b4-438f-8fdf-784dbab58150", "Nancy Calderon Alicea", null, null, null, null, "NCA", "Especialista Recursos Humanos", null, null, null, null, null, null, null, null },
+                    { 19, true, 8, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1230), "03334448-73b4-438f-8fdf-784dbab58150", "Gabriel Otero Valentin", null, null, null, null, "GOV", "Analista ADSEF", null, null, null, null, null, null, null, null },
+                    { 20, true, 8, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1232), "03334448-73b4-438f-8fdf-784dbab58150", "Leslie Soto Matos", null, null, null, null, "LSM", "Analista AMSCA", null, null, null, null, null, null, null, null },
+                    { 21, true, 8, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1233), "03334448-73b4-438f-8fdf-784dbab58150", "Secretaria Gerencia", null, null, null, null, "SEC-GME", "Administrador", null, null, null, null, null, null, null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -519,18 +523,18 @@ namespace PRAMS.Configuration.Migrations
                 columns: new[] { "ReportRoleId", "Activo", "CreateDate", "CreateUser", "ReportId", "RoleId" },
                 values: new object[,]
                 {
-                    { 1, true, new DateTime(2024, 8, 16, 0, 48, 51, 347, DateTimeKind.Local).AddTicks(100), "03334448-73b4-438f-8fdf-784dbab58150", 1, "SU" },
-                    { 2, true, new DateTime(2024, 8, 16, 0, 48, 51, 347, DateTimeKind.Local).AddTicks(102), "03334448-73b4-438f-8fdf-784dbab58150", 2, "SU" },
-                    { 3, true, new DateTime(2024, 8, 16, 0, 48, 51, 347, DateTimeKind.Local).AddTicks(144), "03334448-73b4-438f-8fdf-784dbab58150", 3, "SU" },
-                    { 4, true, new DateTime(2024, 8, 16, 0, 48, 51, 347, DateTimeKind.Local).AddTicks(145), "03334448-73b4-438f-8fdf-784dbab58150", 4, "SU" },
-                    { 5, true, new DateTime(2024, 8, 16, 0, 48, 51, 347, DateTimeKind.Local).AddTicks(146), "03334448-73b4-438f-8fdf-784dbab58150", 5, "SU" },
-                    { 6, true, new DateTime(2024, 8, 16, 0, 48, 51, 347, DateTimeKind.Local).AddTicks(148), "03334448-73b4-438f-8fdf-784dbab58150", 6, "SU" },
-                    { 7, true, new DateTime(2024, 8, 16, 0, 48, 51, 347, DateTimeKind.Local).AddTicks(149), "03334448-73b4-438f-8fdf-784dbab58150", 7, "SU" },
-                    { 8, true, new DateTime(2024, 8, 16, 0, 48, 51, 347, DateTimeKind.Local).AddTicks(150), "03334448-73b4-438f-8fdf-784dbab58150", 8, "SU" },
-                    { 9, true, new DateTime(2024, 8, 16, 0, 48, 51, 347, DateTimeKind.Local).AddTicks(151), "03334448-73b4-438f-8fdf-784dbab58150", 9, "SU" },
-                    { 10, true, new DateTime(2024, 8, 16, 0, 48, 51, 347, DateTimeKind.Local).AddTicks(152), "03334448-73b4-438f-8fdf-784dbab58150", 10, "SU" },
-                    { 11, true, new DateTime(2024, 8, 16, 0, 48, 51, 347, DateTimeKind.Local).AddTicks(154), "03334448-73b4-438f-8fdf-784dbab58150", 11, "SU" },
-                    { 12, true, new DateTime(2024, 8, 16, 0, 48, 51, 347, DateTimeKind.Local).AddTicks(155), "03334448-73b4-438f-8fdf-784dbab58150", 12, "SU" }
+                    { 1, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(2046), "03334448-73b4-438f-8fdf-784dbab58150", 1, "SU" },
+                    { 2, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(2047), "03334448-73b4-438f-8fdf-784dbab58150", 2, "SU" },
+                    { 3, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(2049), "03334448-73b4-438f-8fdf-784dbab58150", 3, "SU" },
+                    { 4, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(2050), "03334448-73b4-438f-8fdf-784dbab58150", 4, "SU" },
+                    { 5, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(2052), "03334448-73b4-438f-8fdf-784dbab58150", 5, "SU" },
+                    { 6, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(2053), "03334448-73b4-438f-8fdf-784dbab58150", 6, "SU" },
+                    { 7, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(2054), "03334448-73b4-438f-8fdf-784dbab58150", 7, "SU" },
+                    { 8, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(2055), "03334448-73b4-438f-8fdf-784dbab58150", 8, "SU" },
+                    { 9, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(2056), "03334448-73b4-438f-8fdf-784dbab58150", 9, "SU" },
+                    { 10, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(2058), "03334448-73b4-438f-8fdf-784dbab58150", 10, "SU" },
+                    { 11, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(2060), "03334448-73b4-438f-8fdf-784dbab58150", 11, "SU" },
+                    { 12, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(2061), "03334448-73b4-438f-8fdf-784dbab58150", 12, "SU" }
                 });
 
             migrationBuilder.InsertData(
@@ -538,12 +542,12 @@ namespace PRAMS.Configuration.Migrations
                 columns: new[] { "MenuElementId", "Accion", "Activo", "Controlador", "CreateDate", "CreateUser", "Icono", "MenuElementParentId", "Nombre", "Orden" },
                 values: new object[,]
                 {
-                    { 9, "Index", true, "AgregarRol", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9063), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", 6, "Agregar", 7 },
-                    { 10, "Index", true, "EditarRol", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9065), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", 6, "Editar", 8 },
-                    { 11, "Index", true, "EliminarRol", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9067), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", 6, "Eliminar", 9 },
-                    { 12, "Index", true, "AgregarUsuario", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9068), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", 7, "Agregar", 10 },
-                    { 13, "Index", true, "EditarUsuario", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9070), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", 7, "Editar", 11 },
-                    { 14, "Index", true, "EliminarUsuario", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9072), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", 7, "Eliminar", 12 }
+                    { 9, "Index", true, "AgregarRol", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1334), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", 6, "Agregar", 7 },
+                    { 10, "Index", true, "EditarRol", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1335), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", 6, "Editar", 8 },
+                    { 11, "Index", true, "EliminarRol", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1337), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", 6, "Eliminar", 9 },
+                    { 12, "Index", true, "AgregarUsuario", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1339), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", 7, "Agregar", 10 },
+                    { 13, "Index", true, "EditarUsuario", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1341), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", 7, "Editar", 11 },
+                    { 14, "Index", true, "EliminarUsuario", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1345), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", 7, "Eliminar", 12 }
                 });
 
             migrationBuilder.InsertData(
@@ -551,11 +555,11 @@ namespace PRAMS.Configuration.Migrations
                 columns: new[] { "MenuRoleId", "Activo", "CreateDate", "CreateUser", "MenuElementId", "RoleId" },
                 values: new object[,]
                 {
-                    { 3, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9151), "03334448-73b4-438f-8fdf-784dbab58150", 3, "SU" },
-                    { 4, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9152), "03334448-73b4-438f-8fdf-784dbab58150", 4, "SU" },
-                    { 6, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9155), "03334448-73b4-438f-8fdf-784dbab58150", 6, "SU" },
-                    { 7, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9156), "03334448-73b4-438f-8fdf-784dbab58150", 7, "SU" },
-                    { 8, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9157), "03334448-73b4-438f-8fdf-784dbab58150", 8, "SU" }
+                    { 3, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1418), "03334448-73b4-438f-8fdf-784dbab58150", 3, "SU" },
+                    { 4, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1419), "03334448-73b4-438f-8fdf-784dbab58150", 4, "SU" },
+                    { 6, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1422), "03334448-73b4-438f-8fdf-784dbab58150", 6, "SU" },
+                    { 7, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1423), "03334448-73b4-438f-8fdf-784dbab58150", 7, "SU" },
+                    { 8, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1424), "03334448-73b4-438f-8fdf-784dbab58150", 8, "SU" }
                 });
 
             migrationBuilder.InsertData(
@@ -563,8 +567,8 @@ namespace PRAMS.Configuration.Migrations
                 columns: new[] { "MenuElementId", "Accion", "Activo", "Controlador", "CreateDate", "CreateUser", "Icono", "MenuElementParentId", "Nombre", "Orden" },
                 values: new object[,]
                 {
-                    { 15, "Index", true, "EliminarUsuario", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9074), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", 14, "Borrado físico", 12 },
-                    { 16, "Index", true, "EliminarUsuario", new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9076), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", 14, "Borrado lógico", 12 }
+                    { 15, "Index", true, "EliminarUsuario", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1347), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", 14, "Borrado físico", 12 },
+                    { 16, "Index", true, "EliminarUsuario", new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1350), "03334448-73b4-438f-8fdf-784dbab58150", "fas fa-cogs", 14, "Borrado lógico", 12 }
                 });
 
             migrationBuilder.InsertData(
@@ -572,14 +576,14 @@ namespace PRAMS.Configuration.Migrations
                 columns: new[] { "MenuRoleId", "Activo", "CreateDate", "CreateUser", "MenuElementId", "RoleId" },
                 values: new object[,]
                 {
-                    { 9, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9158), "03334448-73b4-438f-8fdf-784dbab58150", 9, "SU" },
-                    { 10, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9159), "03334448-73b4-438f-8fdf-784dbab58150", 10, "SU" },
-                    { 11, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9161), "03334448-73b4-438f-8fdf-784dbab58150", 11, "SU" },
-                    { 12, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9162), "03334448-73b4-438f-8fdf-784dbab58150", 12, "SU" },
-                    { 13, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9163), "03334448-73b4-438f-8fdf-784dbab58150", 13, "SU" },
-                    { 14, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9164), "03334448-73b4-438f-8fdf-784dbab58150", 14, "SU" },
-                    { 15, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9166), "03334448-73b4-438f-8fdf-784dbab58150", 15, "SU" },
-                    { 16, true, new DateTime(2024, 8, 16, 0, 48, 51, 346, DateTimeKind.Local).AddTicks(9167), "03334448-73b4-438f-8fdf-784dbab58150", 16, "SU" }
+                    { 9, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1426), "03334448-73b4-438f-8fdf-784dbab58150", 9, "SU" },
+                    { 10, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1427), "03334448-73b4-438f-8fdf-784dbab58150", 10, "SU" },
+                    { 11, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1428), "03334448-73b4-438f-8fdf-784dbab58150", 11, "SU" },
+                    { 12, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1429), "03334448-73b4-438f-8fdf-784dbab58150", 12, "SU" },
+                    { 13, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1431), "03334448-73b4-438f-8fdf-784dbab58150", 13, "SU" },
+                    { 14, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1432), "03334448-73b4-438f-8fdf-784dbab58150", 14, "SU" },
+                    { 15, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1433), "03334448-73b4-438f-8fdf-784dbab58150", 15, "SU" },
+                    { 16, true, new DateTime(2024, 8, 19, 20, 58, 14, 273, DateTimeKind.Local).AddTicks(1434), "03334448-73b4-438f-8fdf-784dbab58150", 16, "SU" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -588,9 +592,14 @@ namespace PRAMS.Configuration.Migrations
                 column: "FormularioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Adm_FlujoFormularioNotas_FormularioId",
-                table: "Adm_FlujoFormularioNotas",
-                column: "FormularioId");
+                name: "IX_Adm_FlujoFormularioEtapas_NotaEndId",
+                table: "Adm_FlujoFormularioEtapas",
+                column: "NotaEndId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Adm_FlujoFormularioEtapas_NotaStartId",
+                table: "Adm_FlujoFormularioEtapas",
+                column: "NotaStartId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Adm_FlujoPantallaUser_FormularioEtapaId",
@@ -647,9 +656,6 @@ namespace PRAMS.Configuration.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Adm_FlujoFormularioNotas");
-
-            migrationBuilder.DropTable(
                 name: "Adm_FlujoPantallaUser");
 
             migrationBuilder.DropTable(
@@ -684,6 +690,9 @@ namespace PRAMS.Configuration.Migrations
 
             migrationBuilder.DropTable(
                 name: "Adm_FlujoFormularioEtapas");
+
+            migrationBuilder.DropTable(
+                name: "Adm_FlujoFormularioNotas");
 
             migrationBuilder.DropTable(
                 name: "Adm_FlujosFormularios");

@@ -32,7 +32,7 @@ namespace PRAMS.Domain.Models.Flujos
         public bool Concurrencia { get; set; }
         [Required]
         public int ConcurrenciaEtapa { get; set; }
-        public int? NotaSatarId { get; set; }
+        public int? NotaStartId { get; set; }
         public int? NotaEndId { get; set; }
         [Required]
         [StringLength(40)]
@@ -45,6 +45,11 @@ namespace PRAMS.Domain.Models.Flujos
         public required bool Activo { get; set; } = true;
 
 
+        [ForeignKey("NotaStartId")]
+        public virtual AdmFlujoFormularioNota? AdmFlujoFormularioNotaStart { get; set; }
+
+        [ForeignKey("NotaEndId")]
+        public virtual AdmFlujoFormularioNota? AdmFlujoFormularioNotaEnd { get; set; }
 
         [ForeignKey("FormularioId")]
         public virtual AdmFlujoFormulario? AdmFlujoFormulario { get; set; }

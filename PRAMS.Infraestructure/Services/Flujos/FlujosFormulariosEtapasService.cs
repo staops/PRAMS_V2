@@ -35,8 +35,29 @@ namespace PRAMS.Infraestructure.Services.Flujos
                 var ddmFlujoFormulario = await _appConfigDbContext.AdmFlujoFormularios.Where(w => w.FormularioId == entity.FormularioId).FirstOrDefaultAsync();
                 if (ddmFlujoFormulario == null)
                 {
-                    return Result.Fail<AdmFlujoFormularioEtapaDto>($"El formulario {entity.FormularioId} no existe");
+                    return Result.Fail<AdmFlujoFormularioEtapaDto>($"The form {entity.FormularioId} does not exist");
                 }
+
+                // Validate if the start note exist
+                if(entity.NotaEndId is not null)
+                {
+                    var ddmFlujoFormularioNota = await _appConfigDbContext.AdmFlujoFormularioNotas.Where(w => w.FormularioNotaId == entity.NotaEndId).FirstOrDefaultAsync();
+                    if (ddmFlujoFormularioNota == null)
+                    {
+                        return Result.Fail<AdmFlujoFormularioEtapaDto>($"The start note {entity.NotaEndId} does not exist");
+                    }
+                }
+
+                // Validate if the end note exist
+                if (entity.NotaStartId is not null)
+                {
+                    var ddmFlujoFormularioNota = await _appConfigDbContext.AdmFlujoFormularioNotas.Where(w => w.FormularioNotaId == entity.NotaStartId).FirstOrDefaultAsync();
+                    if (ddmFlujoFormularioNota == null)
+                    {
+                        return Result.Fail<AdmFlujoFormularioEtapaDto>($"The end note {entity.NotaStartId} does not exist");
+                    }
+                }
+
 
                 await _appConfigDbContext.AdmFlujoFormularioEtapas.AddAsync(entity);
                 await _appConfigDbContext.SaveChangesAsync();
@@ -133,10 +154,30 @@ namespace PRAMS.Infraestructure.Services.Flujos
                 }
 
                 // Validate if the FormularioId exist
-                var ddmFlujoFormulario = await _appConfigDbContext.AdmFlujoFormularios.Where(w => w.FormularioId == entity.FormularioId).FirstOrDefaultAsync();
+                var ddmFlujoFormulario = await _appConfigDbContext.AdmFlujoFormularios.Where(w => w.FormularioId == itemToUpdate.FormularioId).FirstOrDefaultAsync();
                 if (ddmFlujoFormulario == null)
                 {
-                    return Result.Fail<AdmFlujoFormularioEtapaDto>($"El formulario {entity.FormularioId} no existe");
+                    return Result.Fail<AdmFlujoFormularioEtapaDto>($"El formulario {itemToUpdate.FormularioId} no existe");
+                }
+
+                // Validate if the start note exist
+                if (itemToUpdate.NotaEndId is not null)
+                {
+                    var ddmFlujoFormularioNota = await _appConfigDbContext.AdmFlujoFormularioNotas.Where(w => w.FormularioNotaId == itemToUpdate.NotaEndId).FirstOrDefaultAsync();
+                    if (ddmFlujoFormularioNota == null)
+                    {
+                        return Result.Fail<AdmFlujoFormularioEtapaDto>($"The start note {itemToUpdate.NotaEndId} does not exist");
+                    }
+                }
+
+                // Validate if the end note exist
+                if (itemToUpdate.notaStartId is not null)
+                {
+                    var ddmFlujoFormularioNota = await _appConfigDbContext.AdmFlujoFormularioNotas.Where(w => w.FormularioNotaId == itemToUpdate.notaStartId).FirstOrDefaultAsync();
+                    if (ddmFlujoFormularioNota == null)
+                    {
+                        return Result.Fail<AdmFlujoFormularioEtapaDto>($"The end note {itemToUpdate.notaStartId} does not exist");
+                    }
                 }
 
 
