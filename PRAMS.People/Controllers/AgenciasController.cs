@@ -205,5 +205,128 @@ namespace PRAMS.People.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("activeAgencies")]
+        [Authorize]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<ICollection<AgenciaDto>>))]
+        [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
+        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
+        public async Task<IActionResult> ListActiveAgencies()
+        {
+            try
+            {
+                var result = await _agenciasService.ListAgenciasActivas();
+                if (result.IsSuccess)
+                {
+                    _logger.LogInformation("Success in ListActiveAgencies Result:{@resut}", result.Value);
+                    return Ok(new ResponseDto<ICollection<AgenciaDto>> { Result = result.Value });
+                }
+                else
+                {
+                    _logger.LogError("Error in ListActiveAgencies Error:{@error}", result.Errors);
+                    return BadRequest(new ErrorResponseDto<List<IError>> { Message = result.Errors.First().Message, Result = result.Errors });
+                }
+            }
+            catch (Exception error)
+            {
+                _logger.LogError("Error in ListActiveAgencies Error:{@error}", error);
+                return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
+            }
+        }
+
+        [HttpGet]
+        [Route("inactiveAgencies")]
+        [Authorize]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<ICollection<AgenciaDto>>))]
+        [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
+        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
+        public async Task<IActionResult> ListInactiveAgencies()
+        {
+            try
+            {
+                var result = await _agenciasService.ListAgenciasInactivas();
+                if (result.IsSuccess)
+                {
+                    _logger.LogInformation("Success in ListInactiveAgencies Result:{@resut}", result.Value);
+                    return Ok(new ResponseDto<ICollection<AgenciaDto>> { Result = result.Value });
+                }
+                else
+                {
+                    _logger.LogError("Error in ListInactiveAgencies Error:{@error}", result.Errors);
+                    return BadRequest(new ErrorResponseDto<List<IError>> { Message = result.Errors.First().Message, Result = result.Errors });
+                }
+            }
+            catch (Exception error)
+            {
+                _logger.LogError("Error in ListInactiveAgencies Error:{@error}", error);
+                return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
+            }
+        }
+
+        [HttpPut]
+        [Route("deactivate/{id}")]
+        [Authorize]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<AgenciaDto>))]
+        [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
+        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
+        public async Task<IActionResult> DeactivateAgencia([FromRoute] int id)
+        {
+            try
+            {
+                // Get the user id from the Authorize
+                var user = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty;
+                var result = await _agenciasService.SetAgenciaFechaFin(id, user);
+                if (result.IsSuccess)
+                {
+                    _logger.LogInformation("Success in DeactivateAgencia Result:{@resut}", result.Value);
+                    return Ok(new ResponseDto<AgenciaDto> { Result = result.Value });
+                }
+                else
+                {
+                    _logger.LogError("Error in DeactivateAgencia Error:{@error}", result.Errors);
+                    return BadRequest(new ErrorResponseDto<List<IError>> { Message = result.Errors.First().Message, Result = result.Errors });
+                }
+            }
+            catch (Exception error)
+            {
+                _logger.LogError("Error in DeactivateAgencia Error:{@error}", error);
+                return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
+            }
+        }
+
+        [HttpPost]
+        [Route("search")]
+        [Authorize]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<DtResult<AgenciaDto>>))]
+        [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
+        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
+        public async Task<IActionResult> SearchAgencias([FromBody] AgenciaSearchDto filterCriteria)
+        {
+            try
+            {
+                var result = await _agenciasService.SearchAgenciaItem(filterCriteria);
+                if (result.IsSuccess)
+                {
+                    _logger.LogInformation("Success in SearchAgencias Result:{@resut}", result.Value);
+                    return Ok(new ResponseDto<ICollection<AgenciaDto>> { Result = result.Value });
+                }
+                else
+                {
+                    _logger.LogError("Error in SearchAgencias Error:{@error}", result.Errors);
+                    return BadRequest(new ErrorResponseDto<List<IError>> { Message = result.Errors.First().Message, Result = result.Errors });
+                }
+            }
+            catch (Exception error)
+            {
+                _logger.LogError("Error in SearchAgencias Error:{@error}", error);
+                return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
+            }
+        }
+
     }
 }
