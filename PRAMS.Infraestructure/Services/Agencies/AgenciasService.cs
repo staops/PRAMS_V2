@@ -5,10 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using PRAMS.Application.Contract.Agencies;
 using PRAMS.Domain.Entities.Agencies.Dto;
-using PRAMS.Domain.Entities.People.Dto;
 using PRAMS.Domain.Entities.Shared;
 using PRAMS.Domain.Models.Agencies;
-using PRAMS.Domain.Models.People;
 using PRAMS.Infraestructure.Data.People;
 using System.Linq.Expressions;
 
@@ -83,6 +81,25 @@ namespace PRAMS.Infraestructure.Services.Agencies
         {
             try
             {
+                // Search if the agency already exists
+                var agenciaExists = await _appConfigDbContext.agencias
+                    .Where(x =>
+                           x.NombreAgencia == agencia.NombreAgencia &&
+                           x.TipoAgencia == agencia.TipoAgencia &&
+                           x.Region == agencia.Region &&
+                           x.FechaFin == null &&
+                           x.Activo)
+                    .FirstOrDefaultAsync();
+                if (agenciaExists != null)
+                {
+                    // Set the FechaFin to now and the user that is updating the agency
+                    agenciaExists.FechaFin = DateTime.Now;
+                    agenciaExists.UpdateUser = user;
+                    agenciaExists.UpdateDate = DateTime.Now;
+                    await _appConfigDbContext.SaveChangesAsync();
+                }
+
+
                 var agenciaEntity = _mapper.Map<Agencia>(agencia);
                 agenciaEntity.CreateUser = user;
                 agenciaEntity.Activo = true;
@@ -139,10 +156,10 @@ namespace PRAMS.Infraestructure.Services.Agencies
                     predicate = predicate.Or(x => x.TipoAgencia.Contains(searchBy));
                     predicate = predicate.Or(x => x.NombreAgencia.Contains(searchBy));
                     predicate = predicate.Or(x => x.Region.Contains(searchBy));
-                    predicate = predicate.Or(x => x.Direccion1.Contains(searchBy));
-                    predicate = predicate.Or(x => x.Direccion2.Contains(searchBy));
-                    predicate = predicate.Or(x => x.Ciudad.Contains(searchBy));
-                    predicate = predicate.Or(x => x.Estado.Contains(searchBy));
+                    predicate = predicate.Or(x => x.Direccion1 != null && x.Direccion1.Contains(searchBy));
+                    predicate = predicate.Or(x => x.Direccion2 != null && x.Direccion2.Contains(searchBy));
+                    predicate = predicate.Or(x => x.Ciudad != null && x.Ciudad.Contains(searchBy));
+                    predicate = predicate.Or(x => x.Estado != null && x.Estado.Contains(searchBy));
                 }
 
                 // Get the data for the current page
@@ -187,6 +204,105 @@ namespace PRAMS.Infraestructure.Services.Agencies
                 _logger.LogError(error, "Error in ListAgencias");
                 return Result.Fail(new Error($"Error in ListAgencias {error.Message}")).WithError(error.StackTrace);
             }
+        }
+
+        public async Task<Result<ICollection<AgenciaDto>>> ListAgenciasActivas()
+        {
+            try
+            {
+                var agencias = await _appConfigDbContext.agencias
+                    .Where(x => x.Activo && x.FechaFin == null)
+                    .ToListAsync();
+                var agenciasDto = _mapper.Map<ICollection<AgenciaDto>>(agencias);
+                return Result.Ok(agenciasDto);
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, "Error in ListAgencias");
+                return Result.Fail(new Error($"Error in ListAgencias {error.Message}")).WithError(error.StackTrace);
+            }
+        }
+
+        public async Task<Result<ICollection<AgenciaDto>>> ListAgenciasInactivas()
+        {
+            try
+            {
+                var agencias = await _appConfigDbContext.agencias
+                    .Where(x => x.Activo && x.FechaFin != null)
+                    .ToListAsync();
+                var agenciasDto = _mapper.Map<ICollection<AgenciaDto>>(agencias);
+                return Result.Ok(agenciasDto);
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, "Error in ListAgencias");
+                return Result.Fail(new Error($"Error in ListAgencias {error.Message}")).WithError(error.StackTrace);
+            }
+        }
+
+        public async Task<Result<ICollection<AgenciaDto>>> SearchAgenciaItem(AgenciaSearchDto agenciaSearchDto)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(agenciaSearchDto.TipoAgencia) &&
+                     string.IsNullOrEmpty(agenciaSearchDto.Region) &&
+                     string.IsNullOrEmpty(agenciaSearchDto.NombreAgencia))
+                {
+                    return Result.Fail<ICollection<AgenciaDto>>("Error in SearchAgenciaItem");
+                }
+
+                // Build the predicate based on the search criteria
+                var predicate = PredicateBuilder.New<Agencia>(true);
+
+                if (!string.IsNullOrEmpty(agenciaSearchDto.TipoAgencia))
+                {
+                    predicate = predicate.Or(x => x.TipoAgencia.Contains(agenciaSearchDto.TipoAgencia));
+                }
+                if (!string.IsNullOrEmpty(agenciaSearchDto.Region))
+                {
+                    predicate = predicate.Or(x => x.Region.Contains(agenciaSearchDto.Region));
+                }
+                if (!string.IsNullOrEmpty(agenciaSearchDto.NombreAgencia))
+                {
+                    predicate = predicate.Or(x => x.NombreAgencia.Contains(agenciaSearchDto.NombreAgencia));
+                }
+
+                var result = await _appConfigDbContext.agencias.Where(predicate).ToListAsync();
+
+                var agenciasDto = _mapper.Map<ICollection<AgenciaDto>>(result);
+                return Result.Ok(agenciasDto);
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, "Error in SearchAgenciaItem");
+                return Result.Fail<ICollection<AgenciaDto>>("Error in SearchAgenciaItem");
+            }
+        }
+
+        public async Task<Result<AgenciaDto>> SetAgenciaFechaFin(int id, string user)
+        {
+            try
+            {
+                var agencia = await _appConfigDbContext.agencias.Where(x => x.AgenciaId == id && x.Activo).FirstOrDefaultAsync();
+                if (agencia == null)
+                {
+                    return Result.Fail(new Error($"Agencia with id {id} not found"));
+                }
+
+                agencia.FechaFin = DateTime.Now;
+                agencia.UpdateDate = DateTime.Now;
+                agencia.UpdateUser = user;
+                await _appConfigDbContext.SaveChangesAsync();
+                var agenciaDto = _mapper.Map<AgenciaDto>(agencia);
+                return Result.Ok(agenciaDto);
+
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, "Error in SetAgenciaFechaFin");
+                return Result.Fail(new Error($"Error in SetAgenciaFechaFin {error.Message}")).WithError(error.StackTrace);
+            }
+
         }
 
         public async Task<Result<AgenciaDto>> UpdateAgencia(AgenciaUpdateDto agencia, string user)

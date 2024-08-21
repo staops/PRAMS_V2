@@ -169,8 +169,6 @@ namespace PRAMS.People.Controllers
             }
         }
 
-
-
         [HttpPut("update")]
         [Authorize]
         [Produces(MediaTypeNames.Application.Json)]

@@ -2,10 +2,14 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using PRAMS.Application.Contract.Flujos;
+using PRAMS.Application.Contract.Forms;
 using PRAMS.Application.Contract.SystemConfiguration;
 using PRAMS.Configuration.Extensions;
 using PRAMS.Infraestructure.Data.SystemConfiguration;
 using PRAMS.Infraestructure.Mapping.SystemConfiguration;
+using PRAMS.Infraestructure.Services.Flujos;
+using PRAMS.Infraestructure.Services.Forms;
 using PRAMS.Infraestructure.Services.SystemConfiguration;
 using Serilog;
 
@@ -44,6 +48,56 @@ builder.Services.AddScoped<IRoleService>(x =>
     var logger = x.GetRequiredService<ILogger<IMenuService>>();
     return new RoleService(dbContext, mapper, logger);
 });
+
+builder.Services.AddScoped<IFlujosFormulariosService>(x =>
+{
+    var dbContext = x.GetRequiredService<AppConfigDbContext>();
+    var logger = x.GetRequiredService<ILogger<IFlujosFormulariosService>>();
+    return new FlujosFormulariosService(dbContext, mapper, logger);
+});
+
+builder.Services.AddScoped<IFlujosFormulariosEtapasService>(x =>
+{
+    var dbContext = x.GetRequiredService<AppConfigDbContext>();
+    var logger = x.GetRequiredService<ILogger<IFlujosFormulariosEtapasService>>();
+    return new FlujosFormulariosEtapasService(dbContext, mapper, logger);
+});
+
+builder.Services.AddScoped<IFlujoFormularioNotasService>(x =>
+{
+    var dbContext = x.GetRequiredService<AppConfigDbContext>();
+    var logger = x.GetRequiredService<ILogger<IFlujoFormularioNotasService>>();
+    return new FlujoFormularioNotasService(dbContext, mapper, logger);
+});
+
+builder.Services.AddScoped<IFlujosFormulariosEtapasAccionesService>(x =>
+{
+    var dbContext = x.GetRequiredService<AppConfigDbContext>();
+    var logger = x.GetRequiredService<ILogger<IFlujosFormulariosEtapasAccionesService>>();
+    return new FlujosFormulariosEtapasAccionesService(dbContext, mapper, logger);
+});
+
+builder.Services.AddScoped<IFlujosFormulariosEtapasAccionesCamposService>(x =>
+{
+    var dbContext = x.GetRequiredService<AppConfigDbContext>();
+    var logger = x.GetRequiredService<ILogger<IFlujosFormulariosEtapasAccionesCamposService>>();
+    return new FlujosFormulariosEtapasAccionesCamposService(dbContext, mapper, logger);
+});
+
+builder.Services.AddScoped<IFlujosPantallasService>(x =>
+{
+    var dbContext = x.GetRequiredService<AppConfigDbContext>();
+    var logger = x.GetRequiredService<ILogger<IFlujosPantallasService>>();
+    return new FlujosPantallasService(dbContext, mapper, logger);
+});
+
+builder.Services.AddScoped<IFormulariosFirmasService>(x =>
+{
+    var dbContext = x.GetRequiredService<AppConfigDbContext>();
+    var logger = x.GetRequiredService<ILogger<IFormulariosFirmasService>>();
+    return new FormulariosFirmasService(dbContext, mapper, logger);
+});
+
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
