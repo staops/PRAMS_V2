@@ -10,9 +10,6 @@
             TX_Filtro1 = tX_Filtro1;
             TX_Filtro2 = tX_Filtro2;
             TX_Filtro3 = tX_Filtro3;
-            Activo = true;
-            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150";
-            CreateDate = DateTime.Now;
         }
 
         public int CategoriaID { get; set; }
@@ -29,10 +26,5 @@
         public string? TX_Filtro7 { get; set; }
         public string? TX_Filtro8 { get; set; }
         public string? TX_Filtro9 { get; set; }
-        public string? ModifiedUser { get; set; }
-        public DateTime? ModifiedDate { get; set; }
-        public string CreateUser { get; set; }
-        public DateTime CreateDate { get; set; } = DateTime.Now;
-        public bool Activo { get; set; } = true;
     }
 }

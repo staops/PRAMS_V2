@@ -1,12 +1,15 @@
 ﻿using FluentResults;
 using Microsoft.EntityFrameworkCore;
+using PRAMS.Domain.Entities.Flujos.Dto;
 using PRAMS.Domain.Entities.SystemConfiguration.Dto;
 using PRAMS.Domain.Models.Flujos;
 using PRAMS.Domain.Models.Forms;
 using PRAMS.Domain.Models.SystemConfiguration;
 using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Reflection.Metadata;
+using System.Runtime.ConstrainedExecution;
 
 namespace PRAMS.Infraestructure.Data.SystemConfiguration
 {
@@ -40,6 +43,8 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
 
         public DbSet<FormFormularioFirma> FormFormularioFirmas { get; set; }
 
+        public DbSet<FormReferido> FormReferidos { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -63,6 +68,7 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
             PouplateParametroCategoria(modelBuilder);
             PopulateAdmMenuElements(modelBuilder);
             PouplateReportsCategoria(modelBuilder);
+            PouplateFlujosFormularios(modelBuilder);
         }
 
         private static void PouplateParametroCategoria(ModelBuilder modelBuilder)
@@ -738,9 +744,9 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
                 TX_Filtro1 = x.TX_Filtro1,
                 TX_Filtro2 = x.TX_Filtro2,
                 TX_Filtro3 = x.TX_Filtro3,
-                CreateUser = x.CreateUser,
-                CreateDate = x.CreateDate,
-                Activo = x.Activo
+                Activo = true,
+                CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                CreateDate = DateTime.Now,
             }).ToList();
             modelBuilder.Entity<AdmParametrosSeleccion>().HasData(admParametrosSeleccion);
 
@@ -1375,6 +1381,154 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
             ];
 
             modelBuilder.Entity<AdmReportsRole>().HasData(admReportsRole);
+        }
+
+        private static void PouplateFlujosFormularios(ModelBuilder modelBuilder)
+        {
+
+            IList<AdmFlujoFormularioInsertDto> admFlujoFormularios = [
+                new ("Orientación", "Referido Orientación", "Form_Referidos", 1, "Referido", null, "Orientación de Clientes", null, null),
+                new ("Orientación y Referimiento", "Referido Orientación y Referimiento", "Form_Referidos", 2, "Orientación", null, "Orientació y Referimiento de Clientes", null, null),
+                new ("Protección", "Referido de Protección", "Form_Referidos", 1, "Referido", null, "Evaluacion de Protección Social", null, null),
+                new ("Servicios Proteccion", "Estudio Social", "Form_Estudio_Social", 2, "Protección", null, "Servicio de Protección Estudio Social", null, null),
+                new ("Servicios Proteccion", "Notas de Progreso", "Form_Notas_Progreso", 3, "Protección", null, null, null, null),
+                new ("Servicios Proteccion", "Visitas al Hogar", "Form_Visita_Hogar", 3, "Protección", null, null, null, null),
+            ];
+
+            IList<AdmFlujoFormulario> admFlujos = admFlujoFormularios.Select((x, i) => new AdmFlujoFormulario
+            {
+                FormularioId = i + 1,
+                TipoCaso = x.TipoCaso,
+                Formulario = x.Formulario,
+                TablaBase = x.TablaBase,
+                Descripcion = x.Descripcion,
+                OrdenFormulario = x.OrdenFormulario,
+                NivelCaso = x.NivelCaso,
+                TXFiltro1 = x.TXFiltro1,
+                TXFiltro2 = x.TXFiltro2,
+                TXFiltro3 = x.TXFiltro3
+            }).ToList();
+
+
+            modelBuilder.Entity<AdmFlujoFormulario>().HasData(admFlujos);
+
+            IList<AdmFlujoFormularioEtapaInsertDto> admFlujoFormularioEtapas = [
+                new(1,"Referido Nuevo",1,"Comienzo Formulario","#f7f72f", false,false, null, null, null),
+                new(1,"Referido Seguimiento",2,"Seguimiento Formulario","#3c7efa", false,false, null, null, null),
+                new(1,"Referido Firma TS",3,"Seguimiento Formulario","#8c57f7", false,false, null, null, 1),
+                new(1,"Referido Firma Sup",4,"Completar Formulario",null, false,false, null, null, null),
+            ];
+
+            IList<AdmFlujoFormularioEtapa> admFlujoFormularioEtapa = admFlujoFormularioEtapas.Select((x, i) => new AdmFlujoFormularioEtapa
+            {
+                FormularioEtapaId = i + 1,
+                FormularioId = x.FormularioId,
+                NombreEtapa = x.NombreEtapa,
+                OrdenEtapa = x.OrdenEtapa,
+                TipoEtapa = x.TipoEtapa,
+                ColorEtapa = x.ColorEtapa,
+                Completado = x.Completado,
+                Concurrencia = x.Concurrencia,
+                ConcurrenciaEtapa = x.ConcurrenciaEtapa,
+                NotaStartId = x.NotaStartId,
+                NotaEndId = x.NotaEndId,
+                Activo = true,
+                CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                CreateDate = DateTime.Now,
+            }).ToList();
+
+            modelBuilder.Entity<AdmFlujoFormularioEtapa>().HasData(admFlujoFormularioEtapa);
+
+            IList<AdmFlujoFormularioNotaInsertDto> admFlujoFormularioNotas = [
+                new(1, "Aviso Supervisor", "Aviso Supervisor Firma Completada por Trabajador Social", "Para el Formulario de Referido se completo la firma de Trabajador Social", "Mensaje Atado con Datos del Referido segun ID del Formulario", 14)
+            ];
+            IList<AdmFlujoFormularioNota> admFlujoFormularioNota = admFlujoFormularioNotas.Select((x, i) => new AdmFlujoFormularioNota
+            {
+                FormularioNotaId = i + 1,
+                FormularioId = x.FormularioId,
+                TXNombreNota = x.TXNombreNota,
+                TXDescripcion = x.TXDescripcion,
+                TXSubject = x.TXSubject,
+                TXMensaje = x.TXMensaje,
+                TipoUsuarioId = x.TipoUsuarioId,
+            }).ToList();
+            modelBuilder.Entity<AdmFlujoFormularioNota>().HasData(admFlujoFormularioNota);
+
+
+
+            IList<AdmFlujoPantallaUserInsertDto> admFlujoPantallaUsers = [
+                new(1, 1, "Trabajador Social", 14, DateTime.Now, null),
+                new(2, 1, "Trabajador Social", 14, DateTime.Now, null),
+                new(3, 1, "Trabajador Social", 14, DateTime.Now, null),
+                new(4, 1, "Supervidor", 20, DateTime.Now, null),
+            ];
+            IList<AdmFlujoPantallaUser> admFlujoPantallaUser = admFlujoPantallaUsers.Select((x, i) => new AdmFlujoPantallaUser
+            {
+                FlujoUserID = i + 1,
+                FormularioEtapaId = x.FormularioEtapaId,
+                Prioridad = x.Prioridad,
+                UserType = x.UserType,
+                GroupTypeId = x.GroupTypeId,
+                FechaFin = x.FechaFin,
+            }).ToList();
+            modelBuilder.Entity<AdmFlujoPantallaUser>().HasData(admFlujoPantallaUser);
+
+
+
+
+            IList<AdmFlujoFormularioEtapaAccionInsertDto> admFlujoFormularioEtapaAccions = [
+                new(1, "Validacion Campos", 1, "Validación Campos", "Requerido", true, false, null),
+                new(2, "Determinacion Referido", 1, "Seguimiento Campos", "Requerido", true, false, null),
+                new(3, "Firmas Personal TS", 1, "Firmas Personal", "Requerido", true, false, null),
+                new(4, "Firmas Personal Supervisor", 1, "Firmas Personal", "Requerido", true, false, null),
+            ];
+
+            IList<AdmFlujoFormularioEtapaAccion> admFlujoFormularioEtapaAccion = admFlujoFormularioEtapaAccions.Select((x, i) => new AdmFlujoFormularioEtapaAccion
+            {
+                FormularioEtapaAccionId = i + 1,
+                FormularioEtapaId = x.FormularioEtapaId,
+                NombreAccion = x.NombreAccion,
+                OrdenAccion = x.OrdenAccion,
+                TipoAccion = x.TipoAccion,
+                TipoProceso = x.TipoProceso,
+                Completado = x.Completado,
+                Concurrencia = x.Concurrencia,
+                ConcurrenciaAccionId = x.ConcurrenciaAccionId,
+                Activo = true,
+                CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                CreateDate = DateTime.Now,
+            }).ToList();
+
+            modelBuilder.Entity<AdmFlujoFormularioEtapaAccion>().HasData(admFlujoFormularioEtapaAccion);
+
+            IList<AdmFlujoFormularioEtapaAccionCampoInsertDto> admFlujoFormularioEtapaAccionCampos = [
+                new(1, 1, "Fecha Referido", "Form_Referidos", "Fecha", 0, "FechaRecibo", "TieneValor", "Fecha del Referido es requerida para continuar.", null),
+                new(1, 2, "Hora Referido", "Form_Referidos", "Fecha", 0, "HoraRecibo", "TieneValor", "La Hora del Referido es requerida.", null),
+                new(1, 3, "Narrativa Situacion", "Form_Referidos", "Texto", 40, "Narrativa_Situacion", "LargoMinimo", "La Narrativa de la Situacion debe ser al menos de 40 caracteres.", null),
+                new(2, 1, "Determinacion", "Form_Referidos", "Texto", 0, "Determinacion", "TieneValor", "Debe Completar la Determinacion para Continuar con las Firmas", "La Determinacion aun no esta llena para continuar con el Referido."),
+                new(2, 2, "Determinacion_Fecha", "Form_Referidos", "Fecha", 0, "Determinacion_Fecha", "TieneValor", "Debe Completar la Fecha de la Determinacion para Continuar con las Firmas", "La Fecha Determinacion aun no esta llena para continuar con el Referido."),
+                new(2, 3, "Determinacion_Razon", "Form_Referidos", "Texto", 0, "Determinacion_Razon", "TieneValor", "Debe Completar la Razón de la Determinacion para poder Firmar", "La Razón Determinacion aun no esta llena para continuar con el Referido."),
+                new(3, 1, "Firma TS", "Form_FormulariosFirmas", "Integro", 0, "ID_Usuario", "FirmaTS", "La Firma del Trabajador Social debe estar Completada", null),
+                new(4, 1, "Firma Supervisor", "Form_FormulariosFirmas", "Integro", 0, "ID_Usuario", "FirmaSup", "La Firma del Supervisor de Trabajador Social debe estar Completada", null),
+            ];
+
+            IList<AdmFormularioEtapaAccioneCampo> admFlujoFormularioEtapaAccionCampo = admFlujoFormularioEtapaAccionCampos.Select((x, i) => new AdmFormularioEtapaAccioneCampo
+            {
+                FormularioEtapaAccionCampoId = i + 1,
+                FormularioEtapaAccionId = x.FormularioEtapaAccionId,
+                OrdenAccion = x.OrdenAccion,
+                CampoDB = x.CampoDB,
+                TablaBase = x.TablaBase,
+                CampoDBTipo = x.CampoDBTipo,
+                CampoDBLongitud = x.CampoDBLongitud,
+                CampoDBIDField = x.CampoDBIDField,
+                TipoProcesoCampo = x.TipoProcesoCampo,
+                Resultado = x.Resultado,
+                Descripcion = x.Descripcion,
+            }).ToList();
+
+            modelBuilder.Entity<AdmFormularioEtapaAccioneCampo>().HasData(admFlujoFormularioEtapaAccionCampo);
+
         }
     }
 }

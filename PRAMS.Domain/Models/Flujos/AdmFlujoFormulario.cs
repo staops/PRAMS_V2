@@ -24,18 +24,17 @@ namespace PRAMS.Domain.Models.Flujos
         public required string Formulario { get; set; }
         [Required]
         [StringLength(75)]
-        public required int TablaBase { get; set; }
-        [Required]
+        public required string TablaBase { get; set; }
         [StringLength(255)]
-        public required string Descripcion { get; set; }
+        public string? Descripcion { get; set; }
         [Required]
         public required int OrdenFormulario { get; set; }
         [Required]
         [StringLength(75)]
         public required string NivelCaso { get; set; }
         [StringLength(255)]
-        [Column("TX_Filtro")]
-        public string? TXFiltro { get; set; }
+        [Column("TX_Filtro1")]
+        public string? TXFiltro1 { get; set; }
         [StringLength(255)]
         [Column("TX_Filtro2")]
         public string? TXFiltro2 { get; set; }

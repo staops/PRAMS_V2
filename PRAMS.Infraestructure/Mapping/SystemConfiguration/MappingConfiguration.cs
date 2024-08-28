@@ -20,10 +20,12 @@ namespace PRAMS.Infraestructure.Mapping.SystemConfiguration
                 config.AddProfile<AdmFlujosProfile>();
                 config.AddProfile<AdmFlujosFormulariosProfile>();
                 config.AddProfile<AdmFlujosFormulariosNotasProfile>();
+                config.AddProfile<AdmFlujoPantallaUserProfile>();
                 config.AddProfile<AdmFlujoFormularioEtapaAccionProfile>();
                 config.AddProfile<AdmFormularioEtapaAccioneCampoProfile>();
                 config.AddProfile<FlujosPantallasProfile>();
                 config.AddProfile<FormFormularioFirmaProfile>();
+                config.AddProfile<FormReferidoProfile>();
             });
             return mappingConfig;
         }
@@ -160,6 +162,16 @@ namespace PRAMS.Infraestructure.Mapping.SystemConfiguration
         }
     }
 
+    public class AdmFlujoPantallaUserProfile : Profile
+    {
+        public AdmFlujoPantallaUserProfile()
+        {
+            CreateMap<AdmFlujoPantallaUser, AdmFlujoPantallaUserDto>().ReverseMap();
+            CreateMap<AdmFlujoPantallaUser, AdmFlujoPantallaUserInsertDto>().ReverseMap();
+            CreateMap<AdmFlujoPantallaUser, AdmFlujoPantallaUserUpdateDto>().ReverseMap();
+        }
+    }
+
     public class AdmFlujoFormularioEtapaAccionProfile : Profile
     {
         public AdmFlujoFormularioEtapaAccionProfile()
@@ -197,6 +209,16 @@ namespace PRAMS.Infraestructure.Mapping.SystemConfiguration
             CreateMap<FormFormularioFirma, FormFormularioFirmaDto>().ReverseMap();
             CreateMap<FormFormularioFirma, FormFormularioFirmaInsertDto>().ReverseMap();
             CreateMap<FormFormularioFirma, FormFormularioFirmaUpdateDto>().ReverseMap();
+        }
+    }
+
+    public class FormReferidoProfile : Profile
+    {
+        public FormReferidoProfile()
+        {
+            CreateMap<FormReferido, FormReferidoDto>().ReverseMap();
+            CreateMap<FormReferido, FormReferidoInsertDto>().ReverseMap();
+            CreateMap<FormReferido, FormReferidoUpdateDto>().ReverseMap();
         }
     }
 }
