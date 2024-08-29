@@ -14,13 +14,13 @@ namespace PRAMS.Domain.Models.Forms
         [StringLength(75)]
         public string? TipoReferido { get; set; }
         public DateTime? FechaRecibo { get; set; }
-        public TimeSpan? HoraRecibo { get; set; }
+        public DateTime? HoraRecibo { get; set; }
         [StringLength(50)]
         [Column("Accion_Tomada")]
         public string? AccionTomada { get; set; }
         [StringLength(2000)]
         [Column("Narrativa_Situacion")]
-        public string? NarrativaSituacion { get; set; }
+        public string? Narrativa_Situacion { get; set; }
         public int? ReferidoPor { get; set; }
         [StringLength(25)]
         [Column("RelacionAdulto")]

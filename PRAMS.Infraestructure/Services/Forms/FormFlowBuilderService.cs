@@ -20,20 +20,20 @@ namespace PRAMS.Infraestructure.Services.Forms
         private readonly ILogger<IFormFlowBuilderService> _logger;
         private readonly IFormReferidoService _formReferidoService;
 
-        public FormFlowBuilderService(AppConfigDbContext context, IMapper mapper, ILogger<IFormFlowBuilderService> logger)
+        public FormFlowBuilderService(AppConfigDbContext context, IMapper mapper, ILogger<IFormFlowBuilderService> logger, IFormReferidoService formReferidoService)
         {
             _context = context;
             _mapper = mapper;
             _logger = logger;
+            _formReferidoService = formReferidoService;
         }
-
-
 
         public async Task<Result<FormFlowBuilderResult>> ValidaFormulario(FormFlowBuilder formFlowBuilder)
         {
             try
             {
                 FormFlowBuilderResult formFlowBuilderResult = new();
+                Result<FormFlowBuilderResult> result = Result.Ok(formFlowBuilderResult);
                 List<ISuccess> successs = [];
                 List<IError> errors = [];
 
@@ -45,6 +45,7 @@ namespace PRAMS.Infraestructure.Services.Forms
                 if (form is not null)
                 {
 
+                    formFlowBuilderResult.AdmFlujoFormulario = _mapper.Map<AdmFlujoFormularioDto>(form);
                     // Get the [Adm_FlujosFormulariosEtapas]
                     AdmFlujoFormularioEtapa? formFlow = await _context.AdmFlujoFormularioEtapas
                         .Where(w => w.FormularioEtapaId == formFlowBuilder.FormularioEtapaId && w.FormularioId == form.FormularioId && w.Activo)
@@ -52,6 +53,7 @@ namespace PRAMS.Infraestructure.Services.Forms
 
                     if (formFlow is not null)
                     {
+                        formFlowBuilderResult.AdmFlujoFormularioEtapa = _mapper.Map<AdmFlujoFormularioEtapaDto>(formFlow);
                         // Get the [Adm_FlujosFormulariosEtapasAcciones]
                         AdmFlujoFormularioEtapaAccion? admFlujoFormularioEtapaAccion = await _context.AdmFlujoFormularioEtapaAcciones
                             .Where(w => w.FormularioEtapaId == formFlowBuilder.FormularioEtapaId && w.FormularioEtapaId == formFlow.FormularioEtapaId && w.Activo)
@@ -60,6 +62,7 @@ namespace PRAMS.Infraestructure.Services.Forms
 
                         if (admFlujoFormularioEtapaAccion is not null)
                         {
+                            formFlowBuilderResult.AdmFlujoFormularioEtapaAccion = _mapper.Map<AdmFlujoFormularioEtapaAccionDto>(admFlujoFormularioEtapaAccion);
                             // Get all the fields of the form from [Adm_FlujosFormulariosEtapasAccionesCampos]
                             IList<AdmFormularioEtapaAccioneCampo> formFields = await _context.AdmFormularioEtapaAccioneCampos
                             .Where(w => w.FormularioEtapaAccionId == formFlowBuilder.FormularioEtapaAccionId && w.FormularioEtapaAccionId == admFlujoFormularioEtapaAccion.FormularioEtapaAccionId)
@@ -68,26 +71,26 @@ namespace PRAMS.Infraestructure.Services.Forms
                             if (formFields.Count > 0)
                             {
 
+                                formFlowBuilderResult.AdmFormularioEtapaAccioneCampos = _mapper.Map<IList<AdmFlujoFormularioEtapaAccionCampoDto>>(formFields);
+                                if (admFlujoFormularioEtapaAccion.TipoAccion == SD.TIPO_ACCION_VALIDACION_CAMPOS)
+                                {
 
-                                // Execute the validation of the TipoProcesocampo
-                                Result<bool> tipoProcesoCampoResult = TipoProcesoCampoValidation(formFields, formFlowBuilder);
-                                errors.AddRange(tipoProcesoCampoResult.Errors);
+                                    // Execute the validation of the TipoProcesocampo
+                                    Result<bool> tipoProcesoCampoResult = TipoProcesoCampoValidation(formFields, formFlowBuilder);
+                                    errors.AddRange(tipoProcesoCampoResult.Errors);
 
-                                // Execute the validation of the TipoDatoCampo
-                                Result<bool> dataTypesResult = DataTypesValidation(formFields, formFlowBuilder);
-                                errors.AddRange(dataTypesResult.Errors);
+                                    // Execute the validation of the TipoDatoCampo
+                                    Result<bool> dataTypesResult = DataTypesValidation(formFields, formFlowBuilder);
+                                    errors.AddRange(dataTypesResult.Errors);
 
-                                // Execute the validation of the InvalidFields
-                                Result<bool> invalidFieldsResult = InvalidFieldsValidation(formFields, formFlowBuilder);
-                                errors.AddRange(invalidFieldsResult.Errors);
+                                    // Execute the validation of the InvalidFields
+                                    Result<bool> invalidFieldsResult = InvalidFieldsValidation(formFields, formFlowBuilder);
+                                    errors.AddRange(invalidFieldsResult.Errors);
 
 
+                                    formFlowBuilderResult.CanContinue = errors.Count == 0;
 
-                                formFlowBuilderResult.admFlujoFormulario = _mapper.Map<AdmFlujoFormularioDto>(form);
-                                formFlowBuilderResult.admFlujoFormularioEtapa = _mapper.Map<AdmFlujoFormularioEtapaDto>(formFlow);
-                                formFlowBuilderResult.admFlujoFormularioEtapaAccion = _mapper.Map<AdmFlujoFormularioEtapaAccionDto>(admFlujoFormularioEtapaAccion);
-                                formFlowBuilderResult.admFormularioEtapaAccioneCampos = _mapper.Map<IList<AdmFlujoFormularioEtapaAccionCampoDto>>(formFields);
-
+                                }
 
 
                             }
@@ -114,11 +117,7 @@ namespace PRAMS.Infraestructure.Services.Forms
 
                 if (errors.Count > 0)
                 {
-                    return Result.Fail<FormFlowBuilderResult>(errors.ToArray());
-                }
-                else
-                {
-                    successs.Add(new Success("The form has been validated successfully"));
+                    formFlowBuilderResult.Errors = errors;
 
                 }
 
@@ -132,48 +131,51 @@ namespace PRAMS.Infraestructure.Services.Forms
             }
         }
 
-        public async Task<Result<object>> CreaRegistrosFormulario(FormFlowBuilder formFlowBuilder)
+        public async Task<Result<object>> CreaRegistrosFormulario(FormFlowBuilder formFlowBuilder, string user)
         {
             try
             {
+                Result<object> result = Result.Ok();
+
                 List<ISuccess> successs = [];
                 List<IError> errors = [];
 
 
-                Result<FormFlowBuilderResult> result = await ValidaFormulario(formFlowBuilder);
+                Result<FormFlowBuilderResult> validationRresult = await ValidaFormulario(formFlowBuilder);
                 if (result.IsSuccess)
                 {
 
-                    switch (result.Value.admFlujoFormulario?.TablaBase.ToUpper())
+
+                    // Just save the data if the form is completed and can continue is true
+                    if (validationRresult.Value.AdmFlujoFormularioEtapaAccion?.Completado == true && validationRresult.Value.CanContinue)
                     {
-                        case SD.FORM_REFERIDOS:
+                        // Save the data in the database
+                        Result<object> saveFormDataResult = await SaveFormData(formFlowBuilder, validationRresult.Value, user);
+                        if (saveFormDataResult.IsSuccess)
+                        {
+                            successs.Add(new Success("The form has been saved successfully"));
 
-                            // Create a new instance of FormReferidoInsertDto using reflection
-                            FormReferidoInsertDto formReferidoInsertDto = new();
-                            foreach (var field in formFlowBuilder.Fields)
-                            {
-                                PropertyInfo? property = formReferidoInsertDto.GetType().GetProperty(field.Key);
-                                if (property is not null)
-                                {
-                                    property.SetValue(formReferidoInsertDto, field.Value);
-                                }
-                            }
-
-                            // Save the new record in the database
-
-
-
-                            break;
-                        default:
-                            break;
+                            result = Result.Ok(saveFormDataResult.Value);
+                        }
+                        else
+                        {
+                            errors.AddRange(saveFormDataResult.Errors);
+                        }
                     }
-
+                    else
+                    {
+                        result = Result.Ok(validationRresult);
+                    }
                 }
 
-                return Result.Ok().WithSuccesses(successs).WithErrors(errors);
 
 
 
+                if (errors.Count > 0)
+                {
+                    return Result.Fail<object>(errors.ToArray());
+                }
+                return result;
             }
             catch (Exception error)
             {
@@ -181,6 +183,173 @@ namespace PRAMS.Infraestructure.Services.Forms
                 return Result.Fail<FormFlowBuilderResult>(new Error($"Error al crear el registro del formulario: {error.Message}")).WithError(error.Message);
             }
         }
+
+        private async Task<Result<object>> SaveFormData(FormFlowBuilder formFlowBuilder, FormFlowBuilderResult formFlow, string user)
+        {
+            try
+            {
+                Result<object> result = Result.Ok();
+                List<IError> errors = [];
+
+                switch (formFlow.AdmFlujoFormulario?.TablaBase.ToUpper())
+                {
+                    case SD.FORM_REFERIDOS:
+
+                        // Create a new instance of FormReferidoInsertDto using reflection
+                        FormReferidoInsertDto formReferidoInsertDto = new();
+                        foreach (var field in formFlowBuilder.Fields)
+                        {
+                            PropertyInfo? property = formReferidoInsertDto.GetType().GetProperty(field.Key);
+                            AdmFlujoFormularioEtapaAccionCampoDto? accioneCampo = formFlow.AdmFormularioEtapaAccioneCampos?.FirstOrDefault(f => f.CampoDBIDField == field.Key);
+                            if (accioneCampo is not null)
+                            {
+                                property?.SetValue(formReferidoInsertDto, ParserValue(accioneCampo, field.Value));
+                            }
+                        }
+
+                        // Save the new record in the database
+                        Result<FormReferidoDto> formReferidoResult = await _formReferidoService.CreateFormReferido(formReferidoInsertDto, user);
+                        if (formReferidoResult.IsSuccess)
+                        {
+                            // Set the result to the response
+
+                            FormFlowBuilderObjectResult<FormReferidoDto> formFlowBuilderObjectResult = new()
+                            {
+                                AdmFlujoFormulario = formFlow.AdmFlujoFormulario,
+                                AdmFlujoFormularioEtapa = formFlow.AdmFlujoFormularioEtapa,
+                                AdmFlujoFormularioEtapaAccion = formFlow.AdmFlujoFormularioEtapaAccion,
+                                AdmFormularioEtapaAccioneCampos = formFlow.AdmFormularioEtapaAccioneCampos,
+                                Object = formReferidoResult.Value,
+                                CanContinue = true
+                            };
+
+                            result = Result.Ok(formFlowBuilderObjectResult);
+                        }
+                        else
+                        {
+                            // Add the errors to the response
+                            errors.AddRange(formReferidoResult.Errors);
+                        }
+
+                        break;
+                    default:
+                        errors.Add(new Error($"La tabla base {formFlow.AdmFlujoFormulario?.TablaBase} no es válida"));
+                        break;
+                }
+
+
+                if (errors.Count > 0)
+                {
+                    return Result.Fail<object>(errors.ToArray());
+                }
+                return result;
+
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, $"Error al guardar los datos del formulario: {error.Message}");
+                return Result.Fail<object>(new Error($"Error al guardar los datos del formulario: {error.Message}")).WithError(error.Message);
+            }
+        }
+
+        private static object ParserValue(AdmFlujoFormularioEtapaAccionCampoDto admFormularioEtapaAccione, object value)
+        {
+
+            switch (admFormularioEtapaAccione.CampoDBTipo)
+            {
+                case SD.TIPO_DATO_INT:
+                    return (int)Convert.ChangeType(value, typeof(int));
+                case SD.TIPO_DATO_DECIMAL:
+                    return (decimal)Convert.ChangeType(value, typeof(decimal));
+                case SD.TIPO_DATO_BOOL:
+                    return (bool)Convert.ChangeType(value, typeof(bool));
+                case SD.TIPO_DATO_FECHA:
+                    return (DateTime)Convert.ChangeType(value, typeof(DateTime));
+                case SD.TIPO_DATO_TEXTO:
+                    return (string)Convert.ChangeType(value, typeof(string));
+                default:
+                    return (string)Convert.ChangeType(value, typeof(string));
+
+            }
+
+        }
+
+        /// <summary>
+        /// Function to parse object to DateTime
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private DateTime? ParseDateTime(object value)
+        {
+            if (value is not null)
+            {
+                if (DateTime.TryParse(value.ToString(), out DateTime dateValue))
+                {
+                    return dateValue;
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Function to parse object to int
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private int? ParseInt(object value)
+        {
+            if (value is not null)
+            {
+                if (int.TryParse(value.ToString(), out int intValue))
+                {
+                    return intValue;
+                }
+            }
+
+            return null;
+        }
+
+        // Function to parse object to decimal
+        private decimal? ParseDecimal(object value)
+        {
+            if (value is not null)
+            {
+                if (decimal.TryParse(value.ToString(), out decimal decimalValue))
+                {
+                    return decimalValue;
+                }
+            }
+
+            return null;
+        }
+
+        // Function to parse object to bool
+        private bool? ParseBool(object value)
+        {
+            if (value is not null)
+            {
+                if (bool.TryParse(value.ToString(), out bool boolValue))
+                {
+                    return boolValue;
+                }
+            }
+
+            return null;
+        }
+
+        // Function to parse object to string
+        private string? ParseString(object value)
+        {
+            if (value is not null)
+            {
+                return value.ToString();
+            }
+
+            return null;
+        }
+
+
 
         // Function to exec the validation in the TipoProcesocampo
         private Result<bool> TipoProcesoCampoValidation(IList<AdmFormularioEtapaAccioneCampo> formFields, FormFlowBuilder formFlowBuilder)

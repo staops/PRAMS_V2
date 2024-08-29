@@ -7,9 +7,9 @@
         public int? CasoId { get; set; }
         public string? TipoReferido { get; set; }
         public DateTime? FechaRecibo { get; set; }
-        public TimeSpan? HoraRecibo { get; set; }
+        public DateTime? HoraRecibo { get; set; }
         public string? AccionTomada { get; set; }
-        public string? NarrativaSituacion { get; set; }
+        public string? Narrativa_Situacion { get; set; }
         public int? ReferidoPor { get; set; }
         public string? RelacionAdulto { get; set; }
         public string? ServicioSolicitado { get; set; }

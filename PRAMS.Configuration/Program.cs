@@ -109,7 +109,8 @@ builder.Services.AddScoped<IFormFlowBuilderService>(x =>
 {
     var dbContext = x.GetRequiredService<AppConfigDbContext>();
     var logger = x.GetRequiredService<ILogger<IFormFlowBuilderService>>();
-    return new FormFlowBuilderService(dbContext, mapper, logger);
+    var formReferidoService = x.GetRequiredService<IFormReferidoService>();
+    return new FormFlowBuilderService(dbContext, mapper, logger, formReferidoService);
 });
 
 builder.Services.AddScoped<IFormReferidoService>(x =>
