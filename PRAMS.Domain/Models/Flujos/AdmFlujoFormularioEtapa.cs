@@ -27,11 +27,10 @@ namespace PRAMS.Domain.Models.Flujos
         [StringLength(75)]
         public string? ColorEtapa { get; set; }
         [Required]
-        public bool Completado { get; set; }
+        public required bool Completado { get; set; }
         [Required]
-        public bool Concurrencia { get; set; }
-        [Required]
-        public int ConcurrenciaEtapa { get; set; }
+        public required bool Concurrencia { get; set; }
+        public int? ConcurrenciaEtapa { get; set; }
         public int? NotaStartId { get; set; }
         public int? NotaEndId { get; set; }
         [Required]

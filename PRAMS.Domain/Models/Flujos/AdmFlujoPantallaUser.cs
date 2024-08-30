@@ -14,8 +14,7 @@ namespace PRAMS.Domain.Models.Flujos
         public required int Prioridad { get; set; }
         [StringLength(75)]
         public string? UserType { get; set; }
-        [StringLength(75)]
-        public string? GroupType { get; set; }
+        public int? GroupTypeId { get; set; }
         public DateTime? FechaInicio { get; set; }
         public DateTime? FechaFin { get; set; }
         public bool Activo { get; set; } = true;
