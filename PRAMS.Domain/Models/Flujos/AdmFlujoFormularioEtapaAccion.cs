@@ -29,8 +29,7 @@ namespace PRAMS.Domain.Models.Flujos
         public required bool Completado { get; set; } = false;
         [Required]
         public required bool Concurrencia { get; set; } = false;
-        [Required]
-        public required int ConcurrenciaAccionId { get; set; }
+        public int? ConcurrenciaAccionId { get; set; }
         [Required]
         [StringLength(40)]
         public required string CreateUser { get; set; }

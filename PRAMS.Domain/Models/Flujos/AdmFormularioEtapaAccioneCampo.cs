@@ -22,8 +22,7 @@ namespace PRAMS.Domain.Models.Flujos
         [StringLength(75)]
         public required string CampoDBTipo { get; set; }
         [Required]
-        [StringLength(75)]
-        public required string CampoDBLongitud { get; set; }
+        public required int CampoDBLongitud { get; set; }
         [Required]
         [StringLength(75)]
         [Column("CampoDB_IDField")]
@@ -32,6 +31,8 @@ namespace PRAMS.Domain.Models.Flujos
         public string? TipoProcesoCampo { get; set; }
         [StringLength(255)]
         public string? Resultado { get; set; }
+        [StringLength(255)]
+        public string? Descripcion { get; set; }
 
         [ForeignKey("FormularioEtapaAccionId")]
         public virtual AdmFlujoFormularioEtapaAccion? AdmFlujoFormularioEtapaAccion { get; set; }

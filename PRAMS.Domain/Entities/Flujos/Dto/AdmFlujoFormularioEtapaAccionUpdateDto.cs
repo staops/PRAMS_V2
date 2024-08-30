@@ -10,6 +10,6 @@
         public string? TipoProceso { get; set; }
         public required bool Completado { get; set; } = false;
         public required bool Concurrencia { get; set; } = false;
-        public required int ConcurrenciaAccionId { get; set; }
+        public int? ConcurrenciaAccionId { get; set; }
     }
 }
