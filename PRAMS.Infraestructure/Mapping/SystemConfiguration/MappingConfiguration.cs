@@ -219,6 +219,7 @@ namespace PRAMS.Infraestructure.Mapping.SystemConfiguration
             CreateMap<FormReferido, FormReferidoDto>().ReverseMap();
             CreateMap<FormReferido, FormReferidoInsertDto>().ReverseMap();
             CreateMap<FormReferido, FormReferidoUpdateDto>().ReverseMap();
+            CreateMap<FormReferidoUpdateDto, FormReferidoDto>().ReverseMap();
         }
     }
 }

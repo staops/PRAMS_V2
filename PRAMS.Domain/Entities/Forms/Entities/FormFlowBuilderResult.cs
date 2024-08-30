@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using PRAMS.Domain.Entities.Flujos.Dto;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PRAMS.Domain.Entities.Forms.Entities
 {
@@ -15,9 +14,25 @@ namespace PRAMS.Domain.Entities.Forms.Entities
         public object? Errors { get; set; }
     }
 
-    public class FormFlowBuilderObjectResult<TValue> : FormFlowBuilderResult
+    public class FormFlowBuilderObjectResult<TValue>
     {
         [JsonProperty("object", Order = 2)]
         public TValue? Object { get; set; }
+        [JsonProperty("canContinue", Order = 1)]
+        public bool CanContinue { get; set; }
     }
+
+
+
+    public interface IFormFlowBuilderObjectResult<T>
+    {
+        public bool CanContinue { get; set; }
+        public object? Object { get; set; }
+    }
+    public class FormFlowReferidoDto<T> : IFormFlowBuilderObjectResult<T> where T : class
+    {
+        public bool CanContinue { get; set; }
+        public object? Object { get; set; }
+    }
+
 }

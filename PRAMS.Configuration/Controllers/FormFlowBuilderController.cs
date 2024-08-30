@@ -57,13 +57,46 @@ namespace PRAMS.Configuration.Controllers
 
         [HttpPost]
         [Authorize]
-        [Route("ejecutar")]
+        [Route("Create")]
         [Produces(MediaTypeNames.Application.Json)]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<FormFlowBuilderObjectResult<object>>))]
         [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
-        public async Task<IActionResult> CreaRegistrosFormulario(FormFlowBuilder formFlowBuilder)
+        public async Task<IActionResult> CreateRegistroFormulario(FormFlowBuilder formFlowBuilder)
+        {
+            try
+            {
+                // Get the user id from the Authorize
+                var user = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty;
+                var result = await _formFlowBuilderService.CreaRegistrosFormulario(formFlowBuilder, user);
+                if (result.IsSuccess)
+                {
+                    _logger.LogInformation("Success in CreaRegistrosFormulario Result:{@result}", result.Value);
+                    return Ok(new ResponseDto<object> { Result = result.Value });
+                }
+                else
+                {
+                    _logger.LogError("Error in CreaRegistrosFormulario Errors:{@errors}", result.Errors);
+                    return BadRequest(new ErrorResponseDto<List<IError>> { Message = result.Errors.First().Message, Result = result.Errors });
+                }
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, "Error al crear los registros del formulario");
+                return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("Update")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<FormFlowBuilderObjectResult<object>>))]
+        [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
+        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
+        public async Task<IActionResult> UpdateRegistroFormulario(FormFlowBuilder formFlowBuilder)
         {
             try
             {

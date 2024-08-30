@@ -10,10 +10,10 @@ namespace PRAMS.Application.Contract.Forms
 
         Task<Result<ICollection<FormReferidoDto>>> GetFormReferidos();
         Task<Result<DtResult<FormReferidoDto>>> ListFormReferidos(FilterCriteria filterCriteria);
-        Task<Result<FormReferidoDto>> GetFormReferido(int formReferidoId);
+        Task<Result<FormReferidoDto>> GetFormReferido(int referidoId);
         Task<Result<FormReferidoDto>> CreateFormReferido(FormReferidoInsertDto formReferidoInsertDto, string user);
         Task<Result<FormReferidoDto>> UpdateFormReferido(FormReferidoUpdateDto formReferidoUpdateDto, string user);
-        Task<Result<FormReferidoDto>> RemoveFormReferido(int formReferidoId, string user);
+        Task<Result<FormReferidoDto>> RemoveFormReferido(int referidoId, string user);
 
     }
 }

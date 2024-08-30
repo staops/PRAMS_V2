@@ -22,21 +22,50 @@ namespace PRAMS.Configuration.Controllers
             _logger = logger;
         }
 
-        [HttpGet("{formularioId}")]
+        [HttpGet("{formularioEtapaId}")]
         [Authorize]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<AdmFlujoFormularioEtapaDto>))]
         [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
-        public async Task<IActionResult> GetFlujosFormularioEtapa(int formularioId)
+        public async Task<IActionResult> GetFlujosFormularioEtapa(int formularioEtapaId)
         {
             try
             {
-                var result = await _flujosFormulariosEtapas.GetFlujoFormularioEtapa(formularioId);
+                var result = await _flujosFormulariosEtapas.GetFlujoFormularioEtapa(formularioEtapaId);
                 if (result.IsSuccess)
                 {
                     _logger.LogInformation("Success in GetFlujosFormularioEtapa Result:{@result}", result.Value);
                     return Ok(new ResponseDto<AdmFlujoFormularioEtapaDto> { Result = result.Value });
+                }
+                else
+                {
+                    _logger.LogError("Error in GetFlujosFormularioEtapa Errors:{@errors}", result.Errors);
+                    return BadRequest(new ErrorResponseDto<List<IError>> { Message = result.Errors.First().Message, Result = result.Errors });
+                }
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, "Error al obtener el flujo del formulario");
+                return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
+            }
+        }
+
+        [HttpGet("GetFlujoFormularioEtapByformularioIda/{formularioId}")]
+        [Authorize]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<ICollection<AdmFlujoFormularioEtapaDto>>))]
+        [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
+        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
+        public async Task<IActionResult> GetFlujoFormularioEtapByformularioIda(int formularioId)
+        {
+            try
+            {
+                var result = await _flujosFormulariosEtapas.GetFlujoFormularioEtapByformularioIda(formularioId);
+                if (result.IsSuccess)
+                {
+                    _logger.LogInformation("Success in GetFlujosFormularioEtapa Result:{@result}", result.Value);
+                    return Ok(new ResponseDto<ICollection<AdmFlujoFormularioEtapaDto>> { Result = result.Value });
                 }
                 else
                 {

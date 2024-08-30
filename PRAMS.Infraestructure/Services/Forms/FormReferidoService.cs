@@ -47,15 +47,15 @@ namespace PRAMS.Infraestructure.Services.Forms
             }
         }
 
-        public async Task<Result<FormReferidoDto>> GetFormReferido(int formReferidoId)
+        public async Task<Result<FormReferidoDto>> GetFormReferido(int referidoId)
         {
             try
             {
-                var formReferido = await _context.FormReferidos.FindAsync(formReferidoId);
+                var formReferido = await _context.FormReferidos.Where(w => w.ReferidoId == referidoId && w.Activo).FirstOrDefaultAsync();
 
                 if (formReferido == null)
                 {
-                    return Result.Fail<FormReferidoDto>(new Error($"The form with id {formReferidoId} was not found"));
+                    return Result.Fail<FormReferidoDto>(new Error($"The form with id {referidoId} was not found"));
                 }
 
                 var formReferidoDto = _mapper.Map<FormReferidoDto>(formReferido);
@@ -104,13 +104,14 @@ namespace PRAMS.Infraestructure.Services.Forms
 
                 // Build the predicate based on the search criteria
                 var predicate = PredicateBuilder.New<FormReferido>(true);
+                predicate = predicate.And(x => x.Activo);
 
                 if (!string.IsNullOrEmpty(searchBy))
                 {
                     predicate = predicate.Or(x => x.RMO != null && x.RMO.Contains(searchBy));
                     predicate = predicate.Or(x => x.TipoReferido != null && x.TipoReferido.Contains(searchBy));
                     predicate = predicate.Or(x => x.AccionTomada != null && x.AccionTomada.Contains(searchBy));
-                    predicate = predicate.Or(x => x.Narrativa_Situacion != null && x.Narrativa_Situacion.Contains(searchBy));
+                    predicate = predicate.Or(x => x.NarrativaSituacion != null && x.NarrativaSituacion.Contains(searchBy));
                 }
 
                 // Get the data for the current page
@@ -156,19 +157,22 @@ namespace PRAMS.Infraestructure.Services.Forms
             }
         }
 
-        public async Task<Result<FormReferidoDto>> RemoveFormReferido(int formReferidoId, string user)
+        public async Task<Result<FormReferidoDto>> RemoveFormReferido(int referidoId, string user)
         {
             try
             {
 
-                var formReferido = await _context.FormReferidos.FindAsync(formReferidoId);
+                var formReferido = await _context.FormReferidos.Where(w => w.ReferidoId == referidoId && w.Activo).FirstOrDefaultAsync();
 
                 if (formReferido == null)
                 {
-                    return Result.Fail<FormReferidoDto>(new Error($"The form with id {formReferidoId} was not found"));
+                    return Result.Fail<FormReferidoDto>(new Error($"The form with id {referidoId} was not found"));
                 }
 
-                _context.FormReferidos.Remove(formReferido);
+                formReferido.Activo = false;
+                formReferido.ModifiedUser = user;
+                formReferido.ModifiedDate = DateTime.Now;
+
                 await _context.SaveChangesAsync();
 
                 var formReferidoDto = _mapper.Map<FormReferidoDto>(formReferido);
@@ -186,14 +190,19 @@ namespace PRAMS.Infraestructure.Services.Forms
         {
             try
             {
-                var formReferido = await _context.FormReferidos.FindAsync(formReferidoUpdateDto.ReferidoId);
+                var formReferido = await _context.FormReferidos.Where(w => w.ReferidoId == formReferidoUpdateDto.ReferidoId && w.Activo).FirstOrDefaultAsync();
 
                 if (formReferido == null)
                 {
                     return Result.Fail<FormReferidoDto>(new Error($"The form with id {formReferidoUpdateDto.ReferidoId} was not found"));
                 }
 
+
                 _mapper.Map(formReferidoUpdateDto, formReferido);
+
+                formReferido.ModifiedUser = user;
+                formReferido.ModifiedDate = DateTime.Now;
+
                 await _context.SaveChangesAsync();
 
                 var formReferidoDto = _mapper.Map<FormReferidoDto>(formReferido);

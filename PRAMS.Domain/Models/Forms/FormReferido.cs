@@ -19,8 +19,8 @@ namespace PRAMS.Domain.Models.Forms
         [Column("Accion_Tomada")]
         public string? AccionTomada { get; set; }
         [StringLength(2000)]
-        [Column("Narrativa_Situacion")]
-        public string? Narrativa_Situacion { get; set; }
+        [Column("NarrativaSituacion")]
+        public string? NarrativaSituacion { get; set; }
         public int? ReferidoPor { get; set; }
         [StringLength(25)]
         [Column("RelacionAdulto")]
