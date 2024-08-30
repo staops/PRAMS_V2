@@ -98,6 +98,27 @@ builder.Services.AddScoped<IFormulariosFirmasService>(x =>
     return new FormulariosFirmasService(dbContext, mapper, logger);
 });
 
+builder.Services.AddScoped<IFlujoPantallaUserService>(x =>
+{
+    var dbContext = x.GetRequiredService<AppConfigDbContext>();
+    var logger = x.GetRequiredService<ILogger<IFlujoPantallaUserService>>();
+    return new FlujoPantallaUserService(dbContext, mapper, logger);
+});
+
+builder.Services.AddScoped<IFormFlowBuilderService>(x =>
+{
+    var dbContext = x.GetRequiredService<AppConfigDbContext>();
+    var logger = x.GetRequiredService<ILogger<IFormFlowBuilderService>>();
+    var formReferidoService = x.GetRequiredService<IFormReferidoService>();
+    return new FormFlowBuilderService(dbContext, mapper, logger, formReferidoService);
+});
+
+builder.Services.AddScoped<IFormReferidoService>(x =>
+{
+    var dbContext = x.GetRequiredService<AppConfigDbContext>();
+    var logger = x.GetRequiredService<ILogger<IFormReferidoService>>();
+    return new FormReferidoService(dbContext, mapper, logger);
+});
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -172,7 +193,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 // Apply pending migrations automatically.
-//ApplyMigrations();
+ApplyMigrations();
 
 app.Run();
 

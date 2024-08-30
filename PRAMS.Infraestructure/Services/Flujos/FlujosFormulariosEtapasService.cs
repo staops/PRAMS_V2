@@ -94,6 +94,24 @@ namespace PRAMS.Infraestructure.Services.Flujos
             }
         }
 
+        public async Task<Result<ICollection<AdmFlujoFormularioEtapaDto>>> GetFlujoFormularioEtapByformularioIda(int formularioId)
+        {
+            try
+            {
+                var query = _appConfigDbContext.AdmFlujoFormularioEtapas.Where(x => x.FormularioId == formularioId && x.Activo);
+                ICollection<AdmFlujoFormularioEtapaDto> result = await _mapper.ProjectTo<AdmFlujoFormularioEtapaDto>(query).ToListAsync();
+
+                return Result.Ok(result);
+
+
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, $"Error al obtener el flujo del formulario {formularioId}");
+                return Result.Fail<ICollection<AdmFlujoFormularioEtapaDto>>($"Error al obtener el flujo del formulario {formularioId}");
+            }
+        }
+
         public async Task<Result<ICollection<AdmFlujoFormularioEtapaDto>>> GetFlujosFormulariosEtapas()
         {
             try
