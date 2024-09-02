@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using PRAMS.Domain.Entities.Flujos.Dto;
+using PRAMS.Domain.Entities.Forms.Dto;
 
 namespace PRAMS.Domain.Entities.Forms.Entities
 {
@@ -20,6 +21,7 @@ namespace PRAMS.Domain.Entities.Forms.Entities
         public TValue? Object { get; set; }
         [JsonProperty("canContinue", Order = 1)]
         public bool CanContinue { get; set; }
+        public required FormFlujoPantallaDto formFlujoPantallaInsertDto { get; set; }
     }
 
 

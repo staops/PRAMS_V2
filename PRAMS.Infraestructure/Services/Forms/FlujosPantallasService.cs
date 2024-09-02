@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
 using FluentResults;
+using LinqKit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using PRAMS.Application.Contract.Forms;
 using PRAMS.Domain.Entities.Forms.Dto;
+using PRAMS.Domain.Entities.Shared;
 using PRAMS.Domain.Models.Forms;
 using PRAMS.Infraestructure.Data.SystemConfiguration;
+using System.Linq.Expressions;
 
 namespace PRAMS.Infraestructure.Services.Forms
 {
@@ -125,6 +128,78 @@ namespace PRAMS.Infraestructure.Services.Forms
                 _logger.LogError(error, $"Error getting the flows: {error.Message}");
                 return Result.Fail<ICollection<FormFlujoPantallaDto>>(new Error($"Error getting the flows: {error.Message}")).WithError(error.Message);
 
+            }
+        }
+
+        public async Task<Result<DtResult<FormFlujoPantallaDto>>> ListFlujosPantallass(FilterCriteria filterCriteria)
+        {
+            try
+            {
+                string searchBy = filterCriteria.Search?.Value ?? string.Empty;
+
+                // if we have an empty search then just order the results by Id ascending
+                string orderCriteria = "FlujoPantallaId";
+                bool orderAscendingDirection = true;
+
+                if (filterCriteria.Order != null && filterCriteria.Order.Any())
+                {
+                    // in this example we just default sort on the 1st column
+                    orderCriteria = filterCriteria.Columns[filterCriteria.Order[0].Column].Data;
+                    orderAscendingDirection = filterCriteria.Order[0].Dir.ToString().Equals("asc", StringComparison.CurrentCultureIgnoreCase);
+                }
+
+                // Build the predicate based on the search criteria
+                var predicate = PredicateBuilder.New<FormFlujoPantalla>(true);
+
+                if (!string.IsNullOrEmpty(searchBy))
+                {
+                    predicate = predicate.Or(x => x.RMO != null && x.RMO.Contains(searchBy));
+                    predicate = predicate.Or(x => x.NumeroCaso != null && x.NumeroCaso.Contains(searchBy));
+                    predicate = predicate.Or(x => x.Region != null && x.Region.Contains(searchBy));
+                    predicate = predicate.Or(x => x.Local != null && x.Local.Contains(searchBy));
+                    predicate = predicate.Or(x => x.Persona != null && x.Persona.Contains(searchBy));
+                }
+
+                // Get the data for the current page
+                IQueryable<FormFlujoPantalla> result = _context.FormFlujoPantallas.Where(predicate)
+                    .AsQueryable();
+
+                // now just get the count of items (without the skip and take) - eg how many could be returned with filtering
+                int filteredResultsCount = await result.CountAsync();
+                int totalResultsCount = await _context.FormFlujoPantallas.CountAsync();
+
+                IQueryable<FormFlujoPantallaDto> basicInfApplicantDtos = _mapper.Map<List<FormFlujoPantallaDto>>(result).AsQueryable();
+
+
+                // Ordering using reflection 
+                string command = orderAscendingDirection ? "OrderBy" : "OrderByDescending";
+                var type = typeof(FormFlujoPantallaDto);
+                var property = type.GetProperty(orderCriteria.ToUpper(), System.Reflection.BindingFlags.IgnoreCase | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+                var parameter = Expression.Parameter(type, "p");
+                var propertyAccess = Expression.MakeMemberAccess(parameter, property);
+                var orderByExpression = Expression.Lambda(propertyAccess, parameter);
+                var resultExpression = Expression.Call(typeof(Queryable), command, [type, property.PropertyType], basicInfApplicantDtos.AsQueryable().Expression, Expression.Quote(orderByExpression));
+
+
+                // Get the data for the current page
+                List<FormFlujoPantallaDto> data = [.. basicInfApplicantDtos.Provider.CreateQuery<FormFlujoPantallaDto>(resultExpression)
+                    .Skip(filterCriteria.Start)
+                    .Take(filterCriteria.Length)];
+
+                DtResult<FormFlujoPantallaDto> objectResult = new()
+                {
+                    Draw = filterCriteria.Draw,
+                    RecordsTotal = filteredResultsCount,
+                    RecordsFiltered = filteredResultsCount,
+                    Data = data
+                };
+
+                return Result.Ok(objectResult);
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, $"Error listing the FlujosPantallas: {error.Message}");
+                return Result.Fail<DtResult<FormFlujoPantallaDto>>(new Error($"Error listing the FlujosPantallas: {error.Message}")).WithError(error.Message);
             }
         }
 
