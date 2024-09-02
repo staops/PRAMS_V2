@@ -23,6 +23,10 @@ namespace PRAMS.Domain.Models.Forms
         public required int OrdenFlujo { get; set; }
 
         [Required]
+        [StringLength(75)]
+        public required string FlujoEtapa { get; set; }
+
+        [Required]
         [Column("Fecha_Flujo")]
         public required DateTime FechaFlujo { get; set; } = DateTime.Now;
 
@@ -41,10 +45,10 @@ namespace PRAMS.Domain.Models.Forms
         public string? Persona { get; set; }
 
         [Column("ID_Usuario_Asigna")]
-        public int? UsuarioAsignaId { get; set; }
+        public string? UsuarioAsignaId { get; set; }
 
         [Column("ID_Usuario_Asignado")]
-        public int? UsuarioAsignadoId { get; set; }
+        public string? UsuarioAsignadoId { get; set; }
 
         [Column("Flujo_Status")]
         [StringLength(50)]

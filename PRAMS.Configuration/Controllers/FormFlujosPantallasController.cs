@@ -236,5 +236,35 @@ namespace PRAMS.Configuration.Controllers
 
 
         }
+
+        [HttpPost("paged")]
+        [Authorize]
+        [Produces(MediaTypeNames.Application.Json)]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<DtResult<FormFlujoPantallaDto>>))]
+        [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
+        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
+        public async Task<IActionResult> ListFlujosPantallas([FromBody] FilterCriteria filterCriteria)
+        {
+            try
+            {
+                var result = await _flujosPantallasService.ListFlujosPantallass(filterCriteria);
+                if (result.IsSuccess)
+                {
+                    _logger.LogInformation("Success in ListFlujosPantallas Result:{@result}", result.Value);
+                    return Ok(new ResponseDto<DtResult<FormFlujoPantallaDto>> { Result = result.Value });
+                }
+                else
+                {
+                    _logger.LogError("Error in ListFlujosPantallas Errors:{@errors}", result.Errors);
+                    return BadRequest(new ErrorResponseDto<List<IError>> { Message = result.Errors.First().Message, Result = result.Errors });
+                }
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, "Error al obtener los flujos de pantallas");
+                return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
+            }
+        }
     }
 }

@@ -98,7 +98,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 // Apply pending migrations automatically.
-//ApplyMigrations();
+ApplyMigrations();
 app.Run();
 
 // Apply pending migrations automatically.
