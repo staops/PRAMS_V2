@@ -19,13 +19,15 @@ namespace PRAMS.Infraestructure.Services.Forms
         private readonly IMapper _mapper;
         private readonly ILogger<IFormFlowBuilderService> _logger;
         private readonly IFormReferidoService _formReferidoService;
+        private readonly IFlujosPantallasService _flujosPantallas;
 
-        public FormFlowBuilderService(AppConfigDbContext context, IMapper mapper, ILogger<IFormFlowBuilderService> logger, IFormReferidoService formReferidoService)
+        public FormFlowBuilderService(AppConfigDbContext context, IMapper mapper, ILogger<IFormFlowBuilderService> logger, IFormReferidoService formReferidoService, IFlujosPantallasService flujosPantallas)
         {
             _context = context;
             _mapper = mapper;
             _logger = logger;
             _formReferidoService = formReferidoService;
+            _flujosPantallas = flujosPantallas;
         }
 
         public async Task<Result<FormFlowBuilderResult>> ValidaFormulario(FormFlowBuilder formFlowBuilder)
@@ -244,14 +246,45 @@ namespace PRAMS.Infraestructure.Services.Forms
                         Result<FormReferidoDto> formReferidoResult = await _formReferidoService.CreateFormReferido(formReferidoInsertDto, user);
                         if (formReferidoResult.IsSuccess)
                         {
-                            // Set the result to the response
 
-                            FormFlowBuilderObjectResult<FormReferidoDto> formFlowBuilderObjectResult = new()
+                            FormFlujoPantallaInsertDto itemToInsert = new()
                             {
-                                Object = formReferidoResult.Value,
-                                CanContinue = true
+                                FormularioId = formFlowBuilder.FormularioId,
+                                FormaId = formReferidoResult.Value.ReferidoId,
+                                OrdenFlujo = formFlow.AdmFlujoFormularioEtapa.OrdenEtapa,
+                                FlujoEtapa = formFlow.AdmFlujoFormularioEtapa.NombreEtapa,
+                                FechaFlujo = DateTime.Now,
+                                UsuarioFlujoId = user,
+                                RMO = "TEST-RMO123", // TODO: Get the RMO from the user
+                                NumeroCaso = "TEST-123", // TODO: Get the NumeroCaso from the user
+                                Persona = "TEST-PERSONA", // TODO: Get the Persona from the user
+                                FlujoStatus = formFlow.AdmFlujoFormularioEtapaAccion.NombreAccion,
+                                Notas = "TEST-NOTAS", // TODO: Get the Notas from the user
+                                Comentarios = "TEST-COMENTARIOS", // TODO: Get the Comentarios from the user
+                                Procesado = false,
+                                Region = "TEST-REGION", // TODO: Get the Region from the user
+                                Local = "TEST-LOCAL" // TODO: Get the Local from the user
                             };
-                            return formFlowBuilderObjectResult;
+
+                            Result<FormFlujoPantallaDto> flujoPantalla = await _flujosPantallas.CreateFlujoPantalla(itemToInsert, user);
+                            if (flujoPantalla.IsSuccess)
+                            {
+                                // Set the result to the response
+
+                                FormFlowBuilderObjectResult<FormReferidoDto> formFlowBuilderObjectResult = new()
+                                {
+                                    Object = formReferidoResult.Value,
+                                    formFlujoPantallaInsertDto = flujoPantalla.ValueOrDefault,
+                                    CanContinue = true
+                                };
+                                return formFlowBuilderObjectResult;
+                            }
+                            else
+                            {
+                                // Add the errors to the response
+                                errors.AddRange(flujoPantalla.Errors);
+                            }
+
                         }
                         else
                         {
@@ -313,13 +346,42 @@ namespace PRAMS.Infraestructure.Services.Forms
                             if (updateResult.IsSuccess)
                             {
 
-                                FormFlowBuilderObjectResult<FormReferidoDto> formFlowBuilderObjectResult = new()
+                                FormFlujoPantallaInsertDto itemToInsert = new()
                                 {
-                                    Object = updateResult.ValueOrDefault,
-                                    CanContinue = true
+                                    FormularioId = formFlowBuilder.FormularioId,
+                                    FormaId = formReferidoResult.Value.ReferidoId,
+                                    OrdenFlujo = formFlow.AdmFlujoFormularioEtapa.OrdenEtapa,
+                                    FlujoEtapa = formFlow.AdmFlujoFormularioEtapa.NombreEtapa,
+                                    FechaFlujo = DateTime.Now,
+                                    UsuarioFlujoId = user,
+                                    RMO = "TEST-RMO123", // TODO: Get the RMO from the user
+                                    NumeroCaso = "TEST-123", // TODO: Get the NumeroCaso from the user
+                                    Persona = "TEST-PERSONA", // TODO: Get the Persona from the user
+                                    FlujoStatus = formFlow.AdmFlujoFormularioEtapaAccion.NombreAccion,
+                                    Notas = "TEST-NOTAS", // TODO: Get the Notas from the user
+                                    Comentarios = "TEST-COMENTARIOS", // TODO: Get the Comentarios from the user
+                                    Procesado = false,
+                                    Region = "TEST-REGION", // TODO: Get the Region from the user
+                                    Local = "TEST-LOCAL" // TODO: Get the Local from the user
                                 };
 
-                                return formFlowBuilderObjectResult;
+                                Result<FormFlujoPantallaDto> flujoPantalla = await _flujosPantallas.CreateFlujoPantalla(itemToInsert, user);
+                                if (flujoPantalla.IsSuccess)
+                                {
+                                    // Set the result to the response
+                                    FormFlowBuilderObjectResult<FormReferidoDto> formFlowBuilderObjectResult = new()
+                                    {
+                                        Object = updateResult.ValueOrDefault,
+                                        formFlujoPantallaInsertDto = flujoPantalla.ValueOrDefault,
+                                        CanContinue = true
+                                    };
+                                    return formFlowBuilderObjectResult;
+                                }
+                                else
+                                {
+                                    // Add the errors to the response
+                                    errors.AddRange(flujoPantalla.Errors);
+                                }
                             }
                         }
 
