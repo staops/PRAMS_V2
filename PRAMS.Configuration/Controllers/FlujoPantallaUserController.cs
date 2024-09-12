@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PRAMS.Application.Contract.Flujos;
+using PRAMS.Domain.Entities.Flujos.Dto;
 using PRAMS.Domain.Entities.Shared;
 using PRAMS.Domain.Entities.SystemConfiguration.Dto;
 using System.Net.Mime;
@@ -54,28 +55,28 @@ namespace PRAMS.Configuration.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPut("Update")]
         [Authorize]
         [Produces(MediaTypeNames.Application.Json)]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<AdmFlujoPantallaUserDto>))]
         [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
-        public async Task<IActionResult> DeleteFlujoPantallaUserItem(int flujoUserID)
+        public async Task<IActionResult> UpdateFlujoPantallaUserItem(AdmFlujoPantallaUserUpdateDto admFlujoPantallaUserDto)
         {
             try
             {
                 // Get the user id from the Authorize
                 var user = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty;
-                var result = await _flujoPantallaUserService.DeleteFlujoPantallaUserItem(flujoUserID, user);
+                var result = await _flujoPantallaUserService.UpdateFlujoPantallaUserItem(admFlujoPantallaUserDto, user);
                 if (result.IsSuccess)
                 {
-                    _logger.LogInformation("Success in DeleteFlujoPantallaUserItem Result:{@result}", result.Value);
+                    _logger.LogInformation("Success in UpdateFlujoPantallaUserItem Result:{@result}", result.Value);
                     return Ok(new ResponseDto<AdmFlujoPantallaUserDto> { Result = result.Value });
                 }
                 else
                 {
-                    _logger.LogError("Error in DeleteFlujoPantallaUserItem Errors:{@errors}", result.Errors);
+                    _logger.LogError("Error in UpdateFlujoPantallaUserItem Errors:{@errors}", result.Errors);
                     return BadRequest(new ErrorResponseDto<List<IError>> { Message = result.Errors.First().Message, Result = result.Errors });
                 }
             }
@@ -85,6 +86,38 @@ namespace PRAMS.Configuration.Controllers
                 return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
             }
         }
+
+        [HttpDelete("Remove/{flujoUserID}")]
+        [Authorize]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<AdmFlujoFormularioDto>))]
+        [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
+        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
+        public async Task<IActionResult> RemoveFlujoPantallaUserItem(int flujoUserID)
+        {
+            try
+            {
+                // Get the user id from the Authorize
+                var user = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty;
+                var result = await _flujoPantallaUserService.DeleteFlujoPantallaUserItem(flujoUserID, user);
+                if (result.IsSuccess)
+                {
+                    _logger.LogInformation("Success in RemoveFlujoPantallaUserItem Result:{@result}", result.Value);
+                    return Ok(new ResponseDto<AdmFlujoPantallaUserDto> { Result = result.Value });
+                }
+                else
+                {
+                    _logger.LogError("Error in RemoveFlujoPantallaUserItem Errors:{@errors}", result.Errors);
+                    return BadRequest(new ErrorResponseDto<List<IError>> { Message = result.Errors.First().Message, Result = result.Errors });
+                }
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, "Error al eliminar el flujo del formulario");
+                return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
+            }
+        }
+
 
         [HttpGet("GetByFormularioEtapaId/{formularioEtapaId}")]
         [Authorize]
