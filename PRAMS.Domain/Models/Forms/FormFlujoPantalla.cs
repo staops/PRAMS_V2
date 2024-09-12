@@ -20,7 +20,7 @@ namespace PRAMS.Domain.Models.Forms
         public required int FormaId { get; set; }
 
         [Required]
-        public required int OrdenFlujo { get; set; }
+        public required int OrdenEtapa { get; set; }
 
         [Required]
         [StringLength(75)]
@@ -31,7 +31,8 @@ namespace PRAMS.Domain.Models.Forms
         public required DateTime FechaFlujo { get; set; } = DateTime.Now;
 
         [Required]
-        [Column("ID_Usuario_Flujo")]
+        [Column("ID_User_Flujo")]
+        [StringLength(40)]
         public required string UsuarioFlujoId { get; set; }
 
         [StringLength(25)]
@@ -44,10 +45,12 @@ namespace PRAMS.Domain.Models.Forms
         [StringLength(75)]
         public string? Persona { get; set; }
 
-        [Column("ID_Usuario_Asigna")]
+        [Column("ID_User_Asigna")]
+        [StringLength(40)]
         public string? UsuarioAsignaId { get; set; }
 
-        [Column("ID_Usuario_Asignado")]
+        [Column("ID_User_Asignado")]
+        [StringLength(40)]
         public string? UsuarioAsignadoId { get; set; }
 
         [Column("Flujo_Status")]
@@ -60,7 +63,7 @@ namespace PRAMS.Domain.Models.Forms
         [StringLength(1500)]
         public string? Comentarios { get; set; }
 
-        public bool Procesado { get; set; } = false;
+        public bool EtapaCompletada { get; set; } = false;
 
         [StringLength(75)]
         public string? Region { get; set; }

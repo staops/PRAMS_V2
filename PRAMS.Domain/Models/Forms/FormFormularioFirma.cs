@@ -8,9 +8,15 @@ namespace PRAMS.Domain.Models.Forms
     public class FormFormularioFirma
     {
         [Key]
+        [Column("ID_FormularioFirmas")]
         public int FormularioFirmasId { get; set; }
 
         [Required]
+        [Column("ID_Formulario")]
+        public required int FormularioId { get; set; }
+
+        [Required]
+        [Column("ID_FormularioEtapa")]
         public required int FormularioEtapaId { get; set; }
 
         [Required]
@@ -25,34 +31,34 @@ namespace PRAMS.Domain.Models.Forms
 
         [Required]
         [Column("ID_Usuario")]
-        [StringLength(20)]
+        [StringLength(40)]
         public required string UsuarioId { get; set; }
 
-        [Required]
-        public DateTime FechaFirma { get; set; }
+        [StringLength(20)]
+        public string? UserTypeID { get; set; }
 
         [Required]
+        public DateTime? FechaFirma { get; set; }
+
         [StringLength(75)]
-        public required string Region { get; set; }
+        public string? Region { get; set; }
 
-        [Required]
         [StringLength(75)]
-        public required string Local { get; set; }
-
+        public string? Local { get; set; }
 
         [StringLength(1000)]
         public string? Comentarios { get; set; }
 
         [Required]
         public bool Revertida { get; set; } = false;
-        public DateTime RevertidaFecha { get; set; }
+        public DateTime? RevertidaFecha { get; set; }
 
         [StringLength(30)]
         [Column("ID_Usuario_Revierte")]
-        public string? UsuarioRevertidaId { get; set; }
+        public string? UsuarioRevierteId { get; set; }
 
 
-        [ForeignKey("FormularioEtapaId")]
+        [ForeignKey("ID_FormularioEtapa")]
         public virtual AdmFlujoFormularioEtapa? AdmFlujoFormularioEtapa { get; set; }
 
 
