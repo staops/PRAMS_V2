@@ -49,7 +49,18 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
         {
             base.OnModelCreating(modelBuilder);
 
-            //modelBuilder.Entity<FormFormularioFirma>().HasOne(f => f.AdmFlujoFormulario).WithMany(f => f.FormFormularioFirmas).HasForeignKey(f => f.FormularioFirmasId);
+            modelBuilder.Entity<AdmFlujoFormularioEtapa>()
+                .HasMany(f => f.FormFormularioFirmas)
+                .WithOne(p => p.AdmFlujoFormularioEtapa)
+                .HasConstraintName("FK_FormFormularioFirma_AdmFlujoFormularioEtapa")
+                .HasForeignKey(f => f.FormularioEtapaId);
+
+            modelBuilder.Entity<FormFormularioFirma>()
+                .HasOne(f => f.AdmFlujoFormularioEtapa)
+                .WithMany(p => p.FormFormularioFirmas)
+                .HasForeignKey(f => f.FormularioEtapaId)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasConstraintName("FK_FormFormularioFirma");
 
             modelBuilder.Entity<AdmFlujoFormularioEtapa>()
                 .HasOne(f => f.AdmFlujoFormularioNotaStart)
@@ -1508,8 +1519,13 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
                 new(2, 1, "Determinacion", "Form_Referidos", "Texto", 0, "Determinacion", "TieneValor", "Debe Completar la Determinacion para Continuar con las Firmas", "La Determinacion aun no esta llena para continuar con el Referido."),
                 new(2, 2, "Determinacion_Fecha", "Form_Referidos", "Fecha", 0, "DeterminacionFecha", "TieneValor", "Debe Completar la Fecha de la Determinacion para Continuar con las Firmas", "La Fecha Determinacion aun no esta llena para continuar con el Referido."),
                 new(2, 3, "Determinacion_Razon", "Form_Referidos", "Texto", 0, "DeterminacionRazon", "TieneValor", "Debe Completar la Razón de la Determinacion para poder Firmar", "La Razón Determinacion aun no esta llena para continuar con el Referido."),
-                new(3, 1, "Firma TS", "Form_FormulariosFirmas", "Integro", 0, "IDUsuario", "FirmaTS", "La Firma del Trabajador Social debe estar Completada", null),
-                new(4, 1, "Firma Supervisor", "Form_FormulariosFirmas", "Integro", 0, "IDUsuario", "FirmaSup", "La Firma del Supervisor de Trabajador Social debe estar Completada", null),
+
+                new(3, 1, "Firma TS", "Form_FormulariosFirmas", "Texto", 0, "UsuarioId", "FirmaTS", "La Firma del Trabajador Social debe estar Completada", null),
+                new(3, 1, "Firma TS", "Form_FormulariosFirmas", "Texto", 0, "UserTypeID", "FirmaTS", "Validacion Principal para Busqueda de Usuario Firmo", null),
+                new(3, 1, "Firma TS", "Form_FormulariosFirmas", "Texto", 0, "RMO", "FirmaTS", "La Firma del Supervisor de Trabajador Social debe estar Completada", null),
+                new(3, 1, "RMO", "Form_Referidos", "Texto", 0, "RMO", "TieneValor", "Rmo es requerido", null),
+
+                new(4, 1, "Firma Supervisor", "Form_FormulariosFirmas", "Integro", 0, "UserTypeID", "FirmaSup", "La Firma del Supervisor de Trabajador Social debe estar Completada", null),
             ];
 
             IList<AdmFormularioEtapaAccioneCampo> admFlujoFormularioEtapaAccionCampo = admFlujoFormularioEtapaAccionCampos.Select((x, i) => new AdmFormularioEtapaAccioneCampo

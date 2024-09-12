@@ -55,7 +55,7 @@ namespace PRAMS.Infraestructure.Services.Forms
 
                 if (formReferido == null)
                 {
-                    return Result.Fail<FormReferidoDto>(new Error($"The form with id {referidoId} was not found"));
+                    return Result.Fail<FormReferidoDto>(new Error($"El formulario del referido con id {referidoId} no fue encontrado"));
                 }
 
                 var formReferidoDto = _mapper.Map<FormReferidoDto>(formReferido);

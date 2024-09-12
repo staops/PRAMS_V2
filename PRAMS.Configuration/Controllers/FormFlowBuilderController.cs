@@ -36,7 +36,8 @@ namespace PRAMS.Configuration.Controllers
             {
                 // Get the user id from the Authorize
                 var user = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty;
-                var result = await _formFlowBuilderService.ValidaFormulario(formFlowBuilder);
+                var role = User.FindFirst(ClaimTypes.Role)?.Value ?? string.Empty;
+                var result = await _formFlowBuilderService.ValidaFormulario(formFlowBuilder, user, role);
                 if (result.IsSuccess)
                 {
                     _logger.LogInformation("Success in ValidaFormulario Result:{@result}", result.Value);
@@ -69,7 +70,8 @@ namespace PRAMS.Configuration.Controllers
             {
                 // Get the user id from the Authorize
                 var user = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty;
-                var result = await _formFlowBuilderService.CreaRegistrosFormulario(formFlowBuilder, user);
+                var role = User.FindFirst(ClaimTypes.Role)?.Value ?? string.Empty;
+                var result = await _formFlowBuilderService.CreaRegistrosFormulario(formFlowBuilder, user, role);
                 if (result.IsSuccess)
                 {
                     _logger.LogInformation("Success in CreaRegistrosFormulario Result:{@result}", result.Value);
@@ -102,7 +104,8 @@ namespace PRAMS.Configuration.Controllers
             {
                 // Get the user id from the Authorize
                 var user = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty;
-                var result = await _formFlowBuilderService.CreaRegistrosFormulario(formFlowBuilder, user);
+                var role = User.FindFirst(ClaimTypes.Role)?.Value ?? string.Empty;
+                var result = await _formFlowBuilderService.CreaRegistrosFormulario(formFlowBuilder, user, role);
                 if (result.IsSuccess)
                 {
                     _logger.LogInformation("Success in CreaRegistrosFormulario Result:{@result}", result.Value);

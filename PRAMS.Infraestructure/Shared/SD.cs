@@ -15,9 +15,11 @@
         public const string TIPO_DATO_BOOL = "Booleano";
 
         public const string FORM_REFERIDOS = "FORM_REFERIDOS";
+        public const string FORM_FORMULARIOSFIRMAS = "FORM_FORMULARIOSFIRMAS";
 
 
         public const string TIPO_ACCION_VALIDACION_CAMPOS = "Validación Campos";
         public const string TIPO_ACCION_SEGUIMIENTO_CAMPOS = "Seguimiento Campos";
+        public const string TIPO_ACCION_FIRMAS_PERSONAL = "Firmas Personal";
     }
 }

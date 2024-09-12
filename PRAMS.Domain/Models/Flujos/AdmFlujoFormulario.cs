@@ -15,6 +15,7 @@ namespace PRAMS.Domain.Models.Flujos
         }
 
         [Key]
+        [Column("ID_Formulario")]
         public int FormularioId { get; set; }
         [Required]
         [StringLength(75)]
