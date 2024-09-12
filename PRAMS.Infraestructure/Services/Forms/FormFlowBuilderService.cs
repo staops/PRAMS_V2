@@ -7,6 +7,7 @@ using PRAMS.Domain.Entities.Flujos.Dto;
 using PRAMS.Domain.Entities.Forms.Dto;
 using PRAMS.Domain.Entities.Forms.Entities;
 using PRAMS.Domain.Models.Flujos;
+using PRAMS.Domain.Models.Forms;
 using PRAMS.Infraestructure.Data.SystemConfiguration;
 using PRAMS.Infraestructure.Shared;
 using System.Reflection;
@@ -20,17 +21,19 @@ namespace PRAMS.Infraestructure.Services.Forms
         private readonly ILogger<IFormFlowBuilderService> _logger;
         private readonly IFormReferidoService _formReferidoService;
         private readonly IFlujosPantallasService _flujosPantallas;
+        private readonly IFormulariosFirmasService _formulariosFirmasService;
 
-        public FormFlowBuilderService(AppConfigDbContext context, IMapper mapper, ILogger<IFormFlowBuilderService> logger, IFormReferidoService formReferidoService, IFlujosPantallasService flujosPantallas)
+        public FormFlowBuilderService(AppConfigDbContext context, IMapper mapper, ILogger<IFormFlowBuilderService> logger, IFormReferidoService formReferidoService, IFlujosPantallasService flujosPantallas, IFormulariosFirmasService formulariosFirmasService)
         {
             _context = context;
             _mapper = mapper;
             _logger = logger;
             _formReferidoService = formReferidoService;
             _flujosPantallas = flujosPantallas;
+            _formulariosFirmasService = formulariosFirmasService;
         }
 
-        public async Task<Result<FormFlowBuilderResult>> ValidaFormulario(FormFlowBuilder formFlowBuilder)
+        public async Task<Result<FormFlowBuilderResult>> ValidaFormulario(FormFlowBuilder formFlowBuilder, string user, string role)
         {
             try
             {
@@ -90,14 +93,62 @@ namespace PRAMS.Infraestructure.Services.Forms
                                     errors.AddRange(invalidFieldsResult.Errors);
 
                                     formFlowBuilderResult.CanContinue = errors.Count == 0;
+                                    formFlowBuilderResult.IsSectionCompleted = tipoProcesoCampoResult.IsSuccess;
                                 }
-                                else
+                                else if (admFlujoFormularioEtapaAccion.TipoAccion == SD.TIPO_ACCION_SEGUIMIENTO_CAMPOS)
                                 {
                                     // Execute the validation of the TipoDatoCampo
                                     Result<bool> dataTypesResult = DataTypesValidation(formFields, formFlowBuilder);
                                     errors.AddRange(dataTypesResult.Errors);
 
+                                    // Execute the validation of the TipoProcesocampo
+                                    Result<bool> tipoProcesoCampoResult = TipoProcesoCampoValidation(formFields, formFlowBuilder);
+
                                     formFlowBuilderResult.CanContinue = errors.Count == 0;
+                                    formFlowBuilderResult.IsSectionCompleted = tipoProcesoCampoResult.IsSuccess;
+                                }
+                                else if (admFlujoFormularioEtapaAccion.TipoAccion == SD.TIPO_ACCION_FIRMAS_PERSONAL)
+                                {
+                                    // Get the previous FormularioEtapa to validate if the previous action is completed
+                                    AdmFlujoFormularioEtapa? admFlujoFormularioEtapaAnterior = await _context.AdmFlujoFormularioEtapas
+                                        .Where(w => w.OrdenEtapa == (formFlowBuilderResult.AdmFlujoFormularioEtapa.OrdenEtapa - 1) && w.FormularioId == formFlowBuilder.FormularioId)
+                                        .FirstOrDefaultAsync();
+
+                                    if (admFlujoFormularioEtapaAnterior is not null)
+                                    {
+                                        formFlowBuilderResult.AdmFlujoFormularioEtapaAnterior = _mapper.Map<AdmFlujoFormularioEtapaDto>(admFlujoFormularioEtapaAnterior);
+
+                                        // Get the previous FormFlujoPantalla to validate if the previous action is completed
+                                        FormFlujoPantalla? formFlujoPantallaAnterior = await _context.FormFlujoPantallas
+                                            .Where(w => w.FormularioId == formFlowBuilder.FormularioId && w.FormaId == formFlowBuilder.Id &&
+                                                   w.OrdenEtapa == admFlujoFormularioEtapaAnterior.OrdenEtapa)
+                                            .OrderByDescending(o => o.FlujoPantallaId)
+                                            .FirstOrDefaultAsync();
+
+                                        if (formFlujoPantallaAnterior is not null && formFlujoPantallaAnterior.EtapaCompletada)
+                                        {
+
+
+                                            formFlowBuilder.Fields.Add("UsuarioId", user);
+                                            formFlowBuilder.Fields.Add("UserTypeID", role);
+
+
+                                            // Execute the validation of the TipoProcesocampo
+                                            Result<bool> tipoProcesoCampoResult = TipoProcesoCampoValidation(formFields, formFlowBuilder);
+                                            errors.AddRange(tipoProcesoCampoResult.Errors);
+
+                                            formFlowBuilderResult.CanContinue = errors.Count == 0;
+                                            formFlowBuilderResult.IsSectionCompleted = tipoProcesoCampoResult.IsSuccess;
+                                        }
+                                        else
+                                        {
+                                            formFlowBuilderResult.CanContinue = false;
+                                            formFlowBuilderResult.IsSectionCompleted = false;
+                                            errors.Add(new Error("No es posible continuar, la acción anterior no está completada"));
+                                        }
+
+
+                                    }
                                 }
 
 
@@ -143,7 +194,7 @@ namespace PRAMS.Infraestructure.Services.Forms
             }
         }
 
-        public async Task<Result<object?>> CreaRegistrosFormulario(FormFlowBuilder formFlowBuilder, string user)
+        public async Task<Result<object>> CreaRegistrosFormulario(FormFlowBuilder formFlowBuilder, string user, string role)
         {
             try
             {
@@ -153,61 +204,97 @@ namespace PRAMS.Infraestructure.Services.Forms
                 List<IError> errors = [];
 
 
-                Result<FormFlowBuilderResult> validationRresult = await ValidaFormulario(formFlowBuilder);
+                Result<FormFlowBuilderResult> validationRresult = await ValidaFormulario(formFlowBuilder, user, role);
                 errors.AddRange(validationRresult.Errors);
                 if (validationRresult.IsSuccess)
                 {
-                    // Just save the data if the form is completed and can continue is true
-                    if (validationRresult.Value.AdmFlujoFormularioEtapaAccion?.Completado == true && validationRresult.Value.CanContinue)
+
+                    // Get the distinct tables to fill from formularioEtapasAcciones
+                    IList<string> tables = validationRresult.Value.AdmFormularioEtapaAccioneCampos?.Select(s => s.TablaBase).Distinct().ToList() ?? new List<string>();
+
+                    foreach (string tableName in tables)
                     {
-
-
-                        if (validationRresult.Value.AdmFlujoFormularioEtapaAccion.TipoAccion == SD.TIPO_ACCION_VALIDACION_CAMPOS)
+                        // Just save the data if the form is completed and can continue is true
+                        if (validationRresult.Value.AdmFlujoFormularioEtapaAccion?.Completado == true && validationRresult.Value.CanContinue)
                         {
-                            // Save the data in the database
-                            Result<dynamic?> saveFormDataResult = await SaveFormData(formFlowBuilder, validationRresult.Value, user);
-                            if (saveFormDataResult.IsSuccess && saveFormDataResult.ValueOrDefault is not null)
-                            {
-                                successs.Add(new Success("The form has been saved successfully"));
 
-                                result = saveFormDataResult.ValueOrDefault;
-                            }
-                            else
+
+                            if (validationRresult.Value.AdmFlujoFormularioEtapaAccion.TipoAccion == SD.TIPO_ACCION_VALIDACION_CAMPOS)
                             {
-                                errors.AddRange(saveFormDataResult.Errors);
-                            }
-                        }
-                        else if (validationRresult.Value.AdmFlujoFormularioEtapaAccion.TipoAccion == SD.TIPO_ACCION_SEGUIMIENTO_CAMPOS)
-                        {
-                            if (formFlowBuilder.Id is not null && formFlowBuilder.Id > 0)
-                            {
-                                // Update the data in the database
-                                Result<dynamic?> updateFormDataResult = await UpdateFormData(formFlowBuilder, validationRresult.Value, user);
-                                if (updateFormDataResult.IsSuccess && updateFormDataResult.ValueOrDefault is not null)
+                                // Save the data in the database
+                                Result<dynamic?> saveFormDataResult = await SaveFormData(formFlowBuilder, validationRresult.Value, tableName, user, role);
+                                if (saveFormDataResult.IsSuccess && saveFormDataResult.ValueOrDefault is not null)
                                 {
-                                    successs.Add(new Success("The form has been updated successfully"));
+                                    successs.Add(new Success("The form has been saved successfully"));
 
-                                    result = updateFormDataResult.ValueOrDefault;
+                                    result = saveFormDataResult.ValueOrDefault;
                                 }
                                 else
                                 {
-                                    errors.AddRange(updateFormDataResult.Errors);
+                                    errors.AddRange(saveFormDataResult.Errors);
                                 }
                             }
-                            else
+                            else if (validationRresult.Value.AdmFlujoFormularioEtapaAccion.TipoAccion == SD.TIPO_ACCION_SEGUIMIENTO_CAMPOS)
                             {
-                                errors.Add(new Error("The form id is required to update the form"));
-                            }
+                                if (formFlowBuilder.Id is not null && formFlowBuilder.Id > 0)
+                                {
+                                    // Update the data in the database
+                                    Result<dynamic?> updateFormDataResult = await UpdateFormData(formFlowBuilder, validationRresult.Value, user);
+                                    if (updateFormDataResult.IsSuccess && updateFormDataResult.ValueOrDefault is not null)
+                                    {
+                                        successs.Add(new Success("The form has been updated successfully"));
 
+                                        result = updateFormDataResult.ValueOrDefault;
+                                    }
+                                    else
+                                    {
+                                        errors.AddRange(updateFormDataResult.Errors);
+                                    }
+                                }
+                                else
+                                {
+                                    errors.Add(new Error("The form id is required to update the form"));
+                                }
+                            }
+                            else if (validationRresult.Value.AdmFlujoFormularioEtapaAccion.TipoAccion == SD.TIPO_ACCION_FIRMAS_PERSONAL)
+                            {
+                                if (result.Value == null)
+                                {
+                                    // Save the data in the database
+                                    Result<dynamic?> saveFormDataResult = await SaveFormData(formFlowBuilder, validationRresult.Value, tableName, user, role);
+                                    if (saveFormDataResult.IsSuccess && saveFormDataResult.ValueOrDefault is not null)
+                                    {
+                                        successs.Add(new Success("The form has been saved successfully"));
+
+                                        result = saveFormDataResult.ValueOrDefault;
+                                    }
+                                    else
+                                    {
+                                        errors.AddRange(saveFormDataResult.Errors);
+                                    }
+                                }
+                                else
+                                {
+                                    // Update the data in the database
+                                    Result<dynamic?> updateFormDataResult = await UpdateFormData(formFlowBuilder, validationRresult.Value, user);
+                                    if (updateFormDataResult.IsSuccess && updateFormDataResult.ValueOrDefault is not null)
+                                    {
+                                        successs.Add(new Success("The form has been updated successfully"));
+
+                                        result = updateFormDataResult.ValueOrDefault;
+                                    }
+                                    else
+                                    {
+                                        errors.AddRange(updateFormDataResult.Errors);
+                                    }
+                                }
+
+                            }
                         }
 
                     }
-                    else
-                    {
-                        result = validationRresult;
-                    }
-                }
 
+                }
 
                 return result.WithErrors(errors);
             }
@@ -218,15 +305,19 @@ namespace PRAMS.Infraestructure.Services.Forms
             }
         }
 
-        private async Task<Result<object?>> SaveFormData(FormFlowBuilder formFlowBuilder, FormFlowBuilderResult formFlow, string user)
+        private async Task<Result<object?>> SaveFormData(FormFlowBuilder formFlowBuilder, FormFlowBuilderResult formFlow, string tableName, string user, string role)
         {
             try
             {
                 Result<FormFlowBuilderObjectResult<object>> result = Result.Ok();
                 List<IError> errors = [];
 
-                switch (formFlow.AdmFlujoFormulario?.TablaBase.ToUpper())
+
+
+
+                switch (tableName.ToUpper())
                 {
+
                     // Save the data in the table FORM_REFERIDOS
                     case SD.FORM_REFERIDOS:
 
@@ -246,24 +337,23 @@ namespace PRAMS.Infraestructure.Services.Forms
                         Result<FormReferidoDto> formReferidoResult = await _formReferidoService.CreateFormReferido(formReferidoInsertDto, user);
                         if (formReferidoResult.IsSuccess)
                         {
-
                             FormFlujoPantallaInsertDto itemToInsert = new()
                             {
                                 FormularioId = formFlowBuilder.FormularioId,
                                 FormaId = formReferidoResult.Value.ReferidoId,
-                                OrdenFlujo = formFlow.AdmFlujoFormularioEtapa.OrdenEtapa,
-                                FlujoEtapa = formFlow.AdmFlujoFormularioEtapa.NombreEtapa,
+                                OrdenEtapa = formFlow.AdmFlujoFormularioEtapa?.OrdenEtapa ?? 0,
+                                FlujoEtapa = formFlow.AdmFlujoFormularioEtapa?.NombreEtapa ?? string.Empty,
                                 FechaFlujo = DateTime.Now,
                                 UsuarioFlujoId = user,
-                                RMO = "TEST-RMO123", // TODO: Get the RMO from the user
-                                NumeroCaso = "TEST-123", // TODO: Get the NumeroCaso from the user
-                                Persona = "TEST-PERSONA", // TODO: Get the Persona from the user
-                                FlujoStatus = formFlow.AdmFlujoFormularioEtapaAccion.NombreAccion,
-                                Notas = "TEST-NOTAS", // TODO: Get the Notas from the user
-                                Comentarios = "TEST-COMENTARIOS", // TODO: Get the Comentarios from the user
-                                Procesado = false,
-                                Region = "TEST-REGION", // TODO: Get the Region from the user
-                                Local = "TEST-LOCAL" // TODO: Get the Local from the user
+                                RMO = string.Empty, // TODO: Get the RMO from the user
+                                NumeroCaso = string.Empty, // TODO: Get the NumeroCaso from the user
+                                Persona = string.Empty, // TODO: Get the Persona from the user
+                                FlujoStatus = formFlow.AdmFlujoFormularioEtapaAccion?.NombreAccion,
+                                Notas = string.Empty, // TODO: Get the Notas from the user
+                                Comentarios = string.Empty, // TODO: Get the Comentarios from the user
+                                EtapaCompletada = formFlow.IsSectionCompleted,
+                                Region = string.Empty, // TODO: Get the Region from the user
+                                Local = string.Empty // TODO: Get the Local from the user
                             };
 
                             Result<FormFlujoPantallaDto> flujoPantalla = await _flujosPantallas.CreateFlujoPantalla(itemToInsert, user);
@@ -284,19 +374,90 @@ namespace PRAMS.Infraestructure.Services.Forms
                                 // Add the errors to the response
                                 errors.AddRange(flujoPantalla.Errors);
                             }
-
                         }
                         else
                         {
                             // Add the errors to the response
                             errors.AddRange(formReferidoResult.Errors);
                         }
+                        break;
+                    case SD.FORM_FORMULARIOSFIRMAS:
+
+                        // Create a new instance of FormFormularioFirmaInsertDto using reflection
+                        FormFormularioFirmaInsertDto formFormularioFirmaDto = new();
+                        foreach (var field in formFlowBuilder.Fields)
+                        {
+                            PropertyInfo? property = formFormularioFirmaDto.GetType().GetProperty(field.Key, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
+                            AdmFlujoFormularioEtapaAccionCampoDto? accioneCampo = formFlow.AdmFormularioEtapaAccioneCampos?.FirstOrDefault(f => f.CampoDBIDField == field.Key);
+                            if (accioneCampo is not null)
+                            {
+                                property?.SetValue(formFormularioFirmaDto, ParserValue(accioneCampo, field.Value));
+                            }
+                        }
+
+                        // Extra fields
+                        formFormularioFirmaDto.UsuarioId = user;
+                        formFormularioFirmaDto.UserTypeID = role;
+                        formFormularioFirmaDto.FechaFirma = DateTime.Now;
+                        formFormularioFirmaDto.FormularioId = formFlowBuilder.FormularioId;
+                        formFormularioFirmaDto.FormularioEtapaId = formFlowBuilder.FormularioEtapaId;
+                        formFormularioFirmaDto.NumCaso = string.Empty;
+
+                        // Save the new record in the database
+                        Result<FormFormularioFirmaDto> formularioFirmaDtoResult = await _formulariosFirmasService.CreateFormularioFirma(formFormularioFirmaDto, user);
+                        if (formularioFirmaDtoResult.IsSuccess)
+                        {
+                            FormFlujoPantallaInsertDto itemToInsert = new()
+                            {
+                                FormularioId = formFlowBuilder.FormularioId,
+                                FormaId = formularioFirmaDtoResult.Value.FormularioId,
+                                OrdenEtapa = formFlow.AdmFlujoFormularioEtapa.OrdenEtapa,
+                                FlujoEtapa = formFlow.AdmFlujoFormularioEtapa.NombreEtapa,
+                                FechaFlujo = DateTime.Now,
+                                UsuarioFlujoId = user,
+                                RMO = formFormularioFirmaDto.Rmo, // TODO: Get the RMO from the user
+                                NumeroCaso = string.Empty, // TODO: Get the NumeroCaso from the user
+                                Persona = string.Empty, // TODO: Get the Persona from the user
+                                FlujoStatus = formFlow.AdmFlujoFormularioEtapaAccion.NombreAccion,
+                                Notas = string.Empty, // TODO: Get the Notas from the user
+                                Comentarios = string.Empty, // TODO: Get the Comentarios from the user
+                                EtapaCompletada = formFlow.IsSectionCompleted,
+                                Region = string.Empty, // TODO: Get the Region from the user
+                                Local = string.Empty // TODO: Get the Local from the user
+                            };
+
+                            Result<FormFlujoPantallaDto> flujoPantalla = await _flujosPantallas.CreateFlujoPantalla(itemToInsert, user);
+                            if (flujoPantalla.IsSuccess)
+                            {
+                                // Set the result to the response
+                                FormFlowBuilderObjectResult<FormFormularioFirmaDto> formFlowBuilderObjectResult = new()
+                                {
+                                    Object = formularioFirmaDtoResult.Value,
+                                    formFlujoPantallaInsertDto = flujoPantalla.ValueOrDefault,
+                                    CanContinue = true
+                                };
+                                return formFlowBuilderObjectResult;
+                            }
+                            else
+                            {
+                                // Add the errors to the response
+                                errors.AddRange(flujoPantalla.Errors);
+                            }
+                        }
+                        else
+                        {
+                            // Add the errors to the response
+                            errors.AddRange(formularioFirmaDtoResult.Errors);
+                        }
+
+
 
                         break;
                     default:
                         errors.Add(new Error($"La tabla base {formFlow.AdmFlujoFormulario?.TablaBase} no es válida"));
                         break;
                 }
+
 
 
                 if (errors.Count > 0)
@@ -333,7 +494,7 @@ namespace PRAMS.Infraestructure.Services.Forms
                             FormReferidoUpdateDto formReferidoUpdateDto = _mapper.Map<FormReferidoUpdateDto>(formReferidoResult.Value);
                             foreach (var field in formFlowBuilder.Fields)
                             {
-                                PropertyInfo? property = formReferidoUpdateDto.GetType().GetProperty(field.Key);
+                                PropertyInfo? property = formReferidoUpdateDto.GetType().GetProperty(field.Key, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
                                 AdmFlujoFormularioEtapaAccionCampoDto? accioneCampo = formFlow.AdmFormularioEtapaAccioneCampos?.FirstOrDefault(f => f.CampoDBIDField == field.Key);
                                 if (accioneCampo is not null)
                                 {
@@ -350,19 +511,19 @@ namespace PRAMS.Infraestructure.Services.Forms
                                 {
                                     FormularioId = formFlowBuilder.FormularioId,
                                     FormaId = formReferidoResult.Value.ReferidoId,
-                                    OrdenFlujo = formFlow.AdmFlujoFormularioEtapa.OrdenEtapa,
+                                    OrdenEtapa = formFlow.AdmFlujoFormularioEtapa.OrdenEtapa,
                                     FlujoEtapa = formFlow.AdmFlujoFormularioEtapa.NombreEtapa,
                                     FechaFlujo = DateTime.Now,
                                     UsuarioFlujoId = user,
-                                    RMO = "TEST-RMO123", // TODO: Get the RMO from the user
-                                    NumeroCaso = "TEST-123", // TODO: Get the NumeroCaso from the user
-                                    Persona = "TEST-PERSONA", // TODO: Get the Persona from the user
+                                    RMO = formReferidoUpdateDto.RMO ?? string.Empty, // TODO: Get the RMO from the user
+                                    NumeroCaso = string.Empty, // TODO: Get the NumeroCaso from the user
+                                    Persona = string.Empty, // TODO: Get the Persona from the user
                                     FlujoStatus = formFlow.AdmFlujoFormularioEtapaAccion.NombreAccion,
-                                    Notas = "TEST-NOTAS", // TODO: Get the Notas from the user
-                                    Comentarios = "TEST-COMENTARIOS", // TODO: Get the Comentarios from the user
-                                    Procesado = false,
-                                    Region = "TEST-REGION", // TODO: Get the Region from the user
-                                    Local = "TEST-LOCAL" // TODO: Get the Local from the user
+                                    Notas = string.Empty, // TODO: Get the Notas from the user
+                                    Comentarios = string.Empty, // TODO: Get the Comentarios from the user
+                                    EtapaCompletada = formFlow.IsSectionCompleted,
+                                    Region = string.Empty, // TODO: Get the Region from the user
+                                    Local = string.Empty // TODO: Get the Local from the user
                                 };
 
                                 Result<FormFlujoPantallaDto> flujoPantalla = await _flujosPantallas.CreateFlujoPantalla(itemToInsert, user);
@@ -682,7 +843,7 @@ namespace PRAMS.Infraestructure.Services.Forms
 
         private static bool FirmaTS(string value)
         {
-            return value.Length == 8;
+            return value is not null;
         }
 
         private static bool FirmaSup(string value)

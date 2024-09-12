@@ -10,6 +10,7 @@ namespace PRAMS.Domain.Models.Flujos
         public AdmFlujoFormularioEtapa()
         {
             AdmFlujoFormularioEtapaAcciones = new HashSet<AdmFlujoFormularioEtapaAccion>();
+            FormFormularioFirmas = new HashSet<FormFormularioFirma>();
         }
 
         [Key]

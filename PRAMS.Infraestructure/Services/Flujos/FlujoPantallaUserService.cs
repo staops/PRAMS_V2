@@ -27,7 +27,7 @@ namespace PRAMS.Infraestructure.Services.Flujos
             try
             {
                 // Validate if the PantallaId exists
-                var pantalla = await _context.AdmFlujoPantallaUsers.FindAsync(admFlujoPantallaUserInsertDto.FormularioEtapaId);
+                var pantalla = await _context.AdmFlujoFormularioEtapas.FindAsync(admFlujoPantallaUserInsertDto.FormularioEtapaId);
                 if (pantalla == null)
                 {
                     return Result.Fail<AdmFlujoPantallaUserDto>(new Error($"The screen with id {admFlujoPantallaUserInsertDto.FormularioEtapaId} does not exist"));
@@ -54,7 +54,7 @@ namespace PRAMS.Infraestructure.Services.Flujos
             try
             {
                 var admFlujoPantallaUser = await _context.AdmFlujoPantallaUsers
-                    .Where(w => w.FlujoUserID == flujoUserID)
+                    .Where(w => w.FlujoUserID == flujoUserID && w.Activo)
                     .FirstOrDefaultAsync();
 
                 if (admFlujoPantallaUser == null)
@@ -81,7 +81,7 @@ namespace PRAMS.Infraestructure.Services.Flujos
             try
             {
                 var admFlujoPantallaUser = await _context.AdmFlujoPantallaUsers
-                    .Where(w => w.FlujoUserID == flujoUserID)
+                    .Where(w => w.FlujoUserID == flujoUserID && w.Activo)
                     .FirstOrDefaultAsync();
 
                 if (admFlujoPantallaUser == null)
@@ -106,7 +106,7 @@ namespace PRAMS.Infraestructure.Services.Flujos
             try
             {
                 var admFlujoPantallaUsers = await _context.AdmFlujoPantallaUsers
-                    .Where(w => w.FormularioEtapaId == formularioEtapaId)
+                    .Where(w => w.FormularioEtapaId == formularioEtapaId && w.Activo)
                     .ToListAsync();
 
                 if (admFlujoPantallaUsers == null)
@@ -129,7 +129,10 @@ namespace PRAMS.Infraestructure.Services.Flujos
         {
             try
             {
-                var admFlujoPantallaUser = await _context.AdmFlujoPantallaUsers.FindAsync(admFlujoPantallaUserUpdateDto.FlujoUserID);
+                var admFlujoPantallaUser = await _context.AdmFlujoPantallaUsers
+                    .Where(w => w.FlujoUserID == admFlujoPantallaUserUpdateDto.FlujoUserID && w.Activo)
+                    .FirstOrDefaultAsync();
+
                 if (admFlujoPantallaUser == null)
                 {
                     return Result.Fail<AdmFlujoPantallaUserDto>(new Error($"The form flow with id {admFlujoPantallaUserUpdateDto.FlujoUserID} does not exist"));
