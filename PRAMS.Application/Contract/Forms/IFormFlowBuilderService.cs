@@ -7,6 +7,7 @@ namespace PRAMS.Application.Contract.Forms
     {
         Task<Result<FormFlowBuilderResult>> ValidaFormulario(FormFlowBuilder formFlowBuilder, string user, string role);
         Task<Result<object>> CreaRegistrosFormulario(FormFlowBuilder formFlowBuilder, string user, string role);
+        Task<Result<object>> SignFormulario(FormSignatureBuilder formSignature, string user, string role);
 
     }
 }

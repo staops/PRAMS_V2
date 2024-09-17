@@ -109,17 +109,28 @@ namespace PRAMS.Configuration.Controllers
             }
         }
 
-        [HttpGet("ByFormaId/{formaId}")]
+        /// <summary>
+        /// Obtiene un listado de los flujos de pantallas que pertenecen a un formulario y a una forma
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// Para obtener los flujos de pantallas que pertenecen a un formulario y a una forma se debe de enviar el id del formulario y el id de la forma.
+        /// 
+        /// </remarks>
+        /// <param name="formularioId">Id del formulario al que pertenece el flujo de pantalla</param>
+        /// <param name="formaId">Id del formulario</param>
+        /// <returns></returns>
+        [HttpGet("ByFormaId/{formularioId}/{formaId}")]
         [Authorize]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<ICollection<FormFlujoPantallaDto>>))]
         [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
-        public async Task<IActionResult> GetFlujosPantallasByFormaId(int formaId)
+        public async Task<IActionResult> GetFlujosPantallasByFormaId(int formularioId, int formaId)
         {
             try
             {
-                var result = await _flujosPantallasService.GetFlujosPantallasByFormaId(formaId);
+                var result = await _flujosPantallasService.GetFlujosPantallasByFormaId(formaId, formularioId);
                 if (result.IsSuccess)
                 {
                     _logger.LogInformation("Success in GetFlujosPantallasByFormaId Result:{@result}", result.Value);

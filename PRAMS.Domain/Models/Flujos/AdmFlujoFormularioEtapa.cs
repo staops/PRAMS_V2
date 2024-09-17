@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PRAMS.Domain.Models.Flujos
 {
-    [Table("Adm_FlujoFormularioEtapas")]
+    [Table("Adm_FlujosFormulariosEtapas")]
     public class AdmFlujoFormularioEtapa
     {
         public AdmFlujoFormularioEtapa()

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PRAMS.Domain.Models.Flujos
 {
-    [Table("Adm_FormularioEtapasAccionesCampos")]
+    [Table("Adm_FlujosFormulariosEtapasAccionesCampos")]
     public class AdmFormularioEtapaAccioneCampo
     {
         [Key]

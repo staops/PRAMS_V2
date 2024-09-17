@@ -12,6 +12,7 @@ using PRAMS.Infraestructure.Services.Flujos;
 using PRAMS.Infraestructure.Services.Forms;
 using PRAMS.Infraestructure.Services.SystemConfiguration;
 using Serilog;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -128,6 +129,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(option =>
 {
     option.EnableAnnotations();
+    option.SwaggerDoc("v1", new OpenApiInfo { Title = "PRAMS.Configuration", Version = "v1" });
+
+    // Set the comments path for the Swagger JSON and UI.
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    option.IncludeXmlComments(xmlPath);
+
     option.AddSecurityDefinition(name: JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -195,7 +203,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 // Apply pending migrations automatically.
-//ApplyMigrations();
+ApplyMigrations();
 
 app.Run();
 

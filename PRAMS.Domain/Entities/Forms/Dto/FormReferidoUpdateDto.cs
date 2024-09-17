@@ -10,7 +10,7 @@
         public DateTime? HoraRecibo { get; set; }
         public string? AccionTomada { get; set; }
         public string? Narrativa_Situacion { get; set; }
-        public int? ReferidoPor { get; set; }
+        public string? ReferidoPor { get; set; }
         public string? RelacionAdulto { get; set; }
         public string? ServicioSolicitado { get; set; }
         public DateTime? ServicioFechaNotificacion { get; set; }
@@ -26,6 +26,10 @@
         public int? AgenciaId { get; set; }
         public string? AgenciaSolicitadoPara { get; set; }
         public string? AgenciaSolicitud { get; set; }
+        public string? SupervisorUser { get; set; }
+        public DateTime? SupervisorDate { get; set; }
+        public string? ReferidoOrgenId { get; set; }
+
 
     }
 }

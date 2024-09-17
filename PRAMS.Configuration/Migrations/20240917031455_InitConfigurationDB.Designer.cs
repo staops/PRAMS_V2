@@ -12,7 +12,7 @@ using PRAMS.Infraestructure.Data.SystemConfiguration;
 namespace PRAMS.Configuration.Migrations
 {
     [DbContext(typeof(AppConfigDbContext))]
-    [Migration("20240912072736_InitConfigurationDB")]
+    [Migration("20240917031455_InitConfigurationDB")]
     partial class InitConfigurationDB
     {
         /// <inheritdoc />
@@ -210,7 +210,7 @@ namespace PRAMS.Configuration.Migrations
 
                     b.HasIndex("NotaStartId");
 
-                    b.ToTable("Adm_FlujoFormularioEtapas");
+                    b.ToTable("Adm_FlujosFormulariosEtapas");
 
                     b.HasData(
                         new
@@ -220,7 +220,7 @@ namespace PRAMS.Configuration.Migrations
                             ColorEtapa = "#f7f72f",
                             Completado = false,
                             Concurrencia = false,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 692, DateTimeKind.Local).AddTicks(543),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 571, DateTimeKind.Local).AddTicks(1150),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             FormularioId = 1,
                             NombreEtapa = "Referido Nuevo",
@@ -234,7 +234,7 @@ namespace PRAMS.Configuration.Migrations
                             ColorEtapa = "#3c7efa",
                             Completado = false,
                             Concurrencia = false,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 692, DateTimeKind.Local).AddTicks(550),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 571, DateTimeKind.Local).AddTicks(1156),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             FormularioId = 1,
                             NombreEtapa = "Referido Seguimiento",
@@ -248,7 +248,7 @@ namespace PRAMS.Configuration.Migrations
                             ColorEtapa = "#8c57f7",
                             Completado = false,
                             Concurrencia = false,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 692, DateTimeKind.Local).AddTicks(555),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 571, DateTimeKind.Local).AddTicks(1159),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             FormularioId = 1,
                             NombreEtapa = "Referido Firma TS",
@@ -262,7 +262,7 @@ namespace PRAMS.Configuration.Migrations
                             Activo = true,
                             Completado = false,
                             Concurrencia = false,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 692, DateTimeKind.Local).AddTicks(558),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 571, DateTimeKind.Local).AddTicks(1161),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             FormularioId = 1,
                             NombreEtapa = "Referido Firma Sup",
@@ -339,7 +339,7 @@ namespace PRAMS.Configuration.Migrations
                             Activo = true,
                             Completado = true,
                             Concurrencia = false,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 692, DateTimeKind.Local).AddTicks(861),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 571, DateTimeKind.Local).AddTicks(1366),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             FormularioEtapaId = 1,
                             NombreAccion = "Validacion Campos",
@@ -353,7 +353,7 @@ namespace PRAMS.Configuration.Migrations
                             Activo = true,
                             Completado = true,
                             Concurrencia = false,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 692, DateTimeKind.Local).AddTicks(868),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 571, DateTimeKind.Local).AddTicks(1370),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             FormularioEtapaId = 2,
                             NombreAccion = "Determinacion Referido",
@@ -367,7 +367,7 @@ namespace PRAMS.Configuration.Migrations
                             Activo = true,
                             Completado = true,
                             Concurrencia = false,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 692, DateTimeKind.Local).AddTicks(872),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 571, DateTimeKind.Local).AddTicks(1373),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             FormularioEtapaId = 3,
                             NombreAccion = "Firmas Personal TS",
@@ -381,7 +381,7 @@ namespace PRAMS.Configuration.Migrations
                             Activo = true,
                             Completado = true,
                             Concurrencia = false,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 692, DateTimeKind.Local).AddTicks(875),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 571, DateTimeKind.Local).AddTicks(1375),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             FormularioEtapaId = 4,
                             NombreAccion = "Firmas Personal Supervisor",
@@ -572,7 +572,7 @@ namespace PRAMS.Configuration.Migrations
 
                     b.HasIndex("FormularioEtapaAccionId");
 
-                    b.ToTable("Adm_FormularioEtapasAccionesCampos");
+                    b.ToTable("Adm_FlujosFormulariosEtapasAccionesCampos");
 
                     b.HasData(
                         new
@@ -688,7 +688,7 @@ namespace PRAMS.Configuration.Migrations
                             CampoDB = "Firma TS",
                             CampoDBIDField = "RMO",
                             CampoDBLongitud = 0,
-                            CampoDBTipo = "Integro",
+                            CampoDBTipo = "Texto",
                             FormularioEtapaAccionId = 3,
                             OrdenAccion = 1,
                             Resultado = "La Firma del Supervisor de Trabajador Social debe estar Completada",
@@ -698,6 +698,19 @@ namespace PRAMS.Configuration.Migrations
                         new
                         {
                             FormularioEtapaAccionCampoId = 10,
+                            CampoDB = "RMO",
+                            CampoDBIDField = "RMO",
+                            CampoDBLongitud = 0,
+                            CampoDBTipo = "Texto",
+                            FormularioEtapaAccionId = 3,
+                            OrdenAccion = 1,
+                            Resultado = "Rmo es requerido",
+                            TablaBase = "Form_Referidos",
+                            TipoProcesoCampo = "TieneValor"
+                        },
+                        new
+                        {
+                            FormularioEtapaAccionCampoId = 11,
                             CampoDB = "Firma Supervisor",
                             CampoDBIDField = "UserTypeID",
                             CampoDBLongitud = 0,
@@ -818,6 +831,10 @@ namespace PRAMS.Configuration.Migrations
                     b.Property<DateTime?>("FechaFirma")
                         .IsRequired()
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("FormaId")
+                        .HasColumnType("int")
+                        .HasColumnName("ID_Forma");
 
                     b.Property<int>("FormularioEtapaId")
                         .HasColumnType("int")
@@ -994,12 +1011,13 @@ namespace PRAMS.Configuration.Migrations
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
 
-                    b.Property<int?>("ReferidoOrigenId")
-                        .HasColumnType("int")
+                    b.Property<string>("ReferidoOrgenId")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ID_ReferidoOrigen");
 
-                    b.Property<int?>("ReferidoPor")
-                        .HasColumnType("int");
+                    b.Property<string>("ReferidoPor")
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("RelacionAdulto")
                         .HasMaxLength(25)
@@ -1025,7 +1043,7 @@ namespace PRAMS.Configuration.Migrations
 
                     b.HasKey("ReferidoId");
 
-                    b.ToTable("Form_Referridos");
+                    b.ToTable("Form_Referidos");
                 });
 
             modelBuilder.Entity("PRAMS.Domain.Models.SystemConfiguration.AdmMenuElements", b =>
@@ -1078,7 +1096,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "Home",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8202),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9638),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-home",
                             Nombre = "Home",
@@ -1090,7 +1108,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "SystemConfiguration",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8212),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9643),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             Nombre = "System Configuration",
@@ -1102,7 +1120,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "Parametros",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8218),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9648),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             MenuElementParentId = 2,
@@ -1115,7 +1133,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "Categorias",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8223),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9654),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             MenuElementParentId = 2,
@@ -1128,7 +1146,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "Ajustes",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8228),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9661),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             Nombre = "Ajustes",
@@ -1140,7 +1158,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "Roles",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8233),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9666),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             MenuElementParentId = 5,
@@ -1153,7 +1171,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "Usuarios",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8238),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9671),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             MenuElementParentId = 5,
@@ -1166,7 +1184,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "Otro",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8242),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9675),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             MenuElementParentId = 5,
@@ -1179,7 +1197,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "AgregarRol",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8247),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9679),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             MenuElementParentId = 6,
@@ -1192,7 +1210,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "EditarRol",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8251),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9682),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             MenuElementParentId = 6,
@@ -1205,7 +1223,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "EliminarRol",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8256),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9687),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             MenuElementParentId = 6,
@@ -1218,7 +1236,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "AgregarUsuario",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8261),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9691),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             MenuElementParentId = 7,
@@ -1231,7 +1249,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "EditarUsuario",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8266),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9697),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             MenuElementParentId = 7,
@@ -1244,7 +1262,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "EliminarUsuario",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8271),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9702),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             MenuElementParentId = 7,
@@ -1257,7 +1275,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "EliminarUsuario",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8276),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9742),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             MenuElementParentId = 14,
@@ -1270,7 +1288,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "EliminarUsuario",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8280),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9747),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             MenuElementParentId = 14,
@@ -1283,7 +1301,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = true,
                             Controlador = "EliminarUsuario",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8285),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9752),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             Nombre = "Borrado lógico",
@@ -1295,7 +1313,7 @@ namespace PRAMS.Configuration.Migrations
                             Accion = "Index",
                             Activo = false,
                             Controlador = "EliminarUsuario",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8289),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9757),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Icono = "fas fa-cogs",
                             Nombre = "Elmento eliminado",
@@ -1339,7 +1357,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 1,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8405),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9810),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 1,
                             RoleId = "SU"
@@ -1348,7 +1366,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 2,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8410),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9813),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 2,
                             RoleId = "SU"
@@ -1357,7 +1375,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 3,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8413),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9816),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 3,
                             RoleId = "SU"
@@ -1366,7 +1384,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 4,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8417),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9818),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 4,
                             RoleId = "SU"
@@ -1375,7 +1393,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 5,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8420),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9820),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 5,
                             RoleId = "SU"
@@ -1384,7 +1402,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 6,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8423),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9822),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 6,
                             RoleId = "SU"
@@ -1393,7 +1411,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 7,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8426),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9825),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 7,
                             RoleId = "SU"
@@ -1402,7 +1420,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 8,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8429),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9827),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 8,
                             RoleId = "SU"
@@ -1411,7 +1429,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 9,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8432),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9829),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 9,
                             RoleId = "SU"
@@ -1420,7 +1438,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 10,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8435),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9831),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 10,
                             RoleId = "SU"
@@ -1429,7 +1447,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 11,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8438),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9833),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 11,
                             RoleId = "SU"
@@ -1438,7 +1456,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 12,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8441),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9835),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 12,
                             RoleId = "SU"
@@ -1447,7 +1465,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 13,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8444),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9837),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 13,
                             RoleId = "SU"
@@ -1456,7 +1474,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 14,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8447),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9839),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 14,
                             RoleId = "SU"
@@ -1465,7 +1483,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 15,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8450),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9842),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 15,
                             RoleId = "SU"
@@ -1474,7 +1492,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 16,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8453),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9844),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 16,
                             RoleId = "SU"
@@ -1483,7 +1501,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 17,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8456),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9846),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 17,
                             RoleId = "SU"
@@ -1492,7 +1510,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             MenuRoleId = 18,
                             Activo = false,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8459),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9848),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             MenuElementId = 18,
                             RoleId = "SU"
@@ -1568,7 +1586,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 1,
                             Activo = true,
                             Categoria = "Clasificacion Empleados",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(4958),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7226),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Clasificaciones"
                         },
@@ -1577,16 +1595,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 2,
                             Activo = true,
                             Categoria = "Curso Aprobado",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(4969),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Descripcion = ""
-                        },
-                        new
-                        {
-                            CategoriaID = 3,
-                            Activo = true,
-                            Categoria = "Curso Aprobado Demo",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(4973),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7231),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         },
@@ -1595,7 +1604,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 4,
                             Activo = true,
                             Categoria = "Tipo Impedimento",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(4976),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7234),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         },
@@ -1604,7 +1613,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 5,
                             Activo = true,
                             Categoria = "Tipo Nombramiento",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(4980),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7236),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         },
@@ -1613,7 +1622,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 6,
                             Activo = true,
                             Categoria = "Pueblos",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(5036),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7237),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Def Pueblos con Dos Niveles de Filtros",
                             TX_Filtro1_Nombre = "Estado",
@@ -1624,7 +1633,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 7,
                             Activo = true,
                             Categoria = "Categoria Licencias",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(5041),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7241),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         },
@@ -1633,17 +1642,17 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 8,
                             Activo = true,
                             Categoria = "Firmas",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(5045),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7243),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "",
-                            TX_Filtro1_Nombre = "Posición/Puesto"
+                            TX_Filtro1_Nombre = "Posición / Puesto"
                         },
                         new
                         {
                             CategoriaID = 9,
                             Activo = true,
                             Categoria = "Acciones",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(5048),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7245),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         },
@@ -1652,7 +1661,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 10,
                             Activo = true,
                             Categoria = "Genero",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(5054),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7246),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         },
@@ -1661,7 +1670,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 11,
                             Activo = true,
                             Categoria = "Region",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(5058),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7250),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         },
@@ -1670,7 +1679,7 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 12,
                             Activo = true,
                             Categoria = "Tipo Convocatoria",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(5061),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7252),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         },
@@ -1679,16 +1688,16 @@ namespace PRAMS.Configuration.Migrations
                             CategoriaID = 13,
                             Activo = true,
                             Categoria = "Dependencias",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(5064),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7253),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = ""
                         },
                         new
                         {
-                            CategoriaID = 14,
+                            CategoriaID = 16,
                             Activo = true,
                             Categoria = "Entidades Municipio",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(5068),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7255),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Def Municipios Tres Niveles Ejemplo",
                             TX_Filtro1_Nombre = "Region",
@@ -1697,67 +1706,64 @@ namespace PRAMS.Configuration.Migrations
                         },
                         new
                         {
-                            CategoriaID = 15,
+                            CategoriaID = 17,
                             Activo = true,
                             Categoria = "Cantidad Solicitudes",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(5072),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7256),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Numero de Solicitudes realizadas 2Segunda, etc."
                         },
                         new
                         {
-                            CategoriaID = 16,
-                            Activo = true,
-                            Categoria = "Grados Academicos",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(5075),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Descripcion = "Grados Academicos",
-                            TX_Filtro1_Nombre = "Region",
-                            TX_Filtro2_Nombre = "Estado",
-                            TX_Filtro3_Nombre = "Pais"
-                        },
-                        new
-                        {
-                            CategoriaID = 17,
-                            Activo = true,
-                            Categoria = "Tipo de Documentos",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(5079),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Descripcion = "Tipos de Documentos para Cargas"
-                        },
-                        new
-                        {
-                            CategoriaID = 18,
-                            Activo = true,
-                            Categoria = "Tipo Reportes",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(5083),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Descripcion = "Tipos de Reportes para Tablas de Reportes Admin"
-                        },
-                        new
-                        {
                             CategoriaID = 19,
                             Activo = true,
-                            Categoria = "RolesReportes",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(5087),
+                            Categoria = "Grados Academicos",
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7258),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Descripcion = "Tipos de Roles para Reportes"
+                            Descripcion = "Tipos de Grados Academicos"
                         },
                         new
                         {
                             CategoriaID = 20,
                             Activo = true,
-                            Categoria = "RolesMenu",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(5091),
+                            Categoria = "Tipo de Documentos",
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7260),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Descripcion = "Tipos de Roles para Menu Asignacion Roles"
+                            Descripcion = "Tipos de Documentos para Cargas"
                         },
                         new
                         {
                             CategoriaID = 21,
                             Activo = true,
+                            Categoria = "Tipo Reportes",
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7261),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Tipos de Reportes para Tablas de Reportes Admin"
+                        },
+                        new
+                        {
+                            CategoriaID = 22,
+                            Activo = true,
+                            Categoria = "RolesReportes",
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7313),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Tipos de Roles para Reportes"
+                        },
+                        new
+                        {
+                            CategoriaID = 23,
+                            Activo = true,
+                            Categoria = "RolesMenu",
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7314),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Tipos de Roles para Menu Asignacion Roles"
+                        },
+                        new
+                        {
+                            CategoriaID = 24,
+                            Activo = true,
                             Categoria = "TipoCasos",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(5094),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7316),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Tipo de Casos Flujos",
                             TX_Filtro1_Nombre = "Formulario",
@@ -1765,58 +1771,142 @@ namespace PRAMS.Configuration.Migrations
                         },
                         new
                         {
-                            CategoriaID = 22,
+                            CategoriaID = 25,
                             Activo = true,
                             Categoria = "TipoEtapa",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(5098),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7318),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Tipos de Etapas de Formularios"
                         },
                         new
                         {
-                            CategoriaID = 23,
+                            CategoriaID = 26,
                             Activo = true,
                             Categoria = "TipoAcciones",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(5101),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7320),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Etapas de FLujo Acciones de Validadiones"
                         },
                         new
                         {
-                            CategoriaID = 24,
+                            CategoriaID = 27,
                             Activo = true,
                             Categoria = "TipoProceso",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(5105),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7321),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Etapas Flujo Acciones Tipo de Proceso"
                         },
                         new
                         {
-                            CategoriaID = 25,
+                            CategoriaID = 28,
                             Activo = true,
                             Categoria = "CampoDBTipo",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(5107),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7323),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Tipos de Campos DB para Validaciones"
                         },
                         new
                         {
-                            CategoriaID = 26,
+                            CategoriaID = 29,
                             Activo = true,
                             Categoria = "TipoProcesoCampo",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(5110),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7325),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Como se procesan las Acciones Campo de Validaciones"
                         },
                         new
                         {
-                            CategoriaID = 27,
+                            CategoriaID = 30,
                             Activo = true,
                             Categoria = "TipoUsuarios",
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(5114),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7326),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Tipo de Usuarios Sistema",
                             TX_Filtro1_Nombre = "Rol ID"
+                        },
+                        new
+                        {
+                            CategoriaID = 31,
+                            Activo = true,
+                            Categoria = "TipoPersonas",
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7328),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Para Pantallas de Personas Link"
+                        },
+                        new
+                        {
+                            CategoriaID = 32,
+                            Activo = true,
+                            Categoria = "Relaciones",
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7329),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Para Pantalla de Personas Link Relacion"
+                        },
+                        new
+                        {
+                            CategoriaID = 33,
+                            Activo = true,
+                            Categoria = "ServiciosSolicitados",
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7331),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Servicios para los Referidos",
+                            TX_Filtro1_Nombre = "Tipo de Servicio"
+                        },
+                        new
+                        {
+                            CategoriaID = 34,
+                            Activo = true,
+                            Categoria = "DeterminacionReferido",
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7332),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Determinaciones de los Referidos",
+                            TX_Filtro1_Nombre = "Proxima Etapa"
+                        },
+                        new
+                        {
+                            CategoriaID = 35,
+                            Activo = true,
+                            Categoria = "Antecedentes",
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7334),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Antecedentes para los Referidos"
+                        },
+                        new
+                        {
+                            CategoriaID = 36,
+                            Activo = true,
+                            Categoria = "ClasificacionReferido",
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7335),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Nivel de prioridad del Referido"
+                        },
+                        new
+                        {
+                            CategoriaID = 37,
+                            Activo = true,
+                            Categoria = "AsignacionLocalizacioon",
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7337),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            TX_Filtro1_Nombre = "Oficina / Local"
+                        },
+                        new
+                        {
+                            CategoriaID = 38,
+                            Activo = true,
+                            Categoria = "AgenciaSolicitadoPara",
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7340),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Para los Tipos de Solicitud de Agencia"
+                        },
+                        new
+                        {
+                            CategoriaID = 39,
+                            Activo = true,
+                            Categoria = "OrigenReferido",
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(7341),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Referido Campo OrigenReferido"
                         });
                 });
 
@@ -1899,1656 +1989,1850 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 1,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6443),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8345),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Conserje II"
+                            Descripcion = "",
+                            Parametro = "Abogado"
                         },
                         new
                         {
                             ParamterosID = 2,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6451),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8349),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Reparador(a) Equipo de Oficina"
+                            Descripcion = "",
+                            Parametro = "Abogado Principal"
                         },
                         new
                         {
                             ParamterosID = 3,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6454),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8351),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Carpintero(a)"
+                            Descripcion = "",
+                            Parametro = "Abogado Senior"
                         },
                         new
                         {
                             ParamterosID = 4,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6457),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8353),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Plomero"
+                            Descripcion = "",
+                            Parametro = "Administrador de Bases de Datos"
                         },
                         new
                         {
                             ParamterosID = 5,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6460),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8355),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Ebanista"
+                            Descripcion = "",
+                            Parametro = "Administrador de Sistemas de Oficina I"
                         },
                         new
                         {
                             ParamterosID = 6,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6464),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8358),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Abogado"
+                            Descripcion = "",
+                            Parametro = "Administrador de Sistemas de Oficina II"
                         },
                         new
                         {
                             ParamterosID = 7,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6467),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8360),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Abogado Principal"
+                            Descripcion = "",
+                            Parametro = "Administrador de Sistemas de Oficina III"
                         },
                         new
                         {
                             ParamterosID = 8,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6469),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8361),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Abogado Senior"
+                            Descripcion = "",
+                            Parametro = "Agente Comprador"
                         },
                         new
                         {
                             ParamterosID = 9,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6471),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8363),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Administrador de Bases de Datos"
+                            Descripcion = "",
+                            Parametro = "Analista de Presupuesto"
                         },
                         new
                         {
                             ParamterosID = 10,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6475),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8366),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Administrador de Sistemas de Oficina I"
+                            Descripcion = "",
+                            Parametro = "Analista en Administracion de Recursos Humanos"
                         },
                         new
                         {
                             ParamterosID = 11,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6477),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8367),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Administrador de Sistemas de Oficina II"
+                            Descripcion = "",
+                            Parametro = "Analista en Administracion de Recursos Humanos Senior"
                         },
                         new
                         {
                             ParamterosID = 12,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6479),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8369),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Administrador de Sistemas de Oficina III"
+                            Descripcion = "",
+                            Parametro = "Analista en Administracion de Recursos Humanos y Relaciones Laborales"
                         },
                         new
                         {
                             ParamterosID = 13,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6481),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8370),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Agente Comprador"
+                            Descripcion = "",
+                            Parametro = "Analista en Determinacion de Incapacidad I"
                         },
                         new
                         {
                             ParamterosID = 14,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6483),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8371),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Analista de Presupuesto"
+                            Descripcion = "",
+                            Parametro = "Analista en Determinacion de Incapacidad II"
                         },
                         new
                         {
                             ParamterosID = 15,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6485),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8373),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Analista en Administracion de Recursos Humanos"
+                            Descripcion = "",
+                            Parametro = "Analista en Determinacion de Incapacidad III"
                         },
                         new
                         {
                             ParamterosID = 16,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6486),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8374),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Analista en Administracion de Recursos Humanos Senior"
+                            Descripcion = "",
+                            Parametro = "Analista en Determinacion de Incapacidad IV"
                         },
                         new
                         {
                             ParamterosID = 17,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6488),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8375),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Analista en Administracion de Recursos Humanos y Relaciones Laborales"
+                            Descripcion = "",
+                            Parametro = "Analista en Relaciones Laborales"
                         },
                         new
                         {
                             ParamterosID = 18,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6492),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8378),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Analista en Determinacion de Incapacidad I"
+                            Descripcion = "",
+                            Parametro = "Artista Grafico"
                         },
                         new
                         {
                             ParamterosID = 19,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6494),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8379),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Analista en Determinacion de Incapacidad II"
+                            Descripcion = "",
+                            Parametro = "Asistente de Analistas en Determinacion de Incapacidad"
                         },
                         new
                         {
                             ParamterosID = 20,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6495),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8380),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Analista en Determinacion de Incapacidad III"
+                            Descripcion = "",
+                            Parametro = "Asistente de Cuidado Diurno"
                         },
                         new
                         {
                             ParamterosID = 21,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6497),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8382),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Analista en Determinacion de Incapacidad IV"
+                            Descripcion = "",
+                            Parametro = "Asistente de Programa Federal"
                         },
                         new
                         {
                             ParamterosID = 22,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6499),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8383),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Analista en Relaciones Laborales"
+                            Descripcion = "",
+                            Parametro = "Asistente de Servicios de Alimentos"
                         },
                         new
                         {
                             ParamterosID = 23,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6501),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8384),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Artista Grafico"
+                            Descripcion = "",
+                            Parametro = "Asistente de Servicios Sociales"
                         },
                         new
                         {
                             ParamterosID = 24,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6503),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8385),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Asistente de Analistas en Determinacion de Incapacidad"
+                            Descripcion = "",
+                            Parametro = "Auditor Programatico de Servicios Sociales"
                         },
                         new
                         {
                             ParamterosID = 25,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6505),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8387),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Asistente de Cuidado Diurno"
+                            Descripcion = "",
+                            Parametro = "Auxiliar Administrativo"
                         },
                         new
                         {
                             ParamterosID = 26,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6506),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8388),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Asistente de Programa Federal"
+                            Descripcion = "",
+                            Parametro = "Auxiliar de Cocina"
                         },
                         new
                         {
                             ParamterosID = 27,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6508),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8389),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Asistente de Servicios de Alimentos"
+                            Descripcion = "",
+                            Parametro = "Auxiliar de Compras"
                         },
                         new
                         {
                             ParamterosID = 28,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6510),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8390),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Asistente de Servicios Sociales"
+                            Descripcion = "",
+                            Parametro = "Auxiliar en Contabilidad"
                         },
                         new
                         {
                             ParamterosID = 29,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6512),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8392),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Auditor Programatico de Servicios Sociales"
+                            Descripcion = "",
+                            Parametro = "Auxiliar en Control de Asistencia"
                         },
                         new
                         {
                             ParamterosID = 30,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6514),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8393),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Auxiliar Administrativo"
+                            Descripcion = "",
+                            Parametro = "Auxiliar en Nominas"
                         },
                         new
                         {
                             ParamterosID = 31,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6515),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8394),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Auxiliar de Cocina"
+                            Descripcion = "",
+                            Parametro = "Auxiliar en Sistemas de Oficina"
                         },
                         new
                         {
                             ParamterosID = 32,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6517),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8395),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Auxiliar de Compras"
+                            Descripcion = "",
+                            Parametro = "Auxiliar Fiscal"
                         },
                         new
                         {
                             ParamterosID = 33,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6519),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8397),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Auxiliar en Contabilidad"
+                            Descripcion = "",
+                            Parametro = "Auxiliar Fiscal Principal"
                         },
                         new
                         {
                             ParamterosID = 34,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6549),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8427),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Auxiliar en Control de Asistencia"
+                            Descripcion = "",
+                            Parametro = "Cocinero"
                         },
                         new
                         {
                             ParamterosID = 35,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6551),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8429),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Auxiliar en Nominas"
+                            Descripcion = "",
+                            Parametro = "Conductor de Vehiculos de Motor Liviano"
                         },
                         new
                         {
                             ParamterosID = 36,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6554),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8431),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Auxiliar en Sistemas de Oficina"
+                            Descripcion = "",
+                            Parametro = "Conductor de Vehiculos de Motor Pesado"
                         },
                         new
                         {
                             ParamterosID = 37,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6556),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8432),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Auxiliar Fiscal"
+                            Descripcion = "",
+                            Parametro = "Conserje"
                         },
                         new
                         {
                             ParamterosID = 38,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6558),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8433),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Auxiliar Fiscal Principal"
+                            Descripcion = "",
+                            Parametro = "Contador"
                         },
                         new
                         {
                             ParamterosID = 39,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6560),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8435),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Cocinero"
+                            Descripcion = "",
+                            Parametro = "Contador Principal"
                         },
                         new
                         {
                             ParamterosID = 40,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6562),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8436),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Conductor de Vehiculos de Motor Liviano"
+                            Descripcion = "",
+                            Parametro = "Contador Senior"
                         },
                         new
                         {
                             ParamterosID = 41,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6563),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8437),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Conductor de Vehiculos de Motor Pesado"
+                            Descripcion = "",
+                            Parametro = "Coordinador Auxiliar en Cuidado y Desarrollo del Nino"
                         },
                         new
                         {
                             ParamterosID = 42,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6565),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8438),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Conserje"
+                            Descripcion = "",
+                            Parametro = "Coordinador de Actividades con Padres de Head Start/Early Head Start"
                         },
                         new
                         {
                             ParamterosID = 43,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6567),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8440),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Contador"
+                            Descripcion = "",
+                            Parametro = "Coordinador de Adiestramientos Programaticos de Servicios Sociales"
                         },
                         new
                         {
                             ParamterosID = 44,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6569),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8441),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Contador Principal"
+                            Descripcion = "",
+                            Parametro = "Coordinador de Educacion de Head Start/Early Head Start "
                         },
                         new
                         {
                             ParamterosID = 45,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6572),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8442),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Contador Senior"
+                            Descripcion = "",
+                            Parametro = "Coordinador de Nutricion de Head Start/Early Head Start"
                         },
                         new
                         {
                             ParamterosID = 46,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6574),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8443),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Coordinador Auxiliar en Cuidado y Desarrollo del Nino"
+                            Descripcion = "",
+                            Parametro = "Coordinador de Salud Medico Dental de Head Start/Early Head Start"
                         },
                         new
                         {
                             ParamterosID = 47,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6576),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8445),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Coordinador de Actividades con Padres de Head Start/Early Head Start"
+                            Descripcion = "",
+                            Parametro = "Coordinador de Salud Mental de Head Start/Early Head Start"
                         },
                         new
                         {
                             ParamterosID = 48,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6578),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8446),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Coordinador de Adiestramientos Programaticos de Servicios Sociales"
+                            Descripcion = "",
+                            Parametro = "Coordinador en Cuidado y Desarrollo del Nino"
                         },
                         new
                         {
                             ParamterosID = 49,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6580),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8447),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Coordinador de Educacion de Head Start/Early Head Start "
+                            Descripcion = "",
+                            Parametro = "Coordinador Interagencial"
                         },
                         new
                         {
                             ParamterosID = 50,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6582),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8448),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Coordinador de Nutricion de Head Start/Early Head Start"
+                            Descripcion = "",
+                            Parametro = "Coordinador para Asuntos de Retiro"
                         },
                         new
                         {
                             ParamterosID = 51,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6583),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8450),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Coordinador de Salud Medico Dental de Head Start/Early Head Start"
+                            Descripcion = "",
+                            Parametro = "Director Administrativo"
                         },
                         new
                         {
                             ParamterosID = 52,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6585),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8451),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Coordinador de Salud Mental de Head Start/Early Head Start"
+                            Descripcion = "",
+                            Parametro = "Director Asociado de Asistencia Social y Familiar"
                         },
                         new
                         {
                             ParamterosID = 53,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6587),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8452),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Coordinador en Cuidado y Desarrollo del Nino"
+                            Descripcion = "",
+                            Parametro = "Director Asociado de Servicios Sociales a las Familias y las Comunidades"
                         },
                         new
                         {
                             ParamterosID = 54,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6589),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8453),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Coordinador Interagencial"
+                            Descripcion = "",
+                            Parametro = "Director Asociado de Sustento de Menores"
                         },
                         new
                         {
                             ParamterosID = 55,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6591),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8455),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Coordinador para Asuntos de Retiro"
+                            Descripcion = "",
+                            Parametro = "Director Auxiliar"
                         },
                         new
                         {
                             ParamterosID = 56,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6593),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8456),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Director Administrativo"
+                            Descripcion = "",
+                            Parametro = "Director Auxiliar del Programa de Determinacion de Incapacidad"
                         },
                         new
                         {
                             ParamterosID = 57,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6595),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8457),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Director Asociado de Asistencia Social y Familiar"
+                            Descripcion = "",
+                            Parametro = "Director Auxiliar en Planificacion"
                         },
                         new
                         {
                             ParamterosID = 58,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6597),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8458),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Director Asociado de Servicios Sociales a las Familias y las Comunidades"
+                            Descripcion = "",
+                            Parametro = "Director de Adiestramiento"
                         },
                         new
                         {
                             ParamterosID = 59,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6599),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8460),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Director Asociado de Sustento de Menores"
+                            Descripcion = "",
+                            Parametro = "Director de Centro de Cuidado Diurno"
                         },
                         new
                         {
                             ParamterosID = 60,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6601),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8461),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Director Auxiliar"
+                            Descripcion = "",
+                            Parametro = "Director de Centro de Servicios Integrados"
                         },
                         new
                         {
                             ParamterosID = 61,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6603),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8462),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Director Auxiliar del Programa de Determinacion de Incapacidad"
+                            Descripcion = "",
+                            Parametro = "Director de Finanzas"
                         },
                         new
                         {
                             ParamterosID = 62,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6605),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8463),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Director Auxiliar en Planificacion"
+                            Descripcion = "",
+                            Parametro = "Director de Hogar o Centro de Servicios"
                         },
                         new
                         {
                             ParamterosID = 63,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6607),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8465),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Director de Adiestramiento"
+                            Descripcion = "",
+                            Parametro = "Director de Monitoria Programatica de Sustento de Menores"
                         },
                         new
                         {
                             ParamterosID = 64,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6609),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8466),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Director de Centro de Cuidado Diurno"
+                            Descripcion = "",
+                            Parametro = "Director de Presupuesto"
                         },
                         new
                         {
                             ParamterosID = 65,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6610),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8467),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Director de Centro de Servicios Integrados"
+                            Descripcion = "",
+                            Parametro = "Director de Programa de Asistencia Social y Familiar"
                         },
                         new
                         {
                             ParamterosID = 66,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6668),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8470),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Director de Finanzas"
+                            Descripcion = "",
+                            Parametro = "Director de Servicios Auxiliares"
                         },
                         new
                         {
                             ParamterosID = 67,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6670),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8471),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Director de Hogar o Centro de Servicios"
+                            Descripcion = "",
+                            Parametro = "Director de Sistemas y Procedimientos"
                         },
                         new
                         {
                             ParamterosID = 68,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6672),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8501),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Director de Monitoria Programatica de Sustento de Menores"
+                            Descripcion = "",
+                            Parametro = "Director del Programa Child Care"
                         },
                         new
                         {
                             ParamterosID = 69,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6674),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8503),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Director de Presupuesto"
+                            Descripcion = "",
+                            Parametro = "Director del Programa Head Start/Early Head Start"
                         },
                         new
                         {
                             ParamterosID = 70,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6676),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8505),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Director de Programa de Asistencia Social y Familiar"
+                            Descripcion = "",
+                            Parametro = "Director del Registro Central de Sustento de Menores"
                         },
                         new
                         {
                             ParamterosID = 71,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6678),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8506),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Director de Servicios Auxiliares"
+                            Descripcion = "",
+                            Parametro = "Economista del Hogar"
                         },
                         new
                         {
                             ParamterosID = 72,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6680),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8507),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Director de Sistemas y Procedimientos"
+                            Descripcion = "",
+                            Parametro = "Encargado Auxiliar de la Propiedad"
                         },
                         new
                         {
                             ParamterosID = 73,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6682),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8508),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Director del Programa Child Care"
+                            Descripcion = "",
+                            Parametro = "Encargado de la Propiedad"
                         },
                         new
                         {
                             ParamterosID = 74,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6684),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8510),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Director del Programa Head Start/Early Head Start"
+                            Descripcion = "",
+                            Parametro = "Enfermero Generalista"
                         },
                         new
                         {
                             ParamterosID = 75,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6686),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8511),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Director del Registro Central de Sustento de Menores"
+                            Descripcion = "",
+                            Parametro = "Enfermero Generalista II"
                         },
                         new
                         {
                             ParamterosID = 76,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6688),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8512),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Economista del Hogar"
+                            Descripcion = "",
+                            Parametro = "Enfermero Practico Licenciado"
                         },
                         new
                         {
                             ParamterosID = 77,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6689),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8513),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Encargado Auxiliar de la Propiedad"
+                            Descripcion = "",
+                            Parametro = "Especialista en Asistencia Social y Familiar"
                         },
                         new
                         {
                             ParamterosID = 78,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6691),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8515),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Encargado de la Propiedad"
+                            Descripcion = "",
+                            Parametro = "Especialista en Determinacion de Incapacidad"
                         },
                         new
                         {
                             ParamterosID = 79,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6693),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8516),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Enfermero Generalista"
+                            Descripcion = "",
+                            Parametro = "Especialista en Evaluacion"
                         },
                         new
                         {
                             ParamterosID = 80,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6695),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8517),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Enfermero Generalista II"
+                            Descripcion = "",
+                            Parametro = "Especialista en Pensiones Alimentarias"
                         },
                         new
                         {
                             ParamterosID = 81,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6697),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8518),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Enfermero Practico Licenciado"
+                            Descripcion = "",
+                            Parametro = "Especialista en Pensiones Alimentarias Principal"
                         },
                         new
                         {
                             ParamterosID = 82,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6698),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8520),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Especialista en Asistencia Social y Familiar"
+                            Descripcion = "",
+                            Parametro = "Especialista en Pensiones Alimentarias Senior"
                         },
                         new
                         {
                             ParamterosID = 83,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6700),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8521),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Especialista en Determinacion de Incapacidad"
+                            Descripcion = "",
+                            Parametro = "Especialista en Servicios Sociales a las Familias y las Comunidades"
                         },
                         new
                         {
                             ParamterosID = 84,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6702),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8522),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Especialista en Evaluacion"
+                            Descripcion = "",
+                            Parametro = "Estadistico"
                         },
                         new
                         {
                             ParamterosID = 85,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6704),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8523),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Especialista en Pensiones Alimentarias"
+                            Descripcion = "",
+                            Parametro = "Funcionario Administrativo"
                         },
                         new
                         {
                             ParamterosID = 86,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6706),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8525),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Especialista en Pensiones Alimentarias Principal"
+                            Descripcion = "",
+                            Parametro = "Gerente Auxiliar de Sistemas de Informacion"
                         },
                         new
                         {
                             ParamterosID = 87,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6707),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8526),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Especialista en Pensiones Alimentarias Senior"
+                            Descripcion = "",
+                            Parametro = "Gerente de Monitoreo"
                         },
                         new
                         {
                             ParamterosID = 88,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6709),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8527),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Especialista en Servicios Sociales a las Familias y las Comunidades"
+                            Descripcion = "",
+                            Parametro = "Gerente de Sistemas de Informacion"
                         },
                         new
                         {
                             ParamterosID = 89,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6711),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8528),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Estadistico"
+                            Descripcion = "",
+                            Parametro = "Guardalmacen"
                         },
                         new
                         {
                             ParamterosID = 90,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6713),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8530),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Funcionario Administrativo"
+                            Descripcion = "",
+                            Parametro = "Instructor del Programa Head Start"
                         },
                         new
                         {
                             ParamterosID = 91,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6715),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8531),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Gerente Auxiliar de Sistemas de Informacion"
+                            Descripcion = "",
+                            Parametro = "Investigador de Querellas Administrativas de Servicios Sociales"
                         },
                         new
                         {
                             ParamterosID = 92,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6716),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8532),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Gerente de Monitoreo"
+                            Descripcion = "",
+                            Parametro = "Lider Recreativo"
                         },
                         new
                         {
                             ParamterosID = 93,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6718),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8533),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Gerente de Sistemas de Informacion"
+                            Descripcion = "",
+                            Parametro = "Mensajero"
                         },
                         new
                         {
                             ParamterosID = 94,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6720),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8535),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Guardalmacen"
+                            Descripcion = "",
+                            Parametro = "Monitor Programatico de Sustento de Menores"
                         },
                         new
                         {
                             ParamterosID = 95,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6722),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8536),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Instructor del Programa Head Start"
+                            Descripcion = "",
+                            Parametro = "Nutricionista"
                         },
                         new
                         {
                             ParamterosID = 96,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6723),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8537),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Investigador de Querellas Administrativas de Servicios Sociales"
+                            Descripcion = "",
+                            Parametro = "Oficial Administrativo"
                         },
                         new
                         {
                             ParamterosID = 97,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6725),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8538),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Lider Recreativo"
+                            Descripcion = "",
+                            Parametro = "Oficial Administrativo Principal"
                         },
                         new
                         {
                             ParamterosID = 98,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6727),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8540),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Mensajero"
+                            Descripcion = "",
+                            Parametro = "Oficial Administrativo Senior"
                         },
                         new
                         {
                             ParamterosID = 99,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6729),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8541),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Monitor Programatico de Sustento de Menores"
+                            Descripcion = "",
+                            Parametro = "Oficial de Asistencia y Licencias"
                         },
                         new
                         {
                             ParamterosID = 100,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6731),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8542),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Nutricionista"
+                            Descripcion = "",
+                            Parametro = "Oficial de Comunicaciones"
                         },
                         new
                         {
                             ParamterosID = 101,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6733),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8543),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Oficial Administrativo"
+                            Descripcion = "",
+                            Parametro = "Oficial de Cuentas a Cobrar"
                         },
                         new
                         {
                             ParamterosID = 102,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6734),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8545),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Oficial Administrativo Principal"
+                            Descripcion = "",
+                            Parametro = "Oficial de Cuidado Diurno"
                         },
                         new
                         {
                             ParamterosID = 103,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6736),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8546),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Oficial Administrativo Senior"
+                            Descripcion = "",
+                            Parametro = "Oficial de Licenciamiento"
                         },
                         new
                         {
                             ParamterosID = 104,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6738),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8547),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Oficial de Asistencia y Licencias"
+                            Descripcion = "",
+                            Parametro = "Oficial de Licenciamiento Senior"
                         },
                         new
                         {
                             ParamterosID = 105,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6740),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8548),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Oficial de Comunicaciones"
+                            Descripcion = "",
+                            Parametro = "Oficial de Nominas"
                         },
                         new
                         {
                             ParamterosID = 106,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6802),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8550),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Oficial de Cuentas a Cobrar"
+                            Descripcion = "",
+                            Parametro = "Oficial de Pensiones Alimentarias"
                         },
                         new
                         {
                             ParamterosID = 107,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6805),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8551),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Oficial de Cuidado Diurno"
+                            Descripcion = "",
+                            Parametro = "Oficial de Presupuesto"
                         },
                         new
                         {
                             ParamterosID = 108,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6807),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8552),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Oficial de Licenciamiento"
+                            Descripcion = "",
+                            Parametro = "Oficial Ejecutivo"
                         },
                         new
                         {
                             ParamterosID = 109,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6810),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8582),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Oficial de Licenciamiento Senior"
+                            Descripcion = "",
+                            Parametro = "Oficial en Administracion de Recursos Humanos"
                         },
                         new
                         {
                             ParamterosID = 110,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6812),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8583),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Oficial de Nominas"
+                            Descripcion = "",
+                            Parametro = "Oficial en Administracion de Recursos Humanos Principal"
                         },
                         new
                         {
                             ParamterosID = 111,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6814),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8585),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Oficial de Pensiones Alimentarias"
+                            Descripcion = "",
+                            Parametro = "Oficial en Relaciones Laborales"
                         },
                         new
                         {
                             ParamterosID = 112,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6816),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8586),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Oficial de Presupuesto"
+                            Descripcion = "",
+                            Parametro = "Oficial Examinador"
                         },
                         new
                         {
                             ParamterosID = 113,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6818),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8587),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Oficial Ejecutivo"
+                            Descripcion = "",
+                            Parametro = "Oficial Examinador Licenciado"
                         },
                         new
                         {
                             ParamterosID = 114,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6820),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8588),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Oficial en Administracion de Recursos Humanos"
+                            Descripcion = "",
+                            Parametro = "Oficinista de Contabilidad"
                         },
                         new
                         {
                             ParamterosID = 115,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6821),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8590),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Oficial en Administracion de Recursos Humanos Principal"
+                            Descripcion = "",
+                            Parametro = "Oficinista I"
                         },
                         new
                         {
                             ParamterosID = 116,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6823),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8591),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Oficial en Relaciones Laborales"
+                            Descripcion = "",
+                            Parametro = "Oficinista II"
                         },
                         new
                         {
                             ParamterosID = 117,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6825),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8592),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Oficial Examinador"
+                            Descripcion = "",
+                            Parametro = "Operador de Equipo de Procesar Datos"
                         },
                         new
                         {
                             ParamterosID = 118,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6827),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8593),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Oficial Examinador Licenciado"
+                            Descripcion = "",
+                            Parametro = "Operador de Maquina Duplicadora"
                         },
                         new
                         {
                             ParamterosID = 119,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6829),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8595),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Oficinista de Contabilidad"
+                            Descripcion = "",
+                            Parametro = "Pagador Auxiliar"
                         },
                         new
                         {
                             ParamterosID = 120,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6830),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8596),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Oficinista I"
+                            Descripcion = "",
+                            Parametro = "Pagador Oficial"
                         },
                         new
                         {
                             ParamterosID = 121,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6832),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8597),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Oficinista II"
+                            Descripcion = "",
+                            Parametro = "Pagador Oficial Principal"
                         },
                         new
                         {
                             ParamterosID = 122,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6834),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8598),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Operador de Equipo de Procesar Datos"
+                            Descripcion = "",
+                            Parametro = "Recaudador Auxiliar"
                         },
                         new
                         {
                             ParamterosID = 123,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6836),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8600),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Operador de Maquina Duplicadora"
+                            Descripcion = "",
+                            Parametro = "Recaudador Oficial"
                         },
                         new
                         {
                             ParamterosID = 124,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6838),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8601),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Pagador Auxiliar"
+                            Descripcion = "",
+                            Parametro = "Recepcionista Telefonista"
                         },
                         new
                         {
                             ParamterosID = 125,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6839),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8602),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Pagador Oficial"
+                            Descripcion = "",
+                            Parametro = "Receptor Auxiliar"
                         },
                         new
                         {
                             ParamterosID = 126,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6842),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8603),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Pagador Oficial Principal"
+                            Descripcion = "",
+                            Parametro = "Receptor Oficial"
                         },
                         new
                         {
                             ParamterosID = 127,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6844),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8605),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Recaudador Auxiliar"
+                            Descripcion = "",
+                            Parametro = "Subdirector Administrativo del Programa de Determinacion de Incapacidad"
                         },
                         new
                         {
                             ParamterosID = 128,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6845),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8606),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Recaudador Oficial"
+                            Descripcion = "",
+                            Parametro = "Subdirector del Programa Child Care"
                         },
                         new
                         {
                             ParamterosID = 129,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6847),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8608),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Recepcionista Telefonista"
+                            Descripcion = "",
+                            Parametro = "Subdirector Regional"
                         },
                         new
                         {
                             ParamterosID = 130,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6852),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8611),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Receptor Auxiliar"
+                            Descripcion = "",
+                            Parametro = "Supervisor"
                         },
                         new
                         {
                             ParamterosID = 131,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6853),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8612),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Receptor Oficial"
+                            Descripcion = "",
+                            Parametro = "Supervisor de Actividades con Padres de Head Start/Early Head Start"
                         },
                         new
                         {
                             ParamterosID = 132,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6855),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8613),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Subdirector Administrativo del Programa de Determinacion de Incapacidad"
+                            Descripcion = "",
+                            Parametro = "Supervisor de Actividades Recreativas y Deportivas"
                         },
                         new
                         {
                             ParamterosID = 133,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6857),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8614),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Subdirector del Programa Child Care"
+                            Descripcion = "",
+                            Parametro = "Supervisor de Asistencia Social y Familiar"
                         },
                         new
                         {
                             ParamterosID = 134,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6859),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8616),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Subdirector Regional"
+                            Descripcion = "",
+                            Parametro = "Supervisor de Asistencia Social y Familiar Principal"
                         },
                         new
                         {
                             ParamterosID = 135,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6861),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8617),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Supervisor"
+                            Descripcion = "",
+                            Parametro = "Supervisor de Asistencia y Licencias"
                         },
                         new
                         {
                             ParamterosID = 136,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6862),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8618),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Supervisor de Actividades con Padres de Head Start/Early Head Start"
+                            Descripcion = "",
+                            Parametro = "Supervisor de Asistente de Analistas en Determinacion de Incapacidad"
                         },
                         new
                         {
                             ParamterosID = 137,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6906),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8619),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Supervisor de Actividades Recreativas y Deportivas"
+                            Descripcion = "",
+                            Parametro = "Supervisor de Compras"
                         },
                         new
                         {
                             ParamterosID = 138,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6908),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8621),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Supervisor de Asistencia Social y Familiar"
+                            Descripcion = "",
+                            Parametro = "Supervisor de Conservacion y Mantenimiento"
                         },
                         new
                         {
                             ParamterosID = 139,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6911),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8655),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Supervisor de Asistencia Social y Familiar Principal"
+                            Descripcion = "",
+                            Parametro = "Supervisor de Educacion de Head Start/Early Head Start"
                         },
                         new
                         {
                             ParamterosID = 140,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6913),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8656),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Supervisor de Asistencia y Licencias"
+                            Descripcion = "",
+                            Parametro = "Supervisor de Licenciamiento"
                         },
                         new
                         {
                             ParamterosID = 141,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6915),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8658),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Supervisor de Asistente de Analistas en Determinacion de Incapacidad"
+                            Descripcion = "",
+                            Parametro = "Supervisor de Nominas"
                         },
                         new
                         {
                             ParamterosID = 142,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6917),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8660),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Supervisor de Compras"
+                            Descripcion = "",
+                            Parametro = "Supervisor de Nutricion de Head Start/Early Head Start"
                         },
                         new
                         {
                             ParamterosID = 143,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6919),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8662),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Supervisor de Conservacion y Mantenimiento"
+                            Descripcion = "",
+                            Parametro = "Supervisor de Oficiales de Pensiones Alimentarias"
                         },
                         new
                         {
                             ParamterosID = 144,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6921),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8663),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Supervisor de Educacion de Head Start/Early Head Start"
+                            Descripcion = "",
+                            Parametro = "Supervisor de Salud Medico Dental de Head Start/Early Head Start"
                         },
                         new
                         {
                             ParamterosID = 145,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6922),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8665),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Supervisor de Licenciamiento"
+                            Descripcion = "",
+                            Parametro = "Supervisor de Salud Mental de Head Start/Early Head Start"
                         },
                         new
                         {
                             ParamterosID = 146,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6924),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8666),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Supervisor de Nominas"
+                            Descripcion = "",
+                            Parametro = "Supervisor de Servicios Sociales a las Familias y las Comunidades I"
                         },
                         new
                         {
                             ParamterosID = 147,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6926),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8667),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Supervisor de Nutricion de Head Start/Early Head Start"
+                            Descripcion = "",
+                            Parametro = "Supervisor de Servicios Sociales a las Familias y las Comunidades II"
                         },
                         new
                         {
                             ParamterosID = 148,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6928),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8668),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Supervisor de Oficiales de Pensiones Alimentarias"
+                            Descripcion = "",
+                            Parametro = "Supervisor de Transportacion"
                         },
                         new
                         {
                             ParamterosID = 149,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6930),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8670),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Supervisor de Salud Medico Dental de Head Start/Early Head Start"
+                            Descripcion = "",
+                            Parametro = "Supervisor en Cuidado y Desarrollo del Nino"
                         },
                         new
                         {
                             ParamterosID = 150,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6931),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8671),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Supervisor de Salud Mental de Head Start/Early Head Start"
+                            Descripcion = "",
+                            Parametro = "Supervisor en Determinacion de Incapacidad I"
                         },
                         new
                         {
                             ParamterosID = 151,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6933),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8672),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Supervisor de Servicios Sociales a las Familias y las Comunidades I"
+                            Descripcion = "",
+                            Parametro = "Supervisor en Determinacion de Incapacidad II"
                         },
                         new
                         {
                             ParamterosID = 152,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6935),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8673),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Supervisor de Servicios Sociales a las Familias y las Comunidades II"
+                            Descripcion = "",
+                            Parametro = "Tecnico de Asistencia Social y Familiar"
                         },
                         new
                         {
                             ParamterosID = 153,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6937),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8675),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Supervisor de Transportacion"
+                            Descripcion = "",
+                            Parametro = "Tecnico de Asistencia Social y Familiar Senior"
                         },
                         new
                         {
                             ParamterosID = 154,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6939),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8676),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Supervisor en Cuidado y Desarrollo del Nino"
+                            Descripcion = "",
+                            Parametro = "Tecnico de Control de Calidad de Asistencia Social y Familiar"
                         },
                         new
                         {
                             ParamterosID = 155,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6940),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8677),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Supervisor en Determinacion de Incapacidad I"
+                            Descripcion = "",
+                            Parametro = "Tecnico de Elegibilidad"
                         },
                         new
                         {
                             ParamterosID = 156,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6942),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8678),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Supervisor en Determinacion de Incapacidad II"
+                            Descripcion = "",
+                            Parametro = "Tecnico de Servicios Sociales a las Familias y las Comunidades"
                         },
                         new
                         {
                             ParamterosID = 157,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6944),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8680),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Tecnico de Asistencia Social y Familiar"
+                            Descripcion = "",
+                            Parametro = "Tecnico de Servicios Sociales a las Familias y las Comunidades Senior"
                         },
                         new
                         {
                             ParamterosID = 158,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6946),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8681),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Tecnico de Asistencia Social y Familiar Senior"
+                            Descripcion = "",
+                            Parametro = "Tecnico en Sistemas de Informacion"
                         },
                         new
                         {
                             ParamterosID = 159,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6948),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8682),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Tecnico de Control de Calidad de Asistencia Social y Familiar"
+                            Descripcion = "",
+                            Parametro = "Tecnico en Sistemas en Oficina"
                         },
                         new
                         {
                             ParamterosID = 160,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6949),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8683),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Tecnico de Elegibilidad"
+                            Descripcion = "",
+                            Parametro = "Trabajador de Conservacion"
                         },
                         new
                         {
                             ParamterosID = 161,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6951),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8685),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Tecnico de Servicios Sociales a las Familias y las Comunidades"
+                            Descripcion = "",
+                            Parametro = "Trabajador de Servicios Generales"
                         },
                         new
                         {
                             ParamterosID = 162,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6953),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8686),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Tecnico de Servicios Sociales a las Familias y las Comunidades Senior"
+                            Descripcion = "",
+                            Parametro = "Trabajador Social"
                         },
                         new
                         {
                             ParamterosID = 163,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6955),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8687),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Tecnico en Sistemas de Informacion"
+                            Descripcion = "",
+                            Parametro = "Trabajador Social Senior"
                         },
                         new
                         {
                             ParamterosID = 164,
                             Activo = true,
                             CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6956),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8688),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Tecnico en Sistemas en Oficina"
+                            Descripcion = "",
+                            Parametro = "Traductor Interprete"
                         },
                         new
                         {
                             ParamterosID = 165,
                             Activo = true,
-                            CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6958),
+                            CategoriaID = 2,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8690),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Trabajador de Conservacion"
+                            Descripcion = "",
+                            Parametro = "CursoAprobado"
                         },
                         new
                         {
                             ParamterosID = 166,
                             Activo = true,
-                            CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6960),
+                            CategoriaID = 2,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8691),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Trabajador de Servicios Generales"
+                            Descripcion = "",
+                            Parametro = "Dactilógrafo"
                         },
                         new
                         {
                             ParamterosID = 167,
                             Activo = true,
-                            CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6962),
+                            CategoriaID = 2,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8692),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Trabajador Social"
+                            Descripcion = "",
+                            Parametro = "General"
                         },
                         new
                         {
                             ParamterosID = 168,
                             Activo = true,
-                            CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6964),
+                            CategoriaID = 2,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8693),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Trabajador Social Senior"
+                            Descripcion = "",
+                            Parametro = "Oficinista"
                         },
                         new
                         {
                             ParamterosID = 169,
                             Activo = true,
-                            CategoriaID = 1,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6965),
+                            CategoriaID = 2,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8695),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Traductor Interprete"
+                            Descripcion = "",
+                            Parametro = "Oficinista de Contabilidad"
                         },
                         new
                         {
                             ParamterosID = 170,
                             Activo = true,
                             CategoriaID = 2,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6967),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8696),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "CursoAprobado"
+                            Descripcion = "",
+                            Parametro = "Otro"
                         },
                         new
                         {
                             ParamterosID = 171,
                             Activo = true,
                             CategoriaID = 2,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6969),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8697),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Dactilógrafo"
+                            Descripcion = "",
+                            Parametro = "Secretarial"
                         },
                         new
                         {
                             ParamterosID = 172,
                             Activo = true,
-                            CategoriaID = 2,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6971),
+                            CategoriaID = 4,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8698),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "General"
+                            Descripcion = "",
+                            Parametro = "Ninguno"
                         },
                         new
                         {
                             ParamterosID = 173,
                             Activo = true,
-                            CategoriaID = 2,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6973),
+                            CategoriaID = 4,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8700),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Oficinista"
+                            Descripcion = "",
+                            Parametro = "No Vidente"
                         },
                         new
                         {
                             ParamterosID = 174,
                             Activo = true,
-                            CategoriaID = 2,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6974),
+                            CategoriaID = 4,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8701),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Oficinista de Contabilidad"
+                            Descripcion = "",
+                            Parametro = "Otro"
                         },
                         new
                         {
                             ParamterosID = 175,
                             Activo = true,
-                            CategoriaID = 2,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6976),
+                            CategoriaID = 4,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8702),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Otro"
+                            Descripcion = "",
+                            Parametro = "Sordo"
                         },
                         new
                         {
                             ParamterosID = 176,
                             Activo = true,
-                            CategoriaID = 2,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6978),
+                            CategoriaID = 4,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8703),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Secretarial"
+                            Descripcion = "",
+                            Parametro = "Uso de Silla de Rueda"
                         },
                         new
                         {
                             ParamterosID = 177,
                             Activo = true,
-                            CategoriaID = 4,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(6980),
+                            CategoriaID = 5,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8705),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Ninguno"
+                            Descripcion = "",
+                            Parametro = "Jornada Parcial"
                         },
                         new
                         {
                             ParamterosID = 178,
                             Activo = true,
-                            CategoriaID = 4,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7023),
+                            CategoriaID = 5,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8706),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "No Vidente"
+                            Descripcion = "",
+                            Parametro = "Tiempo Completo"
                         },
                         new
                         {
                             ParamterosID = 179,
                             Activo = true,
-                            CategoriaID = 4,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7025),
+                            CategoriaID = 6,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8707),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Otro"
+                            Descripcion = "",
+                            Parametro = "Adjuntas",
+                            TX_Filtro1 = "PR",
+                            TX_Filtro2 = "PR"
                         },
                         new
                         {
                             ParamterosID = 180,
                             Activo = true,
-                            CategoriaID = 4,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7027),
+                            CategoriaID = 6,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8738),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Sordo"
+                            Descripcion = "",
+                            Parametro = "Aguada",
+                            TX_Filtro1 = "PR",
+                            TX_Filtro2 = "PR"
                         },
                         new
                         {
                             ParamterosID = 181,
                             Activo = true,
-                            CategoriaID = 4,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7030),
+                            CategoriaID = 6,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8740),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Uso de Silla de Rueda"
+                            Descripcion = "",
+                            Parametro = "Aguadilla",
+                            TX_Filtro1 = "PR",
+                            TX_Filtro2 = "PR"
                         },
                         new
                         {
                             ParamterosID = 182,
                             Activo = true,
-                            CategoriaID = 5,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7032),
+                            CategoriaID = 6,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8741),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Jornada Parcial"
+                            Descripcion = "",
+                            Parametro = "Aguas Buenas",
+                            TX_Filtro1 = "PR",
+                            TX_Filtro2 = "PR"
                         },
                         new
                         {
                             ParamterosID = 183,
                             Activo = true,
-                            CategoriaID = 5,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7034),
+                            CategoriaID = 6,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8743),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Tiempo Completo"
+                            Descripcion = "",
+                            Parametro = "Aguirre",
+                            TX_Filtro1 = "PR",
+                            TX_Filtro2 = "PR"
                         },
                         new
                         {
                             ParamterosID = 184,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7035),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8744),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Canovanas",
+                            Descripcion = "",
+                            Parametro = "Aibonito",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3557,9 +3841,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 185,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7037),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8745),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "FORT BUCHANAN",
+                            Descripcion = "",
+                            Parametro = "Añasco",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3568,9 +3853,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 186,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7039),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8746),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Levittown",
+                            Descripcion = "",
+                            Parametro = "Arecibo",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3579,9 +3865,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 187,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7041),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8748),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Adjuntas",
+                            Descripcion = "",
+                            Parametro = "Arroyo",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3590,9 +3877,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 188,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7043),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8749),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Aguada",
+                            Descripcion = "",
+                            Parametro = "Barceloneta",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3601,9 +3889,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 189,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7044),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8750),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Aguadilla",
+                            Descripcion = "",
+                            Parametro = "Barranquitas",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3612,9 +3901,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 190,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7046),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8751),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Aguas Buenas",
+                            Descripcion = "",
+                            Parametro = "Bayamón",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3623,9 +3913,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 191,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7048),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8753),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Aguirre",
+                            Descripcion = "",
+                            Parametro = "Cabo Rojo",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3634,9 +3925,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 192,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7050),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8754),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Aibonito",
+                            Descripcion = "",
+                            Parametro = "Caguas",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3645,9 +3937,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 193,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7052),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8755),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Añasco",
+                            Descripcion = "",
+                            Parametro = "Camuy",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3656,9 +3949,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 194,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7053),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8756),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Arecibo",
+                            Descripcion = "",
+                            Parametro = "Carolina",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3667,9 +3961,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 195,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7055),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8758),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Arroyo",
+                            Descripcion = "",
+                            Parametro = "Cataño",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3678,9 +3973,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 196,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7057),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8759),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Barceloneta",
+                            Descripcion = "",
+                            Parametro = "Cayey",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3689,9 +3985,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 197,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7059),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8760),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Barranquitas",
+                            Descripcion = "",
+                            Parametro = "Ceiba",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3700,9 +3997,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 198,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7061),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8761),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Bayamón",
+                            Descripcion = "",
+                            Parametro = "Ciales",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3711,9 +4009,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 199,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7062),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8763),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Cabo Rojo",
+                            Descripcion = "",
+                            Parametro = "Cidras",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3722,9 +4021,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 200,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7064),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8764),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Caguas",
+                            Descripcion = "",
+                            Parametro = "Coamo",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3733,9 +4033,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 201,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7066),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8765),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Camuy",
+                            Descripcion = "",
+                            Parametro = "Comerio",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3744,9 +4045,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 202,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7068),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8766),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Carolina",
+                            Descripcion = "",
+                            Parametro = "Corozal",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3755,9 +4057,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 203,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7070),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8768),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Cataño",
+                            Descripcion = "",
+                            Parametro = "Culebras",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3766,9 +4069,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 204,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7071),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8769),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Cayey",
+                            Descripcion = "",
+                            Parametro = "Dorado",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3777,9 +4081,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 205,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7073),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8770),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Ceiba",
+                            Descripcion = "",
+                            Parametro = "Ensenada",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3788,9 +4093,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 206,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7075),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8771),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Ciales",
+                            Descripcion = "",
+                            Parametro = "Fajardo",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3799,9 +4105,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 207,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7077),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8773),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Cidras",
+                            Descripcion = "",
+                            Parametro = "Florida",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3810,9 +4117,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 208,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7079),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8774),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Coamo",
+                            Descripcion = "",
+                            Parametro = "Guanica",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3821,9 +4129,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 209,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7080),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8775),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Comerio",
+                            Descripcion = "",
+                            Parametro = "Guayama",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3832,9 +4141,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 210,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7082),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8776),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Corozal",
+                            Descripcion = "",
+                            Parametro = "Guayanilla",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3843,9 +4153,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 211,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7084),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8778),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Culebras",
+                            Descripcion = "",
+                            Parametro = "Guaynabo",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3854,9 +4165,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 212,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7086),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8779),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Dorado",
+                            Descripcion = "",
+                            Parametro = "Gurabo",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3865,9 +4177,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 213,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7088),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8780),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Ensenada",
+                            Descripcion = "",
+                            Parametro = "Hatillo",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3876,9 +4189,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 214,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7089),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8781),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Fajardo",
+                            Descripcion = "",
+                            Parametro = "Hato Rey",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3887,9 +4201,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 215,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7091),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8783),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Florida",
+                            Descripcion = "",
+                            Parametro = "Hormigueros",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3898,9 +4213,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 216,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7093),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8784),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Guanica",
+                            Descripcion = "",
+                            Parametro = "Humacao",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3909,9 +4225,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 217,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7095),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8785),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Guayama",
+                            Descripcion = "",
+                            Parametro = "Isabela",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3920,9 +4237,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 218,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7097),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8786),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Guayanilla",
+                            Descripcion = "",
+                            Parametro = "Jayuya",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3931,9 +4249,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 219,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7141),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8788),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Guaynabo",
+                            Descripcion = "",
+                            Parametro = "Juana Diaz",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3942,9 +4261,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 220,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7143),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8789),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Gurabo",
+                            Descripcion = "",
+                            Parametro = "Juncos",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3953,9 +4273,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 221,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7145),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8808),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Hatillo",
+                            Descripcion = "",
+                            Parametro = "Lajas",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3964,9 +4285,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 222,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7147),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8809),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Hato Rey",
+                            Descripcion = "",
+                            Parametro = "Lares",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3975,9 +4297,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 223,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7149),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8811),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Hormigueros",
+                            Descripcion = "",
+                            Parametro = "Las Marias",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3986,9 +4309,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 224,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7151),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8812),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Humacao",
+                            Descripcion = "",
+                            Parametro = "Las Piedras",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -3997,9 +4321,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 225,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7153),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8813),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Isabela",
+                            Descripcion = "",
+                            Parametro = "Loíza",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4008,9 +4333,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 226,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7155),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8814),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Jayuya",
+                            Descripcion = "",
+                            Parametro = "Luquillo",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4019,9 +4345,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 227,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7156),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8816),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Juana Diaz",
+                            Descripcion = "",
+                            Parametro = "Manatí",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4030,9 +4357,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 228,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7158),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8817),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Juncos",
+                            Descripcion = "",
+                            Parametro = "Maricao",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4041,9 +4369,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 229,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7160),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8818),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Lajas",
+                            Descripcion = "",
+                            Parametro = "Maunabo",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4052,9 +4381,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 230,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7162),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8819),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Lares",
+                            Descripcion = "",
+                            Parametro = "Mayaguez",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4063,9 +4393,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 231,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7164),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8821),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Las Marias",
+                            Descripcion = "",
+                            Parametro = "Moca",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4074,9 +4405,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 232,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7165),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8822),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Las Piedras",
+                            Descripcion = "",
+                            Parametro = "Morovis",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4085,9 +4417,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 233,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7167),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8824),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Loíza",
+                            Descripcion = "",
+                            Parametro = "Naguabo",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4096,9 +4429,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 234,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7169),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8825),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Luquillo",
+                            Descripcion = "",
+                            Parametro = "Naranjito",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4107,9 +4441,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 235,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7171),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8826),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Manatí",
+                            Descripcion = "",
+                            Parametro = "Orocovis",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4118,9 +4453,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 236,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7173),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8827),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Maricao",
+                            Descripcion = "",
+                            Parametro = "Patillas",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4129,9 +4465,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 237,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7174),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8829),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Maunabo",
+                            Descripcion = "",
+                            Parametro = "Peñuelas",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4140,9 +4477,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 238,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7176),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8830),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Mayaguez",
+                            Descripcion = "",
+                            Parametro = "Ponce",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4151,9 +4489,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 239,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7178),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8831),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Moca",
+                            Descripcion = "",
+                            Parametro = "Puerto Nuevo",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4162,9 +4501,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 240,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7180),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8832),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Morovis",
+                            Descripcion = "",
+                            Parametro = "Quebradillas",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4173,9 +4513,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 241,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7181),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8834),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Naguabo",
+                            Descripcion = "",
+                            Parametro = "Rincón",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4184,9 +4525,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 242,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7183),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8835),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Naranjito",
+                            Descripcion = "",
+                            Parametro = "Rio Grande",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4195,9 +4537,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 243,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7185),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8836),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Orocovis",
+                            Descripcion = "",
+                            Parametro = "Rio Piedras",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4206,9 +4549,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 244,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7187),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8837),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Patillas",
+                            Descripcion = "",
+                            Parametro = "Sabana Grande",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4217,9 +4561,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 245,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7189),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8839),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Peñuelas",
+                            Descripcion = "",
+                            Parametro = "Salinas",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4228,9 +4573,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 246,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7190),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8840),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Ponce",
+                            Descripcion = "",
+                            Parametro = "San Germán",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4239,9 +4585,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 247,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7192),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8841),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Puerto Nuevo",
+                            Descripcion = "",
+                            Parametro = "San Juan",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4250,9 +4597,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 248,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7194),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8842),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Quebradillas",
+                            Descripcion = "",
+                            Parametro = "San Lorenzo",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4261,9 +4609,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 249,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7196),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8844),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Rincón",
+                            Descripcion = "",
+                            Parametro = "San Sebastián",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4272,9 +4621,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 250,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7198),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8845),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Rio Grande",
+                            Descripcion = "",
+                            Parametro = "Santa Isabel",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4283,9 +4633,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 251,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7199),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8846),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Rio Piedras",
+                            Descripcion = "",
+                            Parametro = "Santurce",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4294,9 +4645,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 252,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7201),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8847),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Sabana Grande",
+                            Descripcion = "",
+                            Parametro = "Toa Alta",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4305,9 +4657,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 253,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7203),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8849),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Salinas",
+                            Descripcion = "",
+                            Parametro = "Toa Baja",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4316,9 +4669,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 254,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7205),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8850),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "San Germán",
+                            Descripcion = "",
+                            Parametro = "Trujillo Alto",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4327,9 +4681,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 255,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7207),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8851),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "San Juan",
+                            Descripcion = "",
+                            Parametro = "Utuado",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4338,9 +4693,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 256,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7208),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8852),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "San Lorenzo",
+                            Descripcion = "",
+                            Parametro = "Vega Alta",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4349,9 +4705,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 257,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7210),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8854),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "San Sebastián",
+                            Descripcion = "",
+                            Parametro = "Vega Baja",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4360,9 +4717,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 258,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7257),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8895),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Santa Isabel",
+                            Descripcion = "",
+                            Parametro = "Vieques",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4371,9 +4729,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 259,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7259),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8897),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Santurce",
+                            Descripcion = "",
+                            Parametro = "Villalba",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4382,9 +4741,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 260,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7260),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8898),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Toa Alta",
+                            Descripcion = "",
+                            Parametro = "Yabucoa",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4393,9 +4753,10 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 261,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7262),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8900),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Toa Baja",
+                            Descripcion = "",
+                            Parametro = "Yauco",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4404,64 +4765,70 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 262,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7264),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8901),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Trujillo Alto",
-                            TX_Filtro1 = "PR",
-                            TX_Filtro2 = "PR"
+                            Descripcion = "",
+                            Parametro = "Miami",
+                            TX_Filtro1 = "Florida",
+                            TX_Filtro2 = "USA"
                         },
                         new
                         {
                             ParamterosID = 263,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7266),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8902),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Utuado",
-                            TX_Filtro1 = "PR",
-                            TX_Filtro2 = "PR"
+                            Descripcion = "",
+                            Parametro = "Tampa",
+                            TX_Filtro1 = "Florida",
+                            TX_Filtro2 = "USA"
                         },
                         new
                         {
                             ParamterosID = 264,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7268),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8904),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Vega Alta",
-                            TX_Filtro1 = "PR",
-                            TX_Filtro2 = "PR"
+                            Descripcion = "",
+                            Parametro = "Melbourne",
+                            TX_Filtro1 = "Florida",
+                            TX_Filtro2 = "USA"
                         },
                         new
                         {
                             ParamterosID = 265,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7270),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8905),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Vega Baja",
-                            TX_Filtro1 = "PR",
-                            TX_Filtro2 = "PR"
+                            Descripcion = "",
+                            Parametro = "New York",
+                            TX_Filtro1 = "New York",
+                            TX_Filtro2 = "USA"
                         },
                         new
                         {
                             ParamterosID = 266,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7272),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8906),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Vieques",
-                            TX_Filtro1 = "PR",
-                            TX_Filtro2 = "PR"
+                            Descripcion = "",
+                            Parametro = "Buffalo",
+                            TX_Filtro1 = "New York",
+                            TX_Filtro2 = "USA"
                         },
                         new
                         {
                             ParamterosID = 267,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7274),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8908),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Villalba",
+                            Descripcion = "",
+                            Parametro = "Canovanas",
                             TX_Filtro1 = "PR",
                             TX_Filtro2 = "PR"
                         },
@@ -4470,204 +4837,127 @@ namespace PRAMS.Configuration.Migrations
                             ParamterosID = 268,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7276),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8909),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Yabucoa",
-                            TX_Filtro1 = "PR",
-                            TX_Filtro2 = "PR"
-                        },
-                        new
-                        {
-                            ParamterosID = 269,
-                            Activo = true,
-                            CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7278),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Yauco",
-                            TX_Filtro1 = "PR",
-                            TX_Filtro2 = "PR"
-                        },
-                        new
-                        {
-                            ParamterosID = 270,
-                            Activo = true,
-                            CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7280),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
                             Parametro = "Jacksonville",
                             TX_Filtro1 = "Florida",
                             TX_Filtro2 = "USA"
                         },
                         new
                         {
-                            ParamterosID = 271,
+                            ParamterosID = 269,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7281),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8910),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
                             Parametro = "Orlando",
                             TX_Filtro1 = "Florida",
                             TX_Filtro2 = "USA"
                         },
                         new
                         {
+                            ParamterosID = 270,
+                            Activo = true,
+                            CategoriaID = 6,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8911),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "FORT BUCHANAN",
+                            TX_Filtro1 = "PR",
+                            TX_Filtro2 = "PR"
+                        },
+                        new
+                        {
+                            ParamterosID = 271,
+                            Activo = true,
+                            CategoriaID = 6,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8913),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Levittown",
+                            TX_Filtro1 = "PR",
+                            TX_Filtro2 = "PR"
+                        },
+                        new
+                        {
                             ParamterosID = 272,
                             Activo = true,
                             CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7283),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8914),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Miami",
-                            TX_Filtro1 = "Florida",
-                            TX_Filtro2 = "USA"
+                            Descripcion = "",
+                            Parametro = "COTO LAUREL",
+                            TX_Filtro1 = "PR",
+                            TX_Filtro2 = "PR"
                         },
                         new
                         {
                             ParamterosID = 273,
                             Activo = true,
-                            CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7285),
+                            CategoriaID = 7,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8915),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Tampa",
-                            TX_Filtro1 = "Florida",
-                            TX_Filtro2 = "USA"
+                            Descripcion = "",
+                            Parametro = "Aprendizaje"
                         },
                         new
                         {
                             ParamterosID = 274,
                             Activo = true,
-                            CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7287),
+                            CategoriaID = 7,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8916),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Melbourne",
-                            TX_Filtro1 = "Florida",
-                            TX_Filtro2 = "USA"
+                            Descripcion = "",
+                            Parametro = "Chofer"
                         },
                         new
                         {
                             ParamterosID = 275,
                             Activo = true,
-                            CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7289),
+                            CategoriaID = 7,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8918),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "New York",
-                            TX_Filtro1 = "New York",
-                            TX_Filtro2 = "USA"
+                            Descripcion = "",
+                            Parametro = "Conductor"
                         },
                         new
                         {
                             ParamterosID = 276,
                             Activo = true,
-                            CategoriaID = 6,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7290),
+                            CategoriaID = 7,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8919),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Buffalo",
-                            TX_Filtro1 = "New York",
-                            TX_Filtro2 = "USA"
+                            Descripcion = "",
+                            Parametro = "Motocicleta"
                         },
                         new
                         {
                             ParamterosID = 277,
                             Activo = true,
                             CategoriaID = 7,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7292),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8920),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Aprendizaje"
+                            Descripcion = "",
+                            Parametro = "Ninguna"
                         },
                         new
                         {
                             ParamterosID = 278,
                             Activo = true,
                             CategoriaID = 7,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7294),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8922),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Chofer"
+                            Descripcion = "",
+                            Parametro = "Vehículo Pesado"
                         },
                         new
                         {
                             ParamterosID = 279,
                             Activo = true,
-                            CategoriaID = 7,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7296),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Conductor"
-                        },
-                        new
-                        {
-                            ParamterosID = 280,
-                            Activo = true,
-                            CategoriaID = 7,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7297),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Motocicleta"
-                        },
-                        new
-                        {
-                            ParamterosID = 281,
-                            Activo = true,
-                            CategoriaID = 7,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7340),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Ninguna"
-                        },
-                        new
-                        {
-                            ParamterosID = 282,
-                            Activo = true,
-                            CategoriaID = 7,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7342),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Vehículo Pesado"
-                        },
-                        new
-                        {
-                            ParamterosID = 283,
-                            Activo = true,
                             CategoriaID = 8,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7344),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Descripcion = "Secretaria Gerencia",
-                            Parametro = "SEC-GME",
-                            TX_Filtro1 = "Administrador"
-                        },
-                        new
-                        {
-                            ParamterosID = 284,
-                            Activo = true,
-                            CategoriaID = 8,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7347),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Descripcion = "Gabriel Otero Valentin",
-                            Parametro = "GOV",
-                            TX_Filtro1 = "Analista ADSEF"
-                        },
-                        new
-                        {
-                            ParamterosID = 285,
-                            Activo = true,
-                            CategoriaID = 8,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7349),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Descripcion = "Leslie Soto Matos",
-                            Parametro = "LSM",
-                            TX_Filtro1 = "Analista AMSCA"
-                        },
-                        new
-                        {
-                            ParamterosID = 286,
-                            Activo = true,
-                            CategoriaID = 8,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7350),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Descripcion = "Juan Perez Rodriguez",
-                            Parametro = "JPR",
-                            TX_Filtro1 = "Analista ASUME"
-                        },
-                        new
-                        {
-                            ParamterosID = 287,
-                            Activo = true,
-                            CategoriaID = 8,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7352),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8923),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Bernardo Acevedo González",
                             Parametro = "BAG",
@@ -4675,32 +4965,10 @@ namespace PRAMS.Configuration.Migrations
                         },
                         new
                         {
-                            ParamterosID = 288,
+                            ParamterosID = 280,
                             Activo = true,
                             CategoriaID = 8,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7354),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Descripcion = "Jannette López Falcón",
-                            Parametro = "JLF",
-                            TX_Filtro1 = "Analista de Recursos Humanos"
-                        },
-                        new
-                        {
-                            ParamterosID = 289,
-                            Activo = true,
-                            CategoriaID = 8,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7356),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Descripcion = "Victor Maldonado Martínez",
-                            Parametro = "VMM",
-                            TX_Filtro1 = "Director"
-                        },
-                        new
-                        {
-                            ParamterosID = 290,
-                            Activo = true,
-                            CategoriaID = 8,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7358),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8924),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Carmín Rodríguez Negrón",
                             Parametro = "CRN",
@@ -4708,10 +4976,43 @@ namespace PRAMS.Configuration.Migrations
                         },
                         new
                         {
-                            ParamterosID = 291,
+                            ParamterosID = 281,
                             Activo = true,
                             CategoriaID = 8,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7359),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8968),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Jannette López Falcón",
+                            Parametro = "JLF",
+                            TX_Filtro1 = "Analista de Recursos Humanos"
+                        },
+                        new
+                        {
+                            ParamterosID = 282,
+                            Activo = true,
+                            CategoriaID = 8,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8969),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Victor Maldonado Martínez",
+                            Parametro = "VMM",
+                            TX_Filtro1 = "Director"
+                        },
+                        new
+                        {
+                            ParamterosID = 283,
+                            Activo = true,
+                            CategoriaID = 8,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8971),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Juan Perez Rodriguez",
+                            Parametro = "JPR",
+                            TX_Filtro1 = "Analista ASUME"
+                        },
+                        new
+                        {
+                            ParamterosID = 284,
+                            Activo = true,
+                            CategoriaID = 8,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8972),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Nancy Calderon Alicea",
                             Parametro = "NCA",
@@ -4719,173 +5020,225 @@ namespace PRAMS.Configuration.Migrations
                         },
                         new
                         {
-                            ParamterosID = 292,
+                            ParamterosID = 285,
+                            Activo = true,
+                            CategoriaID = 8,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8973),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Gabriel Otero Valentin",
+                            Parametro = "GOV",
+                            TX_Filtro1 = "Analista ADSEF"
+                        },
+                        new
+                        {
+                            ParamterosID = 286,
+                            Activo = true,
+                            CategoriaID = 8,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8974),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Leslie Soto Matos",
+                            Parametro = "LSM",
+                            TX_Filtro1 = "Analista AMSCA"
+                        },
+                        new
+                        {
+                            ParamterosID = 287,
+                            Activo = true,
+                            CategoriaID = 8,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8976),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Secretaria Gerencia",
+                            Parametro = "SEC-GME",
+                            TX_Filtro1 = "Administrador"
+                        },
+                        new
+                        {
+                            ParamterosID = 288,
                             Activo = true,
                             CategoriaID = 9,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7361),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8977),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
                             Parametro = "Aceptada"
+                        },
+                        new
+                        {
+                            ParamterosID = 289,
+                            Activo = true,
+                            CategoriaID = 9,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8978),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Denegada"
+                        },
+                        new
+                        {
+                            ParamterosID = 290,
+                            Activo = true,
+                            CategoriaID = 9,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8980),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Devuelta"
+                        },
+                        new
+                        {
+                            ParamterosID = 291,
+                            Activo = true,
+                            CategoriaID = 10,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8981),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "M"
+                        },
+                        new
+                        {
+                            ParamterosID = 292,
+                            Activo = true,
+                            CategoriaID = 10,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8982),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "F"
                         },
                         new
                         {
                             ParamterosID = 293,
                             Activo = true,
-                            CategoriaID = 9,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7363),
+                            CategoriaID = 11,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8983),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Denegada"
+                            Descripcion = "",
+                            Parametro = "Aguadilla"
                         },
                         new
                         {
                             ParamterosID = 294,
                             Activo = true,
-                            CategoriaID = 9,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7365),
+                            CategoriaID = 11,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8985),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Devuelta"
+                            Descripcion = "",
+                            Parametro = "Arecibo"
                         },
                         new
                         {
                             ParamterosID = 295,
                             Activo = true,
-                            CategoriaID = 10,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7366),
+                            CategoriaID = 11,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8986),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Femenino"
+                            Descripcion = "",
+                            Parametro = "Caguas"
                         },
                         new
                         {
                             ParamterosID = 296,
                             Activo = true,
-                            CategoriaID = 10,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7368),
+                            CategoriaID = 11,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8987),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Masculino"
+                            Descripcion = "",
+                            Parametro = "Carolina"
                         },
                         new
                         {
                             ParamterosID = 297,
                             Activo = true,
                             CategoriaID = 11,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7370),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8988),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Aguadilla"
+                            Descripcion = "",
+                            Parametro = "Humacao"
                         },
                         new
                         {
                             ParamterosID = 298,
                             Activo = true,
                             CategoriaID = 11,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7372),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8990),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Arecibo"
+                            Descripcion = "",
+                            Parametro = "Bayamon"
                         },
                         new
                         {
                             ParamterosID = 299,
                             Activo = true,
                             CategoriaID = 11,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7374),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8991),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Bayamon"
+                            Descripcion = "",
+                            Parametro = "Nivel Central"
                         },
                         new
                         {
                             ParamterosID = 300,
                             Activo = true,
-                            CategoriaID = 11,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7375),
+                            CategoriaID = 12,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8992),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Nivel Central"
+                            Descripcion = "",
+                            Parametro = "Definicion Base"
                         },
                         new
                         {
                             ParamterosID = 301,
                             Activo = true,
-                            CategoriaID = 11,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7377),
+                            CategoriaID = 13,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8994),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Caguas"
+                            Descripcion = "",
+                            Parametro = "Secretariado"
                         },
                         new
                         {
                             ParamterosID = 302,
                             Activo = true,
-                            CategoriaID = 11,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7379),
+                            CategoriaID = 13,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8995),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Carolina"
+                            Descripcion = "",
+                            Parametro = "ADFAN"
                         },
                         new
                         {
                             ParamterosID = 303,
                             Activo = true,
-                            CategoriaID = 11,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7381),
+                            CategoriaID = 13,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8996),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Humacao"
+                            Descripcion = "",
+                            Parametro = "ADSEF"
                         },
                         new
                         {
                             ParamterosID = 304,
                             Activo = true,
-                            CategoriaID = 12,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7383),
+                            CategoriaID = 13,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8997),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Definicion Base"
+                            Descripcion = "",
+                            Parametro = "ASUME"
                         },
                         new
                         {
                             ParamterosID = 305,
                             Activo = true,
                             CategoriaID = 13,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7384),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(8999),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "ADFAN"
+                            Descripcion = "",
+                            Parametro = "ACUDEN"
                         },
                         new
                         {
                             ParamterosID = 306,
                             Activo = true,
-                            CategoriaID = 13,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7386),
+                            CategoriaID = 16,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9000),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "ADSEF"
-                        },
-                        new
-                        {
-                            ParamterosID = 307,
-                            Activo = true,
-                            CategoriaID = 13,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7388),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "ASUME"
-                        },
-                        new
-                        {
-                            ParamterosID = 308,
-                            Activo = true,
-                            CategoriaID = 13,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7390),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "ACUDEN"
-                        },
-                        new
-                        {
-                            ParamterosID = 309,
-                            Activo = true,
-                            CategoriaID = 13,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7391),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Secretariado"
-                        },
-                        new
-                        {
-                            ParamterosID = 310,
-                            Activo = true,
-                            CategoriaID = 14,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7393),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
                             Parametro = "San Juan",
                             TX_Filtro1 = "Area Metro",
                             TX_Filtro2 = "PR",
@@ -4893,11 +5246,12 @@ namespace PRAMS.Configuration.Migrations
                         },
                         new
                         {
-                            ParamterosID = 311,
+                            ParamterosID = 307,
                             Activo = true,
-                            CategoriaID = 14,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7395),
+                            CategoriaID = 16,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9001),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
                             Parametro = "Carolina",
                             TX_Filtro1 = "Area Metro",
                             TX_Filtro2 = "PR",
@@ -4905,11 +5259,12 @@ namespace PRAMS.Configuration.Migrations
                         },
                         new
                         {
-                            ParamterosID = 312,
+                            ParamterosID = 308,
                             Activo = true,
-                            CategoriaID = 14,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7397),
+                            CategoriaID = 16,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9003),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
                             Parametro = "Arecibo",
                             TX_Filtro1 = "Area Norte",
                             TX_Filtro2 = "PR",
@@ -4917,11 +5272,12 @@ namespace PRAMS.Configuration.Migrations
                         },
                         new
                         {
-                            ParamterosID = 313,
+                            ParamterosID = 309,
                             Activo = true,
-                            CategoriaID = 14,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7399),
+                            CategoriaID = 16,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9004),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
                             Parametro = "Ponce",
                             TX_Filtro1 = "Area Sur",
                             TX_Filtro2 = "PR",
@@ -4929,11 +5285,12 @@ namespace PRAMS.Configuration.Migrations
                         },
                         new
                         {
-                            ParamterosID = 314,
+                            ParamterosID = 310,
                             Activo = true,
-                            CategoriaID = 14,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7400),
+                            CategoriaID = 16,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9005),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
                             Parametro = "Orange",
                             TX_Filtro1 = "Central",
                             TX_Filtro2 = "Florida",
@@ -4941,11 +5298,12 @@ namespace PRAMS.Configuration.Migrations
                         },
                         new
                         {
-                            ParamterosID = 315,
+                            ParamterosID = 311,
                             Activo = true,
-                            CategoriaID = 14,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7402),
+                            CategoriaID = 16,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9006),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
                             Parametro = "New York City",
                             TX_Filtro1 = "Greater City",
                             TX_Filtro2 = "New York",
@@ -4953,558 +5311,502 @@ namespace PRAMS.Configuration.Migrations
                         },
                         new
                         {
+                            ParamterosID = 312,
+                            Activo = true,
+                            CategoriaID = 17,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9008),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Segunda"
+                        },
+                        new
+                        {
+                            ParamterosID = 313,
+                            Activo = true,
+                            CategoriaID = 17,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9009),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Primera"
+                        },
+                        new
+                        {
+                            ParamterosID = 314,
+                            Activo = true,
+                            CategoriaID = 17,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9010),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Tercera"
+                        },
+                        new
+                        {
+                            ParamterosID = 315,
+                            Activo = true,
+                            CategoriaID = 19,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9011),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Intermedio 8vo"
+                        },
+                        new
+                        {
                             ParamterosID = 316,
                             Activo = true,
-                            CategoriaID = 15,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7404),
+                            CategoriaID = 19,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9013),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Primera"
+                            Descripcion = "",
+                            Parametro = "Superior 12vo"
                         },
                         new
                         {
                             ParamterosID = 317,
                             Activo = true,
-                            CategoriaID = 15,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7406),
+                            CategoriaID = 19,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9014),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Segunda"
+                            Descripcion = "",
+                            Parametro = "Grado Asociado"
                         },
                         new
                         {
                             ParamterosID = 318,
                             Activo = true,
-                            CategoriaID = 15,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7408),
+                            CategoriaID = 19,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9015),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Tercera"
+                            Descripcion = "",
+                            Parametro = "Bachillerato"
                         },
                         new
                         {
                             ParamterosID = 319,
                             Activo = true,
-                            CategoriaID = 16,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7409),
+                            CategoriaID = 19,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9017),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Intermedio 8vo"
+                            Descripcion = "",
+                            Parametro = "Maestria"
                         },
                         new
                         {
                             ParamterosID = 320,
                             Activo = true,
-                            CategoriaID = 16,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7411),
+                            CategoriaID = 19,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9018),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Superior 12vo"
+                            Descripcion = "",
+                            Parametro = "Doctorado"
                         },
                         new
                         {
                             ParamterosID = 321,
                             Activo = true,
-                            CategoriaID = 16,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7413),
+                            CategoriaID = 20,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9019),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Grado Asociado"
+                            Descripcion = "",
+                            Parametro = "Experiencia Empleo"
                         },
                         new
                         {
                             ParamterosID = 322,
                             Activo = true,
-                            CategoriaID = 16,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7474),
+                            CategoriaID = 20,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9050),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Bachillerato"
+                            Descripcion = "",
+                            Parametro = "Cursos o Adiestramiento"
                         },
                         new
                         {
                             ParamterosID = 323,
                             Activo = true,
-                            CategoriaID = 16,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7476),
+                            CategoriaID = 20,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9052),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Maestria"
+                            Descripcion = "",
+                            Parametro = "Identificacion"
                         },
                         new
                         {
                             ParamterosID = 324,
                             Activo = true,
-                            CategoriaID = 16,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7478),
+                            CategoriaID = 20,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9053),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Doctorado"
+                            Descripcion = "",
+                            Parametro = "Licencia o Certificado"
                         },
                         new
                         {
                             ParamterosID = 325,
                             Activo = true,
-                            CategoriaID = 17,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7480),
+                            CategoriaID = 20,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9054),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Experiencia Empleo"
+                            Descripcion = "",
+                            Parametro = "Referencia"
                         },
                         new
                         {
                             ParamterosID = 326,
                             Activo = true,
-                            CategoriaID = 17,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7482),
+                            CategoriaID = 20,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9056),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Cursos o Adiestramiento"
+                            Descripcion = "",
+                            Parametro = "Certificado de antecedentes penales"
                         },
                         new
                         {
                             ParamterosID = 327,
                             Activo = true,
-                            CategoriaID = 17,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7484),
+                            CategoriaID = 20,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9057),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Identificacion"
+                            Descripcion = "",
+                            Parametro = "TRANSCRIPCION DE CREDITOS"
                         },
                         new
                         {
                             ParamterosID = 328,
                             Activo = true,
-                            CategoriaID = 17,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7486),
+                            CategoriaID = 20,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9059),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Licencia o Certificado"
+                            Descripcion = "",
+                            Parametro = "RESUME"
                         },
                         new
                         {
                             ParamterosID = 329,
                             Activo = true,
-                            CategoriaID = 17,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7488),
+                            CategoriaID = 20,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9060),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Referencia"
+                            Descripcion = "",
+                            Parametro = "DIPLOMA UNIVERSITARIO"
                         },
                         new
                         {
                             ParamterosID = 330,
                             Activo = true,
-                            CategoriaID = 17,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7490),
+                            CategoriaID = 21,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9061),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Certificado de antecedentes penales"
+                            Descripcion = "",
+                            Parametro = "Región"
                         },
                         new
                         {
                             ParamterosID = 331,
                             Activo = true,
-                            CategoriaID = 17,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7491),
+                            CategoriaID = 21,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9062),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "TRANSCRIPCION DE CREDITOS"
+                            Descripcion = "",
+                            Parametro = "Administración"
                         },
                         new
                         {
                             ParamterosID = 332,
                             Activo = true,
-                            CategoriaID = 17,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7493),
+                            CategoriaID = 21,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9064),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "RESUME"
+                            Descripcion = "",
+                            Parametro = "Finanzas"
                         },
                         new
                         {
                             ParamterosID = 333,
                             Activo = true,
-                            CategoriaID = 17,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7495),
+                            CategoriaID = 22,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9065),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "RESUME"
+                            Descripcion = "",
+                            Parametro = "Adminisrtrador"
                         },
                         new
                         {
                             ParamterosID = 334,
                             Activo = true,
-                            CategoriaID = 17,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7497),
+                            CategoriaID = 22,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9066),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "DIPLOMA UNIVERSITARIO"
+                            Descripcion = "",
+                            Parametro = "UsuarioRegion"
                         },
                         new
                         {
                             ParamterosID = 335,
                             Activo = true,
-                            CategoriaID = 18,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7499),
+                            CategoriaID = 22,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9068),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Región"
+                            Descripcion = "",
+                            Parametro = "Supervisor"
                         },
                         new
                         {
                             ParamterosID = 336,
                             Activo = true,
-                            CategoriaID = 18,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7501),
+                            CategoriaID = 22,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9069),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Administración"
+                            Descripcion = "",
+                            Parametro = "UsuarioLocal"
                         },
                         new
                         {
                             ParamterosID = 337,
                             Activo = true,
-                            CategoriaID = 18,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7503),
+                            CategoriaID = 22,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9070),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
                             Parametro = "Finanzas"
                         },
                         new
                         {
                             ParamterosID = 338,
                             Activo = true,
-                            CategoriaID = 19,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7505),
+                            CategoriaID = 23,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9071),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
                             Parametro = "Adminisrtrador"
                         },
                         new
                         {
                             ParamterosID = 339,
                             Activo = true,
-                            CategoriaID = 19,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7506),
+                            CategoriaID = 23,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9073),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "UsuarioRegion"
+                            Descripcion = "",
+                            Parametro = "Supervisor"
                         },
                         new
                         {
                             ParamterosID = 340,
                             Activo = true,
-                            CategoriaID = 19,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7508),
+                            CategoriaID = 23,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9074),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Supervisor"
+                            Descripcion = "",
+                            Parametro = "Usuarios"
                         },
                         new
                         {
                             ParamterosID = 341,
                             Activo = true,
-                            CategoriaID = 19,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7510),
+                            CategoriaID = 24,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9075),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "UsuarioLocal"
+                            Descripcion = "",
+                            Parametro = "Orientación",
+                            TX_Filtro1 = "Form_Referidos",
+                            TX_Filtro2 = "Referido"
                         },
                         new
                         {
                             ParamterosID = 342,
                             Activo = true,
-                            CategoriaID = 19,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7512),
+                            CategoriaID = 24,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9076),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Finanzas"
+                            Descripcion = "",
+                            Parametro = "Orientación y Referimiento",
+                            TX_Filtro1 = "Form_Referidos",
+                            TX_Filtro2 = "Referido"
                         },
                         new
                         {
                             ParamterosID = 343,
                             Activo = true,
-                            CategoriaID = 20,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7514),
+                            CategoriaID = 24,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9078),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Adminisrtrador"
+                            Descripcion = "",
+                            Parametro = "Protección",
+                            TX_Filtro1 = "Form_Referidos",
+                            TX_Filtro2 = "Referido"
                         },
                         new
                         {
                             ParamterosID = 344,
                             Activo = true,
-                            CategoriaID = 20,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7515),
+                            CategoriaID = 24,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9079),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Supervisor"
+                            Descripcion = "",
+                            Parametro = "Servicio Protección",
+                            TX_Filtro1 = "Form_Estudio_Social",
+                            TX_Filtro2 = "Protección"
                         },
                         new
                         {
                             ParamterosID = 345,
                             Activo = true,
-                            CategoriaID = 20,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7517),
+                            CategoriaID = 24,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9080),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Usuarios"
+                            Descripcion = "",
+                            Parametro = "Servicio Protección",
+                            TX_Filtro1 = "Form_Notas_Progreso",
+                            TX_Filtro2 = "Protección"
                         },
                         new
                         {
                             ParamterosID = 346,
                             Activo = true,
-                            CategoriaID = 21,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7519),
+                            CategoriaID = 24,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9081),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Descripcion = "Form_Estudio_Social",
+                            Descripcion = "",
                             Parametro = "Servicio Protección",
-                            TX_Filtro1 = "Protección"
+                            TX_Filtro1 = "Form_Visita_Hogar",
+                            TX_Filtro2 = "Protección"
                         },
                         new
                         {
                             ParamterosID = 347,
                             Activo = true,
-                            CategoriaID = 21,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7521),
+                            CategoriaID = 25,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9083),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Descripcion = "Form_Notas_Progreso",
-                            Parametro = "Servicio Protección",
-                            TX_Filtro1 = "Protección"
+                            Descripcion = "",
+                            Parametro = "Comienzo Formulario"
                         },
                         new
                         {
                             ParamterosID = 348,
                             Activo = true,
-                            CategoriaID = 21,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7522),
+                            CategoriaID = 25,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9084),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Descripcion = "Form_Referidos",
-                            Parametro = "Orientación",
-                            TX_Filtro1 = "Referido"
+                            Descripcion = "",
+                            Parametro = "Seguimiento Formulario"
                         },
                         new
                         {
                             ParamterosID = 349,
                             Activo = true,
-                            CategoriaID = 21,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7524),
+                            CategoriaID = 25,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9085),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Descripcion = "Form_Referidos",
-                            Parametro = "Orientación y Referimiento",
-                            TX_Filtro1 = "Referido"
+                            Descripcion = "",
+                            Parametro = "Completar Formulario"
                         },
                         new
                         {
                             ParamterosID = 350,
                             Activo = true,
-                            CategoriaID = 21,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7526),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Descripcion = "Form_Referidos",
-                            Parametro = "Protección",
-                            TX_Filtro1 = "Referido"
-                        },
-                        new
-                        {
-                            ParamterosID = 351,
-                            Activo = true,
-                            CategoriaID = 21,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7528),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Descripcion = "Form_Visita_Hogar ",
-                            Parametro = "Servicio Protección",
-                            TX_Filtro1 = "Protección"
-                        },
-                        new
-                        {
-                            ParamterosID = 352,
-                            Activo = true,
-                            CategoriaID = 22,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7530),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Comienzo Formulario"
-                        },
-                        new
-                        {
-                            ParamterosID = 353,
-                            Activo = true,
-                            CategoriaID = 22,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7531),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Seguimiento Formulario"
-                        },
-                        new
-                        {
-                            ParamterosID = 354,
-                            Activo = true,
-                            CategoriaID = 22,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7533),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Completar Formulario"
-                        },
-                        new
-                        {
-                            ParamterosID = 355,
-                            Activo = true,
-                            CategoriaID = 23,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7535),
+                            CategoriaID = 26,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9086),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Validaciones Campos Requeridos",
                             Parametro = "Validación Campos"
                         },
                         new
                         {
-                            ParamterosID = 356,
+                            ParamterosID = 351,
                             Activo = true,
-                            CategoriaID = 23,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7537),
+                            CategoriaID = 26,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9088),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Validadcion de Segimiento cuando se completan todas se pasa proxima etapa",
                             Parametro = "Seguimiento Campos"
                         },
                         new
                         {
-                            ParamterosID = 357,
+                            ParamterosID = 352,
                             Activo = true,
-                            CategoriaID = 23,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7539),
+                            CategoriaID = 26,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9089),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Proceso de Manejo de Firmas",
                             Parametro = "Firmas Personal"
                         },
                         new
                         {
-                            ParamterosID = 358,
+                            ParamterosID = 353,
                             Activo = true,
-                            CategoriaID = 23,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7540),
+                            CategoriaID = 26,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9090),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Definicion que Permite Guardar y Seguir adelante, solo para pruebas",
                             Parametro = "Continuar"
                         },
                         new
                         {
-                            ParamterosID = 359,
+                            ParamterosID = 354,
                             Activo = true,
-                            CategoriaID = 24,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7542),
+                            CategoriaID = 27,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9091),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Tipo de Accion campos Requeridos",
                             Parametro = "Requerido"
                         },
                         new
                         {
-                            ParamterosID = 360,
+                            ParamterosID = 355,
                             Activo = true,
-                            CategoriaID = 24,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7544),
+                            CategoriaID = 27,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9093),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "Tipo de Accion campos Opcionales, podrian ser marcados",
                             Parametro = "Opcionales"
                         },
                         new
                         {
-                            ParamterosID = 361,
+                            ParamterosID = 356,
                             Activo = true,
-                            CategoriaID = 25,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7600),
+                            CategoriaID = 28,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9094),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
                             Parametro = "Fecha"
                         },
                         new
                         {
-                            ParamterosID = 362,
+                            ParamterosID = 357,
                             Activo = true,
-                            CategoriaID = 25,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7602),
+                            CategoriaID = 28,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9095),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
                             Parametro = "Texto"
                         },
                         new
                         {
-                            ParamterosID = 363,
+                            ParamterosID = 358,
                             Activo = true,
-                            CategoriaID = 25,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7604),
+                            CategoriaID = 28,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9096),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
                             Parametro = "Integro"
                         },
                         new
                         {
-                            ParamterosID = 364,
+                            ParamterosID = 359,
                             Activo = true,
-                            CategoriaID = 25,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7606),
+                            CategoriaID = 28,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9098),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
                             Parametro = "Narrativa"
                         },
                         new
                         {
-                            ParamterosID = 365,
+                            ParamterosID = 360,
                             Activo = true,
-                            CategoriaID = 25,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7608),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "FirmaDir"
-                        },
-                        new
-                        {
-                            ParamterosID = 366,
-                            Activo = true,
-                            CategoriaID = 26,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7610),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Descripcion = "Implementar Luego",
-                            Parametro = "FirmaDir"
-                        },
-                        new
-                        {
-                            ParamterosID = 367,
-                            Activo = true,
-                            CategoriaID = 26,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7612),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Descripcion = "Implementar Luego",
-                            Parametro = "FirmaCliente"
-                        },
-                        new
-                        {
-                            ParamterosID = 368,
-                            Activo = true,
-                            CategoriaID = 26,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7614),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Descripcion = "Implementar Luego",
-                            Parametro = "FirmaRegion"
-                        },
-                        new
-                        {
-                            ParamterosID = 369,
-                            Activo = true,
-                            CategoriaID = 26,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7616),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Descripcion = "Usar largo campo para determinar si cumple el tamano",
-                            Parametro = "LargoMinimo"
-                        },
-                        new
-                        {
-                            ParamterosID = 370,
-                            Activo = true,
-                            CategoriaID = 26,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7617),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Descripcion = "Verificar Existe valor, Not Null",
-                            Parametro = "TieneValor"
-                        },
-                        new
-                        {
-                            ParamterosID = 371,
-                            Activo = true,
-                            CategoriaID = 26,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7619),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Descripcion = "Entrada de Fecha",
-                            Parametro = "Fecha"
-                        },
-                        new
-                        {
-                            ParamterosID = 372,
-                            Activo = true,
-                            CategoriaID = 26,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7621),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Descripcion = "Entrada de Hora",
-                            Parametro = "Hora"
-                        },
-                        new
-                        {
-                            ParamterosID = 373,
-                            Activo = true,
-                            CategoriaID = 26,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7623),
-                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Descripcion = "Validar Numero con Tope",
-                            Parametro = "NumericoLargo"
-                        },
-                        new
-                        {
-                            ParamterosID = 374,
-                            Activo = true,
-                            CategoriaID = 26,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7625),
+                            CategoriaID = 29,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9099),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "",
                             Parametro = "FirmaTS",
@@ -5512,10 +5814,10 @@ namespace PRAMS.Configuration.Migrations
                         },
                         new
                         {
-                            ParamterosID = 375,
+                            ParamterosID = 361,
                             Activo = true,
-                            CategoriaID = 26,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7626),
+                            CategoriaID = 29,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9100),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Descripcion = "",
                             Parametro = "FirmaSup",
@@ -5523,21 +5825,670 @@ namespace PRAMS.Configuration.Migrations
                         },
                         new
                         {
+                            ParamterosID = 362,
+                            Activo = true,
+                            CategoriaID = 29,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9101),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Implementar Luego",
+                            Parametro = "FirmaDir"
+                        },
+                        new
+                        {
+                            ParamterosID = 363,
+                            Activo = true,
+                            CategoriaID = 29,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9131),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Implementar Luego",
+                            Parametro = "FirmaCliente"
+                        },
+                        new
+                        {
+                            ParamterosID = 364,
+                            Activo = true,
+                            CategoriaID = 29,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9133),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Implementar Luego",
+                            Parametro = "FirmaRegion"
+                        },
+                        new
+                        {
+                            ParamterosID = 365,
+                            Activo = true,
+                            CategoriaID = 29,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9134),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Usar largo campo para determinar si cumple el tamano",
+                            Parametro = "LargoMinimo"
+                        },
+                        new
+                        {
+                            ParamterosID = 366,
+                            Activo = true,
+                            CategoriaID = 29,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9135),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Verificar Existe valor, Not string.Empty",
+                            Parametro = "TieneValor"
+                        },
+                        new
+                        {
+                            ParamterosID = 367,
+                            Activo = true,
+                            CategoriaID = 29,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9137),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Entrada de Fecha",
+                            Parametro = "Fecha"
+                        },
+                        new
+                        {
+                            ParamterosID = 368,
+                            Activo = true,
+                            CategoriaID = 29,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9138),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Entrada de Hora",
+                            Parametro = "Hora"
+                        },
+                        new
+                        {
+                            ParamterosID = 369,
+                            Activo = true,
+                            CategoriaID = 29,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9139),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Validar Numero con Tope",
+                            Parametro = "NumericoLargo"
+                        },
+                        new
+                        {
+                            ParamterosID = 370,
+                            Activo = true,
+                            CategoriaID = 30,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9140),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Definicion de TS para Trabajos de este Nivel",
+                            Parametro = "Trabajador Social"
+                        },
+                        new
+                        {
+                            ParamterosID = 371,
+                            Activo = true,
+                            CategoriaID = 30,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9142),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Definicion de Supervisor para Casos",
+                            Parametro = "Supervisor"
+                        },
+                        new
+                        {
+                            ParamterosID = 372,
+                            Activo = true,
+                            CategoriaID = 31,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9143),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Adulto que es Referido",
+                            Parametro = "Sujeto Referido",
+                            TX_Filtro1 = "Sujeto"
+                        },
+                        new
+                        {
+                            ParamterosID = 373,
+                            Activo = true,
+                            CategoriaID = 31,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9145),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Persona que realiza Llamada o Refiere",
+                            Parametro = "Refiere Adulto"
+                        },
+                        new
+                        {
+                            ParamterosID = 374,
+                            Activo = true,
+                            CategoriaID = 31,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9146),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Contacto"
+                        },
+                        new
+                        {
+                            ParamterosID = 375,
+                            Activo = true,
+                            CategoriaID = 31,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9147),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "Familiares del Adulto",
+                            Parametro = "Familiar"
+                        },
+                        new
+                        {
                             ParamterosID = 376,
                             Activo = true,
-                            CategoriaID = 27,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7628),
+                            CategoriaID = 32,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9148),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Trabajador Social"
+                            Descripcion = "",
+                            Parametro = "Abuelo/a"
                         },
                         new
                         {
                             ParamterosID = 377,
                             Activo = true,
-                            CategoriaID = 27,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(7630),
+                            CategoriaID = 32,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9150),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
-                            Parametro = "Supervisor"
+                            Descripcion = "",
+                            Parametro = "Padre"
+                        },
+                        new
+                        {
+                            ParamterosID = 378,
+                            Activo = true,
+                            CategoriaID = 32,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9151),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Madre"
+                        },
+                        new
+                        {
+                            ParamterosID = 379,
+                            Activo = true,
+                            CategoriaID = 32,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9152),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Hermano/a"
+                        },
+                        new
+                        {
+                            ParamterosID = 380,
+                            Activo = true,
+                            CategoriaID = 32,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9153),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Hijo/a"
+                        },
+                        new
+                        {
+                            ParamterosID = 381,
+                            Activo = true,
+                            CategoriaID = 32,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9155),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Nieto/a"
+                        },
+                        new
+                        {
+                            ParamterosID = 382,
+                            Activo = true,
+                            CategoriaID = 32,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9156),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Esposo/a"
+                        },
+                        new
+                        {
+                            ParamterosID = 383,
+                            Activo = true,
+                            CategoriaID = 32,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9157),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Primo/a"
+                        },
+                        new
+                        {
+                            ParamterosID = 384,
+                            Activo = true,
+                            CategoriaID = 32,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9158),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Tio/a"
+                        },
+                        new
+                        {
+                            ParamterosID = 385,
+                            Activo = true,
+                            CategoriaID = 32,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9160),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Otro"
+                        },
+                        new
+                        {
+                            ParamterosID = 386,
+                            Activo = true,
+                            CategoriaID = 33,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9161),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Ayuda del PAN",
+                            TX_Filtro1 = "Economica"
+                        },
+                        new
+                        {
+                            ParamterosID = 387,
+                            Activo = true,
+                            CategoriaID = 33,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9162),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Ayuda de TANF",
+                            TX_Filtro1 = "Economica"
+                        },
+                        new
+                        {
+                            ParamterosID = 388,
+                            Activo = true,
+                            CategoriaID = 33,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9163),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Ama de Llaves",
+                            TX_Filtro1 = "Hogar"
+                        },
+                        new
+                        {
+                            ParamterosID = 389,
+                            Activo = true,
+                            CategoriaID = 33,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9165),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Alimentacion",
+                            TX_Filtro1 = "Hogar"
+                        },
+                        new
+                        {
+                            ParamterosID = 390,
+                            Activo = true,
+                            CategoriaID = 33,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9166),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Terapias Fisica",
+                            TX_Filtro1 = "Hogar"
+                        },
+                        new
+                        {
+                            ParamterosID = 391,
+                            Activo = true,
+                            CategoriaID = 33,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9167),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Visitas Medica",
+                            TX_Filtro1 = "Terapias"
+                        },
+                        new
+                        {
+                            ParamterosID = 392,
+                            Activo = true,
+                            CategoriaID = 34,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9168),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Aceptado",
+                            TX_Filtro1 = "YES"
+                        },
+                        new
+                        {
+                            ParamterosID = 393,
+                            Activo = true,
+                            CategoriaID = 34,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9170),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Rechazado",
+                            TX_Filtro1 = "NO"
+                        },
+                        new
+                        {
+                            ParamterosID = 394,
+                            Activo = true,
+                            CategoriaID = 34,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9171),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Cliente no Acepto Servicio",
+                            TX_Filtro1 = "NO"
+                        },
+                        new
+                        {
+                            ParamterosID = 395,
+                            Activo = true,
+                            CategoriaID = 34,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9172),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Referido",
+                            TX_Filtro1 = "NO"
+                        },
+                        new
+                        {
+                            ParamterosID = 396,
+                            Activo = true,
+                            CategoriaID = 34,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9173),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Coordinar Servicios",
+                            TX_Filtro1 = "YES"
+                        },
+                        new
+                        {
+                            ParamterosID = 397,
+                            Activo = true,
+                            CategoriaID = 34,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9174),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "En Proceso de Completar Informacion",
+                            TX_Filtro1 = "NO"
+                        },
+                        new
+                        {
+                            ParamterosID = 398,
+                            Activo = true,
+                            CategoriaID = 35,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9176),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Sin Antecedentes"
+                        },
+                        new
+                        {
+                            ParamterosID = 399,
+                            Activo = true,
+                            CategoriaID = 35,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9177),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Con Antecedentes"
+                        },
+                        new
+                        {
+                            ParamterosID = 400,
+                            Activo = true,
+                            CategoriaID = 36,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9178),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Emergencia"
+                        },
+                        new
+                        {
+                            ParamterosID = 401,
+                            Activo = true,
+                            CategoriaID = 36,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9179),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Urgente"
+                        },
+                        new
+                        {
+                            ParamterosID = 402,
+                            Activo = true,
+                            CategoriaID = 36,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9181),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Periodo Reglamentario"
+                        },
+                        new
+                        {
+                            ParamterosID = 403,
+                            Activo = true,
+                            CategoriaID = 37,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9182),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Aguadilla",
+                            TX_Filtro1 = "Aguadilla I"
+                        },
+                        new
+                        {
+                            ParamterosID = 404,
+                            Activo = true,
+                            CategoriaID = 37,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9213),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Arecibo",
+                            TX_Filtro1 = "Arecibo"
+                        },
+                        new
+                        {
+                            ParamterosID = 405,
+                            Activo = true,
+                            CategoriaID = 37,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9214),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Bayamon",
+                            TX_Filtro1 = "Bayamon I"
+                        },
+                        new
+                        {
+                            ParamterosID = 406,
+                            Activo = true,
+                            CategoriaID = 37,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9215),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Caguas",
+                            TX_Filtro1 = "Caguas I"
+                        },
+                        new
+                        {
+                            ParamterosID = 407,
+                            Activo = true,
+                            CategoriaID = 37,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9217),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Carolina",
+                            TX_Filtro1 = "Carolina I"
+                        },
+                        new
+                        {
+                            ParamterosID = 408,
+                            Activo = true,
+                            CategoriaID = 37,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9218),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Guayama",
+                            TX_Filtro1 = "Guayama"
+                        },
+                        new
+                        {
+                            ParamterosID = 409,
+                            Activo = true,
+                            CategoriaID = 37,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9219),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Humacao",
+                            TX_Filtro1 = "HUmacao"
+                        },
+                        new
+                        {
+                            ParamterosID = 410,
+                            Activo = true,
+                            CategoriaID = 37,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9220),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Mayaguez",
+                            TX_Filtro1 = "Mayaguez"
+                        },
+                        new
+                        {
+                            ParamterosID = 411,
+                            Activo = true,
+                            CategoriaID = 37,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9222),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Ponce",
+                            TX_Filtro1 = "Ponce"
+                        },
+                        new
+                        {
+                            ParamterosID = 412,
+                            Activo = true,
+                            CategoriaID = 37,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9223),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "San Juan",
+                            TX_Filtro1 = "San Juan I"
+                        },
+                        new
+                        {
+                            ParamterosID = 413,
+                            Activo = true,
+                            CategoriaID = 37,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9224),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "San Juan",
+                            TX_Filtro1 = "Guaynabo"
+                        },
+                        new
+                        {
+                            ParamterosID = 414,
+                            Activo = true,
+                            CategoriaID = 37,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9225),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Aguadilla",
+                            TX_Filtro1 = "Isabela"
+                        },
+                        new
+                        {
+                            ParamterosID = 415,
+                            Activo = true,
+                            CategoriaID = 37,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9227),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Aguadilla",
+                            TX_Filtro1 = "Moca"
+                        },
+                        new
+                        {
+                            ParamterosID = 416,
+                            Activo = true,
+                            CategoriaID = 37,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9228),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Aguadilla",
+                            TX_Filtro1 = "San Sebastian"
+                        },
+                        new
+                        {
+                            ParamterosID = 417,
+                            Activo = true,
+                            CategoriaID = 38,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9230),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "El Adulto"
+                        },
+                        new
+                        {
+                            ParamterosID = 418,
+                            Activo = true,
+                            CategoriaID = 38,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9232),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "La Familia"
+                        },
+                        new
+                        {
+                            ParamterosID = 419,
+                            Activo = true,
+                            CategoriaID = 39,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9233),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "CAMPEA Lares"
+                        },
+                        new
+                        {
+                            ParamterosID = 420,
+                            Activo = true,
+                            CategoriaID = 39,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9235),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "CAMPEA Caguas"
+                        },
+                        new
+                        {
+                            ParamterosID = 421,
+                            Activo = true,
+                            CategoriaID = 39,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9236),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Region Caguas"
+                        },
+                        new
+                        {
+                            ParamterosID = 422,
+                            Activo = true,
+                            CategoriaID = 39,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9237),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Region Aguadilla"
+                        },
+                        new
+                        {
+                            ParamterosID = 423,
+                            Activo = true,
+                            CategoriaID = 39,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9238),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Region Arecibo"
+                        },
+                        new
+                        {
+                            ParamterosID = 424,
+                            Activo = true,
+                            CategoriaID = 39,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9240),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "Centro Integrado Morovis"
+                        },
+                        new
+                        {
+                            ParamterosID = 425,
+                            Activo = true,
+                            CategoriaID = 39,
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9241),
+                            CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                            Descripcion = "",
+                            Parametro = "CAMPEA Aguas Buenas"
                         });
                 });
 
@@ -5589,7 +6540,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             ReportId = 1,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8529),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9898),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Orden = 1,
                             ReportDescription = "Lista los RMS Pendientes Diariamente, selección por Fecha y agrupado por Región",
@@ -5602,7 +6553,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             ReportId = 2,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8535),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9903),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Orden = 3,
                             ReportDescription = "Lista los RMS Completados por los Empleados por rango de fecha y por Región (Todos los Contestados)",
@@ -5615,7 +6566,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             ReportId = 3,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8540),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9906),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Orden = 2,
                             ReportDescription = "Lista los RMS Completados Validos por los Empleados por rango de fecha y por Región (Solo Validos)",
@@ -5628,7 +6579,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             ReportId = 4,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8544),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9909),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Orden = 3,
                             ReportDescription = "Reporte de RMS Completados Validos para reclamos, incluye Numero de RMS para uso en las Asistencias de los Empleados para los RMS Contestados.",
@@ -5641,7 +6592,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             ReportId = 5,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8548),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9912),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Orden = 2,
                             ReportDescription = "Resumen de los RMS enviados, completados, invalidos, seguimientos y validos con porcientos de completados",
@@ -5654,7 +6605,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             ReportId = 6,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8553),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9915),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Orden = 1,
                             ReportDescription = "Muestra el Formulario RMS según llenado por los Trabajadores Sociales",
@@ -5667,7 +6618,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             ReportId = 7,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8557),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9918),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Orden = 4,
                             ReportDescription = "El reporte de Cost Allocation Plan resumen de los RMS entrados por Grant Diarios",
@@ -5680,7 +6631,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             ReportId = 8,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8561),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9921),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Orden = 5,
                             ReportDescription = "El reporte de Cost Allocation Plan resumen de los RMS entrados por Grant para el Mes seleccionado.",
@@ -5693,7 +6644,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             ReportId = 9,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8565),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9924),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Orden = 7,
                             ReportDescription = "El reporte de Cost Allocation Plan resumen de los RMS entrados por Grant Trimestrales",
@@ -5706,7 +6657,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             ReportId = 10,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8570),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9927),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Orden = 3,
                             ReportDescription = "Este Reporte muestra todas las Observaciones entradas por los usuarios en un rango de fechas con sus respectivos Títulos y Grants por rango de Fecha y selección de Validos o Invalidos para el CAP",
@@ -5719,7 +6670,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             ReportId = 11,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8576),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9930),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Orden = 1,
                             ReportDescription = "RMS Matrix Distribution Report for the CAP Titile Distribution",
@@ -5732,7 +6683,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             ReportId = 12,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 691, DateTimeKind.Local).AddTicks(8582),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 570, DateTimeKind.Local).AddTicks(9933),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             Orden = 2,
                             ReportDescription = "Listado de RMS Validos para completar el Schedule D del CAP",
@@ -5779,7 +6730,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             ReportRoleId = 1,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 692, DateTimeKind.Local).AddTicks(239),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 571, DateTimeKind.Local).AddTicks(969),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             ReportId = 1,
                             RoleId = "SU"
@@ -5788,7 +6739,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             ReportRoleId = 2,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 692, DateTimeKind.Local).AddTicks(244),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 571, DateTimeKind.Local).AddTicks(973),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             ReportId = 2,
                             RoleId = "SU"
@@ -5797,7 +6748,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             ReportRoleId = 3,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 692, DateTimeKind.Local).AddTicks(248),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 571, DateTimeKind.Local).AddTicks(975),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             ReportId = 3,
                             RoleId = "SU"
@@ -5806,7 +6757,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             ReportRoleId = 4,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 692, DateTimeKind.Local).AddTicks(251),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 571, DateTimeKind.Local).AddTicks(978),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             ReportId = 4,
                             RoleId = "SU"
@@ -5815,7 +6766,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             ReportRoleId = 5,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 692, DateTimeKind.Local).AddTicks(254),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 571, DateTimeKind.Local).AddTicks(980),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             ReportId = 5,
                             RoleId = "SU"
@@ -5824,7 +6775,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             ReportRoleId = 6,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 692, DateTimeKind.Local).AddTicks(257),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 571, DateTimeKind.Local).AddTicks(982),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             ReportId = 6,
                             RoleId = "SU"
@@ -5833,7 +6784,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             ReportRoleId = 7,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 692, DateTimeKind.Local).AddTicks(261),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 571, DateTimeKind.Local).AddTicks(984),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             ReportId = 7,
                             RoleId = "SU"
@@ -5842,7 +6793,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             ReportRoleId = 8,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 692, DateTimeKind.Local).AddTicks(264),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 571, DateTimeKind.Local).AddTicks(986),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             ReportId = 8,
                             RoleId = "SU"
@@ -5851,7 +6802,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             ReportRoleId = 9,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 692, DateTimeKind.Local).AddTicks(299),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 571, DateTimeKind.Local).AddTicks(988),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             ReportId = 9,
                             RoleId = "SU"
@@ -5860,7 +6811,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             ReportRoleId = 10,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 692, DateTimeKind.Local).AddTicks(302),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 571, DateTimeKind.Local).AddTicks(991),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             ReportId = 10,
                             RoleId = "SU"
@@ -5869,7 +6820,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             ReportRoleId = 11,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 692, DateTimeKind.Local).AddTicks(305),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 571, DateTimeKind.Local).AddTicks(993),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             ReportId = 11,
                             RoleId = "SU"
@@ -5878,7 +6829,7 @@ namespace PRAMS.Configuration.Migrations
                         {
                             ReportRoleId = 12,
                             Activo = true,
-                            CreateDate = new DateTime(2024, 9, 12, 1, 27, 35, 692, DateTimeKind.Local).AddTicks(308),
+                            CreateDate = new DateTime(2024, 9, 16, 21, 14, 54, 571, DateTimeKind.Local).AddTicks(995),
                             CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                             ReportId = 12,
                             RoleId = "SU"

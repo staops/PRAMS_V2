@@ -9,6 +9,7 @@ namespace PRAMS.Domain.Entities.Forms.Entities
         [JsonProperty("canContinue", Order = 1)]
         public bool CanContinue { get; set; }
         public bool IsSectionCompleted { get; set; }
+        public int FormaId { get; set; }
         public AdmFlujoFormularioDto? AdmFlujoFormulario { get; set; }
         public AdmFlujoFormularioEtapaDto? AdmFlujoFormularioEtapa { get; set; }
         public AdmFlujoFormularioEtapaDto? AdmFlujoFormularioEtapaAnterior { get; set; }
