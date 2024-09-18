@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PRAMS.Domain.Models.Forms
 {
-    [Table("Form_Referridos")]
+    [Table("Form_Referidos")]
     public class FormReferido
     {
         [Key]
@@ -31,7 +31,8 @@ namespace PRAMS.Domain.Models.Forms
         [Column("NarrativaSituacion")]
         public string? NarrativaSituacion { get; set; }
 
-        public int? ReferidoPor { get; set; }
+        [StringLength(40)]
+        public string? ReferidoPor { get; set; }
 
         [StringLength(25)]
         [Column("RelacionAdulto")]
@@ -105,10 +106,10 @@ namespace PRAMS.Domain.Models.Forms
         [Column("Fecha_Supervision")]
         public DateTime? FechaSupervision { get; set; }
 
-        [Column("ID_ReferidoOrigen")]
-        public int? ReferidoOrigenId { get; set; }
-
         public required bool Activo { get; set; } = true;
+
+        [Column("ID_ReferidoOrigen")]
+        public string? ReferidoOrgenId { get; set; }
 
     }
 }

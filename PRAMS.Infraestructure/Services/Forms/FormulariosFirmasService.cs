@@ -22,7 +22,7 @@ namespace PRAMS.Infraestructure.Services.Forms
             _logger = logger;
         }
 
-        public async Task<Result<FormFormularioFirmaDto>> CreateFormularioFirma(FormFormularioFirmaInsertDto itemToInsert, string user)
+        public async Task<Result<FormFormularioFirmaDto>> CreateFormularioFirma(FormFormularioFirmaInsertDto itemToInsert, string user, string role)
         {
             try
             {
@@ -34,6 +34,11 @@ namespace PRAMS.Infraestructure.Services.Forms
                 {
                     return Result.Fail<FormFormularioFirmaDto>($"The form stage with id {formFormularioFirma.FormularioEtapaId} does not exist");
                 }
+
+
+                formFormularioFirma.FechaFirma = DateTime.Now;
+                formFormularioFirma.UsuarioId = user;
+                formFormularioFirma.UserTypeID = role;
 
 
                 await _context.FormFormularioFirmas.AddAsync(formFormularioFirma);
