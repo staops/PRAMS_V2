@@ -4,6 +4,7 @@
     {
         public int FormularioId { get; set; }
         public int FormularioEtapaId { get; set; }
+        public int? FormaId { get; set; }
         public string? Rmo { get; set; }
         public string NumCaso { get; set; }
         public string UsuarioId { get; set; }

@@ -12,7 +12,18 @@ namespace PRAMS.Domain.Entities.Forms.Entities
         public int FormularioEtapaAccionId { get; set; }
         [JsonProperty("Fields", Required = Required.Always)]
         public IDictionary<string, object> Fields { get; set; } = new Dictionary<string, object>();
-        [JsonProperty("Id")]
-        public int? Id { get; set; }
+        [JsonProperty("formaId")]
+        public int? FormaId { get; set; }
+    }
+
+    public class FormSignatureBuilder
+    {
+        [JsonProperty("formularioid", Required = Required.Always)]
+        public int FormularioId { get; set; }
+
+        [JsonProperty("formaId", Required = Required.Always)]
+        public int FormaId { get; set; }
+        public IDictionary<string, object> Fields { get; set; } = new Dictionary<string, object>();
+
     }
 }

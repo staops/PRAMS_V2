@@ -8,7 +8,7 @@ namespace PRAMS.Application.Contract.Forms
         Task<Result<ICollection<FormFormularioFirmaDto>>> GetFormulariosFirmas();
         Task<Result<FormFormularioFirmaDto>> GetFormularioFirma(int formularioFirmaId);
         Task<Result<ICollection<FormFormularioFirmaDto>>> GetFormularioFirmaByFormularioEtapa(int formularioEtapaId);
-        Task<Result<FormFormularioFirmaDto>> CreateFormularioFirma(FormFormularioFirmaInsertDto itemToInsert, string user);
+        Task<Result<FormFormularioFirmaDto>> CreateFormularioFirma(FormFormularioFirmaInsertDto itemToInsert, string user, string role);
         Task<Result<FormFormularioFirmaDto>> RemoveFormularioFirma(int formularioFirmaId, string user);
         Task<Result<FormFormularioFirmaDto>> UpdateFormularioFirma(FormFormularioFirmaUpdateDto itemToUpdate, string user);
     }

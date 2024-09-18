@@ -35,8 +35,9 @@ namespace PRAMS.Configuration.Controllers
             {
                 // Get the user id from the Authorize
                 var user = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty;
+                var role = User.FindFirst(ClaimTypes.Role)?.Value ?? string.Empty;
 
-                var result = await _formulariosFirmasService.CreateFormularioFirma(formFormularioFirmaInsertDto, user);
+                var result = await _formulariosFirmasService.CreateFormularioFirma(formFormularioFirmaInsertDto, user, role);
                 if (result.IsSuccess)
                 {
                     _logger.LogInformation("Success in CreateFormularioFirma Result:{@result}", result.Value);

@@ -19,6 +19,9 @@ namespace PRAMS.Domain.Models.Forms
         [Column("ID_FormularioEtapa")]
         public required int FormularioEtapaId { get; set; }
 
+        [Column("ID_Forma")]
+        public int? FormaId { get; set; }
+
         [Required]
         [Column("RMO")]
         [StringLength(20)]
