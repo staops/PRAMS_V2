@@ -12,7 +12,7 @@ using PRAMS.Authentication.Data;
 namespace PRAMS.Authentication.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240716014934_InitAuthTables")]
+    [Migration("20240918031516_InitAuthTables")]
     partial class InitAuthTables
     {
         /// <inheritdoc />
@@ -50,6 +50,104 @@ namespace PRAMS.Authentication.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "aaf70885-8089-4ac5-a1d4-ed75f5819b27",
+                            Name = "SU",
+                            NormalizedName = "SU"
+                        },
+                        new
+                        {
+                            Id = "bbe6da1f-7616-46d1-a460-a09cc4778f8d",
+                            Name = "Administrador Auxiliar",
+                            NormalizedName = "ADMINISTRADOR AUXILIAR"
+                        },
+                        new
+                        {
+                            Id = "b514860b-06a5-4065-9a44-aa2e2c9272cc",
+                            Name = "Oficial Administrativo",
+                            NormalizedName = "OFICIAL ADMINISTRATIVO"
+                        },
+                        new
+                        {
+                            Id = "9086df9c-4df5-4288-bc8b-bf645ebada46",
+                            Name = "Supervisor Regional",
+                            NormalizedName = "SUPERVISOR REGIONAL"
+                        },
+                        new
+                        {
+                            Id = "8efe913d-3d69-4dc5-95e2-abbf1b882cc9",
+                            Name = "Supervisor de oficina local",
+                            NormalizedName = "SUPERVISOR DE OFICINA LOCAL"
+                        },
+                        new
+                        {
+                            Id = "3abd1e15-cf3b-4130-90a3-316061369241",
+                            Name = "Trabajador Social",
+                            NormalizedName = "TRABAJADOR SOCIAL"
+                        },
+                        new
+                        {
+                            Id = "4079f519-b79d-4d39-81d9-0b7c5a7147f7",
+                            Name = "Director Regional",
+                            NormalizedName = "DIRECTOR REGIONAL"
+                        },
+                        new
+                        {
+                            Id = "81c4ac34-72df-47e1-bf9a-8c99b0162018",
+                            Name = "Director Asociado",
+                            NormalizedName = "DIRECTOR ASOCIADO"
+                        },
+                        new
+                        {
+                            Id = "1b806d99-f949-46e3-9e8b-c867ea63f9d0",
+                            Name = "Tecnico de Servicios a la Familia",
+                            NormalizedName = "TECNICO DE SERVICIOS A LA FAMILIA"
+                        },
+                        new
+                        {
+                            Id = "944a1efb-f99e-4a59-85d5-bea40811a1b4",
+                            Name = "Administrador",
+                            NormalizedName = "ADMINISTRADOR"
+                        },
+                        new
+                        {
+                            Id = "6ec29b4d-ce8a-4e33-a6ce-f597cdb52ef7",
+                            Name = "Sub-Administrador",
+                            NormalizedName = "SUB-ADMINISTRADOR"
+                        },
+                        new
+                        {
+                            Id = "d958fdaa-37bc-4ba4-baa9-2bcb9f3a98e2",
+                            Name = "Especialista Trabajador Social",
+                            NormalizedName = "ESPECIALISTA TRABAJADOR SOCIAL"
+                        },
+                        new
+                        {
+                            Id = "f2bb5f32-f03d-4ca5-96ae-9dac5ba17edc",
+                            Name = "Asistente de Servicio",
+                            NormalizedName = "ASISTENTE DE SERVICIO"
+                        },
+                        new
+                        {
+                            Id = "d51fa165-fff4-4985-bef2-26e1c09eae59",
+                            Name = "Supervisor UIE",
+                            NormalizedName = "SUPERVISOR UIE"
+                        },
+                        new
+                        {
+                            Id = "0c747e0e-ebae-4edd-b7e6-8de1f475dd0c",
+                            Name = "Investigadores UIE",
+                            NormalizedName = "INVESTIGADORES UIE"
+                        },
+                        new
+                        {
+                            Id = "e0c8c50b-70e2-4cd3-a892-c07680df1902",
+                            Name = "Director de Programa",
+                            NormalizedName = "DIRECTOR DE PROGRAMA"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

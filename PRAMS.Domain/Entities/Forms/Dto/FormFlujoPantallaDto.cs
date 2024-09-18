@@ -2,13 +2,27 @@
 {
     public class FormFlujoPantallaDto
     {
-        public required int FlujoPantallaId { get; set; }
-        public required int FormularioId { get; set; }
-        public required int FormaId { get; set; }
-        public required int OrdenEtapa { get; set; }
-        public required string FlujoEtapa { get; set; }
-        public required DateTime FechaFlujo { get; set; } = DateTime.Now;
-        public required string UsuarioFlujoId { get; set; }
+        public int FlujoPantallaId { get; set; }
+        /// <summary>
+        /// El campo de ID_Formulario proviene de la definición del formulario que este siendo trabajado, 
+        /// en este caso sería el mismo ID_Formulario de la tabla Adm_FlujoFormularios
+        /// </summary>
+        /// <remarks>
+        /// Este campo se puede obtener en el controlador de Datos que se este trabajando 
+        /// del nombre directo del controlador que debería ser el mismo que la tabla a la que pertenece 
+        /// y esta tabla esta identificada en el campo TablaBase de  Adm_FlujoFormularios
+        /// </remarks>
+        public int FormularioId { get; set; }
+
+        /// <summary>
+        /// El campo de ID_Forma guarda el valor del ID para la llave del formulario que se este trabajando. 
+        /// Por ejemplo en el formulario Form_Referido el id que se guarda en este campo seria ID_Referido
+        /// </summary>
+        public int FormaId { get; set; }
+        public int OrdenEtapa { get; set; }
+        public string? FlujoEtapa { get; set; }
+        public DateTime FechaFlujo { get; set; } = DateTime.Now;
+        public string? UsuarioFlujoId { get; set; }
         public string? RMO { get; set; }
         public string? NumeroCaso { get; set; }
         public string? Persona { get; set; }

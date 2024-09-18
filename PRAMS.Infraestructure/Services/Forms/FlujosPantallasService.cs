@@ -43,6 +43,11 @@ namespace PRAMS.Infraestructure.Services.Forms
 
                 var admFlujoPantalla = _mapper.Map<FormFlujoPantalla>(itemToInsert);
 
+
+                admFlujoPantalla.UsuarioFlujoId = user;
+                admFlujoPantalla.FechaFlujo = DateTime.Now;
+
+
                 await _context.FormFlujoPantallas.AddAsync(admFlujoPantalla);
                 await _context.SaveChangesAsync();
 
@@ -96,11 +101,14 @@ namespace PRAMS.Infraestructure.Services.Forms
             }
         }
 
-        public async Task<Result<ICollection<FormFlujoPantallaDto>>> GetFlujosPantallasByFormaId(int formaId)
+        public async Task<Result<ICollection<FormFlujoPantallaDto>>> GetFlujosPantallasByFormaId(int formaId, int formularioId)
         {
             try
             {
-                var query = _context.FormFlujoPantallas.Where(x => x.FormaId == formaId);
+                var query = _context.FormFlujoPantallas
+                    .Where(x => x.FormaId == formaId && x.FormularioId == formularioId)
+                    .OrderBy(x => x.OrdenEtapa);
+
                 ICollection<FormFlujoPantallaDto> result = await _mapper.ProjectTo<FormFlujoPantallaDto>(query).ToListAsync();
 
                 return Result.Ok(result);
