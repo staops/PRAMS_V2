@@ -97,7 +97,7 @@ app.UseCors("corsapp");
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+//app.MapControllers();
 
 // Apply pending migrations automatically.
 ApplyMigrations();

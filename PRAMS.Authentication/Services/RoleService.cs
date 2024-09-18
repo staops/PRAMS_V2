@@ -18,12 +18,12 @@ namespace PRAMS.Authentication.Services
         }
 
 
-        public async Task<Result<IList<string>>> GetRoles()
+        public async Task<Result<IList<IdentityRole>>> GetRoles()
         {
             try
             {
-                var roles = await _roleManager.Roles.Select(x => x.Name).ToListAsync();
-                return Result.Ok<IList<string>>(roles);
+                IList<IdentityRole> roles = await _roleManager.Roles.ToListAsync();
+                return Result.Ok(roles);
             }
             catch (Exception error)
             {

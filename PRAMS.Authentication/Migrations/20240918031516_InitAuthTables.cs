@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace PRAMS.Authentication.Migrations
 {
     /// <inheritdoc />
@@ -155,6 +157,29 @@ namespace PRAMS.Authentication.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "0c747e0e-ebae-4edd-b7e6-8de1f475dd0c", null, "Investigadores UIE", "INVESTIGADORES UIE" },
+                    { "1b806d99-f949-46e3-9e8b-c867ea63f9d0", null, "Tecnico de Servicios a la Familia", "TECNICO DE SERVICIOS A LA FAMILIA" },
+                    { "3abd1e15-cf3b-4130-90a3-316061369241", null, "Trabajador Social", "TRABAJADOR SOCIAL" },
+                    { "4079f519-b79d-4d39-81d9-0b7c5a7147f7", null, "Director Regional", "DIRECTOR REGIONAL" },
+                    { "6ec29b4d-ce8a-4e33-a6ce-f597cdb52ef7", null, "Sub-Administrador", "SUB-ADMINISTRADOR" },
+                    { "81c4ac34-72df-47e1-bf9a-8c99b0162018", null, "Director Asociado", "DIRECTOR ASOCIADO" },
+                    { "8efe913d-3d69-4dc5-95e2-abbf1b882cc9", null, "Supervisor de oficina local", "SUPERVISOR DE OFICINA LOCAL" },
+                    { "9086df9c-4df5-4288-bc8b-bf645ebada46", null, "Supervisor Regional", "SUPERVISOR REGIONAL" },
+                    { "944a1efb-f99e-4a59-85d5-bea40811a1b4", null, "Administrador", "ADMINISTRADOR" },
+                    { "aaf70885-8089-4ac5-a1d4-ed75f5819b27", null, "SU", "SU" },
+                    { "b514860b-06a5-4065-9a44-aa2e2c9272cc", null, "Oficial Administrativo", "OFICIAL ADMINISTRATIVO" },
+                    { "bbe6da1f-7616-46d1-a460-a09cc4778f8d", null, "Administrador Auxiliar", "ADMINISTRADOR AUXILIAR" },
+                    { "d51fa165-fff4-4985-bef2-26e1c09eae59", null, "Supervisor UIE", "SUPERVISOR UIE" },
+                    { "d958fdaa-37bc-4ba4-baa9-2bcb9f3a98e2", null, "Especialista Trabajador Social", "ESPECIALISTA TRABAJADOR SOCIAL" },
+                    { "e0c8c50b-70e2-4cd3-a892-c07680df1902", null, "Director de Programa", "DIRECTOR DE PROGRAMA" },
+                    { "f2bb5f32-f03d-4ca5-96ae-9dac5ba17edc", null, "Asistente de Servicio", "ASISTENTE DE SERVICIO" }
                 });
 
             migrationBuilder.CreateIndex(

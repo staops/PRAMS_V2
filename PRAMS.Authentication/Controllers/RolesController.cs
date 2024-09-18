@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PRAMS.Authentication.Models.Dto;
 using PRAMS.Authentication.Services.IServices;
@@ -23,7 +24,7 @@ namespace PRAMS.Authentication.Controllers
         [HttpGet("GetRoles")]
         [Authorize]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<IList<string>>))]
+        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<IList<IdentityRole>>))]
         [ProducesResponseType(statusCode: 400, Type = typeof(ResponseDto<List<IError>>))]
         public async Task<IActionResult> GetRoles()
         {
@@ -31,7 +32,7 @@ namespace PRAMS.Authentication.Controllers
             if (result.IsSuccess)
             {
                 _logger.LogInformation("Success in GetRoles Result:{@result}", result.Value);
-                return Ok(new ResponseDto<IList<string>> { Result = result.Value });
+                return Ok(new ResponseDto<IList<IdentityRole>> { Result = result.Value });
 
             }
             else
