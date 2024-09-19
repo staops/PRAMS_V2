@@ -37,7 +37,7 @@ namespace PRAMS.Domain.Models.Forms
         [StringLength(40)]
         public required string UsuarioId { get; set; }
 
-        [StringLength(20)]
+        [StringLength(40)]
         public string? UserTypeID { get; set; }
 
         [Required]
