@@ -1,7 +1,10 @@
 ﻿using FluentResults;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.SqlServer.Server;
 using PRAMS.Domain.Entities.Flujos.Dto;
+using PRAMS.Domain.Entities.Forms.Dto;
 using PRAMS.Domain.Entities.SystemConfiguration.Dto;
+using PRAMS.Domain.Models.Agencies;
 using PRAMS.Domain.Models.Flujos;
 using PRAMS.Domain.Models.Forms;
 using PRAMS.Domain.Models.SystemConfiguration;
@@ -80,49 +83,50 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
             PopulateAdmMenuElements(modelBuilder);
             PouplateReportsCategoria(modelBuilder);
             PouplateFlujosFormularios(modelBuilder);
+
+            DummyFlujoPantallas(modelBuilder);
         }
 
         private static void PouplateParametroCategoria(ModelBuilder modelBuilder)
         {
 
-
             IList<AdmParametroCategoriaInsertIDDto> admParametroCategoriaInsertDto =
             [
-                new (1, "Clasificacion Empleados", "Clasificaciones", null, null, null, null, null, null, null, null, null),
-                new (2, "Curso Aprobado", string.Empty, null, null, null, null, null, null, null, null, null),
-                new (4, "Tipo Impedimento", string.Empty, null, null, null, null, null, null, null, null, null),
-                new (5, "Tipo Nombramiento",               string.Empty, null, null, null, null, null, null, null, null, null),
-                new (6, "Pueblos", "Def Pueblos con Dos Niveles de Filtros", "Estado", "Pais", null, null, null, null, null, null, null),
-                new (7, "Categoria Licencias",         string.Empty, null, null, null, null, null, null, null, null, null),
-                new (8, "Firmas",      string.Empty, "Posición / Puesto", null, null, null, null, null, null, null, null),
-                new (9, "Acciones",        string.Empty, null, null, null, null, null, null, null, null, null),
-                new (10, "Genero",      string.Empty, null, null, null, null, null, null, null, null, null),
-                new (11, "Region",      string.Empty, null, null, null, null, null, null, null, null, null),
-                new (12, "Tipo Convocatoria",       string.Empty, null, null, null, null, null, null, null, null, null),
-                new (13, "Dependencias",        string.Empty, null, null, null, null, null, null, null, null, null),
-                new (16, "Entidades Municipio",         "Def Municipios Tres Niveles Ejemplo", "Region", "Estado", "Pais", null, null, null, null, null, null),
-                new (17, "Cantidad Solicitudes",        "Numero de Solicitudes realizadas 2Segunda, etc.", null, null, null, null, null, null, null, null, null),
-                new (19, "Grados Academicos",       "Tipos de Grados Academicos", null, null, null, null, null, null, null, null, null),
-                new (20, "Tipo de Documentos",      "Tipos de Documentos para Cargas", null, null, null, null, null, null, null, null, null),
-                new (21, "Tipo Reportes",       "Tipos de Reportes para Tablas de Reportes Admin", null, null, null, null, null, null, null, null, null),
-                new (22, "RolesReportes",       "Tipos de Roles para Reportes", null, null, null, null, null, null, null, null, null),
-                new (23, "RolesMenu",       "Tipos de Roles para Menu Asignacion Roles", null, null, null, null, null, null, null, null, null),
-                new (24, "TipoCasos",       "Tipo de Casos Flujos", "Formulario", "Nivel de Caso", null, null, null, null, null, null, null),
-                new (25, "TipoEtapa",       "Tipos de Etapas de Formularios", null, null, null, null, null, null, null, null, null),
-                new (26, "TipoAcciones",        "Etapas de FLujo Acciones de Validadiones", null, null, null, null, null, null, null, null, null),
-                new (27, "TipoProceso",         "Etapas Flujo Acciones Tipo de Proceso", null, null, null, null, null, null, null, null, null),
-                new (28, "CampoDBTipo",         "Tipos de Campos DB para Validaciones", null, null, null, null, null, null, null, null, null),
-                new (29, "TipoProcesoCampo",        "Como se procesan las Acciones Campo de Validaciones", null, null, null, null, null, null, null, null, null),
-                new (30, "TipoUsuarios",        "Tipo de Usuarios Sistema", "Rol ID", null, null, null, null, null, null, null, null),
-                new (31, "TipoPersonas",        "Para Pantallas de Personas Link", null, null, null, null, null, null, null, null, null),
-                new (32, "Relaciones",      "Para Pantalla de Personas Link Relacion", null, null, null, null, null, null, null, null, null),
-                new (33, "ServiciosSolicitados",        "Servicios para los Referidos", "Tipo de Servicio", null, null, null, null, null, null, null, null),
-                new (34, "DeterminacionReferido",       "Determinaciones de los Referidos", "Proxima Etapa", null, null, null, null, null, null, null, null),
-                new (35, "Antecedentes",        "Antecedentes para los Referidos", null, null, null, null, null, null, null, null, null),
-                new (36, "ClasificacionReferido",       "Nivel de prioridad del Referido", null, null, null, null, null, null, null, null, null),
-                new (37, "AsignacionLocalizacioon",         string.Empty, "Oficina / Local", null, null, null, null, null, null, null, null),
-                new (38, "AgenciaSolicitadoPara",       "Para los Tipos de Solicitud de Agencia", null, null, null, null, null, null, null, null, null),
-                new (39, "OrigenReferido",      "Referido Campo OrigenReferido", null, null, null, null, null, null, null, null, null),
+                new(1, "Clasificacion Empleados", "Clasificaciones", null, null, null, null, null, null, null, null, null),
+                new(2, "Curso Aprobado", string.Empty, null, null, null, null, null, null, null, null, null),
+                new(4, "Tipo Impedimento", string.Empty, null, null, null, null, null, null, null, null, null),
+                new(5, "Tipo Nombramiento", string.Empty, null, null, null, null, null, null, null, null, null),
+                new(6, "Pueblos", "Def Pueblos con Dos Niveles de Filtros", "Estado", "Pais", null, null, null, null, null, null, null),
+                new(7, "Categoria Licencias", string.Empty, null, null, null, null, null, null, null, null, null),
+                new(8, "Firmas", string.Empty, "Posición / Puesto", null, null, null, null, null, null, null, null),
+                new(9, "Acciones", string.Empty, null, null, null, null, null, null, null, null, null),
+                new(10, "Genero", string.Empty, null, null, null, null, null, null, null, null, null),
+                new(11, "Region", string.Empty, null, null, null, null, null, null, null, null, null),
+                new(12, "Tipo Convocatoria", string.Empty, null, null, null, null, null, null, null, null, null),
+                new(13, "Dependencias", string.Empty, null, null, null, null, null, null, null, null, null),
+                new(16, "Entidades Municipio", "Def Municipios Tres Niveles Ejemplo", "Region", "Estado", "Pais", null, null, null, null, null, null),
+                new(17, "Cantidad Solicitudes", "Numero de Solicitudes realizadas 2Segunda, etc.", null, null, null, null, null, null, null, null, null),
+                new(19, "Grados Academicos", "Tipos de Grados Academicos", null, null, null, null, null, null, null, null, null),
+                new(20, "Tipo de Documentos", "Tipos de Documentos para Cargas", null, null, null, null, null, null, null, null, null),
+                new(21, "Tipo Reportes", "Tipos de Reportes para Tablas de Reportes Admin", null, null, null, null, null, null, null, null, null),
+                new(22, "RolesReportes", "Tipos de Roles para Reportes", null, null, null, null, null, null, null, null, null),
+                new(23, "RolesMenu", "Tipos de Roles para Menu Asignacion Roles", null, null, null, null, null, null, null, null, null),
+                new(24, "TipoCasos", "Tipo de Casos Flujos", "Formulario", "Nivel de Caso", null, null, null, null, null, null, null),
+                new(25, "TipoEtapa", "Tipos de Etapas de Formularios", null, null, null, null, null, null, null, null, null),
+                new(26, "TipoAcciones", "Etapas de FLujo Acciones de Validadiones", null, null, null, null, null, null, null, null, null),
+                new(27, "TipoProceso", "Etapas Flujo Acciones Tipo de Proceso", null, null, null, null, null, null, null, null, null),
+                new(28, "CampoDBTipo", "Tipos de Campos DB para Validaciones", null, null, null, null, null, null, null, null, null),
+                new(29, "TipoProcesoCampo", "Como se procesan las Acciones Campo de Validaciones", null, null, null, null, null, null, null, null, null),
+                new(30, "TipoUsuarios", "Tipo de Usuarios Sistema", "Rol ID", null, null, null, null, null, null, null, null),
+                new(31, "TipoPersonas", "Para Pantallas de Personas Link", null, null, null, null, null, null, null, null, null),
+                new(32, "Relaciones", "Para Pantalla de Personas Link Relacion", null, null, null, null, null, null, null, null, null),
+                new(33, "ServiciosSolicitados", "Servicios para los Referidos", "Tipo de Servicio", null, null, null, null, null, null, null, null),
+                new(34, "DeterminacionReferido", "Determinaciones de los Referidos", "Proxima Etapa", null, null, null, null, null, null, null, null),
+                new(35, "Antecedentes", "Antecedentes para los Referidos", null, null, null, null, null, null, null, null, null),
+                new(36, "ClasificacionReferido", "Nivel de prioridad del Referido", null, null, null, null, null, null, null, null, null),
+                new(37, "AsignacionLocalizacioon", string.Empty, "Oficina / Local", null, null, null, null, null, null, null, null),
+                new(38, "AgenciaSolicitadoPara", "Para los Tipos de Solicitud de Agencia", null, null, null, null, null, null, null, null, null),
+                new(39, "OrigenReferido", "Referido Campo OrigenReferido", null, null, null, null, null, null, null, null, null),
             ];
 
             IList<AdmParametroCategoria> admParametros = admParametroCategoriaInsertDto.Select((x, i) => new AdmParametroCategoria
@@ -138,8 +142,6 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
                 CreateDate = DateTime.Now,
             }).ToList();
             modelBuilder.Entity<AdmParametroCategoria>().HasData(admParametros);
-
-
 
             // Clasificacion Empleados
             IList<AdmParametrosSeleccionInsertDto> valuePairsParamAdmParametrosSeleccionClasificacionEmpleados =
@@ -571,7 +573,6 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
                 new(39, "CAMPEA Aguas Buenas", string.Empty, null, null, null),
             ];
 
-
             // Join the dictionaries
             IList<AdmParametrosSeleccionInsertDto> valuePairsParamAdmParametrosSeleccion = [
                 .. valuePairsParamAdmParametrosSeleccionClasificacionEmpleados,
@@ -592,11 +593,11 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
             }).ToList();
             modelBuilder.Entity<AdmParametrosSeleccion>().HasData(admParametrosSeleccion);
 
-
         }
 
         private static void PopulateAdmMenuElements(ModelBuilder modelBuilder)
         {
+
             IList<AdmMenuElements> admMenuElements = [
                 new(){
                     MenuElementId = 1,
@@ -816,7 +817,6 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
                 }
 
             ];
-
             modelBuilder.Entity<AdmMenuElements>().HasData(admMenuElements);
 
             IList<AdmMenuRole> admMenuRoles = [
@@ -967,12 +967,13 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
 
 
             ];
-
             modelBuilder.Entity<AdmMenuRole>().HasData(admMenuRoles);
+
         }
 
         private static void PouplateReportsCategoria(ModelBuilder modelBuilder)
         {
+
             IList<AdmReports> admReportsParametros =
             [
                 new(){
@@ -1223,6 +1224,7 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
             ];
 
             modelBuilder.Entity<AdmReportsRole>().HasData(admReportsRole);
+
         }
 
         private static void PouplateFlujosFormularios(ModelBuilder modelBuilder)
@@ -1250,8 +1252,6 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
                 TXFiltro2 = x.TXFiltro2,
                 TXFiltro3 = x.TXFiltro3
             }).ToList();
-
-
             modelBuilder.Entity<AdmFlujoFormulario>().HasData(admFlujos);
 
             IList<AdmFlujoFormularioEtapaInsertDto> admFlujoFormularioEtapas = [
@@ -1278,12 +1278,12 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
                 CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                 CreateDate = DateTime.Now,
             }).ToList();
-
             modelBuilder.Entity<AdmFlujoFormularioEtapa>().HasData(admFlujoFormularioEtapa);
 
             IList<AdmFlujoFormularioNotaInsertDto> admFlujoFormularioNotas = [
                 new(1, "Aviso Supervisor", "Aviso Supervisor Firma Completada por Trabajador Social", "Para el Formulario de Referido se completo la firma de Trabajador Social", "Mensaje Atado con Datos del Referido segun ID del Formulario", 14)
             ];
+
             IList<AdmFlujoFormularioNota> admFlujoFormularioNota = admFlujoFormularioNotas.Select((x, i) => new AdmFlujoFormularioNota
             {
                 FormularioNotaId = i + 1,
@@ -1296,14 +1296,13 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
             }).ToList();
             modelBuilder.Entity<AdmFlujoFormularioNota>().HasData(admFlujoFormularioNota);
 
-
-
             IList<AdmFlujoPantallaUserInsertDto> admFlujoPantallaUsers = [
                 new(1, 1, "Trabajador Social", 14, DateTime.Now, null),
                 new(2, 1, "Trabajador Social", 14, DateTime.Now, null),
                 new(3, 1, "Trabajador Social", 14, DateTime.Now, null),
                 new(4, 1, "Supervidor", 20, DateTime.Now, null),
             ];
+
             IList<AdmFlujoPantallaUser> admFlujoPantallaUser = admFlujoPantallaUsers.Select((x, i) => new AdmFlujoPantallaUser
             {
                 FlujoUserID = i + 1,
@@ -1314,9 +1313,6 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
                 FechaFin = x.FechaFin,
             }).ToList();
             modelBuilder.Entity<AdmFlujoPantallaUser>().HasData(admFlujoPantallaUser);
-
-
-
 
             IList<AdmFlujoFormularioEtapaAccionInsertDto> admFlujoFormularioEtapaAccions = [
                 new(1, "Validacion Campos", 1, "Validación Campos", "Requerido", true, false, null),
@@ -1340,7 +1336,6 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
                 CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
                 CreateDate = DateTime.Now,
             }).ToList();
-
             modelBuilder.Entity<AdmFlujoFormularioEtapaAccion>().HasData(admFlujoFormularioEtapaAccion);
 
             IList<AdmFlujoFormularioEtapaAccionCampoInsertDto> admFlujoFormularioEtapaAccionCampos = [
@@ -1373,8 +1368,118 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
                 Resultado = x.Resultado,
                 Descripcion = x.Descripcion,
             }).ToList();
-
             modelBuilder.Entity<AdmFormularioEtapaAccioneCampo>().HasData(admFlujoFormularioEtapaAccionCampo);
+
+        }
+
+        private static void DummyFlujoPantallas(ModelBuilder modelBuilder)
+        {
+            IList<FormFlujoPantallaInsertDto> formFlujoPantallas = [
+                new(1,1,1,"Referido Nuevo", DateTime.Now, "03334448-73b4-438f-8fdf-784dbab58150", "03-0301-0001", null, "Maria Santiago", "03334448-73b4-438f-8fdf-784dbab58150", "03334448-73b4-438f-8fdf-784dbab58151", "Comienzo Formulario", null, null, false, "Aguadilla", "Aguadilla"),
+                new(1,1,2,"Referido Seguimiento", DateTime.Now, "03334448-73b4-438f-8fdf-784dbab58150", "03-0301-0001", null, "Maria Santiago", "03334448-73b4-438f-8fdf-784dbab58150", "03334448-73b4-438f-8fdf-784dbab58151", "Seguimiento Formulario", null, null, false, "Aguadilla", "Aguadilla"),
+                new(1,1,3,"Referido Seguimiento", DateTime.Now, "03334448-73b4-438f-8fdf-784dbab58150", "03-0301-0001", null, "Maria Santiago", "03334448-73b4-438f-8fdf-784dbab58150", "03334448-73b4-438f-8fdf-784dbab58151", "Seguimiento Formulario", null, null, false, "Aguadilla", "Aguadilla"),
+                new(2,2,1,"Referido Nuevo", DateTime.Now, "03334448-73b4-438f-8fdf-784dbab58150", "03-0301-0002", null, "Manuel Torres", "03334448-73b4-438f-8fdf-784dbab58150", "03334448-73b4-438f-8fdf-784dbab58151", "Comienzo Formulario", null, null, false, "Bayamon", "Bayamon"),
+                new(2,2,2,"Referido Seguimiento", DateTime.Now, "03334448-73b4-438f-8fdf-784dbab58150", "03-0301-0002", null, "Manuel Torres", "03334448-73b4-438f-8fdf-784dbab58150", "03334448-73b4-438f-8fdf-784dbab58151", "Seguimiento Formulario", null, null, false, "Bayamon", "Bayamon"),
+                new(3,3,1,"Referido Nuevo", DateTime.Now, "03334448-73b4-438f-8fdf-784dbab58150", "03-0301-0003", null, "Jaime Sepulveda", "03334448-73b4-438f-8fdf-784dbab58150", "03334448-73b4-438f-8fdf-784dbab58151", "Comienzo Formulario", null, null, false, "Bayamon", "Bayamon"),
+                new(3,3,2,"Referido Seguimiento", DateTime.Now, "03334448-73b4-438f-8fdf-784dbab58150", "03-0301-0003", null, "Jaime Sepulveda", "03334448-73b4-438f-8fdf-784dbab58150", "03334448-73b4-438f-8fdf-784dbab58151", "Seguimiento Formulario", null, null, false, "Bayamon", "Bayamon"),
+                new(3,3,3,"Referido Firma TS", DateTime.Now, "03334448-73b4-438f-8fdf-784dbab58150", "03-0301-0003", null, "Jaime Sepulveda", "03334448-73b4-438f-8fdf-784dbab58150", "03334448-73b4-438f-8fdf-784dbab58151", "Seguimiento Formulario", null, null, false, "Bayamon", "Bayamon"),
+                new(1,4,1,"Referido Nuevo", DateTime.Now, "03334448-73b4-438f-8fdf-784dbab58150", "03-0301-0004", null, "John Martinez", "03334448-73b4-438f-8fdf-784dbab58150", "03334448-73b4-438f-8fdf-784dbab58151", "Comienzo Formulario", null, null, false, "Aguadilla", "Aguadilla"),
+                new(1,4,2,"Referido Seguimiento", DateTime.Now, "03334448-73b4-438f-8fdf-784dbab58150", "03-0301-0004", null, "John Martinez", "03334448-73b4-438f-8fdf-784dbab58150", "03334448-73b4-438f-8fdf-784dbab58151", "Seguimiento Formulario", null, null, false, "Aguadilla", "Aguadilla"),
+                new(1,4,3,"Referido Firma TS", DateTime.Now, "03334448-73b4-438f-8fdf-784dbab58150", "03-0301-0004", null, "John Martinez", "03334448-73b4-438f-8fdf-784dbab58150", "03334448-73b4-438f-8fdf-784dbab58151", "Seguimiento Formulario", null, null, false, "Aguadilla", "Aguadilla"),
+                new(1,4,4,"Referido Firma Sup", DateTime.Now, "03334448-73b4-438f-8fdf-784dbab58150", "03-0301-0004", null, "John Martinez", "03334448-73b4-438f-8fdf-784dbab58150", "03334448-73b4-438f-8fdf-784dbab58151", "Completar Formulario", null, null, true, "Aguadilla", "Aguadilla"),
+            ];
+
+            IList<FormFlujoPantalla> formFlujoPantalla = formFlujoPantallas.Select((x, i) => new FormFlujoPantalla
+            {
+                FlujoPantallaId = i + 1,
+                FormularioId = x.FormularioId,
+                FormaId = x.FormaId,
+                OrdenEtapa = x.OrdenEtapa,
+                FlujoEtapa = x.FlujoEtapa,
+                FechaFlujo = x.FechaFlujo,
+                UsuarioFlujoId = x.UsuarioFlujoId,
+                RMO = x.RMO,
+                NumeroCaso = x.NumeroCaso,
+                Persona = x.Persona,
+                UsuarioAsignaId = x.UsuarioAsignaId,
+                UsuarioAsignadoId = x.UsuarioAsignadoId,
+                FlujoStatus = x.FlujoStatus,
+                Notas = x.Notas,
+                Comentarios = x.Comentarios,
+                EtapaCompletada = x.EtapaCompletada,
+                Region = x.Region,
+                Local = x.Local,
+            }).ToList();
+
+            modelBuilder.Entity<FormFlujoPantalla>().HasData(formFlujoPantalla);
+
+
+            IList<FormReferidoInsertDto> formReferidos = [
+                new("03-0301-0001", null, "Orientación", DateTime.Now, DateTime.Now, null, "Narrativa de Caso de Orientacion por el TS", "03334448-73b4-438f-8fdf-784dbab58150", "Madre", null, null, null, "Coordinar Servicios", DateTime.Now, "Determinacion para Orientacion", "Aguadilla", "Aguadilla I", null, null, null, null, null, "Esta solicitud es para referir al Fondo el beneficiario", null),
+                new("03-0301-0002", null, "Orientación y Referimiento", DateTime.Now, DateTime.Now, null, "Narrativa de Caso de Orientacion por el TS y Supervisro", "03334448-73b4-438f-8fdf-784dbab58150", "Padre", "Visitas Medica", DateTime.Now, null, "Referido", DateTime.Now, "Determinacion para Referir a Agencia", "Bayamon", "Bayamon ", null, null, null, 1, "El Adulto", "Esta solicitud es para referir al Fondo el beneficiario", null),
+                new("03-0301-0003", null, "Protección", DateTime.Now, DateTime.Now, null, "Narrativa de Caso de Proteccion", "03334448-73b4-438f-8fdf-784dbab58150", "Padre", null, null, "Sin Antecedentes", "Aceptado", DateTime.Now, "Determinacion para Referir a Agencia", "Bayamon", "Bayamon ", "Urgente", "CAMPEA Aguas Buenas", "Personal Administrativo", null, null, null, null),
+                new("03-0301-0004", null, "Orientación", DateTime.Now, DateTime.Now, null, "Narrativa de Caso de Orientacion por el TS", "03334448-73b4-438f-8fdf-784dbab58150", "Abuelo", null, null, null, "Coordinar Servicios", DateTime.Now, "Determinacion para Orientacion", "Aguadilla", "Aguadilla I", null, null, null, null, null, null, null),
+            ];
+
+            IList<FormReferido> formReferido = formReferidos.Select((x, i) => new FormReferido
+            {
+                ReferidoId = i + 1,
+                RMO = x.RMO,
+                CasoId = x.CasoId,
+                TipoReferido = x.TipoReferido,
+                FechaRecibo = x.FechaRecibo,
+                HoraRecibo = x.HoraRecibo,
+                AccionTomada = x.AccionTomada,
+                NarrativaSituacion = x.NarrativaSituacion,
+                ReferidoPor = x.ReferidoPor,
+                RelacionAdulto = x.RelacionAdulto,
+                ServicioSolicitado = x.ServicioSolicitado,
+                ServicioFechaNotificacion = x.ServicioFechaNotificacion,
+                Antecedentes = x.Antecedentes,
+                Determinacion = x.Determinacion,
+                DeterminacionFecha = x.DeterminacionFecha,
+                DeterminacionRazon = x.DeterminacionRazon,
+                AsignacionRegion = x.AsignacionRegion,
+                AsignacionOficina = x.AsignacionOficina,
+                Clasificacion = x.Clasificacion,
+                OrigenReferido = x.OrigenReferido,
+                AsignacionReferido = x.AsignacionReferido,
+                AgenciaId = x.AgenciaId,
+                AgenciaSolicitadoPara = x.AgenciaSolicitadoPara,
+                AgenciaSolicitud = x.AgenciaSolicitud,
+                ReferidoOrgenId = x.ReferidoOrgenId,
+                CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                CreateDate = DateTime.Now
+            }).ToList();
+
+            modelBuilder.Entity<FormReferido>().HasData(formReferido);
+
+            IList<FormFormularioFirmaInsertDto> formFormularioFirmas = [
+                new (3,3,3,"03-0301-0003", null, "03334448-73b4-438f-8fdf-784dbab58150", "69e6dd63-c624-4c4a-8bf4-c910148367ad", DateTime.Now, "Bayamon", "Bayamon", "Ninguno", false, null,null),
+                new (4,3,4,"03-0301-0004", null, "03334448-73b4-438f-8fdf-784dbab58150", "69e6dd63-c624-4c4a-8bf4-c910148367ad", DateTime.Now, null, null, "Comntario de TS", false, null,null),
+                new (4,4,4,"03-0301-0004", null, "03334448-73b4-438f-8fdf-784dbab58150", "69e6dd63-c624-4c4a-8bf4-c910148367ad", DateTime.Now, null, null, "Comentario Supervisor", false, null,null),
+            ];
+
+            IList<FormFormularioFirma> formFormularioFirmas1 = formFormularioFirmas.Select((x, i) => new FormFormularioFirma
+            {
+                FormularioFirmasId = i + 1,
+                FormularioId = x.FormularioId ,
+                FormularioEtapaId = x.FormularioEtapaId ,
+                FormaId = x.FormaId ,
+                Rmo = x.Rmo ,
+                NumCaso = x.NumCaso ,
+                UsuarioId = x.UsuarioId ,
+                UserTypeID = x.UserTypeID ,
+                FechaFirma = x.FechaFirma ,
+                Region = x.Region ,
+                Local = x.Local ,
+                Comentarios = x.Comentarios ,
+                Revertida = x.Revertida ,
+                RevertidaFecha = x.RevertidaFecha ,
+                UsuarioRevierteId = x.UsuarioRevierteId,
+            }).ToList();
+
+            modelBuilder.Entity<FormFormularioFirma>().HasData(formFormularioFirmas1);
 
         }
     }

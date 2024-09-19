@@ -51,97 +51,97 @@ namespace PRAMS.Authentication.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "aaf70885-8089-4ac5-a1d4-ed75f5819b27",
+                            Id = "cc816e51-44ff-4380-b77b-0609a90de687",
                             Name = "SU",
                             NormalizedName = "SU"
                         },
                         new
                         {
-                            Id = "bbe6da1f-7616-46d1-a460-a09cc4778f8d",
+                            Id = "03e6e13d-04f3-4dc3-acc1-1f8a513471c4",
                             Name = "Administrador Auxiliar",
                             NormalizedName = "ADMINISTRADOR AUXILIAR"
                         },
                         new
                         {
-                            Id = "b514860b-06a5-4065-9a44-aa2e2c9272cc",
+                            Id = "2407b67a-52bd-460e-a127-5d29b716f206",
                             Name = "Oficial Administrativo",
                             NormalizedName = "OFICIAL ADMINISTRATIVO"
                         },
                         new
                         {
-                            Id = "9086df9c-4df5-4288-bc8b-bf645ebada46",
+                            Id = "8667d4f4-6eac-4d45-b3b1-da2ab3ea493b",
                             Name = "Supervisor Regional",
                             NormalizedName = "SUPERVISOR REGIONAL"
                         },
                         new
                         {
-                            Id = "8efe913d-3d69-4dc5-95e2-abbf1b882cc9",
+                            Id = "2ff81a22-5c73-453c-b496-49005bb7dce3",
                             Name = "Supervisor de oficina local",
                             NormalizedName = "SUPERVISOR DE OFICINA LOCAL"
                         },
                         new
                         {
-                            Id = "3abd1e15-cf3b-4130-90a3-316061369241",
+                            Id = "e8f27d49-1b26-4244-88ae-5c4761d2d0a9",
                             Name = "Trabajador Social",
                             NormalizedName = "TRABAJADOR SOCIAL"
                         },
                         new
                         {
-                            Id = "4079f519-b79d-4d39-81d9-0b7c5a7147f7",
+                            Id = "ec834fdb-4730-477d-a1b3-d301e0ef4cf1",
                             Name = "Director Regional",
                             NormalizedName = "DIRECTOR REGIONAL"
                         },
                         new
                         {
-                            Id = "81c4ac34-72df-47e1-bf9a-8c99b0162018",
+                            Id = "fff9c984-f249-4127-93c7-4978d788758d",
                             Name = "Director Asociado",
                             NormalizedName = "DIRECTOR ASOCIADO"
                         },
                         new
                         {
-                            Id = "1b806d99-f949-46e3-9e8b-c867ea63f9d0",
+                            Id = "69e6dd63-c624-4c4a-8bf4-c910148367ad",
                             Name = "Tecnico de Servicios a la Familia",
                             NormalizedName = "TECNICO DE SERVICIOS A LA FAMILIA"
                         },
                         new
                         {
-                            Id = "944a1efb-f99e-4a59-85d5-bea40811a1b4",
+                            Id = "e31000dc-b47a-45cc-a0e0-594ff20682db",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
-                            Id = "6ec29b4d-ce8a-4e33-a6ce-f597cdb52ef7",
+                            Id = "7c8189ba-cf7e-4edc-a017-3423588f7597",
                             Name = "Sub-Administrador",
                             NormalizedName = "SUB-ADMINISTRADOR"
                         },
                         new
                         {
-                            Id = "d958fdaa-37bc-4ba4-baa9-2bcb9f3a98e2",
+                            Id = "6d399282-eb8b-4269-b963-4f4a1962e59d",
                             Name = "Especialista Trabajador Social",
                             NormalizedName = "ESPECIALISTA TRABAJADOR SOCIAL"
                         },
                         new
                         {
-                            Id = "f2bb5f32-f03d-4ca5-96ae-9dac5ba17edc",
+                            Id = "96354c73-35c5-4c5f-8cea-4219f74e114c",
                             Name = "Asistente de Servicio",
                             NormalizedName = "ASISTENTE DE SERVICIO"
                         },
                         new
                         {
-                            Id = "d51fa165-fff4-4985-bef2-26e1c09eae59",
+                            Id = "da12aa85-0d27-4ed7-88a8-94c93c834b0e",
                             Name = "Supervisor UIE",
                             NormalizedName = "SUPERVISOR UIE"
                         },
                         new
                         {
-                            Id = "0c747e0e-ebae-4edd-b7e6-8de1f475dd0c",
+                            Id = "a56cbdfa-8913-4f2d-8695-c64f9f546f77",
                             Name = "Investigadores UIE",
                             NormalizedName = "INVESTIGADORES UIE"
                         },
                         new
                         {
-                            Id = "e0c8c50b-70e2-4cd3-a892-c07680df1902",
+                            Id = "b5ba0e66-c380-443a-b5a2-973a903f216c",
                             Name = "Director de Programa",
                             NormalizedName = "DIRECTOR DE PROGRAMA"
                         });
