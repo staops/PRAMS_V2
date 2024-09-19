@@ -9,7 +9,7 @@
         public DateTime? FechaRecibo { get; set; }
         public DateTime? HoraRecibo { get; set; }
         public string? AccionTomada { get; set; }
-        public string? Narrativa_Situacion { get; set; }
+        public string? NarrativaSituacion { get; set; }
         public string? ReferidoPor { get; set; }
         public string? RelacionAdulto { get; set; }
         public string? ServicioSolicitado { get; set; }

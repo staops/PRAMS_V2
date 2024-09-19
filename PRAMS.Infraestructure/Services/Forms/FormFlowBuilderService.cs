@@ -507,7 +507,7 @@ namespace PRAMS.Infraestructure.Services.Forms
                                 Comentarios = string.Empty, // TODO: Get the Comentarios from the user
                                 EtapaCompletada = formFlow.IsSectionCompleted,
                                 Region = string.Empty, // TODO: Get the Region from the user
-                                Local = string.Empty // TODO: Get the Local from the user
+                                Local = string.Empty, // TODO: Get the Local from the user                                
                             };
 
                             Result<FormFlujoPantallaDto> flujoPantalla = await _flujosPantallas.CreateFlujoPantalla(itemToInsert, user);

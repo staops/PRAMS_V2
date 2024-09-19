@@ -63,7 +63,7 @@ namespace PRAMS.Domain.Entities.Forms.Dto
         /// por el personal que hace la entrada o tener para hacer scroll down. Esto será mejor determinado 
         /// con los usuarios mas adelante.
         /// </summary>
-        public string? Narrativa_Situacion { get; set; }
+        public string? NarrativaSituacion { get; set; }
 
         /// <summary>
         /// En estos momentos no tenemos como definir este campo hasta que se discuta con el cliente, 

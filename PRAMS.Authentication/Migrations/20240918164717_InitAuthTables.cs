@@ -164,22 +164,22 @@ namespace PRAMS.Authentication.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "0c747e0e-ebae-4edd-b7e6-8de1f475dd0c", null, "Investigadores UIE", "INVESTIGADORES UIE" },
-                    { "1b806d99-f949-46e3-9e8b-c867ea63f9d0", null, "Tecnico de Servicios a la Familia", "TECNICO DE SERVICIOS A LA FAMILIA" },
-                    { "3abd1e15-cf3b-4130-90a3-316061369241", null, "Trabajador Social", "TRABAJADOR SOCIAL" },
-                    { "4079f519-b79d-4d39-81d9-0b7c5a7147f7", null, "Director Regional", "DIRECTOR REGIONAL" },
-                    { "6ec29b4d-ce8a-4e33-a6ce-f597cdb52ef7", null, "Sub-Administrador", "SUB-ADMINISTRADOR" },
-                    { "81c4ac34-72df-47e1-bf9a-8c99b0162018", null, "Director Asociado", "DIRECTOR ASOCIADO" },
-                    { "8efe913d-3d69-4dc5-95e2-abbf1b882cc9", null, "Supervisor de oficina local", "SUPERVISOR DE OFICINA LOCAL" },
-                    { "9086df9c-4df5-4288-bc8b-bf645ebada46", null, "Supervisor Regional", "SUPERVISOR REGIONAL" },
-                    { "944a1efb-f99e-4a59-85d5-bea40811a1b4", null, "Administrador", "ADMINISTRADOR" },
-                    { "aaf70885-8089-4ac5-a1d4-ed75f5819b27", null, "SU", "SU" },
-                    { "b514860b-06a5-4065-9a44-aa2e2c9272cc", null, "Oficial Administrativo", "OFICIAL ADMINISTRATIVO" },
-                    { "bbe6da1f-7616-46d1-a460-a09cc4778f8d", null, "Administrador Auxiliar", "ADMINISTRADOR AUXILIAR" },
-                    { "d51fa165-fff4-4985-bef2-26e1c09eae59", null, "Supervisor UIE", "SUPERVISOR UIE" },
-                    { "d958fdaa-37bc-4ba4-baa9-2bcb9f3a98e2", null, "Especialista Trabajador Social", "ESPECIALISTA TRABAJADOR SOCIAL" },
-                    { "e0c8c50b-70e2-4cd3-a892-c07680df1902", null, "Director de Programa", "DIRECTOR DE PROGRAMA" },
-                    { "f2bb5f32-f03d-4ca5-96ae-9dac5ba17edc", null, "Asistente de Servicio", "ASISTENTE DE SERVICIO" }
+                    { "03e6e13d-04f3-4dc3-acc1-1f8a513471c4", null, "Administrador Auxiliar", "ADMINISTRADOR AUXILIAR" },
+                    { "2407b67a-52bd-460e-a127-5d29b716f206", null, "Oficial Administrativo", "OFICIAL ADMINISTRATIVO" },
+                    { "2ff81a22-5c73-453c-b496-49005bb7dce3", null, "Supervisor de oficina local", "SUPERVISOR DE OFICINA LOCAL" },
+                    { "69e6dd63-c624-4c4a-8bf4-c910148367ad", null, "Tecnico de Servicios a la Familia", "TECNICO DE SERVICIOS A LA FAMILIA" },
+                    { "6d399282-eb8b-4269-b963-4f4a1962e59d", null, "Especialista Trabajador Social", "ESPECIALISTA TRABAJADOR SOCIAL" },
+                    { "7c8189ba-cf7e-4edc-a017-3423588f7597", null, "Sub-Administrador", "SUB-ADMINISTRADOR" },
+                    { "8667d4f4-6eac-4d45-b3b1-da2ab3ea493b", null, "Supervisor Regional", "SUPERVISOR REGIONAL" },
+                    { "96354c73-35c5-4c5f-8cea-4219f74e114c", null, "Asistente de Servicio", "ASISTENTE DE SERVICIO" },
+                    { "a56cbdfa-8913-4f2d-8695-c64f9f546f77", null, "Investigadores UIE", "INVESTIGADORES UIE" },
+                    { "b5ba0e66-c380-443a-b5a2-973a903f216c", null, "Director de Programa", "DIRECTOR DE PROGRAMA" },
+                    { "cc816e51-44ff-4380-b77b-0609a90de687", null, "SU", "SU" },
+                    { "da12aa85-0d27-4ed7-88a8-94c93c834b0e", null, "Supervisor UIE", "SUPERVISOR UIE" },
+                    { "e31000dc-b47a-45cc-a0e0-594ff20682db", null, "Administrador", "ADMINISTRADOR" },
+                    { "e8f27d49-1b26-4244-88ae-5c4761d2d0a9", null, "Trabajador Social", "TRABAJADOR SOCIAL" },
+                    { "ec834fdb-4730-477d-a1b3-d301e0ef4cf1", null, "Director Regional", "DIRECTOR REGIONAL" },
+                    { "fff9c984-f249-4127-93c7-4978d788758d", null, "Director Asociado", "DIRECTOR ASOCIADO" }
                 });
 
             migrationBuilder.CreateIndex(
