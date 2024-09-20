@@ -149,6 +149,39 @@ namespace PRAMS.Configuration.Controllers
             }
         }
 
+        /// <summary>
+        /// Execute the stored procedure to get the list of flujos de pantallas
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("FromSP")]
+        [Authorize]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<IList<FormFlujoPantallaSPDto>>))]
+        [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
+        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
+        public async Task<IActionResult> GetFlujosPantallasStore()
+        {
+            try
+            {
+                var result = await _flujosPantallasService.GetFlujosPantallasSP();
+                if (result.IsSuccess)
+                {
+                    _logger.LogInformation("Success in GetFlujosPantallasStore Result:{@result}", result.Value);
+                    return Ok(new ResponseDto<IList<FormFlujoPantallaSPDto>> { Result = result.Value });
+                }
+                else
+                {
+                    _logger.LogError("Error in GetFlujosPantallasStore Errors:{@errors}", result.Errors);
+                    return BadRequest(new ErrorResponseDto<List<IError>> { Message = result.Errors.First().Message, Result = result.Errors });
+                }
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, "Error al obtener los flujos de pantallas desde el SP");
+                return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
+            }
+        }
+
         [HttpPost("Create")]
         [Authorize]
         [Produces(MediaTypeNames.Application.Json)]

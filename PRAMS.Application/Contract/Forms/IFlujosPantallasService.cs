@@ -14,6 +14,7 @@ namespace PRAMS.Application.Contract.Forms
         Task<Result<FormFlujoPantallaDto>> RemoveFlujoPantalla(int flujoPantallaId, string user);
         Task<Result<FormFlujoPantallaDto>> UpdateFlujoPantalla(FormFlujoPantallaUpdateDto itemToUpdate, string user);
         Task<Result<DtResult<FormFlujoPantallaDto>>> ListFlujosPantallass(FilterCriteria filterCriteria);
+        Task<Result<IList<FormFlujoPantallaSPDto>>> GetFlujosPantallasSP();
 
     }
 }
