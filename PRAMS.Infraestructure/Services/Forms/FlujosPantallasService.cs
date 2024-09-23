@@ -4,10 +4,13 @@ using LinqKit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using PRAMS.Application.Contract.Forms;
+using PRAMS.Application.Contract.Shared;
 using PRAMS.Domain.Entities.Forms.Dto;
 using PRAMS.Domain.Entities.Shared;
 using PRAMS.Domain.Models.Forms;
 using PRAMS.Infraestructure.Data.SystemConfiguration;
+using PRAMS.Infraestructure.Services.Shared;
+using System.Data.Entity;
 using System.Linq.Expressions;
 
 namespace PRAMS.Infraestructure.Services.Forms
@@ -18,12 +21,14 @@ namespace PRAMS.Infraestructure.Services.Forms
         private readonly AppConfigDbContext _context;
         private readonly IMapper _mapper;
         private readonly ILogger<IFlujosPantallasService> _logger;
+        private readonly IBaseSqlService<IList<FormFlujoPantallaSPDto>> _baseSqlService;
 
-        public FlujosPantallasService(AppConfigDbContext context, IMapper mapper, ILogger<IFlujosPantallasService> logger)
+        public FlujosPantallasService(AppConfigDbContext context, IMapper mapper, ILogger<IFlujosPantallasService> logger, IBaseSqlService<IList<FormFlujoPantallaSPDto>> baseSqlService)
         {
             _context = context;
             _mapper = mapper;
             _logger = logger;
+            _baseSqlService = baseSqlService;
         }
 
         public async Task<Result<FormFlujoPantallaDto>> CreateFlujoPantalla(FormFlujoPantallaInsertDto itemToInsert, string user)
@@ -260,6 +265,32 @@ namespace PRAMS.Infraestructure.Services.Forms
             {
                 _logger.LogError(error, $"Error updating the flow: {error.Message}");
                 return Result.Fail<FormFlujoPantallaDto>(new Error($"Error updating the flow: {error.Message}")).WithError(error.Message);
+            }
+        }
+
+        public async Task<Result<IList<FormFlujoPantallaSPDto>>> GetFlujosPantallasSP()
+        {
+            try
+            {
+
+                Result<IList<FormFlujoPantallaSPDto>> dataResult = await _baseSqlService.ExecuteStoreProcedure(new RequestSQLDto
+                {
+                    ConnectionString = _context.Database.GetDbConnection().ConnectionString,
+                    StoreProcedureName = "[dbo].[SelectFlujoPendiente]",
+                    Parameters = new Dictionary<string, object>()
+                });
+
+                if (dataResult.IsSuccess)
+                {
+                    return Result.Ok(dataResult.Value);
+                }
+                return Result.Fail<IList<FormFlujoPantallaSPDto>>(new Error("The flow does not exist"));
+
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, $"Error getting the flows: {error.Message}");
+                return Result.Fail<IList<FormFlujoPantallaSPDto>>(new Error($"Error getting the flows: {error.Message}")).WithError(error.Message);
             }
         }
     }

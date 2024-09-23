@@ -4,12 +4,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using PRAMS.Application.Contract.Flujos;
 using PRAMS.Application.Contract.Forms;
+using PRAMS.Application.Contract.Shared;
 using PRAMS.Application.Contract.SystemConfiguration;
 using PRAMS.Configuration.Extensions;
+using PRAMS.Domain.Entities.Forms.Dto;
 using PRAMS.Infraestructure.Data.SystemConfiguration;
 using PRAMS.Infraestructure.Mapping.SystemConfiguration;
 using PRAMS.Infraestructure.Services.Flujos;
 using PRAMS.Infraestructure.Services.Forms;
+using PRAMS.Infraestructure.Services.Shared;
 using PRAMS.Infraestructure.Services.SystemConfiguration;
 using Serilog;
 using System.Reflection;
@@ -28,6 +31,11 @@ builder.Services.AddSingleton(mapper);
 
 
 builder.Services.AddControllers().AddNewtonsoftJson();
+
+
+builder.Services.AddScoped<IBaseSqlService<IList<FormFlujoPantallaSPDto>>, BaseSqlService<IList<FormFlujoPantallaSPDto>>>();
+
+
 
 builder.Services.AddScoped<ICatalogsService>(x =>
 {
@@ -89,7 +97,8 @@ builder.Services.AddScoped<IFlujosPantallasService>(x =>
 {
     var dbContext = x.GetRequiredService<AppConfigDbContext>();
     var logger = x.GetRequiredService<ILogger<IFlujosPantallasService>>();
-    return new FlujosPantallasService(dbContext, mapper, logger);
+    var sqlService = x.GetRequiredService<IBaseSqlService<IList<FormFlujoPantallaSPDto>>>();
+    return new FlujosPantallasService(dbContext, mapper, logger, sqlService);
 });
 
 builder.Services.AddScoped<IFormulariosFirmasService>(x =>

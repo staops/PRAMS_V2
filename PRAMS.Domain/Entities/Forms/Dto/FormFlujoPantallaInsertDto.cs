@@ -2,12 +2,34 @@
 {
     public class FormFlujoPantallaInsertDto
     {
-        public required int FormularioId { get; set; }
-        public required int FormaId { get; set; }
-        public required int OrdenEtapa { get; set; }
-        public required string FlujoEtapa { get; set; }
+        public FormFlujoPantallaInsertDto() { }
+        public FormFlujoPantallaInsertDto (int formularioId, int formaId, int ordenEtapa, string flujoEtapa, DateTime fechaFlujo, string? usuarioFlujoId, string? rmo, string? numeroCaso, string? persona, string? usuarioAsignaId, string? usuarioAsignadoId, string? flujoStatus, string? notas, string? comentarios, bool etapaCompletada, string? region, string? local)
+        {
+            FormularioId = formularioId;
+            FormaId = formaId;
+            OrdenEtapa = ordenEtapa;
+            FlujoEtapa = flujoEtapa;
+            FechaFlujo = fechaFlujo;
+            UsuarioFlujoId = usuarioFlujoId ?? string.Empty;
+            RMO = rmo;
+            NumeroCaso = numeroCaso;
+            Persona = persona;
+            FlujoStatus = flujoStatus;
+            Notas = notas;
+            Comentarios = comentarios;
+            EtapaCompletada = etapaCompletada;
+            Region = region;
+            Local = local;
+            UsuarioAsignaId = usuarioAsignaId;
+            UsuarioAsignadoId = usuarioAsignadoId;
+        }
+
+        public int FormularioId { get; set; }
+        public int FormaId { get; set; }
+        public int OrdenEtapa { get; set; }
+        public string FlujoEtapa { get; set; }
         public DateTime FechaFlujo { get; set; } = DateTime.Now;
-        public string? UsuarioFlujoId { get; set; }
+        public string UsuarioFlujoId { get; set; } = string.Empty;
 
         /// <summary>
         /// Campo RMO este es el número de referido, hay que determinar cómo estos son 

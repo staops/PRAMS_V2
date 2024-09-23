@@ -101,15 +101,15 @@ namespace PRAMS.Domain.Models.Forms
         public DateTime? ModifiedDate { get; set; }
 
         [Column("ID_Supervisor")]
-        public int? SupervisorId { get; set; }
+        [StringLength(40)]
+        public string? SupervisorId { get; set; }
 
         [Column("Fecha_Supervision")]
         public DateTime? FechaSupervision { get; set; }
 
-        public required bool Activo { get; set; } = true;
-
         [Column("ID_ReferidoOrigen")]
         public string? ReferidoOrgenId { get; set; }
+        public bool Activo { get; set; } = true;
 
     }
 }
