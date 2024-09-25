@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using FluentResults;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using PRAMS.Application.Contract.Forms;
 using PRAMS.Domain.Entities.Flujos.Dto;
 using PRAMS.Domain.Entities.Forms.Dto;
@@ -91,7 +93,7 @@ namespace PRAMS.Infraestructure.Services.Forms
                                     errors.AddRange(dataTypesResult.Errors);
 
                                     // Execute the validation of the InvalidFields
-                                    Result<bool> invalidFieldsResult = InvalidFieldsValidation(formFields, formFlowBuilder);
+                                    Result<bool> invalidFieldsResult = InvalidFieldsValidation(formFlowBuilderResult.AdmFlujoFormulario.TablaBase, formFields, formFlowBuilder);
                                     errors.AddRange(invalidFieldsResult.Errors);
 
                                     formFlowBuilderResult.CanContinue = errors.Count == 0;
@@ -475,16 +477,12 @@ namespace PRAMS.Infraestructure.Services.Forms
                     case SD.FORM_REFERIDOS:
 
                         // Create a new instance of FormReferidoInsertDto using reflection
-                        FormReferidoInsertDto formReferidoInsertDto = new();
-                        foreach (var field in formFlowBuilder.Fields)
-                        {
-                            PropertyInfo? property = formReferidoInsertDto.GetType().GetProperty(field.Key);
-                            AdmFlujoFormularioEtapaAccionCampoDto? accioneCampo = formFlow.AdmFormularioEtapaAccioneCampos?.FirstOrDefault(f => f.CampoDBIDField == field.Key);
-                            if (accioneCampo is not null)
-                            {
-                                property?.SetValue(formReferidoInsertDto, ParserValue(accioneCampo, field.Value));
-                            }
-                        }
+                        FormReferidoInsertDto? formReferidoInsertDto = new();
+
+                        // Fields to Json objet
+                        string jsonFields = JsonConvert.SerializeObject(formFlowBuilder.Fields);
+                        formReferidoInsertDto = JsonConvert.DeserializeObject<FormReferidoInsertDto>(jsonFields);
+
 
                         // Save the new record in the database
                         Result<FormReferidoDto> formReferidoResult = await _formReferidoService.CreateFormReferido(formReferidoInsertDto, user);
@@ -538,16 +536,11 @@ namespace PRAMS.Infraestructure.Services.Forms
                     case SD.FORM_FORMULARIOSFIRMAS:
 
                         // Create a new instance of FormFormularioFirmaInsertDto using reflection
-                        FormFormularioFirmaInsertDto formFormularioFirmaDto = new();
-                        foreach (var field in formFlowBuilder.Fields)
-                        {
-                            PropertyInfo? property = formFormularioFirmaDto.GetType().GetProperty(field.Key, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
-                            AdmFlujoFormularioEtapaAccionCampoDto? accioneCampo = formFlow.AdmFormularioEtapaAccioneCampos?.FirstOrDefault(f => f.CampoDBIDField == field.Key);
-                            if (accioneCampo is not null)
-                            {
-                                property?.SetValue(formFormularioFirmaDto, ParserValue(accioneCampo, field.Value));
-                            }
-                        }
+                        FormFormularioFirmaInsertDto? formFormularioFirmaDto = new();
+
+                        // Fields to Json objet
+                        string jsonFieldsFirma = JsonConvert.SerializeObject(formFlowBuilder.Fields);
+                        formFormularioFirmaDto = JsonConvert.DeserializeObject<FormFormularioFirmaInsertDto>(jsonFieldsFirma);
 
                         // Extra fields
                         //formFormularioFirmaDto.UsuarioId = user;
@@ -646,16 +639,16 @@ namespace PRAMS.Infraestructure.Services.Forms
                         if (formReferidoResult.IsSuccess)
                         {
                             // Create a new instance of FormReferidoUpdateDto using reflection
-                            FormReferidoUpdateDto formReferidoUpdateDto = _mapper.Map<FormReferidoUpdateDto>(formReferidoResult.Value);
-                            foreach (var field in formFlowBuilder.Fields)
-                            {
-                                PropertyInfo? property = formReferidoUpdateDto.GetType().GetProperty(field.Key, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
-                                AdmFlujoFormularioEtapaAccionCampoDto? accioneCampo = formFlow.AdmFormularioEtapaAccioneCampos?.FirstOrDefault(f => f.CampoDBIDField == field.Key);
-                                if (accioneCampo is not null)
-                                {
-                                    property?.SetValue(formReferidoUpdateDto, ParserValue(accioneCampo, field.Value));
-                                }
-                            }
+                            FormReferidoUpdateDto? formReferidoUpdateDto = _mapper.Map<FormReferidoUpdateDto>(formReferidoResult.Value);
+
+                            // Fields to Json objet
+                            string jsonFields = JsonConvert.SerializeObject(formFlowBuilder.Fields);
+                            FormReferidoUpdateDto formReferidoUpdateDtoToMerge = JsonConvert.DeserializeObject<FormReferidoUpdateDto>(jsonFields);
+
+                            formReferidoUpdateDto = _mapper.Map(formReferidoUpdateDtoToMerge, formReferidoUpdateDto);
+
+                            formReferidoUpdateDto.ReferidoId = formFlowBuilder.FormaId ?? 0;
+
 
                             Result<FormReferidoDto> updateResult = await _formReferidoService.UpdateFormReferido(formReferidoUpdateDto, user);
                             errors.AddRange(updateResult.Errors);
@@ -847,7 +840,7 @@ namespace PRAMS.Infraestructure.Services.Forms
             {
                 return null;
             }
-        
+
         }
 
         private static object? ParserValue(PropertyInfo info, object value)
@@ -1085,19 +1078,43 @@ namespace PRAMS.Infraestructure.Services.Forms
             }
         }
 
-        private Result<bool> InvalidFieldsValidation(IList<AdmFormularioEtapaAccioneCampo> formFields, FormFlowBuilder formFlowBuilder)
+        private Result<bool> InvalidFieldsValidation(string tablaBase, IList<AdmFormularioEtapaAccioneCampo> formFields, FormFlowBuilder formFlowBuilder)
         {
             try
             {
                 IList<IError> errors = [];
 
-                // Validate fields that are not in the form
-                foreach (var field in formFlowBuilder.Fields)
+
+                switch (tablaBase.ToUpper())
                 {
-                    if (!formFields.Any(a => a.CampoDBIDField == field.Key))
-                    {
-                        errors.Add(new Error($"El campo {field.Key} no pertenece al formulario").WithMetadata("INVALID_FORM_FIELD", field.Key));
-                    }
+
+                    // Save the data in the table FORM_REFERIDOS
+                    case SD.FORM_REFERIDOS:
+
+                        // Create a new instance of FormReferidoInsertDto using reflection
+                        FormReferidoInsertDto formReferidoInsertDto = new();
+
+                        // Validate fields that are not in the form
+                        foreach (var field in formFlowBuilder.Fields)
+                        {
+                            if (!formFields.Any(a => a.CampoDBIDField == field.Key))
+                            {
+                                PropertyInfo? property = formReferidoInsertDto.GetType().GetProperty(field.Key, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
+                                if (property is null)
+                                {
+                                    errors.Add(new Error($"El campo {field.Key} no pertenece al formulario").WithMetadata("INVALID_FORM_FIELD", field.Key));
+                                }
+                            }
+
+                        }
+                        break;
+                    default:
+                        // Validate fields that are not in the form
+                        foreach (var field in formFlowBuilder.Fields)
+                        {
+                            errors.Add(new Error($"El campo {field.Key} no pertenece al formulario").WithMetadata("INVALID_FORM_FIELD", field.Key));
+                        }
+                        break;
                 }
 
 
