@@ -9,8 +9,6 @@ using PRAMS.Domain.Entities.Forms.Dto;
 using PRAMS.Domain.Entities.Shared;
 using PRAMS.Domain.Models.Forms;
 using PRAMS.Infraestructure.Data.SystemConfiguration;
-using PRAMS.Infraestructure.Services.Shared;
-using System.Data.Entity;
 using System.Linq.Expressions;
 
 namespace PRAMS.Infraestructure.Services.Forms
