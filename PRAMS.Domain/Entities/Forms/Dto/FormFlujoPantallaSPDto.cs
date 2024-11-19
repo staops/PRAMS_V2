@@ -50,7 +50,8 @@ namespace PRAMS.Domain.Entities.Forms.Dto
         public string?  NombreFlujo { get; set; }
         public string?  NombreAsigna { get; set; }
         public string? NombreAsignado { get; set; }
-
+        public string? NombreSujeto { get; set; }
+        public string? NombreRefiere { get; set; }
 
     }
 }
