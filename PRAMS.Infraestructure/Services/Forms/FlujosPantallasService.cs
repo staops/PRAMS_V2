@@ -291,5 +291,25 @@ namespace PRAMS.Infraestructure.Services.Forms
                 return Result.Fail<IList<FormFlujoPantallaSPDto>>(new Error($"Error getting the flows: {error.Message}")).WithError(error.Message);
             }
         }
+
+        public async Task<Result<int>> GetCountByRegionAndLocal(string region, string local)
+        {
+            try
+            {
+                var query = _context.FormFlujoPantallas
+                    .Where(x => x.Region == region && x.Local == local)
+                    .Distinct();
+
+                int result = await query.CountAsync();
+
+                return Result.Ok(result);
+
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, $"Error getting the count: {error.Message}");
+                return Result.Fail<int>(new Error($"Error getting the count: {error.Message}")).WithError(error.Message);
+            }
+        }
     }
 }

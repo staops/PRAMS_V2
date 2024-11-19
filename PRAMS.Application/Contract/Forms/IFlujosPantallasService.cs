@@ -15,6 +15,7 @@ namespace PRAMS.Application.Contract.Forms
         Task<Result<FormFlujoPantallaDto>> UpdateFlujoPantalla(FormFlujoPantallaUpdateDto itemToUpdate, string user);
         Task<Result<DtResult<FormFlujoPantallaDto>>> ListFlujosPantallass(FilterCriteria filterCriteria);
         Task<Result<IList<FormFlujoPantallaSPDto>>> GetFlujosPantallasSP();
+        Task<Result<int>> GetCountByRegionAndLocal(string region, string local);
 
     }
 }

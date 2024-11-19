@@ -1342,6 +1342,9 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
                 new(1, 1, "Fecha Referido", "Form_Referidos", "Fecha", 0, "FechaRecibo", "TieneValor", "Fecha del Referido es requerida para continuar.", null),
                 new(1, 2, "Hora Referido", "Form_Referidos", "Fecha", 0, "HoraRecibo", "TieneValor", "La Hora del Referido es requerida.", null),
                 new(1, 3, "Narrativa Situacion", "Form_Referidos", "Texto", 40, "NarrativaSituacion", "LargoMinimo", "La Narrativa de la Situacion debe ser al menos de 40 caracteres.", null),
+                new(1, 4, "Region", "Form_Referidos", "Texto", 0, "Region", "TieneValor", "La region es requerida para construir el RMO.", null),
+                new(1, 5, "Local", "Form_Referidos", "Texto", 0, "Local", "TieneValor", "El local es requerido para construir el RMO.", null),
+
                 new(2, 1, "Determinacion", "Form_Referidos", "Texto", 0, "Determinacion", "TieneValor", "Debe Completar la Determinacion para Continuar con las Firmas", "La Determinacion aun no esta llena para continuar con el Referido."),
                 new(2, 2, "Determinacion_Fecha", "Form_Referidos", "Fecha", 0, "DeterminacionFecha", "TieneValor", "Debe Completar la Fecha de la Determinacion para Continuar con las Firmas", "La Fecha Determinacion aun no esta llena para continuar con el Referido."),
                 new(2, 3, "Determinacion_Razon", "Form_Referidos", "Texto", 0, "DeterminacionRazon", "TieneValor", "Debe Completar la Razón de la Determinacion para poder Firmar", "La Razón Determinacion aun no esta llena para continuar con el Referido."),
