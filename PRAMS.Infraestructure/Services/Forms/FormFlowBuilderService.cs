@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using FluentResults;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using PRAMS.Application.Contract.Forms;
@@ -342,6 +341,22 @@ namespace PRAMS.Infraestructure.Services.Forms
 
                             if (validationRresult.Value.AdmFlujoFormularioEtapaAccion.TipoAccion == SD.TIPO_ACCION_VALIDACION_CAMPOS)
                             {
+                                // Build the RMO
+                                // La region es requerida para construir el RMO
+                                formFlowBuilder.Fields.TryGetValue("Region", out object? regionValue);
+                                // El local es requerido para construir el RMO
+                                formFlowBuilder.Fields.TryGetValue("Local", out object? localValue);
+
+                                Result<string> rmoResult = await BuildRmo(regionValue?.ToString()!, localValue?.ToString()!);
+                                if (rmoResult.IsSuccess)
+                                {
+                                    formFlowBuilder.Fields.Add("RMO", rmoResult.ValueOrDefault);
+                                }
+                                else
+                                {
+                                    errors.AddRange(rmoResult.Errors);
+                                }
+
                                 // Save the data in the database
                                 Result<dynamic?> saveFormDataResult = await SaveFormData(formFlowBuilder, validationRresult.Value, tableName, user, role);
                                 if (saveFormDataResult.IsSuccess && saveFormDataResult.ValueOrDefault is not null)
@@ -467,9 +482,6 @@ namespace PRAMS.Infraestructure.Services.Forms
                 Result<FormFlowBuilderObjectResult<object>> result = Result.Ok();
                 List<IError> errors = [];
 
-
-
-
                 switch (tableName.ToUpper())
                 {
 
@@ -496,7 +508,7 @@ namespace PRAMS.Infraestructure.Services.Forms
                                 FlujoEtapa = formFlow.AdmFlujoFormularioEtapa?.NombreEtapa ?? string.Empty,
                                 FechaFlujo = DateTime.Now,
                                 UsuarioFlujoId = user,
-                                RMO = string.Empty, // TODO: Get the RMO from the user
+                                RMO = formReferidoResult.Value.RMO,
                                 NumeroCaso = string.Empty, // TODO: Get the NumeroCaso from the user
                                 Persona = string.Empty, // TODO: Get the Persona from the user
                                 //FlujoStatus = formFlow.AdmFlujoFormularioEtapaAccion?.NombreAccion,
@@ -504,8 +516,8 @@ namespace PRAMS.Infraestructure.Services.Forms
                                 Notas = string.Empty, // TODO: Get the Notas from the user
                                 Comentarios = string.Empty, // TODO: Get the Comentarios from the user
                                 EtapaCompletada = formFlow.IsSectionCompleted,
-                                Region = string.Empty, // TODO: Get the Region from the user
-                                Local = string.Empty, // TODO: Get the Local from the user                                
+                                Region = formFlowBuilder.Fields.TryGetValue("Region", out object? regionValue) ? regionValue.ToString()?.PadLeft(2, '0') : string.Empty,
+                                Local = formFlowBuilder.Fields.TryGetValue("Local", out object? localValue) ? localValue.ToString()?.PadLeft(4, '0') : string.Empty
                             };
 
                             Result<FormFlujoPantallaDto> flujoPantalla = await _flujosPantallas.CreateFlujoPantalla(itemToInsert, user);
@@ -816,6 +828,35 @@ namespace PRAMS.Infraestructure.Services.Forms
 
         #region Helper Methods
 
+        private async Task<Result<string>> BuildRmo(string region, string local)
+        {
+            try
+            {
+                string rmo = string.Empty;
+                region = region.PadLeft(2, '0');
+                local = local.PadLeft(4, '0');
+
+                // Get the count by region and local
+                Result<int> countResult = await _flujosPantallas.GetCountByRegionAndLocal(region, local);
+                if (countResult.IsSuccess)
+                {
+                    // Sample of RMO: 03-3801-10000
+                    rmo = $"{region}-{local}-{countResult.Value + 10001}";
+
+                    return Result.Ok(rmo);
+                }
+                else
+                {
+                    return Result.Fail<string>(countResult.Errors.ToArray());
+                }
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, $"Error al crear el RMO: {error.Message}");
+                return Result.Fail<string>(new Error($"Error al crear el RMO: {error.Message}")).WithError(error.Message);
+            }
+        }
+
         private static object? ParserValue(AdmFlujoFormularioEtapaAccionCampoDto admFormularioEtapaAccione, object value)
         {
             try
@@ -1083,7 +1124,13 @@ namespace PRAMS.Infraestructure.Services.Forms
             try
             {
                 IList<IError> errors = [];
-
+                formFields = formFields.Where(w => w.TablaBase == tablaBase).ToList();
+                // White list of fields that are not in the form
+                IDictionary<string, string> whiteList = new Dictionary<string, string>
+                {
+                    { "Region", "Form_Referidos" },
+                    { "Local", "Form_Referidos" }
+                };
 
                 switch (tablaBase.ToUpper())
                 {
@@ -1097,7 +1144,11 @@ namespace PRAMS.Infraestructure.Services.Forms
                         // Validate fields that are not in the form
                         foreach (var field in formFlowBuilder.Fields)
                         {
-                            if (!formFields.Any(a => a.CampoDBIDField == field.Key))
+
+                            bool isWhiteList = whiteList.ContainsKey(field.Key) && whiteList[field.Key] == tablaBase;
+
+
+                            if (!formFields.Any(a => a.CampoDBIDField == field.Key) && !isWhiteList)
                             {
                                 PropertyInfo? property = formReferidoInsertDto.GetType().GetProperty(field.Key, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
                                 if (property is null)

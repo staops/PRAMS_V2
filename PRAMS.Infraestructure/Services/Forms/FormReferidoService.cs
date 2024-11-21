@@ -7,6 +7,7 @@ using PRAMS.Application.Contract.Forms;
 using PRAMS.Domain.Entities.Forms.Dto;
 using PRAMS.Domain.Entities.Shared;
 using PRAMS.Domain.Models.Forms;
+using PRAMS.Infraestructure.Data.Authentication;
 using PRAMS.Infraestructure.Data.SystemConfiguration;
 using System.Linq.Expressions;
 
@@ -15,12 +16,14 @@ namespace PRAMS.Infraestructure.Services.Forms
     public class FormReferidoService : IFormReferidoService
     {
         private readonly AppConfigDbContext _context;
+        private readonly UsersDbContext _usersDbContext;
         private readonly IMapper _mapper;
         private readonly ILogger<IFormReferidoService> _logger;
 
-        public FormReferidoService(AppConfigDbContext context, IMapper mapper, ILogger<IFormReferidoService> logger)
+        public FormReferidoService(AppConfigDbContext context, UsersDbContext usersDbContext, IMapper mapper, ILogger<IFormReferidoService> logger)
         {
             _context = context;
+            _usersDbContext = usersDbContext;
             _mapper = mapper;
             _logger = logger;
         }
@@ -59,6 +62,14 @@ namespace PRAMS.Infraestructure.Services.Forms
                 }
 
                 var formReferidoDto = _mapper.Map<FormReferidoDto>(formReferido);
+
+                // Complete the ReferidoPorName field with the name of the user who referred the form
+                if (formReferido.ReferidoPor != null)
+                {
+                    var user = await _usersDbContext.ApplicationUsers.Where(w => w.Id == formReferido.ReferidoPor).FirstOrDefaultAsync();
+                    formReferidoDto.ReferidoPorName = $"{user?.FirstName}";
+                }
+
                 return Result.Ok(formReferidoDto);
 
             }
@@ -75,6 +86,17 @@ namespace PRAMS.Infraestructure.Services.Forms
             {
                 var formReferidos = await _context.FormReferidos.Where(w => w.Activo).ToListAsync();
                 var formReferidosDto = _mapper.Map<List<FormReferidoDto>>(formReferidos);
+
+                // Complete the ReferidoPorName field with the name of the user who referred the form
+                foreach (var formReferidoDto in formReferidosDto)
+                {
+                    if (formReferidoDto.ReferidoPor != null)
+                    {
+                        var user = await _usersDbContext.ApplicationUsers.Where(w => w.Id == formReferidoDto.ReferidoPor).FirstOrDefaultAsync();
+                        formReferidoDto.ReferidoPorName = $"{user?.FirstName}";
+                    }
+                }
+
                 return Result.Ok<ICollection<FormReferidoDto>>(formReferidosDto);
 
             }
@@ -139,6 +161,17 @@ namespace PRAMS.Infraestructure.Services.Forms
                 List<FormReferidoDto> data = [.. basicInfApplicantDtos.Provider.CreateQuery<FormReferidoDto>(resultExpression)
                     .Skip(filterCriteria.Start)
                     .Take(filterCriteria.Length)];
+
+                // Complete the ReferidoPorName field with the name of the user who referred the form
+                foreach (var formReferidoDto in data)
+                {
+                    if (formReferidoDto.ReferidoPor != null)
+                    {
+                        var user = await _usersDbContext.ApplicationUsers.Where(w => w.Id == formReferidoDto.ReferidoPor).FirstOrDefaultAsync();
+                        formReferidoDto.ReferidoPorName = $"{user?.FirstName}";
+                    }
+                }
+
 
                 DtResult<FormReferidoDto> objectResult = new()
                 {
