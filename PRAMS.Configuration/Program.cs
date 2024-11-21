@@ -8,6 +8,7 @@ using PRAMS.Application.Contract.Shared;
 using PRAMS.Application.Contract.SystemConfiguration;
 using PRAMS.Configuration.Extensions;
 using PRAMS.Domain.Entities.Forms.Dto;
+using PRAMS.Infraestructure.Data.Authentication;
 using PRAMS.Infraestructure.Data.SystemConfiguration;
 using PRAMS.Infraestructure.Mapping.SystemConfiguration;
 using PRAMS.Infraestructure.Services.Flujos;
@@ -26,6 +27,11 @@ builder.Services.AddDbContext<AppConfigDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("PRAMSConfigurationConnection"), b => b.MigrationsAssembly("PRAMS.Configuration"));
     options.LogTo(l => Console.WriteLine(l), LogLevel.Information);
 });
+builder.Services.AddDbContext<UsersDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("PRAMSConfigurationConnection"));
+});
+
 IMapper mapper = MappingConfiguration.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 
@@ -128,8 +134,9 @@ builder.Services.AddScoped<IFormFlowBuilderService>(x =>
 builder.Services.AddScoped<IFormReferidoService>(x =>
 {
     var dbContext = x.GetRequiredService<AppConfigDbContext>();
+    var usersDbContext = x.GetRequiredService<UsersDbContext>();
     var logger = x.GetRequiredService<ILogger<IFormReferidoService>>();
-    return new FormReferidoService(dbContext, mapper, logger);
+    return new FormReferidoService(dbContext, usersDbContext, mapper, logger);
 });
 
 

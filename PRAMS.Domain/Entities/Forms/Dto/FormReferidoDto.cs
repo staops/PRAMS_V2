@@ -70,6 +70,7 @@ namespace PRAMS.Domain.Entities.Forms.Dto
         /// pero se estaría manejando en Pantalla para cualquiera de los dos casos que son presentados.
         /// </summary>
         public string? ReferidoPor { get; set; }
+        public string? ReferidoPorName { get; set; }
 
         /// <summary>
         /// Este puede ser un campo de Selección o puede que este atado a Personas igual que Referido Por

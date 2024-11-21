@@ -80,5 +80,35 @@ namespace PRAMS.Configuration.Controllers
             }
         }
 
+        [HttpGet("ByReferidoId/{referidoId}")]
+        [Authorize]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<FormReferidoDto>))]
+        [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
+        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
+        public async Task<IActionResult> GetFormReferido(int referidoId)
+        {
+            try
+            {
+                var result = await _formReferidoService.GetFormReferido(referidoId);
+                if (result.IsSuccess)
+                {
+                    _logger.LogInformation("Success in GetFormReferido Result:{@result}", result.Value);
+                    return Ok(new ResponseDto<FormReferidoDto> { Result = result.Value });
+                }
+                else
+                {
+                    _logger.LogError("Error in GetFormReferido Errors:{@errors}", result.Errors);
+                    return BadRequest(new ErrorResponseDto<List<IError>> { Message = result.Errors.First().Message, Result = result.Errors });
+                }
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, "Error al obtener el formulario referido");
+                return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
+            }
+        }
+
+
     }
 }
