@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PRAMS.Infraestructure.Data.People;
 
@@ -11,9 +12,11 @@ using PRAMS.Infraestructure.Data.People;
 namespace PRAMS.People.Migrations
 {
     [DbContext(typeof(AppPeopleDbContext))]
-    partial class AppPeopleDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241124184522_PeopleReferidoId")]
+    partial class PeopleReferidoId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

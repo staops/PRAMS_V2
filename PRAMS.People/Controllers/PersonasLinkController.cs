@@ -51,6 +51,35 @@ namespace PRAMS.People.Controllers
             }
         }
 
+        [HttpGet("referido/{referidoId}")]
+        [Authorize]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<ICollection<PersonasLinkDto>>))]
+        [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
+        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
+        public async Task<IActionResult> GetPersonasLinkByReferidoId([FromRoute] int referidoId)
+        {
+            try
+            {
+                var result = await _personasLinkService.GetPersonasLinkByReferidoId(referidoId);
+                if (result.IsSuccess)
+                {
+                    _logger.LogInformation("Success in GetPersonasLinkByReferidoId Result:{@resut}", result.Value);
+                    return Ok(new ResponseDto<ICollection<PersonasLinkDto>> { Result = result.Value });
+                }
+                else
+                {
+                    _logger.LogError("Error in GetPersonasLinkByReferidoId Error:{@error}", result.Errors);
+                    return BadRequest(new ErrorResponseDto<List<IError>> { Message = result.Errors.First().Message, Result = result.Errors });
+                }
+            }
+            catch (Exception error)
+            {
+                _logger.LogError("Error in GetPersonasLinkByReferidoId Error:{@error}", error);
+                return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
+            }
+        }
+
         [HttpPost]
         [Authorize]
         [Consumes(MediaTypeNames.Application.Json)]
