@@ -10,5 +10,6 @@
         public bool JefeDeFamilia { get; set; } = false;
         public string? EstadoEmpleo { get; set; }
         public bool Pensionado { get; set; } = false;
+        public int? ReferidoId { get; set; }
     }
 }
