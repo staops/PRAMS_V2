@@ -22,6 +22,8 @@ namespace PRAMS.Domain.Models.People
         public bool JefeDeFamilia { get; set; } = false;
         public string? EstadoEmpleo { get; set; }
         public bool Pensionado { get; set; } = false;
+        public int? ReferidoId { get; set; }
+
 
         [ForeignKey("PersonaId")]
         public virtual Persona? Persona { get; set; }

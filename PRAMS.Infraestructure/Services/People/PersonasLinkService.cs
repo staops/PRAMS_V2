@@ -99,6 +99,25 @@ namespace PRAMS.Infraestructure.Services.People
             }
         }
 
+        public async Task<Result<ICollection<PersonasLinkDto>>> GetPersonasLinkByReferidoId(int referidoId)
+        {
+            try
+            {
+                var personasLinks = await _appConfigDbContext.personasLinks
+                    .Where(x => x.ReferidoId == referidoId)
+                    .ToListAsync();
+
+                var personasLinksDto = _mapper.Map<ICollection<PersonasLinkDto>>(personasLinks);
+
+                return Result.Ok(personasLinksDto);
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, "Error in GetPersonasLinkByReferidoId");
+                return Result.Fail(new Error($"Error in GetPersonasLinkByReferidoId {error.Message}")).WithError(error.StackTrace);
+            }
+        }
+
         public async Task<Result<PersonasLinkDto>> UpdatePersonasLinkItem(PersonasLinkUpdateDto personasLinkUpdateDto, string user)
         {
             try
