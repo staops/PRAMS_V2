@@ -128,7 +128,8 @@ builder.Services.AddScoped<IFormFlowBuilderService>(x =>
     var formReferidoService = x.GetRequiredService<IFormReferidoService>();
     var flujosPantallasService = x.GetRequiredService<IFlujosPantallasService>();
     var formulariosFirmasService = x.GetRequiredService<IFormulariosFirmasService>();
-    return new FormFlowBuilderService(dbContext, mapper, logger, formReferidoService, flujosPantallasService, formulariosFirmasService);
+    var catalogService = x.GetRequiredService<ICatalogsService>();
+    return new FormFlowBuilderService(dbContext, mapper, logger, formReferidoService, flujosPantallasService, formulariosFirmasService, catalogService);
 });
 
 builder.Services.AddScoped<IFormReferidoService>(x =>
@@ -219,7 +220,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 // Apply pending migrations automatically.
-//ApplyMigrations();
+ApplyMigrations();
 
 app.Run();
 
