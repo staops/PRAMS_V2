@@ -33,6 +33,9 @@ namespace PRAMS.Authentication.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Initial = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SecondLastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -164,22 +167,33 @@ namespace PRAMS.Authentication.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "03e6e13d-04f3-4dc3-acc1-1f8a513471c4", null, "Administrador Auxiliar", "ADMINISTRADOR AUXILIAR" },
-                    { "2407b67a-52bd-460e-a127-5d29b716f206", null, "Oficial Administrativo", "OFICIAL ADMINISTRATIVO" },
-                    { "2ff81a22-5c73-453c-b496-49005bb7dce3", null, "Supervisor de oficina local", "SUPERVISOR DE OFICINA LOCAL" },
-                    { "69e6dd63-c624-4c4a-8bf4-c910148367ad", null, "Tecnico de Servicios a la Familia", "TECNICO DE SERVICIOS A LA FAMILIA" },
-                    { "6d399282-eb8b-4269-b963-4f4a1962e59d", null, "Especialista Trabajador Social", "ESPECIALISTA TRABAJADOR SOCIAL" },
-                    { "7c8189ba-cf7e-4edc-a017-3423588f7597", null, "Sub-Administrador", "SUB-ADMINISTRADOR" },
-                    { "8667d4f4-6eac-4d45-b3b1-da2ab3ea493b", null, "Supervisor Regional", "SUPERVISOR REGIONAL" },
-                    { "96354c73-35c5-4c5f-8cea-4219f74e114c", null, "Asistente de Servicio", "ASISTENTE DE SERVICIO" },
-                    { "a56cbdfa-8913-4f2d-8695-c64f9f546f77", null, "Investigadores UIE", "INVESTIGADORES UIE" },
-                    { "b5ba0e66-c380-443a-b5a2-973a903f216c", null, "Director de Programa", "DIRECTOR DE PROGRAMA" },
-                    { "cc816e51-44ff-4380-b77b-0609a90de687", null, "SU", "SU" },
-                    { "da12aa85-0d27-4ed7-88a8-94c93c834b0e", null, "Supervisor UIE", "SUPERVISOR UIE" },
-                    { "e31000dc-b47a-45cc-a0e0-594ff20682db", null, "Administrador", "ADMINISTRADOR" },
-                    { "e8f27d49-1b26-4244-88ae-5c4761d2d0a9", null, "Trabajador Social", "TRABAJADOR SOCIAL" },
-                    { "ec834fdb-4730-477d-a1b3-d301e0ef4cf1", null, "Director Regional", "DIRECTOR REGIONAL" },
-                    { "fff9c984-f249-4127-93c7-4978d788758d", null, "Director Asociado", "DIRECTOR ASOCIADO" }
+                    { "23119a6b-ce86-43ea-b292-fc6aba327306", null, "Asistente de Servicio", "ASISTENTE DE SERVICIO" },
+                    { "2c614cc4-18bf-4f7f-afc4-d8c9a895bcee", null, "Investigadores UIE", "INVESTIGADORES UIE" },
+                    { "3b3a99f2-d240-4dd0-bf06-59d21ae37469", null, "Supervisor de oficina local", "SUPERVISOR DE OFICINA LOCAL" },
+                    { "6f2aeece-a234-42cb-a8e6-cf5ae105f7d6", null, "Director de Programa", "DIRECTOR DE PROGRAMA" },
+                    { "71c424a5-f0e8-4d8e-812b-2933d9cdbff1", null, "Director Regional", "DIRECTOR REGIONAL" },
+                    { "7cf26328-f1e0-48ef-9618-a969fc762136", null, "Administrador", "ADMINISTRADOR" },
+                    { "89bc12fd-c1b0-44dc-9d7b-aa1c08ed938b", null, "Trabajador Social", "TRABAJADOR SOCIAL" },
+                    { "9072c61f-c994-4602-a975-7c4799a32c24", null, "Tecnico de Servicios a la Familia", "TECNICO DE SERVICIOS A LA FAMILIA" },
+                    { "a5ec2f90-f06b-4388-a597-119ee5173360", null, "Sub-Administrador", "SUB-ADMINISTRADOR" },
+                    { "a96d4963-584d-4ab4-8cf0-bea6c3bb5de7", null, "Supervisor UIE", "SUPERVISOR UIE" },
+                    { "ae38c61c-eb79-4f0d-9dc7-f7f0756867f2", null, "Administrador Auxiliar", "ADMINISTRADOR AUXILIAR" },
+                    { "d0c5ab97-e957-44b1-a060-c791c2a6c600", null, "SU", "SU" },
+                    { "d345e149-a42a-4535-b62f-75554c00326b", null, "Director Asociado", "DIRECTOR ASOCIADO" },
+                    { "d8f77203-1535-4c43-a170-e6add93f53d7", null, "Supervisor Regional", "SUPERVISOR REGIONAL" },
+                    { "f37bfa85-c44c-4bfc-a6c4-37b4b2621031", null, "Especialista Trabajador Social", "ESPECIALISTA TRABAJADOR SOCIAL" },
+                    { "feb8594f-e247-4840-95fb-d061a8b0eec4", null, "Oficial Administrativo", "OFICIAL ADMINISTRATIVO" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "Initial", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecondLastName", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "03334448-73b4-438f-8fdf-784dbab58150", 0, "e5a499d0-52da-42e4-aa60-06170e7c5000", "dummy@dummy.com", false, "Dummy", null, "User", true, null, "ADMIN@DUMMY.COM", "DUMMY@DUMMY.COM", "AQAAAAIAAYagAAAAEL8h+yY/r8Lhawk8du3a4+xAEv/sDCq9Lneg2HaUG7fJfAGWyfldFGmSDIOSZnst+w==", "7875555555", false, "One", "SMJSAWT2M63D7BYXQ7R2E3AA2GILPLBC", false, "dummy@dummy.com" },
+                    { "118fb076-affa-4fda-8617-e6c39b7e53c2", 0, "e5a499d0-52da-42e4-aa60-06170e7c5000", "admin1@sta.com", false, "Admin", null, "User", true, null, "ADMIN1@STA.COM", "ADMIN1@STA.COM", "AQAAAAIAAYagAAAAEL8h+yY/r8Lhawk8du3a2+xAEv/sDCq9Lneg2HaUG7fJfAGWyfldFGmSDIOSZnst+w==", "7875555555", false, "One", "SMJSAWT2M63D7BYXQ7R2E3AA2GILPLBC", false, "admin1@sta.com" },
+                    { "69e6dd63-c624-4c4a-8bf4-c910148367ad", 0, "e5a499d0-52da-42e4-aa60-06170e7c5000", "dummy2@dummy.com", false, "Dummy", null, "User", true, null, "ADMIN2@DUMMY.COM", "DUMMY2@DUMMY.COM", "AQAAAAIAAYagAAAAEL8h+yY/r8Lhawk8du3a3+xAEv/sDCq9Lneg2HaUG7fJfAGWyfldFGmSDIOSZnst+w==", "7875555555", false, "Two", "SMJSAWT2M63D7BYXQ7R2E3AA2GILPLBC", false, "dummy2@dummy.com" },
+                    { "b4cbb14e-bb75-4143-b530-ec5d8bad55f7", 0, "e5a499d0-52da-42e4-aa60-06170e7c5000", "admin@sta.com", false, "Admin", null, "User", true, null, "ADMIN@STA.COM", "ADMIN@STA.COM", "AQAAAAIAAYagAAAAEL8h+yY/r8Lhawk8du3a2+xAEv/sDCq9Lneg2HaUG7fJfAGWyfldFGmSDIOSZnst+w==", "7875555555", false, "Two", "SMJSAWT2M63D7BYXQ7R2E3AA2GILPLBC", false, "admin@sta.com" }
                 });
 
             migrationBuilder.CreateIndex(

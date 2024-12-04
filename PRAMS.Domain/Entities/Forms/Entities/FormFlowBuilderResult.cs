@@ -24,7 +24,7 @@ namespace PRAMS.Domain.Entities.Forms.Entities
         public TValue? Object { get; set; }
         [JsonProperty("canContinue", Order = 1)]
         public bool CanContinue { get; set; }
-        public required FormFlujoPantallaDto formFlujoPantallaInsertDto { get; set; }
+        public required FormFlujoPantallaDto? formFlujoPantallaInsertDto { get; set; }
     }
 
 

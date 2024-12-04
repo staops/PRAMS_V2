@@ -4,13 +4,16 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using PRAMS.Application.Contract.Forms;
+using PRAMS.Application.Contract.SystemConfiguration;
 using PRAMS.Domain.Entities.Flujos.Dto;
 using PRAMS.Domain.Entities.Forms.Dto;
 using PRAMS.Domain.Entities.Forms.Entities;
+using PRAMS.Domain.Entities.SystemConfiguration.Dto;
 using PRAMS.Domain.Models.Flujos;
 using PRAMS.Domain.Models.Forms;
 using PRAMS.Infraestructure.Data.SystemConfiguration;
 using PRAMS.Infraestructure.Shared;
+using System.Drawing;
 using System.Reflection;
 
 namespace PRAMS.Infraestructure.Services.Forms
@@ -23,8 +26,9 @@ namespace PRAMS.Infraestructure.Services.Forms
         private readonly IFormReferidoService _formReferidoService;
         private readonly IFlujosPantallasService _flujosPantallas;
         private readonly IFormulariosFirmasService _formulariosFirmasService;
+        private readonly ICatalogsService _catalogsService;
 
-        public FormFlowBuilderService(AppConfigDbContext context, IMapper mapper, ILogger<IFormFlowBuilderService> logger, IFormReferidoService formReferidoService, IFlujosPantallasService flujosPantallas, IFormulariosFirmasService formulariosFirmasService)
+        public FormFlowBuilderService(AppConfigDbContext context, IMapper mapper, ILogger<IFormFlowBuilderService> logger, IFormReferidoService formReferidoService, IFlujosPantallasService flujosPantallas, IFormulariosFirmasService formulariosFirmasService, ICatalogsService catalogsService)
         {
             _context = context;
             _mapper = mapper;
@@ -32,6 +36,7 @@ namespace PRAMS.Infraestructure.Services.Forms
             _formReferidoService = formReferidoService;
             _flujosPantallas = flujosPantallas;
             _formulariosFirmasService = formulariosFirmasService;
+            _catalogsService = catalogsService;
         }
 
         public async Task<Result<FormFlowBuilderResult>> ValidaFormulario(FormFlowBuilder formFlowBuilder, string user, string role)
@@ -343,18 +348,26 @@ namespace PRAMS.Infraestructure.Services.Forms
                             {
                                 // Build the RMO
                                 // La region es requerida para construir el RMO
-                                formFlowBuilder.Fields.TryGetValue("Region", out object? regionValue);
+                                formFlowBuilder.Fields.TryGetValue("region", out object? regionValue);
                                 // El local es requerido para construir el RMO
-                                formFlowBuilder.Fields.TryGetValue("Local", out object? localValue);
+                                formFlowBuilder.Fields.TryGetValue("local", out object? localValue);
+
+                                // Get the region and local values to build the RMO
+                                Result<AdmParametrosNivel0Dto> getDataRmo = await GetRmo(localValue?.ToString()!);
 
                                 Result<string> rmoResult = await BuildRmo(regionValue?.ToString()!, localValue?.ToString()!);
-                                if (rmoResult.IsSuccess)
+                                if (rmoResult.IsSuccess && getDataRmo.IsSuccess)
                                 {
-                                    formFlowBuilder.Fields.Add("RMO", rmoResult.ValueOrDefault);
+                                    formFlowBuilder.Fields.Add("rmo", rmoResult.ValueOrDefault);
+                                    // Replace the Region and Local values with the getDataRmo values
+                                    formFlowBuilder.Fields["region"] = getDataRmo.ValueOrDefault.Paremeter;
+                                    formFlowBuilder.Fields["local"] = getDataRmo.ValueOrDefault.TX_Filter ?? string.Empty;
+
                                 }
                                 else
                                 {
                                     errors.AddRange(rmoResult.Errors);
+                                    errors.AddRange(getDataRmo.Errors);
                                 }
 
                                 // Save the data in the database
@@ -516,8 +529,8 @@ namespace PRAMS.Infraestructure.Services.Forms
                                 Notas = string.Empty, // TODO: Get the Notas from the user
                                 Comentarios = string.Empty, // TODO: Get the Comentarios from the user
                                 EtapaCompletada = formFlow.IsSectionCompleted,
-                                Region = formFlowBuilder.Fields.TryGetValue("Region", out object? regionValue) ? regionValue.ToString()?.PadLeft(2, '0') : string.Empty,
-                                Local = formFlowBuilder.Fields.TryGetValue("Local", out object? localValue) ? localValue.ToString()?.PadLeft(4, '0') : string.Empty
+                                Region = formFlowBuilder.Fields.TryGetValue("region", out object? regionValue) ? regionValue.ToString() : string.Empty,
+                                Local = formFlowBuilder.Fields.TryGetValue("local", out object? localValue) ? localValue.ToString() : string.Empty
                             };
 
                             Result<FormFlujoPantallaDto> flujoPantalla = await _flujosPantallas.CreateFlujoPantalla(itemToInsert, user);
@@ -687,22 +700,45 @@ namespace PRAMS.Infraestructure.Services.Forms
                                     Local = string.Empty // TODO: Get the Local from the user
                                 };
 
-                                Result<FormFlujoPantallaDto> flujoPantalla = await _flujosPantallas.CreateFlujoPantalla(itemToInsert, user);
-                                if (flujoPantalla.IsSuccess)
+                                // Get the last record in the table [FormFlujoPantallas]
+                                var getlastFlujoPantalla = await _flujosPantallas.GetFlujosPantallasByFormaId(formFlowBuilder.FormaId ?? 0, formFlowBuilder.FormularioId);
+                                FormFlujoPantallaDto? formFlujoPantallaDto = getlastFlujoPantalla.ValueOrDefault.LastOrDefault();
+
+
+                                // Just If the user if the user is not the same as the user that created the record then create a new record in the table [FormFlujoPantallas] or when the formFlujoPantallaDto o
+                                if (InsertNewFlujoPantalla(itemToInsert, formFlujoPantallaDto))
                                 {
+
+                                    Result<FormFlujoPantallaDto> flujoPantalla = await _flujosPantallas.CreateFlujoPantalla(itemToInsert, user);
+                                    if (flujoPantalla.IsSuccess)
+                                    {
+                                        // Set the result to the response
+                                        FormFlowBuilderObjectResult<FormReferidoDto> formFlowBuilderObjectResult = new()
+                                        {
+                                            Object = updateResult.ValueOrDefault,
+                                            formFlujoPantallaInsertDto = flujoPantalla.ValueOrDefault,
+                                            CanContinue = true
+                                        };
+                                        return formFlowBuilderObjectResult;
+                                    }
+                                    else
+                                    {
+                                        // Add the errors to the response
+                                        errors.AddRange(flujoPantalla.Errors);
+                                    }
+                                }
+                                else
+                                {
+                                    
+
                                     // Set the result to the response
                                     FormFlowBuilderObjectResult<FormReferidoDto> formFlowBuilderObjectResult = new()
                                     {
                                         Object = updateResult.ValueOrDefault,
-                                        formFlujoPantallaInsertDto = flujoPantalla.ValueOrDefault,
+                                        formFlujoPantallaInsertDto = getlastFlujoPantalla.ValueOrDefault.FirstOrDefault(),
                                         CanContinue = true
                                     };
                                     return formFlowBuilderObjectResult;
-                                }
-                                else
-                                {
-                                    // Add the errors to the response
-                                    errors.AddRange(flujoPantalla.Errors);
                                 }
                             }
                         }
@@ -725,6 +761,30 @@ namespace PRAMS.Infraestructure.Services.Forms
                 _logger.LogError(error, $"Error al actualizar los datos del formulario: {error.Message}");
                 return Result.Fail<dynamic?>(new Error($"Error al actualizar los datos del formulario: {error.Message}")).WithError(error.Message);
             }
+        }
+
+        private bool InsertNewFlujoPantalla(FormFlujoPantallaInsertDto newFlujo, FormFlujoPantallaDto? oldFlujo)
+        {
+            if (oldFlujo is not null)
+            {
+                // If the user if the user is not the same as the user that created the record then create a new record in the table [FormFlujoPantallas]
+                if (oldFlujo.UsuarioFlujoId != newFlujo.UsuarioFlujoId)
+                {
+                    return true;
+                }
+                // If the OrderEtapa is different then create a new record in the table [FormFlujoPantallas]
+                if (oldFlujo.OrdenEtapa != newFlujo.OrdenEtapa)
+                {
+                    return true;
+                }
+                // If the EtapaCompletada is different then create a new record in the table [FormFlujoPantallas]
+                if (oldFlujo.EtapaCompletada != newFlujo.EtapaCompletada)
+                {
+                    return true;
+                }
+
+            }
+            return false;
         }
 
         private async Task<Result<object?>> SaveFormFirmaData(IDictionary<string, object> fields, FormFlowBuilderResult formFlow, string tableName, string user, string role)
@@ -856,6 +916,38 @@ namespace PRAMS.Infraestructure.Services.Forms
                 return Result.Fail<string>(new Error($"Error al crear el RMO: {error.Message}")).WithError(error.Message);
             }
         }
+
+        private async Task<Result<AdmParametrosNivel0Dto>> GetRmo(string local)
+        {
+            try
+            {
+                // Search the region in the multitable service
+                Result<ICollection<AdmParametrosNivel0Dto>> regionResult = await _catalogsService.GetCatalogZero(37);
+                if (regionResult.IsSuccess)
+                {
+                    AdmParametrosNivel0Dto? itmCatRegion = regionResult.Value.Where(a => a.TX_FilterTwo == local).FirstOrDefault();
+                    if (itmCatRegion is not null)
+                    {
+                        return Result.Ok(itmCatRegion);
+                    }
+                    else
+                    {
+                        return Result.Fail<AdmParametrosNivel0Dto>(new Error($"No se encontró la región para el local {local}"));
+                    }
+                }
+                else
+                {
+                    return Result.Fail<AdmParametrosNivel0Dto>(regionResult.Errors.ToArray());
+                }
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, $"Error al obtener el RMO: {error.Message}");
+                return Result.Fail<AdmParametrosNivel0Dto>(new Error($"Error al obtener el RMO: {error.Message}")).WithError(error.Message);
+            }
+
+        }
+
 
         private static object? ParserValue(AdmFlujoFormularioEtapaAccionCampoDto admFormularioEtapaAccione, object value)
         {
@@ -993,34 +1085,43 @@ namespace PRAMS.Infraestructure.Services.Forms
             {
                 IList<IError> errors = [];
 
+                var comparer = StringComparer.OrdinalIgnoreCase;
+                var caseInsensitiveDictionary = new Dictionary<string, object>(comparer);
+
+                foreach (var field in fields)
+                {
+                    caseInsensitiveDictionary.Add(field.Key, field.Value);
+                }
+
+
                 foreach (AdmFormularioEtapaAccioneCampo formField in formFields)
                 {
                     switch (formField.TipoProcesoCampo)
                     {
                         case SD.TIENE_VALOR:
 
-                            fields.TryGetValue(formField.CampoDBIDField, out object? value);
+                            caseInsensitiveDictionary.TryGetValue(formField.CampoDBIDField, out object? value);
                             if (value is null)
                             {
                                 errors.Add(new Error(formField.Resultado).WithMetadata("TIPO_PROCESO", value).WithMetadata("CAMPODBIDFIELD", formField.CampoDBIDField));
                             }
                             break;
                         case SD.LARGO_MINIMO:
-                            fields.TryGetValue(formField.CampoDBIDField, out object? largeValue);
+                            caseInsensitiveDictionary.TryGetValue(formField.CampoDBIDField, out object? largeValue);
                             if (largeValue is null || !MinLength(largeValue.ToString() ?? string.Empty, formField.CampoDBLongitud))
                             {
                                 errors.Add(new Error(formField.Resultado).WithMetadata("TIPO_PROCESO", largeValue).WithMetadata("CAMPODBIDFIELD", formField.CampoDBIDField));
                             }
                             break;
                         case SD.FIRMA_ST:
-                            fields.TryGetValue(formField.CampoDBIDField, out object? firmaValue);
+                            caseInsensitiveDictionary.TryGetValue(formField.CampoDBIDField, out object? firmaValue);
                             if (firmaValue is null || !FirmaTS(firmaValue.ToString() ?? string.Empty))
                             {
                                 errors.Add(new Error(formField.Resultado).WithMetadata("TIPO_PROCESO", firmaValue).WithMetadata("CAMPODBIDFIELD", formField.CampoDBIDField));
                             }
                             break;
                         case SD.FIRMA_SUP:
-                            fields.TryGetValue(formField.CampoDBIDField, out object? firmaSupValue);
+                            caseInsensitiveDictionary.TryGetValue(formField.CampoDBIDField, out object? firmaSupValue);
                             if (firmaSupValue is null || !FirmaSup(firmaSupValue.ToString() ?? string.Empty))
                             {
                                 errors.Add(new Error(formField.Resultado).WithMetadata("TIPO_PROCESO", firmaSupValue).WithMetadata("CAMPODBIDFIELD", formField.CampoDBIDField));
@@ -1128,8 +1229,8 @@ namespace PRAMS.Infraestructure.Services.Forms
                 // White list of fields that are not in the form
                 IDictionary<string, string> whiteList = new Dictionary<string, string>
                 {
-                    { "Region", "Form_Referidos" },
-                    { "Local", "Form_Referidos" }
+                    { "region", "Form_Referidos" },
+                    { "local", "Form_Referidos" }
                 };
 
                 switch (tablaBase.ToUpper())
