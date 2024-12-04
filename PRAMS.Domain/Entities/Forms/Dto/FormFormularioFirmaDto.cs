@@ -9,7 +9,7 @@
         public int? FormaId { get; set; }
         public string? Rmo { get; set; }
         public string NumCaso { get; set; }
-        public string UsuarioId { get; set; }
+        public string ID_Usuario { get; set; }
         public string? UserTypeID { get; set; }
         public DateTime? FechaFirma { get; set; }
         public string? Region { get; set; }

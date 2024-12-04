@@ -37,7 +37,7 @@ namespace PRAMS.Infraestructure.Services.Forms
 
 
                 formFormularioFirma.FechaFirma = DateTime.Now;
-                formFormularioFirma.UsuarioId = user;
+                formFormularioFirma.ID_Usuario = user;
                 formFormularioFirma.UserTypeID = role;
 
 
