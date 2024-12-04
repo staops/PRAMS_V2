@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using PRAMS.Domain.Entities.People.Dto;
 using PRAMS.Domain.Models.People;
-using System.Reflection;
 
 namespace PRAMS.Infraestructure.Mapping.People
 {
@@ -23,6 +22,9 @@ namespace PRAMS.Infraestructure.Mapping.People
         public PeopleProfile()
         {
             CreateMap<Persona, PersonDto>().ReverseMap();
+            CreateMap<Persona, PersonSmallDto>()
+                .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => $"{src.Nombre} {src.Inicial} {src.ApellidoPaterno} {src.ApellidoMaterno}"))
+                .ReverseMap();
             CreateMap<Persona, PersonMergedDto>().ReverseMap();
             CreateMap<Persona, PersonUpdateDto>().ReverseMap();
             CreateMap<Persona, PersonInsertDto>().ReverseMap();
@@ -34,6 +36,8 @@ namespace PRAMS.Infraestructure.Mapping.People
 
 
             CreateMap<PersonasLink, PersonasLinkDto>().ReverseMap();
+            CreateMap<PersonasLink, PersonasLinkPersonaDto>()
+                .ReverseMap();
             CreateMap<PersonasLinkInsertDto, PersonasLink>().ReverseMap();
             CreateMap<PersonasLinkUpdateDto, PersonasLink>().ReverseMap();
         }

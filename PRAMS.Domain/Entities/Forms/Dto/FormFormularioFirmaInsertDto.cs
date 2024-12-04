@@ -10,7 +10,7 @@
             FormaId = formaId;
             Rmo = rmo;
             NumCaso = numCaso ?? string.Empty;
-            UsuarioId = usuarioId ?? string.Empty;
+            ID_Usuario = usuarioId ?? string.Empty;
             UserTypeID = userTypeID;
             FechaFirma = fechaFirma;
             Region = region;
@@ -26,7 +26,7 @@
         public int? FormaId { get; set; }
         public string? Rmo { get; set; }
         public string NumCaso { get; set; } = string.Empty;
-        public string UsuarioId { get; set; } = string.Empty;
+        public string ID_Usuario { get; set; } = string.Empty;
         public string? UserTypeID { get; set; }
         public DateTime? FechaFirma { get; set; }
         public string? Region { get; set; }

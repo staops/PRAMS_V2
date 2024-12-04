@@ -54,7 +54,7 @@ namespace PRAMS.People.Controllers
         [HttpGet("referido/{referidoId}")]
         [Authorize]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<ICollection<PersonasLinkDto>>))]
+        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<ICollection<PersonasLinkPersonaDto>>))]
         [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
         public async Task<IActionResult> GetPersonasLinkByReferidoId([FromRoute] int referidoId)
@@ -65,7 +65,7 @@ namespace PRAMS.People.Controllers
                 if (result.IsSuccess)
                 {
                     _logger.LogInformation("Success in GetPersonasLinkByReferidoId Result:{@resut}", result.Value);
-                    return Ok(new ResponseDto<ICollection<PersonasLinkDto>> { Result = result.Value });
+                    return Ok(new ResponseDto<ICollection<PersonasLinkPersonaDto>> { Result = result.Value });
                 }
                 else
                 {
