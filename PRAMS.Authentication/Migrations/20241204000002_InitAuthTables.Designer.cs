@@ -12,7 +12,7 @@ using PRAMS.Authentication.Data;
 namespace PRAMS.Authentication.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240918164717_InitAuthTables")]
+    [Migration("20241204000002_InitAuthTables")]
     partial class InitAuthTables
     {
         /// <inheritdoc />
@@ -54,97 +54,97 @@ namespace PRAMS.Authentication.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "cc816e51-44ff-4380-b77b-0609a90de687",
+                            Id = "d0c5ab97-e957-44b1-a060-c791c2a6c600",
                             Name = "SU",
                             NormalizedName = "SU"
                         },
                         new
                         {
-                            Id = "03e6e13d-04f3-4dc3-acc1-1f8a513471c4",
+                            Id = "ae38c61c-eb79-4f0d-9dc7-f7f0756867f2",
                             Name = "Administrador Auxiliar",
                             NormalizedName = "ADMINISTRADOR AUXILIAR"
                         },
                         new
                         {
-                            Id = "2407b67a-52bd-460e-a127-5d29b716f206",
+                            Id = "feb8594f-e247-4840-95fb-d061a8b0eec4",
                             Name = "Oficial Administrativo",
                             NormalizedName = "OFICIAL ADMINISTRATIVO"
                         },
                         new
                         {
-                            Id = "8667d4f4-6eac-4d45-b3b1-da2ab3ea493b",
+                            Id = "d8f77203-1535-4c43-a170-e6add93f53d7",
                             Name = "Supervisor Regional",
                             NormalizedName = "SUPERVISOR REGIONAL"
                         },
                         new
                         {
-                            Id = "2ff81a22-5c73-453c-b496-49005bb7dce3",
+                            Id = "3b3a99f2-d240-4dd0-bf06-59d21ae37469",
                             Name = "Supervisor de oficina local",
                             NormalizedName = "SUPERVISOR DE OFICINA LOCAL"
                         },
                         new
                         {
-                            Id = "e8f27d49-1b26-4244-88ae-5c4761d2d0a9",
+                            Id = "89bc12fd-c1b0-44dc-9d7b-aa1c08ed938b",
                             Name = "Trabajador Social",
                             NormalizedName = "TRABAJADOR SOCIAL"
                         },
                         new
                         {
-                            Id = "ec834fdb-4730-477d-a1b3-d301e0ef4cf1",
+                            Id = "71c424a5-f0e8-4d8e-812b-2933d9cdbff1",
                             Name = "Director Regional",
                             NormalizedName = "DIRECTOR REGIONAL"
                         },
                         new
                         {
-                            Id = "fff9c984-f249-4127-93c7-4978d788758d",
+                            Id = "d345e149-a42a-4535-b62f-75554c00326b",
                             Name = "Director Asociado",
                             NormalizedName = "DIRECTOR ASOCIADO"
                         },
                         new
                         {
-                            Id = "69e6dd63-c624-4c4a-8bf4-c910148367ad",
+                            Id = "9072c61f-c994-4602-a975-7c4799a32c24",
                             Name = "Tecnico de Servicios a la Familia",
                             NormalizedName = "TECNICO DE SERVICIOS A LA FAMILIA"
                         },
                         new
                         {
-                            Id = "e31000dc-b47a-45cc-a0e0-594ff20682db",
+                            Id = "7cf26328-f1e0-48ef-9618-a969fc762136",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
-                            Id = "7c8189ba-cf7e-4edc-a017-3423588f7597",
+                            Id = "a5ec2f90-f06b-4388-a597-119ee5173360",
                             Name = "Sub-Administrador",
                             NormalizedName = "SUB-ADMINISTRADOR"
                         },
                         new
                         {
-                            Id = "6d399282-eb8b-4269-b963-4f4a1962e59d",
+                            Id = "f37bfa85-c44c-4bfc-a6c4-37b4b2621031",
                             Name = "Especialista Trabajador Social",
                             NormalizedName = "ESPECIALISTA TRABAJADOR SOCIAL"
                         },
                         new
                         {
-                            Id = "96354c73-35c5-4c5f-8cea-4219f74e114c",
+                            Id = "23119a6b-ce86-43ea-b292-fc6aba327306",
                             Name = "Asistente de Servicio",
                             NormalizedName = "ASISTENTE DE SERVICIO"
                         },
                         new
                         {
-                            Id = "da12aa85-0d27-4ed7-88a8-94c93c834b0e",
+                            Id = "a96d4963-584d-4ab4-8cf0-bea6c3bb5de7",
                             Name = "Supervisor UIE",
                             NormalizedName = "SUPERVISOR UIE"
                         },
                         new
                         {
-                            Id = "a56cbdfa-8913-4f2d-8695-c64f9f546f77",
+                            Id = "2c614cc4-18bf-4f7f-afc4-d8c9a895bcee",
                             Name = "Investigadores UIE",
                             NormalizedName = "INVESTIGADORES UIE"
                         },
                         new
                         {
-                            Id = "b5ba0e66-c380-443a-b5a2-973a903f216c",
+                            Id = "6f2aeece-a234-42cb-a8e6-cf5ae105f7d6",
                             Name = "Director de Programa",
                             NormalizedName = "DIRECTOR DE PROGRAMA"
                         });
@@ -279,6 +279,13 @@ namespace PRAMS.Authentication.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Initial")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -302,6 +309,9 @@ namespace PRAMS.Authentication.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("SecondLastName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -323,6 +333,88 @@ namespace PRAMS.Authentication.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "118fb076-affa-4fda-8617-e6c39b7e53c2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "e5a499d0-52da-42e4-aa60-06170e7c5000",
+                            Email = "admin1@sta.com",
+                            EmailConfirmed = false,
+                            FirstName = "Admin",
+                            LastName = "User",
+                            LockoutEnabled = true,
+                            NormalizedEmail = "ADMIN1@STA.COM",
+                            NormalizedUserName = "ADMIN1@STA.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL8h+yY/r8Lhawk8du3a2+xAEv/sDCq9Lneg2HaUG7fJfAGWyfldFGmSDIOSZnst+w==",
+                            PhoneNumber = "7875555555",
+                            PhoneNumberConfirmed = false,
+                            SecondLastName = "One",
+                            SecurityStamp = "SMJSAWT2M63D7BYXQ7R2E3AA2GILPLBC",
+                            TwoFactorEnabled = false,
+                            UserName = "admin1@sta.com"
+                        },
+                        new
+                        {
+                            Id = "b4cbb14e-bb75-4143-b530-ec5d8bad55f7",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "e5a499d0-52da-42e4-aa60-06170e7c5000",
+                            Email = "admin@sta.com",
+                            EmailConfirmed = false,
+                            FirstName = "Admin",
+                            LastName = "User",
+                            LockoutEnabled = true,
+                            NormalizedEmail = "ADMIN@STA.COM",
+                            NormalizedUserName = "ADMIN@STA.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL8h+yY/r8Lhawk8du3a2+xAEv/sDCq9Lneg2HaUG7fJfAGWyfldFGmSDIOSZnst+w==",
+                            PhoneNumber = "7875555555",
+                            PhoneNumberConfirmed = false,
+                            SecondLastName = "Two",
+                            SecurityStamp = "SMJSAWT2M63D7BYXQ7R2E3AA2GILPLBC",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@sta.com"
+                        },
+                        new
+                        {
+                            Id = "03334448-73b4-438f-8fdf-784dbab58150",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "e5a499d0-52da-42e4-aa60-06170e7c5000",
+                            Email = "dummy@dummy.com",
+                            EmailConfirmed = false,
+                            FirstName = "Dummy",
+                            LastName = "User",
+                            LockoutEnabled = true,
+                            NormalizedEmail = "ADMIN@DUMMY.COM",
+                            NormalizedUserName = "DUMMY@DUMMY.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL8h+yY/r8Lhawk8du3a4+xAEv/sDCq9Lneg2HaUG7fJfAGWyfldFGmSDIOSZnst+w==",
+                            PhoneNumber = "7875555555",
+                            PhoneNumberConfirmed = false,
+                            SecondLastName = "One",
+                            SecurityStamp = "SMJSAWT2M63D7BYXQ7R2E3AA2GILPLBC",
+                            TwoFactorEnabled = false,
+                            UserName = "dummy@dummy.com"
+                        },
+                        new
+                        {
+                            Id = "69e6dd63-c624-4c4a-8bf4-c910148367ad",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "e5a499d0-52da-42e4-aa60-06170e7c5000",
+                            Email = "dummy2@dummy.com",
+                            EmailConfirmed = false,
+                            FirstName = "Dummy",
+                            LastName = "User",
+                            LockoutEnabled = true,
+                            NormalizedEmail = "ADMIN2@DUMMY.COM",
+                            NormalizedUserName = "DUMMY2@DUMMY.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL8h+yY/r8Lhawk8du3a3+xAEv/sDCq9Lneg2HaUG7fJfAGWyfldFGmSDIOSZnst+w==",
+                            PhoneNumber = "7875555555",
+                            PhoneNumberConfirmed = false,
+                            SecondLastName = "Two",
+                            SecurityStamp = "SMJSAWT2M63D7BYXQ7R2E3AA2GILPLBC",
+                            TwoFactorEnabled = false,
+                            UserName = "dummy2@dummy.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

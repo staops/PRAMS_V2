@@ -81,41 +81,48 @@ namespace PRAMS.Authentication.Services
         {
             try
             {
-                ApplicationUser user = _db.ApplicationUsers.FirstOrDefault(x => x.UserName != null && x.UserName.ToUpper() == loginRequestDto.UserName.ToUpper()) ?? new ApplicationUser() { FirstName = "Default" };
-                bool isPasswordValid = await _userManager.CheckPasswordAsync(user, loginRequestDto.Password);
-                if (user == null)
+                ApplicationUser? user = _db.ApplicationUsers.FirstOrDefault(x => x.UserName != null && x.UserName.ToUpper() == loginRequestDto.UserName.ToUpper());
+                if (user is not null)
+                {
+                    bool isPasswordValid = await _userManager.CheckPasswordAsync(user, loginRequestDto.Password);
+                    if (user == null)
+                    {
+                        return Result.Fail("Invalid credentials");
+                    }
+                    if (!isPasswordValid)
+                    {
+                        await _userManager.AccessFailedAsync(user);
+                        return Result.Fail("Invalid credentials");
+                    }
+
+                    // Log user login in NetUserLogins table
+
+
+                    // If user was found, generate JWT token
+                    var roles = await _userManager.GetRolesAsync(user);
+                    var token = _jwtTokenGenerator.CreateToken(user, roles);
+
+                    UserDto userDto = new()
+                    {
+                        ID = user.Id,
+                        Email = user.Email,
+                        Name = user.FirstName,
+                        PhoneNumber = user.PhoneNumber,
+                        Roles = roles
+                    };
+
+                    LoginResponseDto loginResponseDto = new()
+                    {
+                        User = userDto,
+                        Token = token,
+                    };
+
+                    return Result.Ok(loginResponseDto);
+                }
+                else
                 {
                     return Result.Fail("Invalid credentials");
                 }
-                if (!isPasswordValid)
-                {
-                    await _userManager.AccessFailedAsync(user);
-                    return Result.Fail("Invalid credentials");
-                }
-
-                // Log user login in NetUserLogins table
-
-
-                // If user was found, generate JWT token
-                var roles = await _userManager.GetRolesAsync(user);
-                var token = _jwtTokenGenerator.CreateToken(user, roles);
-
-                UserDto userDto = new()
-                {
-                    ID = user.Id,
-                    Email = user.Email,
-                    Name = user.FirstName,
-                    PhoneNumber = user.PhoneNumber,
-                    Roles = roles
-                };
-
-                LoginResponseDto loginResponseDto = new()
-                {
-                    User = userDto,
-                    Token = token,
-                };
-
-                return Result.Ok(loginResponseDto);
             }
             catch (Exception error)
             {
@@ -131,11 +138,13 @@ namespace PRAMS.Authentication.Services
 
                 ApplicationUser user = new()
                 {
+                    FirstName = registrationRequiredDto.FirstName,
+                    LastName = registrationRequiredDto.LastName,
+                    SecondLastName = registrationRequiredDto.SecondLastName,
+                    Initial = registrationRequiredDto.Initial,
                     UserName = registrationRequiredDto.Email,
                     Email = registrationRequiredDto.Email,
                     NormalizedEmail = registrationRequiredDto.Email.ToUpper(),
-                    FirstName = registrationRequiredDto.FirstName,
-                    PhoneNumber = registrationRequiredDto.PhoneNumber,
                 };
 
                 var creationResult = await _userManager.CreateAsync(user, registrationRequiredDto.Password);
