@@ -86,6 +86,7 @@ namespace PRAMS.Infraestructure.Services.People
             {
                 var personasLinks = await _appConfigDbContext.personasLinks
                     .Where(x => x.PersonaId == personaId)
+                    .Include(x => x.Persona)
                     .ToListAsync();
 
                 var personasLinksDto = _mapper.Map<ICollection<PersonasLinkDto>>(personasLinks);
@@ -99,15 +100,16 @@ namespace PRAMS.Infraestructure.Services.People
             }
         }
 
-        public async Task<Result<ICollection<PersonasLinkDto>>> GetPersonasLinkByReferidoId(int referidoId)
+        public async Task<Result<ICollection<PersonasLinkPersonaDto>>> GetPersonasLinkByReferidoId(int referidoId)
         {
             try
             {
                 var personasLinks = await _appConfigDbContext.personasLinks
                     .Where(x => x.ReferidoId == referidoId)
+                    .Include(x => x.Persona)
                     .ToListAsync();
 
-                var personasLinksDto = _mapper.Map<ICollection<PersonasLinkDto>>(personasLinks);
+                var personasLinksDto = _mapper.Map<ICollection<PersonasLinkPersonaDto>>(personasLinks);
 
                 return Result.Ok(personasLinksDto);
             }
