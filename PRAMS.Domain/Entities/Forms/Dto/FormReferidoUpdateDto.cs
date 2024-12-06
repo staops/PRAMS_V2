@@ -18,8 +18,8 @@
         public string? Determinacion { get; set; }
         public DateTime? DeterminacionFecha { get; set; }
         public string? DeterminacionRazon { get; set; }
-        public string? AsignacionRegion { get; set; }
-        public string? AsignacionOficina { get; set; }
+        public string? Region { get; set; }
+        public string? Local { get; set; }
         public string? Clasificacion { get; set; }
         public string? OrigenReferido { get; set; }
         public string? AsignacionReferido { get; set; }

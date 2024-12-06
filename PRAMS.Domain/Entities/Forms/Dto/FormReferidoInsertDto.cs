@@ -6,7 +6,7 @@ namespace PRAMS.Domain.Entities.Forms.Dto
     {
 
         public FormReferidoInsertDto() { }
-        public FormReferidoInsertDto(string rmo, int? casoId, string? tipoReferido, DateTime? fechaRecibo, DateTime? horaRecibo, string? accionTomada, string? narrativaSituacion, string? referidoPor, string? relacionAdulto, string? servicioSolicitado, DateTime? servicioFechaNotificacion, string? antecedentes, string? determinacion, DateTime? determinacionFecha, string? determinacionRazon, string? asignacionRegion, string? asignacionOficina, string? clasificacion, string? origenReferido, string? asignacionReferido, int? agenciaId, string? agenciaSolicitadoPara, string? agenciaSolicitud, string? referidoOrgenId)
+        public FormReferidoInsertDto(string rmo, int? casoId, string? tipoReferido, DateTime? fechaRecibo, DateTime? horaRecibo, string? accionTomada, string? narrativaSituacion, string? referidoPor, string? relacionAdulto, string? servicioSolicitado, DateTime? servicioFechaNotificacion, string? antecedentes, string? determinacion, DateTime? determinacionFecha, string? determinacionRazon, string? region, string? local, string? clasificacion, string? origenReferido, string? asignacionReferido, int? agenciaId, string? agenciaSolicitadoPara, string? agenciaSolicitud, string? referidoOrgenId)
         {
             RMO = rmo;
             CasoId = casoId;
@@ -23,8 +23,8 @@ namespace PRAMS.Domain.Entities.Forms.Dto
             Determinacion = determinacion;
             DeterminacionFecha = determinacionFecha;
             DeterminacionRazon = determinacionRazon;
-            AsignacionRegion = asignacionRegion;
-            AsignacionOficina = asignacionOficina;
+            Region = region;
+            Local = local;
             Clasificacion = clasificacion;
             OrigenReferido = origenReferido;
             AsignacionReferido = asignacionReferido;
@@ -64,10 +64,10 @@ namespace PRAMS.Domain.Entities.Forms.Dto
         public DateTime? DeterminacionFecha { get; set; }
         [JsonProperty("determinacionRazon")]
         public string? DeterminacionRazon { get; set; }
-        [JsonProperty("asignacionRegion")]
-        public string? AsignacionRegion { get; set; }
-        [JsonProperty("asignacionOficina")]
-        public string? AsignacionOficina { get; set; }
+        [JsonProperty("region")]
+        public string? Region { get; set; }
+        [JsonProperty("local")]
+        public string? Local { get; set; }
         [JsonProperty("clasificacion")]
         public string? Clasificacion { get; set; }
         [JsonProperty("origenReferido")]
