@@ -126,7 +126,7 @@ namespace PRAMS.Domain.Entities.Forms.Dto
         /// MULTITABLA
         /// 
         /// </summary>
-        public string? AsignacionRegion { get; set; }
+        public string? Region { get; set; }
 
         /// <summary>
         /// En estos campos siempre debemos tener la misma región por si es solo para la región y que luego se el caso asignado. 
@@ -137,7 +137,7 @@ namespace PRAMS.Domain.Entities.Forms.Dto
         /// MULTITABLA
         /// 
         /// </summary>
-        public string? AsignacionOficina { get; set; }
+        public string? Local { get; set; }
 
 
 

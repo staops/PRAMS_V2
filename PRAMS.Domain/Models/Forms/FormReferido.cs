@@ -59,12 +59,12 @@ namespace PRAMS.Domain.Models.Forms
         public string? DeterminacionRazon { get; set; }
 
         [StringLength(75)]
-        [Column("AsignacionRegion")]
-        public string? AsignacionRegion { get; set; }
+        [Column("Region")]
+        public string? Region { get; set; }
 
         [StringLength(75)]
-        [Column("AsignacionOficina")]
-        public string? AsignacionOficina { get; set; }
+        [Column("Local")]
+        public string? Local { get; set; }
 
         [StringLength(50)]
         public string? Clasificacion { get; set; }
