@@ -13,6 +13,7 @@ using PRAMS.Domain.Models.Flujos;
 using PRAMS.Domain.Models.Forms;
 using PRAMS.Infraestructure.Data.SystemConfiguration;
 using PRAMS.Infraestructure.Shared;
+using System;
 using System.Drawing;
 using System.Reflection;
 
@@ -323,7 +324,7 @@ namespace PRAMS.Infraestructure.Services.Forms
         {
             try
             {
-                Result<object> result = new Result<object>();
+                Result<object> result = new();
 
                 List<ISuccess> successs = [];
                 List<IError> errors = [];
@@ -359,9 +360,9 @@ namespace PRAMS.Infraestructure.Services.Forms
                                 if (rmoResult.IsSuccess && getDataRmo.IsSuccess)
                                 {
                                     formFlowBuilder.Fields.Add("rmo", rmoResult.ValueOrDefault);
-                                    // Replace the Region and Local values with the getDataRmo values
-                                    formFlowBuilder.Fields["region"] = getDataRmo.ValueOrDefault.Paremeter;
-                                    formFlowBuilder.Fields["local"] = getDataRmo.ValueOrDefault.TX_Filter ?? string.Empty;
+                                    //// Replace the Region and Local values with the getDataRmo values
+                                    //formFlowBuilder.Fields["region"] = getDataRmo.ValueOrDefault.Paremeter;
+                                    //formFlowBuilder.Fields["local"] = getDataRmo.ValueOrDefault.TX_Filter ?? string.Empty;
 
                                 }
                                 else
@@ -522,12 +523,12 @@ namespace PRAMS.Infraestructure.Services.Forms
                                 FechaFlujo = DateTime.Now,
                                 UsuarioFlujoId = user,
                                 RMO = formReferidoResult.Value.RMO,
-                                NumeroCaso = string.Empty, // TODO: Get the NumeroCaso from the user
-                                Persona = string.Empty, // TODO: Get the Persona from the user
+                                NumeroCaso = null, // TODO: Get the NumeroCaso from the user
+                                Persona = null, // TODO: Get the Persona from the user
                                 //FlujoStatus = formFlow.AdmFlujoFormularioEtapaAccion?.NombreAccion,
                                 FlujoStatus = formFlow.AdmFlujoFormularioEtapa?.TipoEtapa,
-                                Notas = string.Empty, // TODO: Get the Notas from the user
-                                Comentarios = string.Empty, // TODO: Get the Comentarios from the user
+                                Notas = null, // TODO: Get the Notas from the user
+                                Comentarios = null, // TODO: Get the Comentarios from the user
                                 EtapaCompletada = formFlow.IsSectionCompleted,
                                 Region = formFlowBuilder.Fields.TryGetValue("region", out object? regionValue) ? regionValue.ToString() : string.Empty,
                                 Local = formFlowBuilder.Fields.TryGetValue("local", out object? localValue) ? localValue.ToString() : string.Empty
@@ -588,12 +589,12 @@ namespace PRAMS.Infraestructure.Services.Forms
                                 FechaFlujo = DateTime.Now,
                                 UsuarioFlujoId = user,
                                 RMO = formFormularioFirmaDto.Rmo, // TODO: Get the RMO from the user
-                                NumeroCaso = string.Empty, // TODO: Get the NumeroCaso from the user
-                                Persona = string.Empty, // TODO: Get the Persona from the user
+                                NumeroCaso = null, // TODO: Get the NumeroCaso from the user
+                                Persona = null, // TODO: Get the Persona from the user
                                 //FlujoStatus = formFlow.AdmFlujoFormularioEtapaAccion.NombreAccion,
                                 FlujoStatus = formFlow.AdmFlujoFormularioEtapa?.TipoEtapa,
-                                Notas = string.Empty, // TODO: Get the Notas from the user
-                                Comentarios = string.Empty, // TODO: Get the Comentarios from the user
+                                Notas = null, // TODO: Get the Notas from the user
+                                Comentarios = null, // TODO: Get the Comentarios from the user
                                 EtapaCompletada = formFlow.IsSectionCompleted,
                                 Region = string.Empty, // TODO: Get the Region from the user
                                 Local = string.Empty // TODO: Get the Local from the user
@@ -652,101 +653,107 @@ namespace PRAMS.Infraestructure.Services.Forms
             try
             {
                 List<IError> errors = [];
-
-                switch (formFlow.AdmFlujoFormulario?.TablaBase.ToUpper())
+                if (formFlow is not null && formFlow.AdmFlujoFormularioEtapa is not null && formFlow.AdmFlujoFormulario is not null)
                 {
-                    // Update the data in the table FORM_REFERIDOS
-                    case SD.FORM_REFERIDOS:
+                    switch (formFlow.AdmFlujoFormulario?.TablaBase.ToUpper())
+                    {
+                        // Update the data in the table FORM_REFERIDOS
+                        case SD.FORM_REFERIDOS:
 
-                        // Look for the record in the database
-                        Result<FormReferidoDto> formReferidoResult = await _formReferidoService.GetFormReferido(formFlowBuilder.FormaId ?? 0);
-                        errors.AddRange(formReferidoResult.Errors);
-                        if (formReferidoResult.IsSuccess)
-                        {
-                            // Create a new instance of FormReferidoUpdateDto using reflection
-                            FormReferidoUpdateDto? formReferidoUpdateDto = _mapper.Map<FormReferidoUpdateDto>(formReferidoResult.Value);
-
-                            // Fields to Json objet
-                            string jsonFields = JsonConvert.SerializeObject(formFlowBuilder.Fields);
-                            FormReferidoUpdateDto formReferidoUpdateDtoToMerge = JsonConvert.DeserializeObject<FormReferidoUpdateDto>(jsonFields);
-
-                            formReferidoUpdateDto = _mapper.Map(formReferidoUpdateDtoToMerge, formReferidoUpdateDto);
-
-                            formReferidoUpdateDto.ReferidoId = formFlowBuilder.FormaId ?? 0;
-
-
-                            Result<FormReferidoDto> updateResult = await _formReferidoService.UpdateFormReferido(formReferidoUpdateDto, user);
-                            errors.AddRange(updateResult.Errors);
-                            if (updateResult.IsSuccess)
+                            // Look for the record in the database
+                            Result<FormReferidoDto> formReferidoResult = await _formReferidoService.GetFormReferido(formFlowBuilder.FormaId ?? 0);
+                            errors.AddRange(formReferidoResult.Errors);
+                            if (formReferidoResult.IsSuccess)
                             {
+                                // Create a new instance of FormReferidoUpdateDto using reflection
+                                FormReferidoUpdateDto? formReferidoUpdateDto = _mapper.Map<FormReferidoUpdateDto>(formReferidoResult.Value);
 
-                                FormFlujoPantallaInsertDto itemToInsert = new()
-                                {
-                                    FormularioId = formFlowBuilder.FormularioId,
-                                    FormaId = formReferidoResult.Value.ReferidoId,
-                                    OrdenEtapa = formFlow.AdmFlujoFormularioEtapa.OrdenEtapa,
-                                    FlujoEtapa = formFlow.AdmFlujoFormularioEtapa.NombreEtapa,
-                                    FechaFlujo = DateTime.Now,
-                                    UsuarioFlujoId = user,
-                                    RMO = formReferidoUpdateDto.RMO ?? string.Empty, // TODO: Get the RMO from the user
-                                    NumeroCaso = string.Empty, // TODO: Get the NumeroCaso from the user
-                                    Persona = string.Empty, // TODO: Get the Persona from the user
-                                    //FlujoStatus = formFlow.AdmFlujoFormularioEtapaAccion.NombreAccion,
-                                    FlujoStatus = formFlow.AdmFlujoFormularioEtapa?.TipoEtapa,
-                                    Notas = string.Empty, // TODO: Get the Notas from the user
-                                    Comentarios = string.Empty, // TODO: Get the Comentarios from the user
-                                    EtapaCompletada = formFlow.IsSectionCompleted,
-                                    Region = string.Empty, // TODO: Get the Region from the user
-                                    Local = string.Empty // TODO: Get the Local from the user
-                                };
+                                // Fields to Json objet
+                                string jsonFields = JsonConvert.SerializeObject(formFlowBuilder.Fields);
+                                FormReferidoUpdateDto? formReferidoUpdateDtoToMerge = JsonConvert.DeserializeObject<FormReferidoUpdateDto>(jsonFields);
 
-                                // Get the last record in the table [FormFlujoPantallas]
-                                var getlastFlujoPantalla = await _flujosPantallas.GetFlujosPantallasByFormaId(formFlowBuilder.FormaId ?? 0, formFlowBuilder.FormularioId);
-                                FormFlujoPantallaDto? formFlujoPantallaDto = getlastFlujoPantalla.ValueOrDefault.LastOrDefault();
+                                formReferidoUpdateDto = _mapper.Map(formReferidoUpdateDtoToMerge, formReferidoUpdateDto);
+
+                                formReferidoUpdateDto.ReferidoId = formFlowBuilder.FormaId ?? 0;
 
 
-                                // Just If the user if the user is not the same as the user that created the record then create a new record in the table [FormFlujoPantallas] or when the formFlujoPantallaDto o
-                                if (InsertNewFlujoPantalla(itemToInsert, formFlujoPantallaDto))
+                                Result<FormReferidoDto> updateResult = await _formReferidoService.UpdateFormReferido(formReferidoUpdateDto, user);
+                                errors.AddRange(updateResult.Errors);
+                                if (updateResult.IsSuccess)
                                 {
 
-                                    Result<FormFlujoPantallaDto> flujoPantalla = await _flujosPantallas.CreateFlujoPantalla(itemToInsert, user);
-                                    if (flujoPantalla.IsSuccess)
+                                    FormFlujoPantallaInsertDto itemToInsert = new()
                                     {
+                                        FormularioId = formFlowBuilder.FormularioId,
+                                        FormaId = formReferidoResult.Value.ReferidoId,
+                                        OrdenEtapa = formFlow.AdmFlujoFormularioEtapa.OrdenEtapa,
+                                        FlujoEtapa = formFlow.AdmFlujoFormularioEtapa.NombreEtapa,
+                                        FechaFlujo = DateTime.Now,
+                                        UsuarioFlujoId = user,
+                                        RMO = updateResult.Value.RMO,
+                                        NumeroCaso = null,
+                                        Persona = null, // TODO: Get the Persona from the user
+                                                                //FlujoStatus = formFlow.AdmFlujoFormularioEtapaAccion.NombreAccion,
+                                        FlujoStatus = formFlow.AdmFlujoFormularioEtapa?.TipoEtapa,
+                                        Notas = null, // TODO: Get the Notas from the user
+                                        Comentarios = null, // TODO: Get the Comentarios from the user
+                                        EtapaCompletada = formFlow.IsSectionCompleted,
+                                        Region = updateResult.Value.Region,
+                                        Local = updateResult.Value.Local,
+                                    };
+
+                                    // Get the last record in the table [FormFlujoPantallas]
+                                    var getlastFlujoPantalla = await _flujosPantallas.GetFlujosPantallasByFormaId(formFlowBuilder.FormaId ?? 0, formFlowBuilder.FormularioId);
+                                    FormFlujoPantallaDto? formFlujoPantallaDto = getlastFlujoPantalla.ValueOrDefault.LastOrDefault();
+
+
+                                    // Just If the user if the user is not the same as the user that created the record then create a new record in the table [FormFlujoPantallas] or when the formFlujoPantallaDto o
+                                    if (InsertNewFlujoPantalla(itemToInsert, formFlujoPantallaDto))
+                                    {
+
+                                        Result<FormFlujoPantallaDto> flujoPantalla = await _flujosPantallas.CreateFlujoPantalla(itemToInsert, user);
+                                        if (flujoPantalla.IsSuccess)
+                                        {
+                                            // Set the result to the response
+                                            FormFlowBuilderObjectResult<FormReferidoDto> formFlowBuilderObjectResult = new()
+                                            {
+                                                Object = updateResult.ValueOrDefault,
+                                                formFlujoPantallaInsertDto = flujoPantalla.ValueOrDefault,
+                                                CanContinue = true
+                                            };
+                                            return formFlowBuilderObjectResult;
+                                        }
+                                        else
+                                        {
+                                            // Add the errors to the response
+                                            errors.AddRange(flujoPantalla.Errors);
+                                        }
+                                    }
+                                    else
+                                    {
+
+
                                         // Set the result to the response
                                         FormFlowBuilderObjectResult<FormReferidoDto> formFlowBuilderObjectResult = new()
                                         {
                                             Object = updateResult.ValueOrDefault,
-                                            formFlujoPantallaInsertDto = flujoPantalla.ValueOrDefault,
+                                            formFlujoPantallaInsertDto = getlastFlujoPantalla.ValueOrDefault.FirstOrDefault(),
                                             CanContinue = true
                                         };
                                         return formFlowBuilderObjectResult;
                                     }
-                                    else
-                                    {
-                                        // Add the errors to the response
-                                        errors.AddRange(flujoPantalla.Errors);
-                                    }
-                                }
-                                else
-                                {
-                                    
-
-                                    // Set the result to the response
-                                    FormFlowBuilderObjectResult<FormReferidoDto> formFlowBuilderObjectResult = new()
-                                    {
-                                        Object = updateResult.ValueOrDefault,
-                                        formFlujoPantallaInsertDto = getlastFlujoPantalla.ValueOrDefault.FirstOrDefault(),
-                                        CanContinue = true
-                                    };
-                                    return formFlowBuilderObjectResult;
                                 }
                             }
-                        }
 
-                        break;
-                    default:
-                        errors.Add(new Error($"La tabla base {formFlow.AdmFlujoFormulario?.TablaBase} no es válida"));
-                        break;
+                            break;
+                        default:
+                            errors.Add(new Error($"La tabla base {formFlow.AdmFlujoFormulario?.TablaBase} no es válida"));
+                            break;
+                    }
+                }
+                else
+                {
+                    errors.Add(new Error("No se encontraron datos para actualizar"));
                 }
 
                 if (errors.Count > 0)
@@ -830,15 +837,15 @@ namespace PRAMS.Infraestructure.Services.Forms
                         //FechaFlujo = DateTime.Now,
                         //UsuarioFlujoId = user,
                         RMO = formFormularioFirmaDto.Rmo, // TODO: Get the RMO from the user
-                        NumeroCaso = string.Empty, // TODO: Get the NumeroCaso from the user
-                        Persona = string.Empty, // TODO: Get the Persona from the user
+                        NumeroCaso = null, // TODO: Get the NumeroCaso from the user
+                        Persona = null, // TODO: Get the Persona from the user
                         //FlujoStatus = formFlow.AdmFlujoFormularioEtapaAccion.NombreAccion,
                         FlujoStatus = formFlow.AdmFlujoFormularioEtapa?.TipoEtapa,
-                        Notas = string.Empty, // TODO: Get the Notas from the user
-                        Comentarios = string.Empty, // TODO: Get the Comentarios from the user
+                        Notas = null, // TODO: Get the Notas from the user
+                        Comentarios = null, // TODO: Get the Comentarios from the user
                         EtapaCompletada = formFlow.IsSectionCompleted,
-                        Region = string.Empty, // TODO: Get the Region from the user
-                        Local = string.Empty, // TODO: Get the Local from the user
+                        Region = null, // TODO: Get the Region from the user
+                        Local = null, // TODO: Get the Local from the user
 
                     };
 
@@ -947,7 +954,6 @@ namespace PRAMS.Infraestructure.Services.Forms
             }
 
         }
-
 
         private static object? ParserValue(AdmFlujoFormularioEtapaAccionCampoDto admFormularioEtapaAccione, object value)
         {
