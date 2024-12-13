@@ -1269,8 +1269,10 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
             IList<AdmFlujoFormularioEtapaInsertDto> admFlujoFormularioEtapas = [
                 new(1,"Referido Nuevo",1,"Comienzo Formulario","#f7f72f", false,false, null, null, null),
                 new(1,"Referido Seguimiento",2,"Seguimiento Formulario","#3c7efa", false,false, null, null, null),
-                new(1,"Referido Firma TS",3,"Seguimiento Formulario","#8c57f7", false,false, null, null, 1),
-                new(1,"Referido Firma Sup",4,"Completar Formulario",null, false,false, null, null, null),
+                new(1,"Referido Firma TS",3,"Firma Formulario","#8c57f7", false,false, null, null, 1),
+                new(1,"Referido Firma Sup",4,"Firma Formulario",null, false,false, null, null, null),
+                new(1,"Referido Compleado",5,"Completar Formulario",null, false,false, null, null, null),
+
             ];
 
             IList<AdmFlujoFormularioEtapa> admFlujoFormularioEtapa = admFlujoFormularioEtapas.Select((x, i) => new AdmFlujoFormularioEtapa
@@ -1364,9 +1366,17 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
                 new(3, 1, "Firma TS", "Form_FormulariosFirmas", "Texto", 0, "ID_Usuario", "FirmaTS", "La Firma del Trabajador Social debe estar Completada", null),
                 new(3, 1, "Firma TS", "Form_FormulariosFirmas", "Texto", 0, "UserTypeID", "FirmaTS", "Validacion Principal para Busqueda de Usuario Firmo", null),
                 new(3, 1, "Firma TS", "Form_FormulariosFirmas", "Texto", 0, "RMO", "FirmaTS", "La Firma del Supervisor de Trabajador Social debe estar Completada", null),
-                //new(3, 1, "RMO", "Form_Referidos", "Texto", 0, "RMO", "TieneValor", "Rmo es requerido", null),
+                new(3, 1, "Firma TS", "Form_FormulariosFirmas", "Texto", 0, "region", "FirmaTS", "La Firma del Supervisor de Trabajador Social debe estar Completada", null),
+                new(3, 1, "Firma TS", "Form_FormulariosFirmas", "Texto", 0, "local", "FirmaTS", "La Firma del Supervisor de Trabajador Social debe estar Completada", null),
 
-                new(4, 1, "Firma Supervisor", "Form_FormulariosFirmas", "Integro", 0, "UserTypeID", "FirmaSup", "La Firma del Supervisor de Trabajador Social debe estar Completada", null),
+
+                new(4, 1, "Firma Supervisor", "Form_FormulariosFirmas", "Texto", 0, "ID_Usuario", "FirmaSup", "La Firma del Supervisor de Trabajador Social debe estar Completada", null),
+                new(4, 1, "Firma Supervisor", "Form_FormulariosFirmas", "Texto", 0, "UserTypeID", "FirmaSup", "La Firma del Supervisor de Trabajador Social debe estar Completada", null),
+                new(3, 1, "Firma Supervisor", "Form_FormulariosFirmas", "Texto", 0, "RMO", "FirmaSup", "La Firma del Supervisor de Trabajador Social debe estar Completada", null),
+                new(3, 1, "Firma Supervisor", "Form_FormulariosFirmas", "Texto", 0, "region", "FirmaSup", "La Firma del Supervisor de Trabajador Social debe estar Completada", null),
+                new(3, 1, "Firma Supervisor", "Form_FormulariosFirmas", "Texto", 0, "local", "FirmaSup", "La Firma del Supervisor de Trabajador Social debe estar Completada", null),
+
+
             ];
 
             IList<AdmFormularioEtapaAccioneCampo> admFlujoFormularioEtapaAccionCampo = admFlujoFormularioEtapaAccionCampos.Select((x, i) => new AdmFormularioEtapaAccioneCampo

@@ -13,6 +13,7 @@ namespace PRAMS.Domain.Entities.Forms.Entities
         public AdmFlujoFormularioDto? AdmFlujoFormulario { get; set; }
         public AdmFlujoFormularioEtapaDto? AdmFlujoFormularioEtapa { get; set; }
         public AdmFlujoFormularioEtapaDto? AdmFlujoFormularioEtapaAnterior { get; set; }
+        public AdmFlujoFormularioEtapaDto? AdmFlujoFormularioEtapaSiguiente { get; set; }
         public AdmFlujoFormularioEtapaAccionDto? AdmFlujoFormularioEtapaAccion { get; set; }
         public IList<AdmFlujoFormularioEtapaAccionCampoDto>? AdmFormularioEtapaAccioneCampos { get; set; }
         public object? Errors { get; set; }
