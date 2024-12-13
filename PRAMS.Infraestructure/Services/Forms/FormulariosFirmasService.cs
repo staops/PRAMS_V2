@@ -77,6 +77,30 @@ namespace PRAMS.Infraestructure.Services.Forms
             }
         }
 
+        public async Task<Result<FormFormularioFirmaDto>> GetFormularioFirmaByFormStageAndFormaId(int formularioId, int formularioEtapaId, int formaId)
+        {
+            try
+            {
+                // Search the form signature by the form stage and the form id
+                var formFormularioFirma = await _context.FormFormularioFirmas.Where(w => w.FormularioId == formularioId && w.FormularioEtapaId == formularioEtapaId && w.FormaId == formaId).FirstOrDefaultAsync();
+
+                if (formFormularioFirma == null)
+                {
+                    return Result.Fail<FormFormularioFirmaDto>($"The form signature with form id {formularioId}, form stage id {formularioEtapaId} and form id {formaId} does not exist");
+                }
+
+                var formFormularioFirmaDto = _mapper.Map<FormFormularioFirmaDto>(formFormularioFirma);
+
+                return Result.Ok(formFormularioFirmaDto);
+
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, $"Error in the search of the form signature: {error.Message}");
+                return Result.Fail<FormFormularioFirmaDto>($"Error in the search of the form signature: {error.Message}");
+            }
+        }
+
         public async Task<Result<ICollection<FormFormularioFirmaDto>>> GetFormularioFirmaByFormularioEtapa(int formularioEtapaId)
         {
             try
