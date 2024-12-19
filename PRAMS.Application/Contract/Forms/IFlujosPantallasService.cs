@@ -8,6 +8,7 @@ namespace PRAMS.Application.Contract.Forms
     {
         Task<Result<ICollection<FormFlujoPantallaDto>>> GetFlujosPantallas();
         Task<Result<FormFlujoPantallaDto>> GetFlujoPantalla(int flujoPantallaId);
+        Task<Result<ICollection<FormFlujoPantallaDto>>> GetFlujosPantallasByRmo(string rmo);
         Task<Result<ICollection<FormFlujoPantallaDto>>> GetFlujosPantallasByFormularioId(int formularioId);
         Task<Result<ICollection<FormFlujoPantallaDto>>> GetFlujosPantallasByFormaId(int formaId, int formularioId);
         Task<Result<FormFlujoPantallaDto>> CreateFlujoPantalla(FormFlujoPantallaInsertDto itemToInsert, string user);

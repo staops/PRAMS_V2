@@ -3,6 +3,7 @@ using FluentResults;
 using LinqKit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microsoft.SqlServer.Server;
 using PRAMS.Application.Contract.Forms;
 using PRAMS.Application.Contract.Shared;
 using PRAMS.Domain.Entities.Forms.Dto;
@@ -365,6 +366,26 @@ namespace PRAMS.Infraestructure.Services.Forms
             {
                 _logger.LogError(error, $"Error getting the count: {error.Message}");
                 return Result.Fail<int>(new Error($"Error getting the count: {error.Message}")).WithError(error.Message);
+            }
+        }
+
+        public async Task<Result<ICollection<FormFlujoPantallaDto>>> GetFlujosPantallasByRmo(string rmo)
+        {
+            try
+            {
+                var query = _context.FormFlujoPantallas
+                    .Where(x => x.RMO == rmo)
+                    .OrderBy(x => x.OrdenEtapa);
+
+                ICollection<FormFlujoPantallaDto> result = await _mapper.ProjectTo<FormFlujoPantallaDto>(query).ToListAsync();
+
+                return Result.Ok(result);
+
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, $"Error getting the flows: {error.Message}");
+                return Result.Fail<ICollection<FormFlujoPantallaDto>>(new Error($"Error getting the flows: {error.Message}")).WithError(error.Message);
             }
         }
     }
