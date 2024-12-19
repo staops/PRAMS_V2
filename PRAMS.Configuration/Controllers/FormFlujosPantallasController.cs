@@ -80,6 +80,35 @@ namespace PRAMS.Configuration.Controllers
             }
         }
 
+        [HttpGet("ByRmo{rmo}")]
+        [Authorize]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<ICollection<FormFlujoPantallaDto>>))]
+        [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
+        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
+        public async Task<IActionResult> GetFlujosPantallasByRmo(string rmo)
+        {
+            try
+            {
+                var result = await _flujosPantallasService.GetFlujosPantallasByRmo(rmo);
+                if (result.IsSuccess)
+                {
+                    _logger.LogInformation("Success in GetFlujosPantallasByRmo Result:{@result}", result.Value);
+                    return Ok(new ResponseDto<ICollection<FormFlujoPantallaDto>> { Result = result.Value });
+                }
+                else
+                {
+                    _logger.LogError("Error in GetFlujosPantallasByRmo Errors:{@errors}", result.Errors);
+                    return BadRequest(new ErrorResponseDto<List<IError>> { Message = result.Errors.First().Message, Result = result.Errors });
+                }
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, "Error al obtener los flujos de pantallas por formulario");
+                return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
+            }
+        }
+
         [HttpGet("ByFormularioId{formularioId}")]
         [Authorize]
         [Produces(MediaTypeNames.Application.Json)]
