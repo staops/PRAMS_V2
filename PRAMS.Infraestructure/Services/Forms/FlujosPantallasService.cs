@@ -65,6 +65,62 @@ namespace PRAMS.Infraestructure.Services.Forms
             }
         }
 
+        public async Task<Result<FormFlujoPantallaDto>> CreateFlujoPantallaIfExist(FormFlujoPantallaInsertDto itemToInsert, string user)
+        {
+            try
+            {
+                // Validate if the FormularioId exists
+                var forma = await _context.AdmFlujoFormularios
+                    .Where(w => w.FormularioId == itemToInsert.FormularioId)
+                    .FirstOrDefaultAsync();
+
+                if (forma == null)
+                {
+                    return Result.Fail<FormFlujoPantallaDto>(new Error($"The form with id {itemToInsert.FormularioId} does not exist"));
+                }
+
+                // Validate if the flow exists in the table by FormularioId, FormaId, OrdenEtapa, UsuarioFlujoId, Region and Local
+                var admFlujoPantallaExist = await _context.FormFlujoPantallas
+                    .Where(w =>
+                           w.FormularioId == itemToInsert.FormularioId &&
+                           w.FormaId == itemToInsert.FormaId &&
+                           w.OrdenEtapa == itemToInsert.OrdenEtapa &&
+                           w.UsuarioFlujoId == user &&
+                           w.EtapaCompletada == itemToInsert.EtapaCompletada &&
+                           w.Region == itemToInsert.Region &&
+                           w.Local == itemToInsert.Local)
+                    .FirstOrDefaultAsync();
+
+                if (admFlujoPantallaExist != null)
+                {
+                    // Return the flow if it already exists
+                    var admFlujoPantallaExistDto = _mapper.Map<FormFlujoPantallaDto>(admFlujoPantallaExist);
+                    return Result.Ok(admFlujoPantallaExistDto);
+                }
+
+
+                // Create the flow if it does not exist
+
+                var admFlujoPantalla = _mapper.Map<FormFlujoPantalla>(itemToInsert);
+
+                admFlujoPantalla.UsuarioFlujoId = user;
+                admFlujoPantalla.FechaFlujo = DateTime.Now;
+
+
+                await _context.FormFlujoPantallas.AddAsync(admFlujoPantalla);
+                await _context.SaveChangesAsync();
+
+                var admFlujoPantallaDto = _mapper.Map<FormFlujoPantallaDto>(admFlujoPantalla);
+                return Result.Ok(admFlujoPantallaDto);
+
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, $"Error in the flow creation: {error.Message}");
+                return Result.Fail<FormFlujoPantallaDto>(new Error($"Error in the flow creation: {error.Message}")).WithError(error.Message);
+            }
+        }
+
         public async Task<Result<FormFlujoPantallaDto>> GetFlujoPantalla(int flujoPantallaId)
         {
             try
