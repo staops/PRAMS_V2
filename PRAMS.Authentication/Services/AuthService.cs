@@ -6,6 +6,7 @@ using PRAMS.Authentication.Models;
 using PRAMS.Authentication.Models.Dto;
 using PRAMS.Authentication.Services.IServices;
 
+
 namespace PRAMS.Authentication.Services
 {
     public class AuthService(
@@ -37,6 +38,19 @@ namespace PRAMS.Authentication.Services
             return Result.Fail<bool>("User not found or unauthorized");
         }
 
+        public async Task<Result<bool>> AssignLocalAndRegion(string email, string local, string region)
+        {
+            var user = _db.ApplicationUsers.FirstOrDefault(x => x.UserName != null && x.UserName.ToUpper() == email.ToUpper());
+            if (user != null)
+            {
+                user.Local = local;
+                user.Region = region;
+                await _db.SaveChangesAsync();
+                return Result.Ok(true);
+            }
+            return Result.Fail<bool>("User not found or unauthorized");
+        }
+
         public async Task<Result<LoginResponseDto>> CheckToken(string token)
         {
             try
@@ -57,7 +71,9 @@ namespace PRAMS.Authentication.Services
                             Email = user.Email,
                             Name = user.FirstName,
                             PhoneNumber = user.PhoneNumber,
-                            Roles = roles
+                            Roles = roles,
+                            Region = user.Region ?? string.Empty,
+                            Local = user.Local ?? string.Empty
                         };
 
                         LoginResponseDto loginResponseDto = new()
@@ -108,7 +124,9 @@ namespace PRAMS.Authentication.Services
                         Email = user.Email,
                         Name = user.FirstName,
                         PhoneNumber = user.PhoneNumber,
-                        Roles = roles
+                        Roles = roles,
+                        Region = user.Region ?? string.Empty,
+                        Local = user.Local ?? string.Empty
                     };
 
                     LoginResponseDto loginResponseDto = new()
@@ -145,6 +163,9 @@ namespace PRAMS.Authentication.Services
                     UserName = registrationRequiredDto.Email,
                     Email = registrationRequiredDto.Email,
                     NormalizedEmail = registrationRequiredDto.Email.ToUpper(),
+                    Region = registrationRequiredDto.Region,
+                    Local = registrationRequiredDto.Local,
+                    PhoneNumber = registrationRequiredDto.PhoneNumber
                 };
 
                 var creationResult = await _userManager.CreateAsync(user, registrationRequiredDto.Password);
@@ -178,7 +199,9 @@ namespace PRAMS.Authentication.Services
                                     Email = userToReturn.Email,
                                     Name = userToReturn.FirstName,
                                     PhoneNumber = userToReturn.PhoneNumber,
-                                    Roles = roles
+                                    Roles = roles,
+                                    Region = registrationRequiredDto.Region,
+                                    Local = registrationRequiredDto.Local
                                 };
 
                                 result = Result.Ok(userDto);

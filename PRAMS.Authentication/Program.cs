@@ -1,10 +1,13 @@
+using FluentResults;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using PRAMS.Authentication.Data;
 using PRAMS.Authentication.Extensions;
 using PRAMS.Authentication.Models;
+using PRAMS.Authentication.Models.Dto;
 using PRAMS.Authentication.Services;
 using PRAMS.Authentication.Services.IServices;
 using Serilog;
@@ -22,7 +25,22 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
+{
+    options.InvalidModelStateResponseFactory = context =>
+    {
+        var result = new ResponseDto<List<IError>>
+        {
+            IsSuccess = false,
+            Message = "Invalid model",
+            Result = context.ModelState.Values.SelectMany(x => x.Errors).Select(x => (IError) new Error(x.ErrorMessage)).ToList()
+
+        };
+            
+        return new BadRequestObjectResult(result);
+    };
+});
+
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
