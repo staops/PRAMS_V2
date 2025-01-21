@@ -5,13 +5,51 @@ using PRAMS.Authentication.Models;
 
 namespace PRAMS.Authentication.Data
 {
-    public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbContext<ApplicationUser>(options)
+    public class AppDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string, IdentityUserClaim<string>,
+    ApplicationUserRole, IdentityUserLogin<string>,
+    IdentityRoleClaim<string>, IdentityUserToken<string>>
     {
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<ApplicationUserRole> ApplicationUserRoles { get; set; }
+        public DbSet<ApplicationRole> ApplicationRoles { get; set; }
+
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<ApplicationUserRole>(userRole =>
+            {
+                userRole.HasKey(ur => new { ur.UserId, ur.RoleId });
+
+                userRole.HasOne(ur => ur.Role)
+                    .WithMany(r => r.UserRoles)
+                    .HasForeignKey(ur => ur.RoleId)
+                    .IsRequired();
+
+                userRole.HasOne(ur => ur.User)
+                    .WithMany(r => r.UserRoles)
+                    .HasForeignKey(ur => ur.UserId)
+                    .IsRequired();
+            });
+
+            modelBuilder.Entity<ApplicationRole>(role =>
+            {
+                role.HasMany(r => r.UserRoles)
+                    .WithOne(ur => ur.Role)
+                    .HasForeignKey(ur => ur.RoleId)
+                    .IsRequired();
+            });
+
+            modelBuilder.Entity<ApplicationUser>(user =>
+            {
+                user.HasMany(u => u.UserRoles)
+                    .WithOne(ur => ur.User)
+                    .HasForeignKey(ur => ur.UserId)
+                    .IsRequired();
+            });
+
 
             PopulateRoles(modelBuilder);
         }
@@ -40,7 +78,7 @@ namespace PRAMS.Authentication.Data
 
             foreach (var role in initialRoles)
             {
-                modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
+                modelBuilder.Entity<ApplicationRole>().HasData(new IdentityRole
                 {
                     Id = Guid.NewGuid().ToString(),
                     Name = role,
