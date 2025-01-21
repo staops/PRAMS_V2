@@ -1,4 +1,6 @@
-﻿namespace PRAMS.Domain.Entities.Forms.Dto
+﻿using Newtonsoft.Json;
+
+namespace PRAMS.Domain.Entities.Forms.Dto
 {
     public class FormFormularioFirmaDto
     {
@@ -9,6 +11,8 @@
         public int? FormaId { get; set; }
         public string? Rmo { get; set; }
         public string NumCaso { get; set; }
+
+        [JsonProperty("idUsuario")]
         public string ID_Usuario { get; set; }
         public string? UserTypeID { get; set; }
         public DateTime? FechaFirma { get; set; }
