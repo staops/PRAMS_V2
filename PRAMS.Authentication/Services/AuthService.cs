@@ -13,11 +13,11 @@ namespace PRAMS.Authentication.Services
         AppDbContext db,
         IJwtTokenGenerator jwtTokenGenerator,
         UserManager<ApplicationUser> userManager,
-        RoleManager<IdentityRole> roleManager) : IAuthService
+        RoleManager<ApplicationRole> roleManager) : IAuthService
     {
         private readonly AppDbContext _db = db;
         private readonly UserManager<ApplicationUser> _userManager = userManager;
-        private readonly RoleManager<IdentityRole> _roleManager = roleManager;
+        private readonly RoleManager<ApplicationRole> _roleManager = roleManager;
         private readonly IJwtTokenGenerator _jwtTokenGenerator = jwtTokenGenerator;
 
         public async Task<Result<bool>> AssignRole(string email, string roleName)
@@ -29,7 +29,7 @@ namespace PRAMS.Authentication.Services
                 if (!_roleManager.RoleExistsAsync(roleName).GetAwaiter().GetResult())
                 {
                     // Create the role if it does not exist
-                    _roleManager.CreateAsync(new IdentityRole(roleName)).GetAwaiter().GetResult();
+                    _roleManager.CreateAsync(new ApplicationRole(roleName)).GetAwaiter().GetResult();
                 }
 
                 await _userManager.AddToRoleAsync(user, roleName);
@@ -183,7 +183,7 @@ namespace PRAMS.Authentication.Services
                         if (!_roleManager.RoleExistsAsync(requiredRole).GetAwaiter().GetResult())
                         {
                             // Create the role if it does not exist
-                            _roleManager.CreateAsync(new IdentityRole(requiredRole)).GetAwaiter().GetResult();
+                            _roleManager.CreateAsync(new ApplicationRole(requiredRole)).GetAwaiter().GetResult();
                         }
 
                         var roleResult = await _userManager.AddToRoleAsync(userToReturn, requiredRole);

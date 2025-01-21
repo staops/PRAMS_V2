@@ -1,3 +1,4 @@
+using AutoMapper;
 using FluentResults;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -6,10 +7,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using PRAMS.Authentication.Data;
 using PRAMS.Authentication.Extensions;
+using PRAMS.Authentication.Mapping;
 using PRAMS.Authentication.Models;
-using PRAMS.Authentication.Models.Dto;
 using PRAMS.Authentication.Services;
 using PRAMS.Authentication.Services.IServices;
+using PRAMS.Domain.Entities.Shared;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,8 +23,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("ApiSettings:JwtOptions"));
 // Adding Identity authentication
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+builder.Services
+    .AddIdentity<ApplicationUser, ApplicationRole>()
+    .AddRoleManager<RoleManager<ApplicationRole>>()
     .AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+
+IMapper mapper = MappingAuthentication.RegisterMaps().CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 // Add NewtonSoftJson support to the project to create the Swagger documentation
 builder.Services.AddSwaggerGenNewtonsoftSupport();
@@ -35,10 +42,10 @@ builder.Services.AddControllers().AddNewtonsoftJson().ConfigureApiBehaviorOption
         {
             IsSuccess = false,
             Message = "Invalid model",
-            Result = context.ModelState.Values.SelectMany(x => x.Errors).Select(x => (IError) new Error(x.ErrorMessage)).ToList()
+            Result = context.ModelState.Values.SelectMany(x => x.Errors).Select(x => (IError)new Error(x.ErrorMessage)).ToList()
 
         };
-            
+
         return new BadRequestObjectResult(result);
     };
 });
@@ -47,6 +54,7 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
 builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

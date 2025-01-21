@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PRAMS.Authentication.Models.Dto;
 using PRAMS.Authentication.Services.IServices;
+using PRAMS.Domain.Entities.Shared;
 using System.Net.Mime;
 
 namespace PRAMS.Authentication.Controllers
