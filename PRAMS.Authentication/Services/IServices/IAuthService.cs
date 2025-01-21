@@ -9,5 +9,6 @@ namespace PRAMS.Authentication.Services.IServices
         Task<Result<LoginResponseDto>> LoginAsync(LoginRequestDto loginRequestDto);
         Task<Result<LoginResponseDto>> CheckToken(string token);
         Task<Result<bool>> AssignRole(string email, string roleName);
+        Task<Result<bool>> AssignLocalAndRegion(string email, string local, string region);
     }
 }

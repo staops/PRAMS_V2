@@ -33,7 +33,7 @@ namespace PRAMS.Domain.Entities.Forms.Dto
         public string? Rmo { get; set; }
         [JsonProperty("numCaso")]
         public string NumCaso { get; set; } = string.Empty;
-        [JsonProperty("id_Usuario")]
+        [JsonProperty("idUsuario")]
         public string ID_Usuario { get; set; } = string.Empty;
         [JsonProperty("userTypeID")]
         public string? UserTypeID { get; set; }
