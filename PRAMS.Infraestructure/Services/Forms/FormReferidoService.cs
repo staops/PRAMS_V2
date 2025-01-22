@@ -4,6 +4,7 @@ using LinqKit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using PRAMS.Application.Contract.Forms;
+using PRAMS.Application.Contract.Shared;
 using PRAMS.Domain.Entities.Forms.Dto;
 using PRAMS.Domain.Entities.Shared;
 using PRAMS.Domain.Models.Forms;
@@ -19,13 +20,16 @@ namespace PRAMS.Infraestructure.Services.Forms
         private readonly UsersDbContext _usersDbContext;
         private readonly IMapper _mapper;
         private readonly ILogger<IFormReferidoService> _logger;
+        private readonly IBaseSqlService<IList<SelectReferidosCompletadosSpDto>> _baseSqlService;
 
-        public FormReferidoService(AppConfigDbContext context, UsersDbContext usersDbContext, IMapper mapper, ILogger<IFormReferidoService> logger)
+
+        public FormReferidoService(AppConfigDbContext context, UsersDbContext usersDbContext, IMapper mapper, ILogger<IFormReferidoService> logger, IBaseSqlService<IList<SelectReferidosCompletadosSpDto>> baseSqlService)
         {
             _context = context;
             _usersDbContext = usersDbContext;
             _mapper = mapper;
             _logger = logger;
+            _baseSqlService = baseSqlService;
         }
 
         public async Task<Result<FormReferidoDto>> CreateFormReferido(FormReferidoInsertDto formReferidoInsertDto, string user)
@@ -246,6 +250,32 @@ namespace PRAMS.Infraestructure.Services.Forms
             {
                 _logger.LogError(error, $"Error updating the form: {error.Message}");
                 return Result.Fail<FormReferidoDto>(new Error($"Error updating the form: {error.Message}")).WithError(error.Message);
+            }
+        }
+
+        public async Task<Result<IList<SelectReferidosCompletadosSpDto>>> SelectReferidosCompletadosSP()
+        {
+            try
+            {
+
+                Result<IList<SelectReferidosCompletadosSpDto>> dataResult = await _baseSqlService.ExecuteStoreProcedure(new RequestSQLDto
+                {
+                    ConnectionString = _context.Database.GetDbConnection().ConnectionString,
+                    StoreProcedureName = "[dbo].[SelectReferidosCompletados]",
+                    Parameters = new Dictionary<string, object>()
+                });
+
+                if (dataResult.IsSuccess)
+                {
+                    return Result.Ok(dataResult.Value);
+                }
+                return Result.Fail<IList<SelectReferidosCompletadosSpDto>>(new Error("The flow does not exist"));
+
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, $"Error getting the flows: {error.Message}");
+                return Result.Fail<IList<SelectReferidosCompletadosSpDto>>(new Error($"Error getting the flows: {error.Message}")).WithError(error.Message);
             }
         }
     }
