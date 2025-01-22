@@ -46,7 +46,7 @@ namespace PRAMS.Infraestructure.Services.Shared
                 using SqlDataAdapter Data = new SqlDataAdapter(command);
                 DataTable dt = new DataTable();
                 Data.Fill(dt);
-                string stringDataTable = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
+                string stringDataTable = JsonConvert.SerializeObject(dt, Formatting.Indented);
                 var storeResponse = JsonConvert.DeserializeObject<T>(stringDataTable);
 
                 result = (storeResponse is not null) ? Result.Ok(storeResponse) : Result.Fail(new Error($"Error in {requestSQLDto.StoreProcedureName}"));

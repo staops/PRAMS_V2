@@ -58,6 +58,7 @@ builder.Services.AddControllers().AddNewtonsoftJson().ConfigureApiBehaviorOption
 });
 
 builder.Services.AddScoped<IBaseSqlService<IList<FormFlujoPantallaSPDto>>, BaseSqlService<IList<FormFlujoPantallaSPDto>>>();
+builder.Services.AddScoped<IBaseSqlService<IList<SelectReferidosCompletadosSpDto>>, BaseSqlService<IList<SelectReferidosCompletadosSpDto>>>();
 
 
 
@@ -155,7 +156,16 @@ builder.Services.AddScoped<IFormReferidoService>(x =>
     var dbContext = x.GetRequiredService<AppConfigDbContext>();
     var usersDbContext = x.GetRequiredService<UsersDbContext>();
     var logger = x.GetRequiredService<ILogger<IFormReferidoService>>();
-    return new FormReferidoService(dbContext, usersDbContext, mapper, logger);
+    var baseSqlService = x.GetRequiredService<IBaseSqlService<IList<SelectReferidosCompletadosSpDto>>>();
+    return new FormReferidoService(dbContext, usersDbContext, mapper, logger, baseSqlService);
+});
+
+builder.Services.AddScoped<IFormAsignacionUsuarioService>(x =>
+{
+    var dbContext = x.GetRequiredService<AppConfigDbContext>();
+    var logger = x.GetRequiredService<ILogger<IFormAsignacionUsuarioService>>();
+    return new FormAsignacionUsuarioService(dbContext, mapper, logger);
+
 });
 
 
@@ -252,4 +262,3 @@ void ApplyMigrations()
         _db.Database.Migrate();
     }
 }
-    
