@@ -13,6 +13,7 @@ namespace PRAMS.Application.Contract.Forms
         Task<Result<FormReferidoDto>> CreateFormReferido(FormReferidoInsertDto formReferidoInsertDto, string user);
         Task<Result<FormReferidoDto>> UpdateFormReferido(FormReferidoUpdateDto formReferidoUpdateDto, string user);
         Task<Result<FormReferidoDto>> RemoveFormReferido(int referidoId, string user);
+        Task<Result<IList<SelectReferidosCompletadosSpDto>>> SelectReferidosCompletadosSP();
 
     }
 }

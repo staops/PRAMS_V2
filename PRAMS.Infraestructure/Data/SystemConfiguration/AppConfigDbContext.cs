@@ -40,6 +40,8 @@ namespace PRAMS.Infraestructure.Data.SystemConfiguration
 
         public DbSet<FormReferido> FormReferidos { get; set; }
 
+        public DbSet<FormAsignacionUsuarios> formAsignacionUsuarios { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
