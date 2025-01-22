@@ -160,6 +160,14 @@ builder.Services.AddScoped<IFormReferidoService>(x =>
     return new FormReferidoService(dbContext, usersDbContext, mapper, logger, baseSqlService);
 });
 
+builder.Services.AddScoped<IFormAsignacionUsuarioService>(x =>
+{
+    var dbContext = x.GetRequiredService<AppConfigDbContext>();
+    var logger = x.GetRequiredService<ILogger<IFormAsignacionUsuarioService>>();
+    return new FormAsignacionUsuarioService(dbContext, mapper, logger);
+
+});
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -254,4 +262,3 @@ void ApplyMigrations()
         _db.Database.Migrate();
     }
 }
-    

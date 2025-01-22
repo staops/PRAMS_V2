@@ -225,6 +225,11 @@ namespace PRAMS.Infraestructure.Mapping.SystemConfiguration
                 .ForAllMembers(options => options.Condition((src, dest, srcMember) => srcMember != null));
 
             CreateMap<FormReferidoUpdateDto, FormReferidoDto>().ReverseMap();
+
+            CreateMap<FormAsignacionUsuarios, FormAsignacionUsuariosDto>().ReverseMap();
+            CreateMap<FormAsignacionUsuarios, FormAsignacionUsuariosInsertDto>().ReverseMap();
+            CreateMap<FormAsignacionUsuarios, FormAsignacionUsuariosUpdateDto>().ReverseMap();
+
         }
     }
 }

@@ -6,6 +6,11 @@ namespace PRAMS.Domain.Models.Forms
     [Table("Form_Referidos")]
     public class FormReferido
     {
+        public FormReferido()
+        {
+            FormAsignacionUsuariosNavigation = new HashSet<FormAsignacionUsuarios>();
+        }
+
         [Key]
         [Column("ID_Referido")]
         public required int ReferidoId { get; set; }
@@ -110,6 +115,8 @@ namespace PRAMS.Domain.Models.Forms
         [Column("ID_ReferidoOrigen")]
         public string? ReferidoOrgenId { get; set; }
         public bool Activo { get; set; } = true;
+
+        public virtual ICollection<FormAsignacionUsuarios>? FormAsignacionUsuariosNavigation { get; set; }
 
     }
 }
