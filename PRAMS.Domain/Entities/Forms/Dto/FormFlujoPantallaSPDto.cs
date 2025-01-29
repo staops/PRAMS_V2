@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.ComponentModel.DataAnnotations;
 
 namespace PRAMS.Domain.Entities.Forms.Dto
 {
@@ -47,11 +46,12 @@ namespace PRAMS.Domain.Entities.Forms.Dto
         public string? Region { get; set; }
         public string? Local { get; set; }
         public int? rank { get; set; }
-        public string?  NombreFlujo { get; set; }
-        public string?  NombreAsigna { get; set; }
+        public string? NombreFlujo { get; set; }
+        public string? NombreAsigna { get; set; }
         public string? NombreAsignado { get; set; }
+        public string? FormularioEtapaId { get; set; }
+        public string? FormularioEtapaAccionId { get; set; }
         public string? NombreSujeto { get; set; }
         public string? NombreRefiere { get; set; }
-
     }
 }
