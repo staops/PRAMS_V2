@@ -34,5 +34,9 @@
         public bool EtapaCompletada { get; set; } = false;
         public string? Region { get; set; }
         public string? Local { get; set; }
+
+        public int FormularioEtapaAccionId { get; set; }
+        public int FormularioEtapaId { get; set; }
+
     }
 }

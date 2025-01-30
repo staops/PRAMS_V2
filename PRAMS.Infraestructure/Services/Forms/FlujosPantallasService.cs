@@ -125,13 +125,33 @@ namespace PRAMS.Infraestructure.Services.Forms
         {
             try
             {
-                var query = _context.FormFlujoPantallas.Where(x => x.FlujoPantallaId == flujoPantallaId);
+                var query = _context.FormFlujoPantallas
+                    .Where(x => x.FlujoPantallaId == flujoPantallaId);
+
                 FormFlujoPantallaDto? result = await _mapper.ProjectTo<FormFlujoPantallaDto>(query).FirstOrDefaultAsync();
+
+
+
                 if (result == null)
                 {
                     return Result.Fail<FormFlujoPantallaDto>(new Error("The flow does not exist"));
                 }
+                // Find the Adm_FlujosFormulariosEtapasAcciones and Adm_FlujosFormulariosEtapas
+                var admFlujoFormularioEtapas = await _context.AdmFlujoFormularioEtapas
+                    .Where(x => x.FormularioId == result.FormularioId && x.OrdenEtapa == result.OrdenEtapa)
+                    .FirstOrDefaultAsync();
 
+                
+
+                if (admFlujoFormularioEtapas != null)
+                {
+                    var admFlujoFormularioEtapasAcciones = await _context.AdmFlujoFormularioEtapaAcciones
+                        .Where(x => x.FormularioEtapaId == admFlujoFormularioEtapas.FormularioEtapaId)
+                        .FirstOrDefaultAsync();
+
+                    result.FormularioEtapaId = admFlujoFormularioEtapas.FormularioEtapaId;
+                    result.FormularioEtapaAccionId = admFlujoFormularioEtapasAcciones?.FormularioEtapaAccionId ?? 0;
+                }
                 return Result.Ok(result);
 
             }
