@@ -92,10 +92,13 @@ builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Confi
 builder.AddAppAuthentication();
 builder.Services.AddAuthorization();
 
+// List of allowed origins from the appsettings.json
+string[] allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>() ?? ["http://localhost:8080"];
+
 //services cors
 builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
 {
-    builder.WithOrigins("http://localhost:8100", "http://localhost:8080").AllowAnyMethod().AllowAnyHeader();
+    builder.WithOrigins(allowedOrigins).AllowAnyMethod().AllowAnyHeader();
 }));
 
 var app = builder.Build();
