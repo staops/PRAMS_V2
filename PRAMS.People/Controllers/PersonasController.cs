@@ -83,6 +83,7 @@ namespace PRAMS.People.Controllers
         [HttpPost("paged")]
         [Authorize]
         [Produces(MediaTypeNames.Application.Json)]
+        [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(statusCode: 200, Type = typeof(ResponseDto<DtResult<PersonDto>>))]
         [ProducesResponseType(statusCode: 400, Type = typeof(ErrorResponseDto<List<IError>>))]
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponseDto<List<IError>>))]
@@ -168,8 +169,6 @@ namespace PRAMS.People.Controllers
                 return StatusCode(500, new ErrorResponseDto<List<IError>>() { Message = error.Message, Result = [new Error(error.Message)] });
             }
         }
-
-
 
         [HttpPut("update")]
         [Authorize]

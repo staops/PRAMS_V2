@@ -1,5 +1,9 @@
 ﻿using AutoMapper;
+using PRAMS.Domain.Entities.Flujos.Dto;
+using PRAMS.Domain.Entities.Forms.Dto;
 using PRAMS.Domain.Entities.SystemConfiguration.Dto;
+using PRAMS.Domain.Models.Flujos;
+using PRAMS.Domain.Models.Forms;
 using PRAMS.Domain.Models.SystemConfiguration;
 
 namespace PRAMS.Infraestructure.Mapping.SystemConfiguration
@@ -13,6 +17,15 @@ namespace PRAMS.Infraestructure.Mapping.SystemConfiguration
                 config.AddProfile<ParametrosProfile>();
                 config.AddProfile<MenuProfile>();
                 config.AddProfile<ReportProfile>();
+                config.AddProfile<AdmFlujosProfile>();
+                config.AddProfile<AdmFlujosFormulariosProfile>();
+                config.AddProfile<AdmFlujosFormulariosNotasProfile>();
+                config.AddProfile<AdmFlujoPantallaUserProfile>();
+                config.AddProfile<AdmFlujoFormularioEtapaAccionProfile>();
+                config.AddProfile<AdmFormularioEtapaAccioneCampoProfile>();
+                config.AddProfile<FlujosPantallasProfile>();
+                config.AddProfile<FormFormularioFirmaProfile>();
+                config.AddProfile<FormReferidoProfile>();
             });
             return mappingConfig;
         }
@@ -116,6 +129,107 @@ namespace PRAMS.Infraestructure.Mapping.SystemConfiguration
 
             CreateMap<AdmReportsRole, AdmReportsRoleInsertDto>().ReverseMap();
             CreateMap<AdmReportsRole, AdmReportsRoleUpdateDto>().ReverseMap();
+        }
+    }
+
+    public class AdmFlujosProfile : Profile
+    {
+        public AdmFlujosProfile()
+        {
+            CreateMap<AdmFlujoFormulario, AdmFlujoFormularioDto>().ReverseMap();
+            CreateMap<AdmFlujoFormulario, AdmFlujoFormularioInsertDto>().ReverseMap();
+            CreateMap<AdmFlujoFormulario, AdmFlujoFormularioUpdateDto>().ReverseMap();
+        }
+    }
+
+    public class AdmFlujosFormulariosProfile : Profile
+    {
+        public AdmFlujosFormulariosProfile()
+        {
+            CreateMap<AdmFlujoFormularioEtapa, AdmFlujoFormularioEtapaDto>().ReverseMap();
+            CreateMap<AdmFlujoFormularioEtapa, AdmFlujoFormularioEtapaInsertDto>().ReverseMap();
+            CreateMap<AdmFlujoFormularioEtapa, AdmFlujoFormularioEtapaUpdateDto>().ReverseMap();
+        }
+    }
+
+    public class AdmFlujosFormulariosNotasProfile : Profile
+    {
+        public AdmFlujosFormulariosNotasProfile()
+        {
+            CreateMap<AdmFlujoFormularioNota, AdmFlujoFormularioNotaDto>().ReverseMap();
+            CreateMap<AdmFlujoFormularioNota, AdmFlujoFormularioNotaInsertDto>().ReverseMap();
+            CreateMap<AdmFlujoFormularioNota, AdmFlujoFormularioNotaUpdateDto>().ReverseMap();
+        }
+    }
+
+    public class AdmFlujoPantallaUserProfile : Profile
+    {
+        public AdmFlujoPantallaUserProfile()
+        {
+            CreateMap<AdmFlujoPantallaUser, AdmFlujoPantallaUserDto>().ReverseMap();
+            CreateMap<AdmFlujoPantallaUser, AdmFlujoPantallaUserInsertDto>().ReverseMap();
+            CreateMap<AdmFlujoPantallaUser, AdmFlujoPantallaUserUpdateDto>().ReverseMap();
+        }
+    }
+
+    public class AdmFlujoFormularioEtapaAccionProfile : Profile
+    {
+        public AdmFlujoFormularioEtapaAccionProfile()
+        {
+            CreateMap<AdmFlujoFormularioEtapaAccion, AdmFlujoFormularioEtapaAccionDto>().ReverseMap();
+            CreateMap<AdmFlujoFormularioEtapaAccion, AdmFlujoFormularioEtapaAccionInsertDto>().ReverseMap();
+            CreateMap<AdmFlujoFormularioEtapaAccion, AdmFlujoFormularioEtapaAccionUpdateDto>().ReverseMap();
+        }
+    }
+
+    public class AdmFormularioEtapaAccioneCampoProfile : Profile
+    {
+        public AdmFormularioEtapaAccioneCampoProfile()
+        {
+            CreateMap<AdmFormularioEtapaAccioneCampo, AdmFlujoFormularioEtapaAccionCampoDto>().ReverseMap();
+            CreateMap<AdmFormularioEtapaAccioneCampo, AdmFlujoFormularioEtapaAccionCampoInsertDto>().ReverseMap();
+            CreateMap<AdmFormularioEtapaAccioneCampo, AdmFlujoFormularioEtapaAccionCampoUpdateDto>().ReverseMap();
+        }
+    }
+
+    public class FlujosPantallasProfile : Profile
+    {
+        public FlujosPantallasProfile()
+        {
+            CreateMap<FormFlujoPantalla, FormFlujoPantallaDto>().ReverseMap();
+            CreateMap<FormFlujoPantalla, FormFlujoPantallaInsertDto>().ReverseMap();
+            CreateMap<FormFlujoPantalla, FormFlujoPantallaUpdateDto>().ReverseMap();
+        }
+    }
+
+    public class FormFormularioFirmaProfile : Profile
+    {
+        public FormFormularioFirmaProfile()
+        {
+            CreateMap<FormFormularioFirma, FormFormularioFirmaDto>().ReverseMap();
+            CreateMap<FormFormularioFirma, FormFormularioFirmaInsertDto>().ReverseMap();
+            CreateMap<FormFormularioFirma, FormFormularioFirmaUpdateDto>().ReverseMap();
+        }
+    }
+
+    public class FormReferidoProfile : Profile
+    {
+        public FormReferidoProfile()
+        {
+            CreateMap<FormReferido, FormReferidoDto>().ReverseMap();
+            CreateMap<FormReferido, FormReferidoInsertDto>().ReverseMap();
+            CreateMap<FormReferido, FormReferidoUpdateDto>()
+                .ForAllMembers(options => options.Condition((src, dest, srcMember) => srcMember != null));
+
+            CreateMap<FormReferidoUpdateDto, FormReferido>()
+                .ForAllMembers(options => options.Condition((src, dest, srcMember) => srcMember != null));
+
+            CreateMap<FormReferidoUpdateDto, FormReferidoDto>().ReverseMap();
+
+            CreateMap<FormAsignacionUsuarios, FormAsignacionUsuariosDto>().ReverseMap();
+            CreateMap<FormAsignacionUsuarios, FormAsignacionUsuariosInsertDto>().ReverseMap();
+            CreateMap<FormAsignacionUsuarios, FormAsignacionUsuariosUpdateDto>().ReverseMap();
+
         }
     }
 }

@@ -47,6 +47,104 @@ namespace PRAMS.Authentication.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "d9ace2b5-71a4-4a36-96fc-aa3a9cc52908",
+                            Name = "SU",
+                            NormalizedName = "SU"
+                        },
+                        new
+                        {
+                            Id = "59330252-3523-4240-ad4b-cf4e8ea94e91",
+                            Name = "Administrador Auxiliar",
+                            NormalizedName = "ADMINISTRADOR AUXILIAR"
+                        },
+                        new
+                        {
+                            Id = "4e444391-f152-46ba-ad12-afb179024c10",
+                            Name = "Oficial Administrativo",
+                            NormalizedName = "OFICIAL ADMINISTRATIVO"
+                        },
+                        new
+                        {
+                            Id = "22fbbfc1-a247-4243-bfc0-b2cf9f857a8a",
+                            Name = "Supervisor Regional",
+                            NormalizedName = "SUPERVISOR REGIONAL"
+                        },
+                        new
+                        {
+                            Id = "666befca-44af-4ef4-94fa-9bde851a73fc",
+                            Name = "Supervisor de oficina local",
+                            NormalizedName = "SUPERVISOR DE OFICINA LOCAL"
+                        },
+                        new
+                        {
+                            Id = "18470a63-1b63-40e6-b12b-c71ee53117ee",
+                            Name = "Trabajador Social",
+                            NormalizedName = "TRABAJADOR SOCIAL"
+                        },
+                        new
+                        {
+                            Id = "d333d13c-661a-414d-906e-dd2fbe7918fd",
+                            Name = "Director Regional",
+                            NormalizedName = "DIRECTOR REGIONAL"
+                        },
+                        new
+                        {
+                            Id = "07ef7db1-8abd-4c7b-8653-62c684644d49",
+                            Name = "Director Asociado",
+                            NormalizedName = "DIRECTOR ASOCIADO"
+                        },
+                        new
+                        {
+                            Id = "1f1d862b-e5b6-4879-8bf2-65a2b432f93c",
+                            Name = "Tecnico de Servicios a la Familia",
+                            NormalizedName = "TECNICO DE SERVICIOS A LA FAMILIA"
+                        },
+                        new
+                        {
+                            Id = "f7b90627-10d6-4e1e-a53e-22107b6ebc8e",
+                            Name = "Administrador",
+                            NormalizedName = "ADMINISTRADOR"
+                        },
+                        new
+                        {
+                            Id = "e97c238d-a721-4cb8-bfcc-dd5d80561c03",
+                            Name = "Sub-Administrador",
+                            NormalizedName = "SUB-ADMINISTRADOR"
+                        },
+                        new
+                        {
+                            Id = "798d23fd-c025-4d2c-ad11-d962aea62181",
+                            Name = "Especialista Trabajador Social",
+                            NormalizedName = "ESPECIALISTA TRABAJADOR SOCIAL"
+                        },
+                        new
+                        {
+                            Id = "37d7fb1d-3900-45e4-8620-ffa76ca2f25b",
+                            Name = "Asistente de Servicio",
+                            NormalizedName = "ASISTENTE DE SERVICIO"
+                        },
+                        new
+                        {
+                            Id = "86918a67-0f87-4f67-b27d-1e242e92f041",
+                            Name = "Supervisor UIE",
+                            NormalizedName = "SUPERVISOR UIE"
+                        },
+                        new
+                        {
+                            Id = "93730b3e-9023-4891-943e-6787cb1b7bce",
+                            Name = "Investigadores UIE",
+                            NormalizedName = "INVESTIGADORES UIE"
+                        },
+                        new
+                        {
+                            Id = "ccea7ca5-173b-48b9-b57d-e0b43b184569",
+                            Name = "Director de Programa",
+                            NormalizedName = "DIRECTOR DE PROGRAMA"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -178,6 +276,16 @@ namespace PRAMS.Authentication.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Initial")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Local")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -201,6 +309,12 @@ namespace PRAMS.Authentication.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Region")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SecondLastName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -222,6 +336,88 @@ namespace PRAMS.Authentication.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "118fb076-affa-4fda-8617-e6c39b7e53c2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "e5a499d0-52da-42e4-aa60-06170e7c5000",
+                            Email = "admin1@sta.com",
+                            EmailConfirmed = false,
+                            FirstName = "Admin",
+                            LastName = "User",
+                            LockoutEnabled = true,
+                            NormalizedEmail = "ADMIN1@STA.COM",
+                            NormalizedUserName = "ADMIN1@STA.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL8h+yY/r8Lhawk8du3a2+xAEv/sDCq9Lneg2HaUG7fJfAGWyfldFGmSDIOSZnst+w==",
+                            PhoneNumber = "7875555555",
+                            PhoneNumberConfirmed = false,
+                            SecondLastName = "One",
+                            SecurityStamp = "SMJSAWT2M63D7BYXQ7R2E3AA2GILPLBC",
+                            TwoFactorEnabled = false,
+                            UserName = "admin1@sta.com"
+                        },
+                        new
+                        {
+                            Id = "b4cbb14e-bb75-4143-b530-ec5d8bad55f7",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "e5a499d0-52da-42e4-aa60-06170e7c5000",
+                            Email = "admin@sta.com",
+                            EmailConfirmed = false,
+                            FirstName = "Admin",
+                            LastName = "User",
+                            LockoutEnabled = true,
+                            NormalizedEmail = "ADMIN@STA.COM",
+                            NormalizedUserName = "ADMIN@STA.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL8h+yY/r8Lhawk8du3a2+xAEv/sDCq9Lneg2HaUG7fJfAGWyfldFGmSDIOSZnst+w==",
+                            PhoneNumber = "7875555555",
+                            PhoneNumberConfirmed = false,
+                            SecondLastName = "Two",
+                            SecurityStamp = "SMJSAWT2M63D7BYXQ7R2E3AA2GILPLBC",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@sta.com"
+                        },
+                        new
+                        {
+                            Id = "03334448-73b4-438f-8fdf-784dbab58150",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "e5a499d0-52da-42e4-aa60-06170e7c5000",
+                            Email = "dummy@dummy.com",
+                            EmailConfirmed = false,
+                            FirstName = "Dummy",
+                            LastName = "User",
+                            LockoutEnabled = true,
+                            NormalizedEmail = "ADMIN@DUMMY.COM",
+                            NormalizedUserName = "DUMMY@DUMMY.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL8h+yY/r8Lhawk8du3a4+xAEv/sDCq9Lneg2HaUG7fJfAGWyfldFGmSDIOSZnst+w==",
+                            PhoneNumber = "7875555555",
+                            PhoneNumberConfirmed = false,
+                            SecondLastName = "One",
+                            SecurityStamp = "SMJSAWT2M63D7BYXQ7R2E3AA2GILPLBC",
+                            TwoFactorEnabled = false,
+                            UserName = "dummy@dummy.com"
+                        },
+                        new
+                        {
+                            Id = "69e6dd63-c624-4c4a-8bf4-c910148367ad",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "e5a499d0-52da-42e4-aa60-06170e7c5000",
+                            Email = "dummy2@dummy.com",
+                            EmailConfirmed = false,
+                            FirstName = "Dummy",
+                            LastName = "User",
+                            LockoutEnabled = true,
+                            NormalizedEmail = "ADMIN2@DUMMY.COM",
+                            NormalizedUserName = "DUMMY2@DUMMY.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL8h+yY/r8Lhawk8du3a3+xAEv/sDCq9Lneg2HaUG7fJfAGWyfldFGmSDIOSZnst+w==",
+                            PhoneNumber = "7875555555",
+                            PhoneNumberConfirmed = false,
+                            SecondLastName = "Two",
+                            SecurityStamp = "SMJSAWT2M63D7BYXQ7R2E3AA2GILPLBC",
+                            TwoFactorEnabled = false,
+                            UserName = "dummy2@dummy.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
