@@ -1,4 +1,5 @@
 ﻿using PRAMS.Domain.Models.People;
+using System.ComponentModel.DataAnnotations;
 
 namespace PRAMS.Domain.Entities.People.Dto
 {
@@ -38,6 +39,8 @@ namespace PRAMS.Domain.Entities.People.Dto
         public DateTime? MergedDate { get; set; }
         public string? MergedUser { get; set; }
         public int? MergedPersonId { get; set; }
+        public double? MontlyIncome { get; set; }
+        public bool Externo { get; set; } = false;
         public virtual ICollection<PersonMergedDto>? MergedPersons { get; set; }
         public virtual PersonMergedDto? MergedPerson { get; set; }
 

@@ -97,6 +97,7 @@ namespace PRAMS.Infraestructure.Data.People
                         Religion = religions[new Random().Next(0, religions.Count)],
                         CreateDate = DateTime.Now,
                         CreateUser = "03334448-73b4-438f-8fdf-784dbab58150",
+                        Externo = false
                     });
             }
 
@@ -187,7 +188,8 @@ namespace PRAMS.Infraestructure.Data.People
                         Pensionado = new Random().Next(0, 1) == 1,
                         Relacion = relationships[new Random().Next(0, relationships.Count)],
                         RMO = new Random().Next(100000000, 999999999).ToString(),
-                        ViveEnElHogar = new Random().Next(0, 1) == 1
+                        ViveEnElHogar = new Random().Next(0, 1) == 1,
+                        CasoActivo = true
                     });
             }
 
