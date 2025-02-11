@@ -23,6 +23,9 @@ namespace PRAMS.Domain.Models.People
         public string? EstadoEmpleo { get; set; }
         public bool Pensionado { get; set; } = false;
         public int? ReferidoId { get; set; }
+        [Required]
+        public required bool CasoActivo { get; set; } = true;
+
 
 
         [ForeignKey("PersonaId")]

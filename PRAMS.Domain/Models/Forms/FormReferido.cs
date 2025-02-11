@@ -115,6 +115,11 @@ namespace PRAMS.Domain.Models.Forms
         [Column("ID_ReferidoOrigen")]
         public string? ReferidoOrgenId { get; set; }
         public bool Activo { get; set; } = true;
+        [StringLength(75)]
+        public string? TipoInvestigacion { get; set; }
+
+        [Required]
+        public bool Externo { get; set; } = false;
 
         public virtual ICollection<FormAsignacionUsuarios>? FormAsignacionUsuariosNavigation { get; set; }
 

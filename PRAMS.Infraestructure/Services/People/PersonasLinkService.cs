@@ -107,6 +107,7 @@ namespace PRAMS.Infraestructure.Services.People
                 var personasLinks = await _appConfigDbContext.personasLinks
                     .Where(x => x.ReferidoId == referidoId)
                     .Include(x => x.Persona)
+                    .ThenInclude(x => x.PersonasDirecciones)
                     .ToListAsync();
 
                 var personasLinksDto = _mapper.Map<ICollection<PersonasLinkPersonaDto>>(personasLinks);

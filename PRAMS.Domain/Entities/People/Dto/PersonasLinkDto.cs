@@ -12,6 +12,7 @@
         public string? EstadoEmpleo { get; set; }
         public bool Pensionado { get; set; } = false;
         public int? ReferidoId { get; set; }
+        public bool CasoActivo { get; set; } = true;
     }
 
     public class PersonasLinkPersonaDto
@@ -26,6 +27,7 @@
         public string? EstadoEmpleo { get; set; }
         public bool Pensionado { get; set; } = false;
         public int? ReferidoId { get; set; }
+        public bool CasoActivo { get; set; } = true;
         public PersonSmallDto? Persona { get; set; }
     }
 }

@@ -82,5 +82,9 @@ namespace PRAMS.Domain.Entities.Forms.Dto
         public string? AgenciaSolicitud { get; set; }
         [JsonProperty("referidoOrgenId")]
         public string? ReferidoOrgenId { get; set; }
+        [JsonProperty("tipoInvestigacion")]
+        public string? TipoInvestigacion { get; set; }
+        [JsonProperty("externo")]
+        public bool Externo { get; set; }
     }
 }
