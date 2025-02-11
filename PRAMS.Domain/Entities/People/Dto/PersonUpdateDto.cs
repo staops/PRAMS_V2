@@ -28,5 +28,7 @@
         public required string GradAcademico { get; set; }
         public required string Religion { get; set; }
         public string? Email { get; set; }
+        public double? MontlyIncome { get; set; }
+        public bool Externo { get; set; } = false;
     }
 }

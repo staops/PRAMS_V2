@@ -87,6 +87,12 @@ namespace PRAMS.Domain.Models.People
         [StringLength(36)]
         public string? MergedUser { get; set; }
         public int? MergedPersonId { get; set; }
+
+        [Column("Montly_Income", TypeName = "decimal(18,2)")]
+        public double? MontlyIncome { get; set; }
+
+        [Required]
+        public required bool Externo { get; set; } = false;
         public virtual ICollection<PersonasDireccion>? PersonasDirecciones { get; set; }
         public virtual ICollection<PersonasLink>? PersonasLinks { get; set; }
         public virtual PersonasIngreso? PersonasIngresos { get; set; }

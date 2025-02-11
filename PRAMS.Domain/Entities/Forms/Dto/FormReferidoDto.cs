@@ -1,4 +1,5 @@
 ﻿using PRAMS.Domain.Models.People;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
@@ -199,5 +200,8 @@ namespace PRAMS.Domain.Entities.Forms.Dto
         /// </summary>
         public string? ReferidoOrgenId { get; set; }
 
+        public string? TipoInvestigacion { get; set; }
+
+        public bool Externo { get; set; }
     }
 }

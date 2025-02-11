@@ -1,4 +1,6 @@
-﻿namespace PRAMS.Domain.Entities.People.Dto
+﻿using PRAMS.Domain.Models.People;
+
+namespace PRAMS.Domain.Entities.People.Dto
 {
     public class PersonSmallDto
     {
@@ -10,6 +12,7 @@
         public string? Inicial { get; set; }
         public string FullName { get; set; } = string.Empty;
         public string? TelefonoCelular { get; set; }
+        public ICollection<PersonasDireccionDto>? PersonasDirecciones { get; set; }
 
     }
 }

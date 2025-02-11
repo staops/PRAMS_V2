@@ -29,6 +29,9 @@
         public string? SupervisorUser { get; set; }
         public DateTime? SupervisorDate { get; set; }
         public string? ReferidoOrgenId { get; set; }
+        public string? TipoInvestigacion { get; set; }
+
+        public bool Externo { get; set; }
 
 
     }
